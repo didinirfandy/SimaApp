@@ -59,11 +59,11 @@
                                             <label for="jns_brg">Jenis Barang</label>
                                             <select class="selectbox col-sm-12" name="jns_brg" id="jns_brg" required>
                                                 <option value="">-- Pilih --</option>
-                                                <option value="1">KIB A</option>
-                                                <option value="2">KIB B</option>
-                                                <option value="3">KIB C</option>
-                                                <option value="4">KIB D</option>
-                                                <option value="5">KIB E</option>
+                                                <option value="1">KARTU INVENTARIS BARANG TANAH ( KIB A )</option>
+                                                <option value="2">KARTU INVENTARIS BARANG PERALATAN DAN MESIN ( KIB B )</option>
+                                                <option value="3">KARTU INVENTARIS BARANG GEDUNG DAN BANGUNAN ( KIB C )</option>
+                                                <option value="4">KARTU INVENTARIS BARANG JARINGAN ( KIB D )</option>
+                                                <option value="5">KARTU INVENTARIS BARANG ASET TETAP LAINNYA ( KIB E )</option>
                                             </select>
                                         </div>
                                         <div class="form-group col-md-6">

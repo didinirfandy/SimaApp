@@ -91,6 +91,11 @@ class Master_data_model extends CI_Model
         return $this->db->query("SELECT id_brg, kd_brg, nm_brg, no_reg, umr_ekonomis, nli_sisa FROM tbl_pengadaan_aset")->result_array();
     }
 
+    function get_usulan_jns($db, $jns_brg)
+    {
+        return $this->db->get_where($db, array('jns_brg' => $jns_brg))->result_array();
+    }
+
     function del_pengadaan($db, $id_brg)
     {
         $data = $this->db->get_where($db, array('id_brg' => $id_brg))->result_array();

@@ -88,6 +88,13 @@ class Master_data extends CI_Controller
         echo json_encode($data);
     }
 
+    public function get_usulan_jns()
+    {
+        $jns_brg_usul = $this->input->post('jns_brg_usul');
+        $data = $this->Master_data_model->get_usulan_jns('tbl_usulan_aset', $jns_brg_usul);
+        echo json_encode($data);
+    }
+
     public function int_pengadaan()
     {
         $kd_brg         =   $this->input->post('kd_brg');

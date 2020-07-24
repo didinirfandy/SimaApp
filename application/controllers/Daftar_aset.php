@@ -20,4 +20,10 @@ class Daftar_aset extends CI_Controller
     {
         $this->load->view('Aset/daftar_aset');
     }
+
+    public function get_kib_a()
+    {
+        $data = $this->Daftar_aset_model->get_dt_kib_a();
+        echo json_encode($data);
+    }
 }

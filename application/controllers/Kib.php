@@ -24,12 +24,24 @@ class Kib extends CI_Controller
         $this->load->view('Aset/Kib/kib_a');
     }
 
+    public function get_kib_a()
+    {
+        $data = $this->Kib_model->get_dt_kib_a();
+        echo json_encode($data);
+    }
+
     // ----------------------- //
     //      Data kib_b        //
     // ----------------------- //
     public function kib_b()
     {
         $this->load->view('Aset/Kib/kib_b');
+    }
+
+    public function get_kib_b()
+    {
+        $data = $this->Kib_model->get_dt_kib_b();
+        echo json_encode($data);
     }
 
     // ----------------------- //
@@ -40,12 +52,24 @@ class Kib extends CI_Controller
         $this->load->view('Aset/Kib/kib_c');
     }
 
+    public function get_kib_c()
+    {
+        $data = $this->Kib_model->get_dt_kib_c();
+        echo json_encode($data);
+    }
+
     // ----------------------- //
     //      Data kib_e        //
     // ----------------------- //
     public function kib_e()
     {
         $this->load->view('Aset/Kib/kib_e');
+    }
+
+    public function get_kib_e()
+    {
+        $data = $this->Kib_model->get_dt_kib_e();
+        echo json_encode($data);
     }
 }
 

@@ -77,6 +77,9 @@
                         </li>
                     </ul>
                 </li>
+                <!-- <li>
+                    <a class="<?php if ($this->uri->segment(2) == "daftar_aset") { echo "active-menu";} ?>" href="<?=base_url()?>Daftar_aset/daftar_aset"><i class="fa fa-barcode"></i> Daftar Aset</a>
+                </li> -->
                 <li>
                     <a class="<?php if ($this->uri->segment(2) == "pengadaan_aset") { echo "active-menu";} ?>" href="<?=base_url()?>Pengadaan_aset/pengadaan_aset"><i class="fa fa-shopping-cart"></i> Pengadaan Aset</a>
                 </li>
