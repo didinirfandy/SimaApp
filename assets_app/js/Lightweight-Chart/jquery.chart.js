@@ -497,7 +497,7 @@ var thychart = {
     };
 
     $.each(cord, function(i, val) {
-       loopCord(i, val, height);
+      loopCord(i, val, height);
     });
 
   }

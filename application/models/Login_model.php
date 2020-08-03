@@ -82,6 +82,62 @@ class Login_model extends CI_Model {
         return $this->db->query("SELECT * FROM app_user WHERE user_id='$id' GROUP BY user_id='$id'")->result_array();
     }
 
+    function total_aset()
+    {
+        return $this->db->query("SELECT COUNT(id_brg) AS id FROM tbl_pengadaan_aset")->result_array();
+    }
+
+    function get_jns_brg()
+    {
+        return $this->db->query("SELECT jns_brg, COUNT(jns_brg) AS tot FROM tbl_pengadaan_aset GROUP BY jns_brg")->result_array();
+    }
+
+    function get_stts()
+    {
+        return $this->db->query(
+            "SELECT 
+                MAX(id_usulan) AS max_id,
+                (SELECT COUNT(stts_approval_kep) FROM tbl_usulan_aset WHERE stts_approval_kep = '1') AS pending,
+                (SELECT COUNT(stts_approval_kep) FROM tbl_usulan_aset WHERE stts_approval_kep = '2') AS diterima,
+                (SELECT COUNT(stts_approval_kep) FROM tbl_usulan_aset WHERE stts_approval_kep = '3') AS ditolak
+            FROM tbl_usulan_aset"
+        )->result_array();
+    }
+
+    function get_peminjaman_aset()
+    {
+        return $this->db->query(
+            "SELECT COUNT(id_peminjaman) AS dipinjam FROM tbl_peminjaman_aset WHERE stts_peminjaman = '1'"
+        )->result_array();
+    }
+
+    function get_pengembalian_aset()
+    {
+        return $this->db->query(
+            "SELECT COUNT(id_peminjaman) AS dikembalikan FROM tbl_peminjaman_aset WHERE stts_peminjaman = '2'"
+        )->result_array();
+    }
+
+    function get_dt_aset()
+    {
+        return $this->db->query(
+            "SELECT
+                (SELECT COUNT(kondisi) FROM tbl_pengadaan_aset WHERE kondisi = '1' ) AS tot_aset_b,
+                (SELECT COUNT(kondisi) FROM tbl_pengadaan_aset WHERE kondisi = '2' ) AS tot_aset_rr,
+                (SELECT COUNT(kondisi) FROM tbl_pengadaan_aset WHERE kondisi = '3' ) AS tot_aset_rb,
+                (SELECT COUNT(stts_approval) FROM tbl_pemeliharaan_aset WHERE stts_approval = '2') AS tot_pemeliharaan_in,
+                (SELECT COUNT(stts_approval) FROM tbl_pemeliharaan_aset WHERE stts_approval = '3') AS tot_pemeliharaan_ex,
+                (SELECT COUNT(stts_approval) FROM tbl_pemeliharaan_aset WHERE stts_approval = '4') AS tot_pemeliharaan_selesai_in,
+                (SELECT COUNT(stts_approval) FROM tbl_pemeliharaan_aset WHERE stts_approval = '5') AS tot_pemeliharaan_selesai_ex,
+                (SELECT COUNT(stts_penghapusan) FROM tbl_pengadaan_aset WHERE stts_penghapusan = '3' ) AS tot_penghapusan
+            FROM 
+                tbl_pengadaan_aset
+            GROUP BY 
+                tot_aset_b, tot_aset_rr, tot_aset_rb, tot_pemeliharaan_in, tot_pemeliharaan_ex, 
+                tot_pemeliharaan_selesai_in, tot_pemeliharaan_selesai_ex, tot_penghapusan"
+        )->result_array();
+    }
+
 }
 
 ?>

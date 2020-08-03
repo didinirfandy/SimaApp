@@ -6,18 +6,16 @@
         
         <!-- Metis Menu Js -->
         <script src="<?= base_url(); ?>assets_app/js/jquery.metisMenu.js"></script>
-        <script src="<?= base_url(); ?>assets_app/js/select2.full.min.js"></script>
 
         <!-- Morris Chart Js -->
         <script src="<?= base_url(); ?>assets_app/js/morris/raphael-2.1.0.min.js"></script>
-        <script src="<?= base_url(); ?>assets_app/js/morris/morris.min.js"></script>
+        <script src="<?= base_url(); ?>assets_app/js/morris/morris.js"></script>
         
-        <!-- <script src="<?= base_url(); ?>assets_app/js/easypiechart.js"></script> -->
-        <!-- <script src="<?= base_url(); ?>assets_app/js/easypiechart-data.js"></script> -->
+        <script src="<?= base_url(); ?>assets_app/js/easypiechart.js"></script>
+        <script src="<?= base_url(); ?>assets_app/js/easypiechart-data.js"></script>
+
+        <!-- Lightweight Chart -->
         <script src="<?= base_url(); ?>assets_app/js/Lightweight-Chart/jquery.chart.js"></script>
-        
-        <!-- Custom Js -->
-        <script src="<?= base_url(); ?>assets_app/js/custom-scripts.js"></script>
 
         <!-- DATA TABLE SCRIPTS -->
         <script src="<?= base_url(); ?>assets_app/js/dataTables/jquery.dataTables.js"></script>
@@ -25,14 +23,25 @@
 
         <script src="<?= base_url(); ?>assets_app/js/popper.min.js"></script>
         <script src="<?= base_url(); ?>assets_app/js/main.js"></script>
+
+        <!-- Select 2 Js -->
+        <script src="<?= base_url(); ?>assets_app/js/select2.full.min.js"></script>
+        
+        <!-- SweetAlert Js -->
         <script type="text/javascript" src="<?= base_url(); ?>assets_app/plugins/bootstrap-notify.min.js"></script>
         <script type="text/javascript" src="<?= base_url(); ?>assets_app/plugins/sweetalert.min.js"></script>
 
-        <script type="text/javascript">
-                $(".selectbox").select2();
-                $('#brg_tbl').dataTable();
-        </script>
-
+        <!-- Custom Js -->
+        <script>var get_status = '<?= base_url('Aset/get_status') ?>';</script>
+        <script src="<?= base_url(); ?>assets_app/js/custom-scripts.js"></script>
         <!-- Chart Js -->
-        <!-- <script type="text/javascript" src="<?= base_url(); ?>assets_app/js/Chart.min.js"></script> -->
-        <!-- <script type="text/javascript" src="<?= base_url(); ?>assets_app/js/chartjs.js"></script> -->
+        <script type="text/javascript" src="<?= base_url(); ?>assets_app/js/Chart.min.js"></script>
+        <script>var get_data_aset = '<?= base_url('Aset/get_data_aset') ?>';</script>
+        <script type="text/javascript" src="<?= base_url(); ?>assets_app/js/chartjs.js"></script>
+
+        <script type="text/javascript">
+                $(document).ready(function() {
+                        $(".selectbox").select2();
+                        $('#brg_tbl').dataTable();
+                });
+        </script>

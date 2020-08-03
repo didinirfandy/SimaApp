@@ -11,9 +11,7 @@
 
 		<div id="page-wrapper">
             <div class="header"> 
-                <h1 class="page-header">
-                    Data Barang
-                </h1>
+                <h1 class="page-header">Data Barang</h1>
                 <?= $this->session->flashdata('pesan'); ?>
                 <ol class="breadcrumb">
                     <li><a href="#"><?php $str = $this->session->userdata('nama_pegawai');

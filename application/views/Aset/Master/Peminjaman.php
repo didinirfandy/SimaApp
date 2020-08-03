@@ -70,6 +70,7 @@
                                         <textarea type="text" rows="2" class="form-control" name="ket" id="ket" placeholder="" required></textarea>
                                     </div>
                                     <button type="submit" name="submit" id="submit" class="btn btn-primary">Simpan</button>
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#data_aset">Cek Data</button>
                                     <input type="hidden" name="kd_peminjaman" value="<?= $kd_peminjaman; ?>">
                                 </form>
                                 <?= form_close() ?>
@@ -114,26 +115,26 @@
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Daftar Aset dapat Dipinjam</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
+                            <h4 class="modal-title" id="exampleModalLabel">Daftar Aset dapat Dipinjam</h4>
                         </div>
                         <div class="modal-body">
-                            <table class="table table-striped table-bordered table-hover table-sm" id="brg_tbl">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Kode Aset</th>
-                                        <th>Nama Aset</th>
-                                        <th>Merek/Type</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tmpl_popup">
-                                </tbody>
-                            </table>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover table-sm" id="brg_pinjam">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Kode Aset</th>
+                                            <th>Nama Aset</th>
+                                            <th>Merek/Type</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tmpl_popup">
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -153,6 +154,7 @@
             tampil_popup();
 
             $('#pinjaman').dataTable();
+            $('#brg_pinjam').dataTable();
 
             $("#regfrom").submit(function() {
                 $.ajax({
@@ -207,9 +209,10 @@
         function tampil_data() {
             var kd_peminjaman = $('#kd_peminjaman').val();
             $.ajax({
-                type: "POST",
+                type: "ajax",
                 data: "kd_peminjaman=" + kd_peminjaman,
                 url: "<?= base_url('Master_data/get_dt_peminjaman'); ?>",
+                async: false,
                 dataType: "JSON",
                 success: function(a) {
                     var rows = '';
@@ -243,18 +246,19 @@
 
         function tampil_popup() {
             $.ajax({
-                type: "POST",
+                type: "ajax",
                 url: "<?= base_url('Master_data/get_dt_pengadaan'); ?>",
+                async: false,
                 dataType: "JSON",
                 success: function(b) {
-                    
                     var row = '';
                     for (var i = 0; i < b.length; i++) {
                         if (b[i].kondisi == "1") {
-                            kondisi = "Baik";
+                            kondisi = "Rusak ringan";
                         } else {
-                            kondisi = "Tidak Baik";
+                            kondisi = "Rusak Berat";
                         }
+
                         row += '<tr>' + 
                                     '<td>' + (i + 1) + '</td>' +
                                     '<td>' + b[i].kd_brg + '</td>' +

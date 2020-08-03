@@ -13,7 +13,7 @@
     <!-- <link href="<?= base_url(); ?>assets_app/css/font-awesome.css" rel="stylesheet" /> -->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Morris Chart Styles-->
-    <link href="<?= base_url(); ?>assets_app/js/morris/morris.css" rel="stylesheet" />
+    <link href="<?= base_url(); ?>assets_app/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
     <!-- Custom Styles-->
     <link href="<?= base_url(); ?>assets_app/css/custom-styles.css" rel="stylesheet" />
     <!-- Google Fonts-->
@@ -25,4 +25,15 @@
 
     <!-- TABLE STYLES-->
     <link href="<?= base_url(); ?>assets_app/js/dataTables/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <style type="text/css">
+
+        td {
+            cursor: pointer;
+        }
+
+        .editor{
+            display: none;
+        }
+
+    </style>
 </head>

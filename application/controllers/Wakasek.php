@@ -16,43 +16,22 @@ class Wakasek extends CI_Controller
     
     public function home()
     {
-        $this->load->view('Wakasek/home');
+        $data['jmlh']               = $this->Login_model->total_aset();
+        $data['jns_brg']            = $this->Login_model->get_jns_brg();
+        $data['stts_dipinjam']      = $this->Login_model->get_peminjaman_aset();
+        $data['stts_dikembalikan']  = $this->Login_model->get_pengembalian_aset();
+        $this->load->view('Wakasek/home', $data);
     }
 
-    public function daftar_aset()
+    public function get_status()
     {
-        $this->load->view('Wakasek/daftar_aset');
+        $data = $this->Login_model->get_stts();
+        echo json_encode($data);
     }
 
-    public function pengadaan_aset()
+    public function get_data_aset()
     {
-        $this->load->view('Wakasek/pengadaan_aset');
-    }
-
-    public function penghapusan_aset()
-    {
-        $this->load->view('Wakasek/penghapusan_aset');
-    }
-
-
-    // LAPORAN
-    public function lp_pengadaan()
-    {
-        $this->load->view('Wakasek/lp_pengadaan');
-    }
-
-    public function lp_peminjaman()
-    {
-        $this->load->view('Wakasek/lp_peminjaman');
-    }
-
-    public function lp_pemeliharaan()
-    {
-        $this->load->view('Wakasek/lp_pemeliharaan');
-    }
-
-    public function lp_penghapusan()
-    {
-        $this->load->view('Wakasek/lp_penghapusan');
+        $data = $this->Login_model->get_dt_aset();
+        echo json_encode($data);
     }
 }

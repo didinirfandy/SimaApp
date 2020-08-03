@@ -26,7 +26,7 @@
             <div id="page-inner">
                 <!-- /. ROW  -->
                 <div class="row">
-                <div class="col-md-12">
+                    <div class="col-md-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h3 style="font-weight:bold;">Usulan Pengadaan</h3>
@@ -56,7 +56,7 @@
                     <div class="col-md-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                            <h3 style="font-weight:bold;">Daftar Pengadaan</h3>
+                                <h3 style="font-weight:bold;">Daftar Pengadaan</h3>
                                 <hr align="right" color="black">
                             </div>
                             <div class="panel-body">
@@ -66,8 +66,8 @@
                                             <tr>
                                                 <th>No</th>
                                                 <th>Kode Aset</th>
-                                                <th>Nama Aset</th>
                                                 <th>No Registrasi</th>
+                                                <th>Nama Aset</th>
                                                 <th>Umur Ekonomis</th>
                                                 <th>Nilai Sisa</th>
                                             </tr>
@@ -85,6 +85,7 @@
 				<?php $this->load->view('template/copyright') ?>
             </div>
             <!-- /. PAGE INNER  -->
+            <!-- Modal -->
             <div class="modal fade" id="dtl" tabindex="-1" role="dialog">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
@@ -141,14 +142,14 @@
                     var html = "";                        
                     for (i = 0; i < a.length; i++) {
 
-                        if (a[i].stts_approval = 1) {
-                            status = "<button class='btn btn-warning btn-sm'><i class='fa fa-hourglass-half'></i> Pendding</button>";
+                        if (a[i].stts_approval_kep = 1) {
+                            status = "<button class='btn btn-sm btn-warning' disabled><i class='fa fa-hourglass-half'></i> Pendding</button>";
                         }
-                        else if (a[i].stts_approval = 2) {
-                            status = "<button class='btn btn-success btn-sm'><i class='fa fa-check-circle'></i> Diterima</button>";
+                        else if (a[i].stts_approval_kep = 2) {
+                            status = "<button class='btn btn-sm btn-success' disabled><i class='fa fa-check-circle'></i> Diterima</button>";
                         }
-                        else if (a[i].stts_approval = 3) {
-                            status = "<button class='btn btn-danger btn-sm'><i class='fa fa-times-circle'></i> Ditolak</button>";
+                        else if (a[i].stts_approval_kep = 3) {
+                            status = "<button class='btn btn-sm btn-danger' disabled><i class='fa fa-times-circle'></i> Ditolak</button>";
                         } else {
                             status = "";
                         }
@@ -157,9 +158,9 @@
                         "<tr>" + 
                             "<td>" + (i + 1) + "</td>" +
                             "<td>" + a[i].ket + "</td>" +
-                            "<td><button class='btn btn-primary btn-sm' onclick='tampil_detail_barang(" + a[i].kd_usulan + ")' data-toggle='modal' data-target='#dtl'><i class='fa fa-info-circle'></i> Detail</button></td>" +
+                            "<td><button class='btn btn-sm btn-info' onclick='tampil_detail_barang(" + a[i].kd_usulan + ")' data-toggle='modal' data-target='#dtl'><i class='fa fa-info-circle'></i> Detail</button></td>" +
                             "<td>" + a[i].entry_date + "</td>" +
-                            "<td>" + status + "</td>" +
+                            "<td style='text-align: center;'>" + status + "</td>" +
                         "</tr>";
                     }
                     $('#usulan_brg').html(html);
@@ -177,6 +178,11 @@
                 success: function(b) {
                     var dtl = "";
                     for (j = 0; j < b.length; j++) {
+                        var bilangan = b[j].harga_brg
+                            
+                        var	reverse     = bilangan.toString().split('').reverse().join(''),
+                            harga_brg 	= reverse.match(/\d{1,3}/g);
+                            harga_brg	= harga_brg.join('.').split('').reverse().join('');
 
                         if (b[j].jns_brg == 1) { jenis = "KIB A"; } 
                         else if (b[j].jns_brg == 2) { jenis = "KIB B"; } 
@@ -196,8 +202,8 @@
                             '<td>' + b[j].nm_brg + '</td>' +
                             '<td>' + jenis + '</td>' +
                             '<td>' + satuan + '</td>' +
-                            '<td>' + b[j].jmlh_brg + '</td>' +
-                            '<td>' + b[j].harga_brg + '</td>' +
+                            '<td style="text-align: right;">' + b[j].jmlh_brg + '</td>' +
+                            '<td style="text-align: right;">' + harga_brg + '</td>' +
                         '</tr>';
                     }
                     $('#dtl_brg').html(dtl);
@@ -214,14 +220,20 @@
                 success: function(c) {
                     var pgdn = "";
                     for (h = 0; h < c.length; h++) {
+                        var bilangan = c[h].nli_sisa;
+                            
+                        var	reverse = bilangan.toString().split('').reverse().join(''),
+                            ribuan 	= reverse.match(/\d{1,3}/g);
+                            ribuan	= ribuan.join('.').split('').reverse().join('');
+
                         pgdn +=
                         '<tr>' + 
                             '<td>' + (h + 1) + '</td>' +
                             '<td>' + c[h].kd_brg + '</td>' +
+                            '<td style="text-align: center;">' + c[h].no_reg + '</td>' +
                             '<td>' + c[h].nm_brg + '</td>' +
-                            '<td>' + c[h].no_reg + '</td>' +
-                            '<td>' + c[h].umr_ekonomis + '</td>' +
-                            '<td style="text-align: right;">' + c[h].nli_sisa + '</td>' +
+                            '<td style="text-align: right;">' + c[h].umr_ekonomis + '</td>' +
+                            '<td style="text-align: right;">' + ribuan + '</td>' +
                         '</tr>';
                     }
                     $('#pgdn').html(pgdn);

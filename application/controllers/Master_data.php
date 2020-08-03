@@ -55,17 +55,19 @@ class Master_data extends CI_Controller
         date_default_timezone_set('Asia/Jakarta');
         $date   = date("Y/m/d H:i:s");
         $data   = array(
-                'kd_usulan' => $kd_usulan,
-                'kd_brg' => $kd_brg,
-                'nm_brg' => $nm_brg, 
-                'jns_brg' => $jns_brg, 
-                'jmlh_brg' => $jmlh_brg, 
-                'satuan_brg' => $satuan_brg, 
-                'harga_brg' => $harga_brg,
-                'ket' => $ket,
-                'stts_approval' => '1',
-                'tgl_approval' => '', 
-                'entry_date' => $date
+                'kd_usulan'         => $kd_usulan,
+                'kd_brg'            => $kd_brg,
+                'nm_brg'            => $nm_brg, 
+                'jns_brg'           => $jns_brg, 
+                'jmlh_brg'          => $jmlh_brg, 
+                'satuan_brg'        => $satuan_brg, 
+                'harga_brg'         => $harga_brg,
+                'ket'               => $ket,
+                'stts_approval_wk'  => '1',
+                'tgl_approval_wk'   => '', 
+                'stts_approval_kep' => '1',
+                'tgl_approval_kep'  => '', 
+                'entry_date'        => $date
         );
 
         $berhasil   =   $this->Master_data_model->entry_usulan_pengadaan('tbl_usulan_aset', $data, $nm_brg);
@@ -79,14 +81,24 @@ class Master_data extends CI_Controller
     // ----------------------- //
     public function data_pengadaan()
     {
-        $this->load->view('Aset/Master/pengadaan');
+        $data['pgdn'] = $this->Master_data_model->get_pengadaan();
+        $this->load->view('Aset/Master/pengadaan',$data);
     }
 
-    public function get_pengadaan()
+    public function updt_pengadaan()
     {
-        $data = $this->Master_data_model->get_pengadaan();
-        echo json_encode($data);
+        $id = $this->input->post("id");
+		$value = $this->input->post("value");
+		$modul = $this->input->post("modul");
+		$this->Master_data_model->update_pengadaan($id,$value,$modul);
+		echo "{}";
     }
+
+    public function dlt_pengadaan(){
+		$id = $this->input->post("id");
+		$this->Master_data_model->delete_pengadaan($id);
+		echo "{}";
+	}
 
     public function get_usulan_jns()
     {
@@ -99,7 +111,7 @@ class Master_data extends CI_Controller
     {
         $kd_brg         =   $this->input->post('kd_brg');
         $nm_brg         =   $this->input->post('nm_brg');
-        $no_reg         =   $this->input->post('no_reg');
+        // $no_reg         =   $this->input->post('no_reg');
         $jmlh_brg       =   $this->input->post('jmlh_brg');
         $merk_type      =   $this->input->post('merk_type');
         $ukuran_cc      =   $this->input->post('ukuran_cc');
@@ -119,13 +131,19 @@ class Master_data extends CI_Controller
         } else {
             $dp = "0";
         }
-
-        date_default_timezone_set('Asia/Jakarta');
-        $date   = date("Y/m/d H:i:s");
-        $data   = array(
+        
+        $no_reg = $this->Master_data_model->get_no_req($kd_brg);
+        $data = array();
+        
+        for ($j=0; $j < $jmlh_brg ; $j++) { 
+            $no = str_pad($no_reg,4,"0",STR_PAD_LEFT);
+            // print_r($kode);
+            date_default_timezone_set('Asia/Jakarta');
+            $date   = date('Y/m/d H:i:s');
+            array_push($data, array(
                 'kd_brg' => $kd_brg,
                 'nm_brg' => $nm_brg, 
-                'no_reg' => $no_reg, 
+                'no_reg' => $no, 
                 'jmlh_brg' => $jmlh_brg, 
                 'merk_type' => $merk_type, 
                 'ukuran_cc' => $ukuran_cc,
@@ -140,7 +158,10 @@ class Master_data extends CI_Controller
                 'nli_sisa' => $nli_sisa,
                 'ket' => $ket,
                 'entry_date' => $date
-        );
+
+            ));
+            $no_reg++;
+        }
 
         $berhasil   =   $this->Master_data_model->entry_pengadaan('tbl_pengadaan_aset', $data, $nm_brg);
         

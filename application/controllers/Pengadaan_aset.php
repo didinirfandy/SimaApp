@@ -21,6 +21,16 @@ class Pengadaan_aset extends CI_Controller
         $this->load->view('Aset/pengadaan_aset');
     }
 
+    public function pengadaan_aset_wk()
+    {
+        $this->load->view('Wakasek/pengadaan_aset');
+    }
+
+    public function pengadaan_aset_kep()
+    {
+        $this->load->view('Kepsek/pengadaan_aset');
+    }
+
     public function get_usulan_group()
     {
         $data = $this->Pengadaan_aset_model->get_usulan_group();
@@ -37,6 +47,22 @@ class Pengadaan_aset extends CI_Controller
     public function get_pengadaan()
     {
         $data = $this->Pengadaan_aset_model->get_pengadaan();
+        echo json_encode($data);
+    }
+
+    public function aksi_usulan_wk()
+    {
+        $kd_usulan = $this->input->post('kd_usulan');
+        $stts_approval = $this->input->post('stts_approval');
+        $data = $this->Pengadaan_aset_model->aksi_usulan_pengadaan_wk($kd_usulan, $stts_approval);
+        echo json_encode($data);
+    }
+
+    public function aksi_usulan_kep()
+    {
+        $kd_usulan = $this->input->post('kd_usulan');
+        $stts_approval = $this->input->post('stts_approval');
+        $data = $this->Pengadaan_aset_model->aksi_usulan_pengadaan_kep($kd_usulan, $stts_approval);
         echo json_encode($data);
     }
 }

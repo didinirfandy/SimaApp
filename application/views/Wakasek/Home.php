@@ -16,8 +16,9 @@
                 </h1>
                 <?= $this->session->flashdata('pesan'); ?>
                 <ol class="breadcrumb">
-                    <li><a href="#"><?php $str = $this->session->userdata('nama_pegawai');
-                    echo wordwrap($str, 15, "<br>\n"); ?></a></li>
+                    <li>
+                        <a href="#"><?php $str = $this->session->userdata('nama_pegawai'); echo wordwrap($str, 15, "<br>\n"); ?></a>
+                    </li>
                     <li class="active">Dashboard</li>
                 </ol> 
             </div>
@@ -25,211 +26,132 @@
             <div id="page-inner">
                 <!-- /. ROW  -->
                 <div class="row">
-                    <div class="col-md-3 col-sm-12 col-xs-12">
+                    <div class="col-md-4 col-sm-12 col-xs-12">
                         <div class="board">
                             <div class="panel panel-primary">
                                 <div class="number">
                                     <h3>
-                                        <h3>44,023</h3>
-                                        <small>Daily Visits</small>
+                                        <h3><?= $jmlh[0]['id'] ?></h3>
+                                        <small>Total aset aktif</small>
                                     </h3> 
                                 </div>
                                 <div class="icon">
-                                    <i class="fa fa-eye fa-5x red"></i>
+                                    <i class="fa fa-laptop fa-5x red"></i>
                                 </div>
                             </div>
                         </div>
                     </div>
 					
-                    <div class="col-md-3 col-sm-12 col-xs-12">
+                    <div class="col-md-4 col-sm-12 col-xs-12">
                         <div class="board">
                             <div class="panel panel-primary">
                                 <div class="number">
                                     <h3>
-                                        <h3>32,850</h3>
-                                        <small>Sales</small>
+                                        <h3><?= $stts_dipinjam[0]['dipinjam'] ?></h3>
+                                        <small>Aset terpinjam</small>
                                     </h3> 
                                 </div>
                                 <div class="icon">
-                                    <i class="fa fa-shopping-cart fa-5x blue"></i>
+                                    <i class="fa fa-handshake-o fa-5x green"></i>
                                 </div>
                             </div>
 						</div>
                     </div>
-					
-                    <div class="col-md-3 col-sm-12 col-xs-12">
+
+                    <div class="col-md-4 col-sm-12 col-xs-12">
                         <div class="board">
                             <div class="panel panel-primary">
                                 <div class="number">
                                     <h3>
-                                        <h3>56,150</h3>
-                                        <small>Comments</small>
+                                        <h3><?= $stts_dikembalikan[0]['dikembalikan'] ?></h3>
+                                        <small>Aset dikembalikan</small>
                                     </h3> 
                                 </div>
                                 <div class="icon">
-                                    <i class="fa fa-comments fa-5x green"></i>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-					
-					<div class="col-md-3 col-sm-12 col-xs-12">
-                        <div class="board">
-                            <div class="panel panel-primary">
-                                <div class="number">
-                                    <h3>
-                                        <h3>89,645</h3>
-                                        <small>Daily Profits</small>
-                                    </h3> 
-                                </div>
-                                <div class="icon">
-                                    <i class="fa fa-user fa-5x yellow"></i>
+                                    <i class="fa fa-handshake-o fa-5x blue"></i>
                                 </div>
                             </div>
 						</div>
                     </div>
                 </div>
+                <?php 
+                    $all = $jmlh[0]['id'];
+                    $a   = $jns_brg[0]['tot'];
+                    $b   = $jns_brg[1]['tot'];
+                    $c   = $jns_brg[2]['tot'];
+                    $e   = $jns_brg[3]['tot'];
+
+                    $tot_a = ($a / $all) * 100;
+                    $tot_b = ($b / $all) * 100;
+                    $tot_c = ($c / $all) * 100;
+                    $tot_e = ($e / $all) * 100;
+                ?>
+                <div class="row">
+                    <div class="col-xs-6 col-md-3">
+                        <div class="panel panel-default">
+                            <div class="panel-body easypiechart-panel">
+                                <h4>KIB A</h4>
+                                <div class="easypiechart" id="easypiechart-blue" data-percent="<?= ceil($tot_a) ?>" ><span class="percent"><?= ceil($tot_a) ?>%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-md-3">
+                        <div class="panel panel-default">
+                            <div class="panel-body easypiechart-panel">
+                                <h4>KIB B</h4>
+                                <div class="easypiechart" id="easypiechart-orange" data-percent="<?= ceil($tot_b) ?>" ><span class="percent"><?= ceil($tot_b) ?>%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-md-3">
+                        <div class="panel panel-default">
+                            <div class="panel-body easypiechart-panel">
+                                <h4>KIB C</h4>
+                                <div class="easypiechart" id="easypiechart-teal" data-percent="<?= ceil($tot_c) ?>" ><span class="percent"><?= ceil($tot_c) ?>%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-md-3">
+                        <div class="panel panel-default">
+                            <div class="panel-body easypiechart-panel">
+                                <h4>KIB E</h4>
+                                <div class="easypiechart" id="easypiechart-red" data-percent="<?= ceil($tot_e) ?>" ><span class="percent"><?= ceil($tot_e) ?>%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--/.row-->
 		
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="panel panel-default">
+                    <div class="col-md-9 col-sm-12 col-xs-12">                     
+                        <div class="panel panel-default chartJs">
                             <div class="panel-heading">
-                                Line Chart
+                                <div class="card-title">
+                                    <div class="title">Jumlah Aset Perkategori</div>
+                                </div>
                             </div>
                             <div class="panel-body">
-                                
-                            </div>						
-                        </div>   
-                    </div>		
-                        
-                    <div class="col-md-6">
+                                <canvas id="pie-chart" class="chart"></canvas>
+                            </div>
+                        </div>            
+                    </div>
+                    <div class="col-md-3 col-sm-12 col-xs-12">                     
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                Bar Chart Example
+                                Status Usulan Pengadaan
                             </div>
-                            <div class="panel-body">
-
+                            <div class="panel-body">                            
+                                <div id="morris-donut-chart"></div>
                             </div>
-                        </div>  
+                        </div>
                     </div>
                 </div> 
-                <div class="row">
-                    <div class="col-md-12">
-                    
-                    </div>		
-				</div> 	
-                <!-- /. ROW  -->			
-				
-                <div class="row">
-                    <div class="col-md-4 col-sm-12 col-xs-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                Tasks Panel
-                            </div>
-                            <div class="panel-body">
-                                <div class="list-group">
-
-                                    <a href="#" class="list-group-item">
-                                        <span class="badge">7 minutes ago</span>
-                                        <i class="fa fa-fw fa-comment"></i> Commented on a post
-                                    </a>
-                                    <a href="#" class="list-group-item">
-                                        <span class="badge">16 minutes ago</span>
-                                        <i class="fa fa-fw fa-truck"></i> Order 392 shipped
-                                    </a>
-                                    <a href="#" class="list-group-item">
-                                        <span class="badge">36 minutes ago</span>
-                                        <i class="fa fa-fw fa-globe"></i> Invoice 653 has paid
-                                    </a>
-                                    <a href="#" class="list-group-item">
-                                        <span class="badge">1 hour ago</span>
-                                        <i class="fa fa-fw fa-user"></i> A new user has been added
-                                    </a>
-                                    <a href="#" class="list-group-item">
-                                        <span class="badge">1.23 hour ago</span>
-                                        <i class="fa fa-fw fa-user"></i> A new user has added
-                                    </a>
-                                    <a href="#" class="list-group-item">
-                                        <span class="badge">yesterday</span>
-                                        <i class="fa fa-fw fa-globe"></i> Saved the world
-                                    </a>
-                                </div>
-                                <div class="text-right">
-                                    <a href="#">More Tasks <i class="fa fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-8 col-sm-12 col-xs-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                Responsive Table Example
-                            </div> 
-                            <div class="panel-body">
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-bordered table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>S No.</th>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
-                                                <th>User Name</th>
-                                                <th>Email ID.</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>John</td>
-                                                <td>Doe</td>
-                                                <td>John15482</td>
-                                                <td>name@site.com</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Kimsila</td>
-                                                <td>Marriye</td>
-                                                <td>Kim1425</td>
-                                                <td>name@site.com</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Rossye</td>
-                                                <td>Nermal</td>
-                                                <td>Rossy1245</td>
-                                                <td>name@site.com</td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Richard</td>
-                                                <td>Orieal</td>
-                                                <td>Rich5685</td>
-                                                <td>name@site.com</td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>Jacob</td>
-                                                <td>Hielsar</td>
-                                                <td>Jac4587</td>
-                                                <td>name@site.com</td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>Wrapel</td>
-                                                <td>Dere</td>
-                                                <td>Wrap4585</td>
-                                                <td>name@site.com</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <!-- /. ROW  -->
-				<?php $this->load->view('template/copyright') ?>
+                <?php $this->load->view('template/copyright') ?>
             </div>
             <!-- /. PAGE INNER  -->
         </div>
