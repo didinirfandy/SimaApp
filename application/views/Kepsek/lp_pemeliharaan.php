@@ -1,7 +1,8 @@
 <?php
-	$data['tittle'] = "Laporan Pemeliharaan";
-	$this->load->view('template/head', $data);
+$data['tittle'] = "Laporan Pemeliharaan";
+$this->load->view('template/head', $data);
 ?>
+
 <body>
     <div id="wrapper">
         <?php $this->load->view('template/navbar'); ?>
@@ -9,20 +10,20 @@
         <?php $this->load->view('template/menu'); ?>
         <!-- /. NAV SIDE  -->
 
-		<div id="page-wrapper">
-            <div class="header"> 
+        <div id="page-wrapper">
+            <div class="header">
                 <h1 class="page-header">
                     Laporan Pemeliharaan
                 </h1>
                 <?= $this->session->flashdata('pesan'); ?>
                 <ol class="breadcrumb">
                     <li><a href="#"><?php $str = $this->session->userdata('nama_pegawai');
-                    echo wordwrap($str, 15, "<br>\n"); ?></a></li>
-                    <li><a href="<?=base_url()?>Aset/home">Home</a></li>
+                                    echo wordwrap($str, 15, "<br>\n"); ?></a></li>
+                    <li><a href="<?= base_url() ?>Aset/home">Home</a></li>
                     <li class="active">Laporan Pemeliharaan</li>
-                </ol> 
+                </ol>
             </div>
-            
+
             <div id="page-inner">
                 <!-- /. ROW  -->
                 <div class="row">
@@ -32,11 +33,11 @@
                                 Line Chart
                             </div>
                             <div class="panel-body">
-                                
-                            </div>						
-                        </div>   
-                    </div>		
-                        
+
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="col-md-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">
@@ -45,16 +46,16 @@
                             <div class="panel-body">
 
                             </div>
-                        </div>  
+                        </div>
                     </div>
-                </div> 
+                </div>
                 <div class="row">
                     <div class="col-md-12">
-                    
-                    </div>		
-				</div> 	
+
+                    </div>
+                </div>
                 <!-- /. ROW  -->
-				<?php $this->load->view('template/copyright') ?>
+                <?php $this->load->view('template/copyright') ?>
             </div>
             <!-- /. PAGE INNER  -->
         </div>

@@ -9,95 +9,128 @@ http://creativecommons.org/licenses/by/3.0/
     COMMON  STYLES    
 ------------------------------------------------*/
 body {
-    font-family: 'Open Sans', sans-serif;
-    background: #3E3E3E;
+	font-family: 'Open Sans', sans-serif;
+	background: #3E3E3E;
+	font-size: 12px;
 }
 
 #wrapper {
-    width: 100%;
+	width: 100%;
 }
 
 #page-wrapper {
-    padding: 15px 15px;
-    min-height: 600px;
-    background: #EDEDED;
-}
-#page-inner {
-    width:100%;
-    margin:10px 20px 10px 0px;
-    background-color:transparent;
-    padding: 15px 30px;
-    min-height:1200px;
-}
-.header .container-fluid{
-	padding:0;
-}
-.text-center {
-    text-align:center;
-}
-.no-boder {
-    border:1px solid #f3f3f3;
+	padding: 15px 15px;
+	min-height: 600px;
+	background: #EDEDED;
 }
 
-h1, .h1, h2, .h2, h3, .h3 {
-margin-top: 7px;
-margin-bottom: -5px;
+#page-inner {
+	width: 100%;
+	margin: 10px 20px 10px 0px;
+	background-color: transparent;
+	padding: 15px 30px;
+	min-height: 1000px;
 }
+
+.header .container-fluid {
+	padding: 0;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.no-boder {
+	border: 1px solid #f3f3f3;
+}
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3 {
+	margin-top: 7px;
+	margin-bottom: -5px;
+}
+
 h2 {
-    color: #000;
+	color: #000;
 }
+
 h4 {
-    padding-top:10px;
+	padding-top: 10px;
 }
+
 .square-btn-adjust {
-    border: 0px solid transparent; 
+	border: 0px solid transparent;
 	-webkit-border-radius: 0px;
 	-moz-border-radius: 0px;
 	border-radius: 0px;
 }
+
 p {
-    font-size:16px;
-    line-height:25px;
-    padding-top:20px;
+	font-size: 16px;
+	line-height: 25px;
+	padding-top: 20px;
 }
-.navbar-side {
-    z-index: 0; 
+
+.panel {
+	border-radius: 0px;
 }
-.panel{
-border-radius:0px;
-}
-.navbar-side .nav > li > a > i{
+
+.navbar-side .nav>li>a>i {
 	color: #8C8C8C;
 	padding: 8px;
 	width: 30px;
 	text-align: center;
 }
-.top-navbar{
+
+.top-navbar {
 	position: fixed;
 	width: 100%;
 	z-index: 300;
-		-webkit-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.05);
+	-webkit-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.05);
 	-moz-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.05);
 	box-shadow: 0 3px 3px rgba(0, 0, 0, 0.05);
 }
+
 .navbar-side {
-	z-index: 1;
 	position: fixed;
-	width: 260px;
-	top: 80px;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	padding-top: 60px;
+	width: 230px;
+	overflow: auto;
+	z-index: 10;
+	display: block;
+	background-color: #0d252f;
+	-webkit-box-shadow: 0px 8px 17px rgba(0, 0, 0, 0.2);
+	box-shadow: 0px 8px 17px rgba(0, 0, 0, 0.2);
+	-webkit-transition: left 0.3s ease,
+		width 0.3s ease;
+	-o-transition: left 0.3s ease,
+		width 0.3s ease;
+	transition: left 0.3s ease,
+		width 0.3s ease;
 }
+
 #page-wrapper {
 	position: relative;
-	top: 55px;
+	top: 50px;
 	box-shadow: 0 0 10px #757575;
 	-moz-box-shadow: 0 0 10px #757575;
 	-webkit-box-shadow: 0 0 10px #757575;
 }
-.top-navbar .nav > li > a:hover, .top-navbar .nav > li > a:focus {
+
+.top-navbar .nav>li>a:hover,
+.top-navbar .nav>li>a:focus {
 	text-decoration: none;
 	background-color: #4D4D4D;
 	color: #fff;
 }
+
 .nav .open>a,
 .nav .open>a:hover,
 .nav .open>a:focus {
@@ -105,15 +138,17 @@ border-radius:0px;
 	border-color: #14cc13;
 	color: #fff !important;
 }
+
 .breadcrumb {
 	padding: 12px 10px 12px 20px;
 	margin-bottom: 20px;
 	list-style: none;
 	border-radius: 0;
-	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
-	box-shadow: 0 1px 1px rgba(0,0,0,.05);
+	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+	box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
 	background: #fff;
 }
+
 .dropdown-menu>li>a {
 	display: block;
 	padding: 3px 20px;
@@ -124,12 +159,15 @@ border-radius:0px;
 	white-space: nowrap;
 	font-size: 13px;
 }
+
 .dropdown-menu>li>a i {
 	color: #1F1F1F;
 }
+
 .text-muted {
 	color: #14cc13;
 }
+
 .badge {
 	display: inline-block;
 	min-width: 10px;
@@ -143,16 +181,21 @@ border-radius:0px;
 	background-color: #14cc13;
 	border-radius: 10px;
 }
-.closed{
-	-ms-transform: rotate(90deg); /* IE 9 */
-	-webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+
+.closed {
+	-ms-transform: rotate(90deg);
+	/* IE 9 */
+	-webkit-transform: rotate(90deg);
+	/* Chrome, Safari, Opera */
 	transform: rotate(90deg);
 	color: #EDEDED !important;
 	margin-top: 12px !important;
 }
-.closed i{
-	color:#14cc13;
+
+.closed i {
+	color: #14cc13;
 }
+
 /*----------------------------------------------
 	DASHBOARD STYLES    
 ------------------------------------------------*/
@@ -164,19 +207,25 @@ border-radius:0px;
 	padding: 32px 22px 32px 0;
 	color: #323232;
 }
-.panel-left{  
+
+.panel-left {
 	width: 100px;
-	height: 100px;background: #0866C6;/* border: 2px solid #4590DA; */
+	height: 100px;
+	background: #0866C6;
+	/* border: 2px solid #4590DA; */
 	/* border-radius: 100%; */
 	overflow: hidden;
 	margin: 12px;
 }
+
 .panel-left .fa-5x {
-	font-size: 3em;color: rgb(240, 155, 34);
+	font-size: 3em;
+	color: rgb(240, 155, 34);
 	padding: 29px 0;
-	margin-bottom:30px;
+	margin-bottom: 30px;
 }
-.panel-right{  
+
+.panel-right {
 	height: 124px;
 	background: transparent;
 	margin-bottom: 0;
@@ -189,109 +238,137 @@ border-radius:0px;
 	font-weight: normal;
 	text-align: center;
 }
-.panel-right h3{  
+
+.panel-right h3 {
 	font-size: 40px;
 	padding: 18px 10px 13px 0;
 	color: #5D5D5D;
 }
-.panel-right strong{
-	font-weight:normal;
+
+.panel-right strong {
+	font-weight: normal;
 	color: #737373;
 }
+
 .panel-back {
-    background-color:#fff;
+	background-color: #fff;
 
 }
+
 .panel-default {
 	border-color: #ECECEC;
 }
-.panel-default > .panel-heading {
+
+.panel-default>.panel-heading {
 	color: #555;
 	border-color: #FFF;
-	font-weight:bold;background: #FFFFFF;
+	font-weight: bold;
+	background: #FFFFFF;
 	font-size: 16px;
 	text-shadow: none;
 }
+
 .panel-heading {
-  /* padding: 15px 15px 0px; */
+	/* padding: 15px 15px 0px; */
 	border-bottom: 1px solid transparent;
 	border-top-left-radius: 3px;
 	border-top-right-radius: 3px;
 }
+
 .header {
-    margin: 0 30px;
+	margin: 0 30px;
 }
+
 h1.page-header small {
-    color: #7E7E7E;
-    margin-left: 15px;
-    font-size: 20px;
+	color: #7E7E7E;
+	margin-left: 15px;
+	font-size: 20px;
 }
+
 .sub-title {
-    padding: 20px 0 8px;
-    font-weight: bold;
+	padding: 20px 0 8px;
+	font-weight: bold;
 }
-.chartJs{
-	padding-right:15px;
+
+.chartJs {
+	padding-right: 15px;
 }
+
 i.fa.fa-bars {
-    font-size: 20px;
-    margin: 12px 0 0;
+	font-size: 20px;
+	margin: 12px 0 0;
 }
+
 i.fa.fa-bars:hover {
 	color: #14cc13;
 }
+
 .board .panel {
-    padding: 25px 15px;
-	border:none;
-	background:#fff;
+	padding: 25px 15px;
+	border: none;
+	background: #fff;
 }
-.board .number{
-	float:left;
+
+.board .number {
+	float: left;
 }
-.board .icon{
-	float:right;
+
+.board .icon {
+	float: right;
 }
+
 .number h3 {
-    font-size: 32px;
-    color: #676767;
+	font-size: 32px;
+	color: #676767;
 }
+
 .number small {
-    font-size: 14px;
-    color: #AAB5BC;
-    font-weight: 600;
-    text-transform: uppercase;
-    margin: 8px 5px;
-    display: inline-block;
+	font-size: 14px;
+	color: #AAB5BC;
+	font-weight: 600;
+	text-transform: uppercase;
+	margin: 8px 5px;
+	display: inline-block;
 }
+
 .board .panel .icon .fa {
-    font-size: 30px;
-    color: #FFFFFF;
-    background: #30A5FF;
-    padding: 19px;
+	font-size: 30px;
+	color: #FFFFFF;
+	background: #30A5FF;
+	padding: 19px;
 }
-.blue{
-	background:#30A5FF !important;
+
+.blue {
+	background: #30A5FF !important;
 }
-.green{
-	background:#1ABC9C !important;
+
+.green {
+	background: #1ABC9C !important;
 }
-.yellow{
-	background:#FABE28 !important;
+
+.yellow {
+	background: #FABE28 !important;
 }
+
 .red {
-    background: #f36a5a !important;
+	background: #f36a5a !important;
 }
-.jumbotron{
-padding:20px;
+
+.jumbotron {
+	padding: 20px;
 }
+
 .jumbotron p {
-    margin-bottom: 15px;
-    font-size: 15px;
-    font-weight: 200;
+	margin-bottom: 15px;
+	font-size: 15px;
+	font-weight: 200;
 }
-.jumbotron, .well{
-background:#fff;
+
+.jumbotron,
+.well {
+	background: #fff;
 }
+
 .noti-box {
 	min-height: 100px;
 	padding: 20px;
@@ -308,43 +385,52 @@ background:#fff;
 	text-align: center;
 	font-size: 40px;
 }
-.text-box p{
-    margin: 0 0 3px;
+
+.text-box p {
+	margin: 0 0 3px;
 }
+
 .main-text {
-    font-size: 25px;
-    font-weight:600;
+	font-size: 25px;
+	font-weight: 600;
 }
+
 .set-icon {
--webkit-border-radius: 50px;
--moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
 	border-radius: 50px;
 
 }
-.panel-primary{
-	display:inline-block;
+
+.panel-primary {
+	display: inline-block;
 	margin-bottom: 30px;
-	width:100%;
+	width: 100%;
 }
+
 .green {
 	background-color: #1CC09F;
 	color: #fff;
 }
+
 .blue {
 	background-color: #FFFFFF;
 	color: #002A4C;
 }
+
 .red {
 	background-color: #FB6E51;
-	color:#fff;
+	color: #fff;
 }
+
 .brown {
 	background-color: #F5B252;
-	color:#fff;
-} 
+	color: #fff;
+}
+
 .back-footer-red {
 	background-color: #F0433D;
-	color:#fff;
+	color: #fff;
 	border-top: 0px solid #fff;
 }
 
@@ -367,25 +453,28 @@ background:#fff;
 	font-weight: 300;
 	text-align: center;
 }
+
 .main-temp-back .text-temp {
 	font-size: 40px;
 }
+
 .back-dash {
-    padding:20px;
-    font-size:20px;
-    font-weight:500;
+	padding: 20px;
+	font-size: 20px;
+	font-weight: 500;
 	-webkit-border-radius: 0px;
 	-moz-border-radius: 0px;
 	border-radius: 0px;
-	background-color:#2EA7EB;
-	color:#fff;
+	background-color: #2EA7EB;
+	color: #fff;
 }
+
 .back-dash p {
-	padding-top:16px;
-	font-size:13px;
-	color:#fff;
-	line-height:25px;
-	text-align:justify;
+	padding-top: 16px;
+	font-size: 13px;
+	color: #fff;
+	line-height: 25px;
+	text-align: justify;
 }
 
 .color-bottom-txt {
@@ -393,6 +482,7 @@ background:#fff;
 	font-size: 16px;
 	line-height: 30px;
 }
+
 /*CHAT PANEL*/
 /*Charts*/
 
@@ -430,99 +520,133 @@ background:#fff;
 	width: 120px;
 }
 
-#easypiechart-blue .percent { color: #30a5ff;}
-#easypiechart-teal .percent { color: #1ebfae;}
-#easypiechart-orange .percent { color: #ffb53e;}
-#easypiechart-red .percent { color: #ef4040;}
+#easypiechart-blue .percent {
+	color: #30a5ff;
+}
+
+#easypiechart-teal .percent {
+	color: #1ebfae;
+}
+
+#easypiechart-orange .percent {
+	color: #ffb53e;
+}
+
+#easypiechart-red .percent {
+	color: #ef4040;
+}
 
 
 .chat-panel .panel-body {
 	height: 450px;
 	overflow-y: scroll;
 }
+
 .chat-box {
 	margin: 0;
 	padding: 0;
 	list-style: none;
 }
+
 .chat-box li {
 	margin-bottom: 15px;
 	padding-bottom: 5px;
 	border-bottom: 1px dotted #808080;
 }
+
 .chat-box li.left .chat-body {
 	margin-left: 90px;
 }
+
 .chat-box li .chat-body p {
 	margin: 0;
 	color: #8d8888;
 }
+
 .chat-img>img {
-    margin-left:20px;
+	margin-left: 20px;
 }
-footer p{
+
+footer p {
 	font-size: 14px;
 }
+
 /*----------------------------------------------
     MENU STYLES    
 ------------------------------------------------*/
 div#sideNav:hover {
-    color: #14cc13;
+	color: #14cc13;
 }
+
 .user-image {
-    margin: 25px auto;
+	margin: 25px auto;
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	border-radius: 10px;
-	max-height:170px;
-	max-width:170px;
+	max-height: 170px;
+	max-width: 170px;
 }
-.top-navbar{
-	margin:0px;
+
+.top-navbar {
+	margin: 0px;
+	height: 50px;
 }
+
 .top-navbar .navbar-brand {
 	color: #fff;
-	width: 260px;
+	width: 250px;
 	text-align: center;
-	height: 60px;
+	height: 50px;
+	padding: 10px 15px;
 	font-size: 24px;
 	font-weight: 700;
 	text-transform: uppercase;
 	line-height: 30px;
 	background: #14cc13;
 }
-.navbar-brand b{
+
+.navbar-brand b {
 	color: #4BD28C;
 }
-.top-navbar .nav > li {
+
+.top-navbar .nav>li {
 	position: relative;
 	display: inline-block;
 	margin: 0px;
 	padding: 0px;
 }
-.top-navbar .nav > li > a {
+
+.top-navbar .nav>li>a {
 	position: relative;
 	display: block;
-	padding: 20px;color: #FFFFFF;
+	padding: 15px 30px 0px 0px;
+	color: #FFFFFF;
 	margin: 0px;
 }
-.top-navbar .nav > li > a:hover, .top-navbar .nav > li > a:focus {
+
+.top-navbar .nav>li>a:hover,
+.top-navbar .nav>li>a:focus {
 	text-decoration: none;
 	color: #319DB5 !important;
 	background: transparent;
 }
-.top-navbar .dropdown-menu{
+
+.top-navbar .dropdown-menu {
 	min-width: 230px;
 	border-radius: 0 0 4px 4px;
 	border: 0;
 }
-.top-navbar .dropdown-menu > li > a:hover, .top-navbar .dropdown-menu > li > a:focus{
+
+.top-navbar .dropdown-menu>li>a:hover,
+.top-navbar .dropdown-menu>li>a:focus {
 	color: #225081;
-	background:none;
+	background: none;
 }
-.dropdown-tasks{
+
+.dropdown-tasks {
 	width: 255px;
 }
+
 .dropdown-tasks .progress {
 	height: 8px;
 	margin-bottom: 8px;
@@ -530,96 +654,124 @@ div#sideNav:hover {
 	background-color: #f5f5f5;
 	border-radius: 0px;
 }
-.dropdown-tasks > li > a { 
+
+.dropdown-tasks>li>a {
 	padding: 0px 15px;
 }
+
 .dropdown-tasks p {
 	font-size: 13px;
 	line-height: 21px;
 	padding-top: 4px;
 }
-.active-menu, .active-menu i {
-    background-color: #EDEDED !important;
-    color: #14cc13 !important;
+
+.active-menu,
+.active-menu i {
+	background-color: #EDEDED !important;
+	color: #14cc13 !important;
 }
+
 .active-menu i {
 	color: #14cc13 !important;
 }
+
 .arrow {
-    float: right;
-    margin-top: 8px;
+	float: right;
+	margin-top: 8px;
 }
 
 .fa.arrow:before {
-    content: "\f104";
+	content: "\f104";
 }
 
-.active > a > .fa.arrow:before {
-    content: "\f107";
+.active>a>.fa.arrow:before {
+	content: "\f107";
 }
 
 .nav-second-level li,
 .nav-third-level li {
-    border-bottom: none !important;
+	border-bottom: none !important;
 }
 
 .nav-second-level li a {
-    padding-left: 37px;
+	padding-left: 37px;
 }
 
 .nav-third-level li a {
-    padding-left: 55px;
+	padding-left: 55px;
 }
-.sidebar-collapse , .sidebar-collapse .nav{
-	background:none;
-}
+
+.sidebar-collapse,
 .sidebar-collapse .nav {
-	padding:0;
+	background: none;
 }
-.sidebar-collapse .nav > li > a {
+
+.sidebar-collapse .nav {
+	padding: 0;
+}
+
+.sidebar-collapse .nav>li>a {
 	color: #B8B8B8;
-	background:transparent;
-	text-shadow:none;
-	font-size: 14px;
+	background: transparent;
+	text-shadow: none;
+	font-size: 12px;
 }
-.sidebar-collapse > .nav > li > a {
+
+.sidebar-collapse>.nav>li>a {
 	padding: 12px 10px;
 }
-.sidebar-collapse > .nav > li {
+
+.sidebar-collapse>.nav>li {
 	border-bottom: 1px solid rgba(107, 108, 109, 0.19);
 }
-ul.nav.nav-second-level.collapse.in {background: #131212;}
-.sidebar-collapse .nav > li > a:hover,
-.sidebar-collapse .nav > li > a:focus {
-	outline:0;
+
+ul.nav.nav-second-level.collapse.in {
+	background: #131212;
+}
+
+.sidebar-collapse .nav>li>a:hover,
+.sidebar-collapse .nav>li>a:focus {
+	outline: 0;
 	background: #575757;
 	color: #14cc13;
 }
+
 .navbar-side {
-	border:none;
+	border: none;
 	background: #3E3E3E;
 }
+
 .top-navbar {
 	background: #FFFFFF;
-	border-bottom:none;
+	border-bottom: none;
 }
-.top-navbar .nav > li > a > i {
-margin-right: 2px;
+
+.top-navbar .nav>li>a>i {
+	margin-right: 2px;
 }
+
 .top-navbar .navbar-brand:hover {
 	color: #FFFFFF;
 	background-color: #14cc13;
 }
+
 .dropdown-user li {
-margin: 8px 0;
+	margin: 8px 0;
 }
-.navbar-default {border:0px solid black;}
+
+.navbar-default {
+	border: 0px solid black;
+}
+
 .navbar-header {
-    background: transparent;
+	background: transparent;
 }
-.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
 	background-color: #283643;
 }
+
 .navbar-default .navbar-toggle {
 	border-color: #fff;
 }
@@ -627,31 +779,36 @@ margin: 8px 0;
 .navbar-default .navbar-toggle .icon-bar {
 	background-color: #FFF;
 }
-.nav > li > a > i {
-    margin-right:10px;
-    color: #14cc13;
+
+.nav>li>a>i {
+	margin-right: 10px;
+	color: #14cc13;
 }
+
 .dropdown-menu>li>a>strong {
 	color: #0866C6;
 	padding: 5px 0;
 	display: inline-block;
 	font-weight: 500;
 }
-#sideNav{
-    float: left;
-    left: 0;
-    z-index: 3;
-    color: #868686;
-    cursor:pointer;
-    border-radius: 0;
-    width: 14px;
-    font-size: 48px;
-    line-height: 0;
-    margin: 7px 0 0 20px;
+
+#sideNav {
+	float: left;
+	left: 0;
+	z-index: 3;
+	color: #868686;
+	cursor: pointer;
+	border-radius: 0;
+	width: 14px;
+	font-size: 48px;
+	line-height: 0;
+	margin: 7px 0 0 20px;
 }
+
 ul.dropdown-menu.dropdown-messages li a div {
 	padding: 2px 0;
 }
+
 /*----------------------------------------------
     UI ELEMENTS STYLES     
 ------------------------------------------------*/
@@ -672,42 +829,45 @@ ul.dropdown-menu.dropdown-messages li a div {
 ------------------------------------------------*/
 
 @media(min-width:768px) {
-    #page-wrapper{
-        margin: 0 0 0 260px;
-        padding: 0;
-        min-height: 1200px;
+	#page-wrapper {
+		margin: 0 0 0 250px;
+		padding: 0;
+		min-height: 1000px;
 	}
-	
-    .navbar-side {
-        width: 260px;
-        z-index: 1;
-    }
 
-    .navbar {
-        border-radius: 0px; 
-    }
-    
+	.navbar-side {
+		width: 250px;
+		z-index: 10;
+	}
+
+	.navbar {
+		border-radius: 0px;
+	}
+
 }
+
 @media(max-width:480px) {
-    #page-wrapper {
-        position: relative;
-        top: 93px;
-    }
-    .page-header small {
-        display: block;
-        padding-top: 14px;
-        font-size: 19px;
-    }
-    /* #sideNav{
+	#page-wrapper {
+		position: relative;
+		top: 93px;
+	}
+
+	.page-header small {
+		display: block;
+		padding-top: 14px;
+		font-size: 19px;
+	}
+
+	/* #sideNav{
         display:none;
     } */
-    .panel-left {
-        width: 85px;
-        height: 85px; 
-        border-radius: 100%;
-        overflow: hidden;
-        margin: 14px;
-    }
+	.panel-left {
+		width: 85px;
+		height: 85px;
+		border-radius: 100%;
+		overflow: hidden;
+		margin: 14px;
+	}
 }
 
 /* bingkai */
@@ -798,8 +958,8 @@ ul.dropdown-menu.dropdown-messages li a div {
 	-webkit-box-align: center;
 	-ms-flex-align: center;
 	align-items: center;
-	padding: 10px;
-	margin-bottom: 20px;
+	padding: 15px;
+	margin-bottom: 15px;
 	color: #fff;
 }
 
@@ -845,8 +1005,8 @@ ul.dropdown-menu.dropdown-messages li a div {
 
 .treeview.is-expanded .treeview-indicator {
 	-webkit-transform: rotate(90deg);
-		-ms-transform: rotate(90deg);
-			transform: rotate(90deg);
+	-ms-transform: rotate(90deg);
+	transform: rotate(90deg);
 }
 
 .treeview-menu {
@@ -863,14 +1023,16 @@ ul.dropdown-menu.dropdown-messages li a div {
 	display: -ms-flexbox;
 	display: flex;
 	-webkit-box-align: center;
-		-ms-flex-align: center;
-			align-items: center;
+	-ms-flex-align: center;
+	align-items: center;
 	padding: 5px 5px 5px 20px;
 	font-size: 1em;
 	color: #fff;
 }
 
-.treeview-item.active, .treeview-item:hover, .treeview-item:focus {
+.treeview-item.active,
+.treeview-item:hover,
+.treeview-item:focus {
 	background: #0d1214;
 	text-decoration: none;
 	color: #fff;
@@ -882,8 +1044,8 @@ ul.dropdown-menu.dropdown-messages li a div {
 
 .treeview-indicator {
 	-webkit-transform-origin: center;
-		-ms-transform-origin: center;
-			transform-origin: center;
+	-ms-transform-origin: center;
+	transform-origin: center;
 	-webkit-transition: -webkit-transform 0.3s ease;
 	transition: -webkit-transform 0.3s ease;
 	-o-transition: transform 0.3s ease;
@@ -991,13 +1153,13 @@ ul.dropdown-menu.dropdown-messages li a div {
 	display: -ms-flexbox;
 	display: flex;
 	-ms-flex-wrap: wrap;
-		flex-wrap: wrap;
+	flex-wrap: wrap;
 	margin-right: -5px;
 	margin-left: -5px;
 }
 
-.form-row > .col,
-.form-row > [class*="col-"] {
+.form-row>.col,
+.form-row>[class*="col-"] {
 	padding-right: 5px;
 	padding-left: 5px;
 }
@@ -1034,7 +1196,7 @@ hr {
 	border-bottom: 2px solid #dee2e6;
 }
 
-.table tbody + tbody {
+.table tbody+tbody {
 	border-top: 2px solid #dee2e6;
 }
 
@@ -1064,7 +1226,7 @@ hr {
 .table-borderless th,
 .table-borderless td,
 .table-borderless thead th,
-.table-borderless tbody + tbody {
+.table-borderless tbody+tbody {
 	border: 0;
 }
 
@@ -1077,8 +1239,8 @@ hr {
 }
 
 .table-primary,
-.table-primary > th,
-.table-primary > td {
+.table-primary>th,
+.table-primary>td {
 	background-color: #b8e2de;
 }
 
@@ -1086,14 +1248,14 @@ hr {
 	background-color: #a6dbd6;
 }
 
-.table-hover .table-primary:hover > td,
-.table-hover .table-primary:hover > th {
+.table-hover .table-primary:hover>td,
+.table-hover .table-primary:hover>th {
 	background-color: #a6dbd6;
 }
 
 .table-secondary,
-.table-secondary > th,
-.table-secondary > td {
+.table-secondary>th,
+.table-secondary>td {
 	background-color: #d6d8db;
 }
 
@@ -1101,14 +1263,14 @@ hr {
 	background-color: #c8cbcf;
 }
 
-.table-hover .table-secondary:hover > td,
-.table-hover .table-secondary:hover > th {
+.table-hover .table-secondary:hover>td,
+.table-hover .table-secondary:hover>th {
 	background-color: #c8cbcf;
 }
 
 .table-success,
-.table-success > th,
-.table-success > td {
+.table-success>th,
+.table-success>td {
 	background-color: #c3e6cb;
 }
 
@@ -1116,14 +1278,14 @@ hr {
 	background-color: #b1dfbb;
 }
 
-.table-hover .table-success:hover > td,
-.table-hover .table-success:hover > th {
+.table-hover .table-success:hover>td,
+.table-hover .table-success:hover>th {
 	background-color: #b1dfbb;
 }
 
 .table-info,
-.table-info > th,
-.table-info > td {
+.table-info>th,
+.table-info>td {
 	background-color: #bee5eb;
 }
 
@@ -1131,14 +1293,14 @@ hr {
 	background-color: #abdde5;
 }
 
-.table-hover .table-info:hover > td,
-.table-hover .table-info:hover > th {
+.table-hover .table-info:hover>td,
+.table-hover .table-info:hover>th {
 	background-color: #abdde5;
 }
 
 .table-warning,
-.table-warning > th,
-.table-warning > td {
+.table-warning>th,
+.table-warning>td {
 	background-color: #ffeeba;
 }
 
@@ -1146,14 +1308,14 @@ hr {
 	background-color: #ffe8a1;
 }
 
-.table-hover .table-warning:hover > td,
-.table-hover .table-warning:hover > th {
+.table-hover .table-warning:hover>td,
+.table-hover .table-warning:hover>th {
 	background-color: #ffe8a1;
 }
 
 .table-danger,
-.table-danger > th,
-.table-danger > td {
+.table-danger>th,
+.table-danger>td {
 	background-color: #f5c6cb;
 }
 
@@ -1161,14 +1323,14 @@ hr {
 	background-color: #f1b0b7;
 }
 
-.table-hover .table-danger:hover > td,
-.table-hover .table-danger:hover > th {
+.table-hover .table-danger:hover>td,
+.table-hover .table-danger:hover>th {
 	background-color: #f1b0b7;
 }
 
 .table-light,
-.table-light > th,
-.table-light > td {
+.table-light>th,
+.table-light>td {
 	background-color: #fdfdfe;
 }
 
@@ -1176,14 +1338,14 @@ hr {
 	background-color: #ececf6;
 }
 
-.table-hover .table-light:hover > td,
-.table-hover .table-light:hover > th {
+.table-hover .table-light:hover>td,
+.table-hover .table-light:hover>th {
 	background-color: #ececf6;
 }
 
 .table-dark,
-.table-dark > th,
-.table-dark > td {
+.table-dark>th,
+.table-dark>td {
 	background-color: #c6c8ca;
 }
 
@@ -1191,14 +1353,14 @@ hr {
 	background-color: #b9bbbe;
 }
 
-.table-hover .table-dark:hover > td,
-.table-hover .table-dark:hover > th {
+.table-hover .table-dark:hover>td,
+.table-hover .table-dark:hover>th {
 	background-color: #b9bbbe;
 }
 
 .table-active,
-.table-active > th,
-.table-active > td {
+.table-active>th,
+.table-active>td {
 	background-color: rgba(0, 0, 0, 0.075);
 }
 
@@ -1206,8 +1368,8 @@ hr {
 	background-color: rgba(0, 0, 0, 0.075);
 }
 
-.table-hover .table-active:hover > td,
-.table-hover .table-active:hover > th {
+.table-hover .table-active:hover>td,
+.table-hover .table-active:hover>th {
 	background-color: rgba(0, 0, 0, 0.075);
 }
 
@@ -1248,53 +1410,57 @@ hr {
 
 @media (max-width: 575.98px) {
 	.table-responsive-sm {
-	display: block;
-	width: 100%;
-	overflow-x: auto;
-	-webkit-overflow-scrolling: touch;
-	-ms-overflow-style: -ms-autohiding-scrollbar;
+		display: block;
+		width: 100%;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+		-ms-overflow-style: -ms-autohiding-scrollbar;
 	}
-	.table-responsive-sm > .table-bordered {
-	border: 0;
+
+	.table-responsive-sm>.table-bordered {
+		border: 0;
 	}
 }
 
 @media (max-width: 767.98px) {
 	.table-responsive-md {
-	display: block;
-	width: 100%;
-	overflow-x: auto;
-	-webkit-overflow-scrolling: touch;
-	-ms-overflow-style: -ms-autohiding-scrollbar;
+		display: block;
+		width: 100%;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+		-ms-overflow-style: -ms-autohiding-scrollbar;
 	}
-	.table-responsive-md > .table-bordered {
-	border: 0;
+
+	.table-responsive-md>.table-bordered {
+		border: 0;
 	}
 }
 
 @media (max-width: 991.98px) {
 	.table-responsive-lg {
-	display: block;
-	width: 100%;
-	overflow-x: auto;
-	-webkit-overflow-scrolling: touch;
-	-ms-overflow-style: -ms-autohiding-scrollbar;
+		display: block;
+		width: 100%;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+		-ms-overflow-style: -ms-autohiding-scrollbar;
 	}
-	.table-responsive-lg > .table-bordered {
-	border: 0;
+
+	.table-responsive-lg>.table-bordered {
+		border: 0;
 	}
 }
 
 @media (max-width: 1199.98px) {
 	.table-responsive-xl {
-	display: block;
-	width: 100%;
-	overflow-x: auto;
-	-webkit-overflow-scrolling: touch;
-	-ms-overflow-style: -ms-autohiding-scrollbar;
+		display: block;
+		width: 100%;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+		-ms-overflow-style: -ms-autohiding-scrollbar;
 	}
-	.table-responsive-xl > .table-bordered {
-	border: 0;
+
+	.table-responsive-xl>.table-bordered {
+		border: 0;
 	}
 }
 
@@ -1306,7 +1472,7 @@ hr {
 	-ms-overflow-style: -ms-autohiding-scrollbar;
 }
 
-.table-responsive > .table-bordered {
+.table-responsive>.table-bordered {
 	border: 0;
 }
 
@@ -1339,7 +1505,7 @@ body.stop-scrolling {
 	margin-left: -259px;
 	margin-top: -200px;
 	-webkit-box-shadow: 0 4px 23px 5px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(0, 0, 0, 0.15);
-			box-shadow: 0 4px 23px 5px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(0, 0, 0, 0.15);
+	box-shadow: 0 4px 23px 5px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(0, 0, 0, 0.15);
 	overflow: hidden;
 	display: none;
 	z-index: 99999;
@@ -1347,11 +1513,11 @@ body.stop-scrolling {
 
 @media all and (max-width: 540px) {
 	.sweet-alert {
-	width: auto;
-	margin-left: 0;
-	margin-right: 0;
-	left: 15px;
-	right: 15px;
+		width: auto;
+		margin-left: 0;
+		margin-right: 0;
+		left: 15px;
+		right: 15px;
 	}
 }
 
@@ -1431,16 +1597,17 @@ body.stop-scrolling {
 	opacity: 0;
 	-webkit-transform: scale(0.5);
 	-ms-transform: scale(0.5);
-		transform: scale(0.5);
+	transform: scale(0.5);
 	-webkit-transform-origin: 50% 50%;
 	-ms-transform-origin: 50% 50%;
-		transform-origin: 50% 50%;
+	transform-origin: 50% 50%;
 	-webkit-transition: all 0.1s;
 	-o-transition: all 0.1s;
 	transition: all 0.1s;
 }
 
-.sweet-alert .sa-input-error::before, .sweet-alert .sa-input-error::after {
+.sweet-alert .sa-input-error::before,
+.sweet-alert .sa-input-error::after {
 	content: "";
 	width: 20px;
 	height: 6px;
@@ -1456,20 +1623,20 @@ body.stop-scrolling {
 .sweet-alert .sa-input-error::before {
 	-webkit-transform: rotate(-45deg);
 	-ms-transform: rotate(-45deg);
-		transform: rotate(-45deg);
+	transform: rotate(-45deg);
 }
 
 .sweet-alert .sa-input-error::after {
 	-webkit-transform: rotate(45deg);
 	-ms-transform: rotate(45deg);
-		transform: rotate(45deg);
+	transform: rotate(45deg);
 }
 
 .sweet-alert .sa-input-error.show {
 	opacity: 1;
 	-webkit-transform: scale(1);
 	-ms-transform: scale(1);
-		transform: scale(1);
+	transform: scale(1);
 }
 
 .sweet-alert input {
@@ -1521,7 +1688,7 @@ body.stop-scrolling {
 	color: white;
 	border: none;
 	-webkit-box-shadow: none;
-			box-shadow: none;
+	box-shadow: none;
 	font-size: 17px;
 	font-weight: 500;
 	border-radius: 3px;
@@ -1533,7 +1700,7 @@ body.stop-scrolling {
 .sweet-alert button:focus {
 	outline: none;
 	-webkit-box-shadow: 0 0 2px rgba(128, 179, 235, 0.5), inset 0 0 0 1px rgba(0, 0, 0, 0.05);
-			box-shadow: 0 0 2px rgba(128, 179, 235, 0.5), inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+	box-shadow: 0 0 2px rgba(128, 179, 235, 0.5), inset 0 0 0 1px rgba(0, 0, 0, 0.05);
 }
 
 .sweet-alert button:hover {
@@ -1558,7 +1725,7 @@ body.stop-scrolling {
 
 .sweet-alert button.cancel:focus {
 	-webkit-box-shadow: rgba(197, 205, 211, 0.8) 0px 0px 2px, rgba(0, 0, 0, 0.0470588) 0px 0px 0px 1px inset !important;
-			box-shadow: rgba(197, 205, 211, 0.8) 0px 0px 2px, rgba(0, 0, 0, 0.0470588) 0px 0px 0px 1px inset !important;
+	box-shadow: rgba(197, 205, 211, 0.8) 0px 0px 2px, rgba(0, 0, 0, 0.0470588) 0px 0px 0px 1px inset !important;
 }
 
 .sweet-alert button[disabled] {
@@ -1570,12 +1737,12 @@ body.stop-scrolling {
 	color: transparent;
 }
 
-.sweet-alert button.confirm[disabled] ~ .la-ball-fall {
+.sweet-alert button.confirm[disabled]~.la-ball-fall {
 	opacity: 1;
 	visibility: visible;
 	-webkit-transition-delay: 0s;
-		-o-transition-delay: 0s;
-			transition-delay: 0s;
+	-o-transition-delay: 0s;
+	transition-delay: 0s;
 }
 
 .sweet-alert button::-moz-focus-inner {
@@ -1584,7 +1751,7 @@ body.stop-scrolling {
 
 .sweet-alert[data-has-cancel-button=false] button {
 	-webkit-box-shadow: none !important;
-			box-shadow: none !important;
+	box-shadow: none !important;
 }
 
 .sweet-alert[data-has-confirm-button=false][data-has-cancel-button=false] {
@@ -1601,7 +1768,7 @@ body.stop-scrolling {
 	padding: 0;
 	position: relative;
 	-webkit-box-sizing: content-box;
-			box-sizing: content-box;
+	box-sizing: content-box;
 }
 
 .sweet-alert .sa-icon.sa-error {
@@ -1626,14 +1793,14 @@ body.stop-scrolling {
 .sweet-alert .sa-icon.sa-error .sa-line.sa-left {
 	-webkit-transform: rotate(45deg);
 	-ms-transform: rotate(45deg);
-		transform: rotate(45deg);
+	transform: rotate(45deg);
 	left: 17px;
 }
 
 .sweet-alert .sa-icon.sa-error .sa-line.sa-right {
 	-webkit-transform: rotate(-45deg);
 	-ms-transform: rotate(-45deg);
-		transform: rotate(-45deg);
+	transform: rotate(-45deg);
 	right: 16px;
 }
 
@@ -1694,7 +1861,8 @@ body.stop-scrolling {
 	border-color: #A5DC86;
 }
 
-.sweet-alert .sa-icon.sa-success::before, .sweet-alert .sa-icon.sa-success::after {
+.sweet-alert .sa-icon.sa-success::before,
+.sweet-alert .sa-icon.sa-success::after {
 	content: '';
 	border-radius: 40px;
 	border-radius: 50%;
@@ -1704,7 +1872,7 @@ body.stop-scrolling {
 	background: white;
 	-webkit-transform: rotate(45deg);
 	-ms-transform: rotate(45deg);
-		transform: rotate(45deg);
+	transform: rotate(45deg);
 }
 
 .sweet-alert .sa-icon.sa-success::before {
@@ -1713,10 +1881,10 @@ body.stop-scrolling {
 	left: -33px;
 	-webkit-transform: rotate(-45deg);
 	-ms-transform: rotate(-45deg);
-		transform: rotate(-45deg);
+	transform: rotate(-45deg);
 	-webkit-transform-origin: 60px 60px;
 	-ms-transform-origin: 60px 60px;
-		transform-origin: 60px 60px;
+	transform-origin: 60px 60px;
 }
 
 .sweet-alert .sa-icon.sa-success::after {
@@ -1725,10 +1893,10 @@ body.stop-scrolling {
 	left: 30px;
 	-webkit-transform: rotate(-45deg);
 	-ms-transform: rotate(-45deg);
-		transform: rotate(-45deg);
+	transform: rotate(-45deg);
 	-webkit-transform-origin: 0px 60px;
 	-ms-transform-origin: 0px 60px;
-		transform-origin: 0px 60px;
+	transform-origin: 0px 60px;
 }
 
 .sweet-alert .sa-icon.sa-success .sa-placeholder {
@@ -1738,7 +1906,7 @@ body.stop-scrolling {
 	border-radius: 40px;
 	border-radius: 50%;
 	-webkit-box-sizing: content-box;
-			box-sizing: content-box;
+	box-sizing: content-box;
 	position: absolute;
 	left: -4px;
 	top: -4px;
@@ -1755,7 +1923,7 @@ body.stop-scrolling {
 	z-index: 1;
 	-webkit-transform: rotate(-45deg);
 	-ms-transform: rotate(-45deg);
-		transform: rotate(-45deg);
+	transform: rotate(-45deg);
 }
 
 .sweet-alert .sa-icon.sa-success .sa-line {
@@ -1773,7 +1941,7 @@ body.stop-scrolling {
 	top: 46px;
 	-webkit-transform: rotate(45deg);
 	-ms-transform: rotate(45deg);
-		transform: rotate(45deg);
+	transform: rotate(45deg);
 }
 
 .sweet-alert .sa-icon.sa-success .sa-line.sa-long {
@@ -1782,7 +1950,7 @@ body.stop-scrolling {
 	top: 38px;
 	-webkit-transform: rotate(-45deg);
 	-ms-transform: rotate(-45deg);
-		transform: rotate(-45deg);
+	transform: rotate(-45deg);
 }
 
 .sweet-alert .sa-icon.sa-custom {
@@ -1798,133 +1966,149 @@ body.stop-scrolling {
 */
 @-webkit-keyframes showSweetAlert {
 	0% {
-	transform: scale(0.7);
-	-webkit-transform: scale(0.7);
+		transform: scale(0.7);
+		-webkit-transform: scale(0.7);
 	}
+
 	45% {
-	transform: scale(1.05);
-	-webkit-transform: scale(1.05);
+		transform: scale(1.05);
+		-webkit-transform: scale(1.05);
 	}
+
 	80% {
-	transform: scale(0.95);
-	-webkit-transform: scale(0.95);
+		transform: scale(0.95);
+		-webkit-transform: scale(0.95);
 	}
+
 	100% {
-	transform: scale(1);
-	-webkit-transform: scale(1);
+		transform: scale(1);
+		-webkit-transform: scale(1);
 	}
 }
 
 @keyframes showSweetAlert {
 	0% {
-	transform: scale(0.7);
-	-webkit-transform: scale(0.7);
+		transform: scale(0.7);
+		-webkit-transform: scale(0.7);
 	}
+
 	45% {
-	transform: scale(1.05);
-	-webkit-transform: scale(1.05);
+		transform: scale(1.05);
+		-webkit-transform: scale(1.05);
 	}
+
 	80% {
-	transform: scale(0.95);
-	-webkit-transform: scale(0.95);
+		transform: scale(0.95);
+		-webkit-transform: scale(0.95);
 	}
+
 	100% {
-	transform: scale(1);
-	-webkit-transform: scale(1);
+		transform: scale(1);
+		-webkit-transform: scale(1);
 	}
 }
 
 @-webkit-keyframes hideSweetAlert {
 	0% {
-	transform: scale(1);
-	-webkit-transform: scale(1);
+		transform: scale(1);
+		-webkit-transform: scale(1);
 	}
+
 	100% {
-	transform: scale(0.5);
-	-webkit-transform: scale(0.5);
+		transform: scale(0.5);
+		-webkit-transform: scale(0.5);
 	}
 }
 
 @keyframes hideSweetAlert {
 	0% {
-	transform: scale(1);
-	-webkit-transform: scale(1);
+		transform: scale(1);
+		-webkit-transform: scale(1);
 	}
+
 	100% {
-	transform: scale(0.5);
-	-webkit-transform: scale(0.5);
+		transform: scale(0.5);
+		-webkit-transform: scale(0.5);
 	}
 }
 
 @-webkit-keyframes slideFromTop {
 	0% {
-	top: 0%;
+		top: 0%;
 	}
+
 	100% {
-	top: 50%;
+		top: 50%;
 	}
 }
 
 @keyframes slideFromTop {
 	0% {
-	top: 0%;
+		top: 0%;
 	}
+
 	100% {
-	top: 50%;
+		top: 50%;
 	}
 }
 
 @-webkit-keyframes slideToTop {
 	0% {
-	top: 50%;
+		top: 50%;
 	}
+
 	100% {
-	top: 0%;
+		top: 0%;
 	}
 }
 
 @keyframes slideToTop {
 	0% {
-	top: 50%;
+		top: 50%;
 	}
+
 	100% {
-	top: 0%;
+		top: 0%;
 	}
 }
 
 @-webkit-keyframes slideFromBottom {
 	0% {
-	top: 70%;
+		top: 70%;
 	}
+
 	100% {
-	top: 50%;
+		top: 50%;
 	}
 }
 
 @keyframes slideFromBottom {
 	0% {
-	top: 70%;
+		top: 70%;
 	}
+
 	100% {
-	top: 50%;
+		top: 50%;
 	}
 }
 
 @-webkit-keyframes slideToBottom {
 	0% {
-	top: 50%;
+		top: 50%;
 	}
+
 	100% {
-	top: 70%;
+		top: 70%;
 	}
 }
 
 @keyframes slideToBottom {
 	0% {
-	top: 50%;
+		top: 50%;
 	}
+
 	100% {
-	top: 70%;
+		top: 70%;
 	}
 }
 
@@ -1970,141 +2154,161 @@ body.stop-scrolling {
 
 @-webkit-keyframes animateSuccessTip {
 	0% {
-	width: 0;
-	left: 1px;
-	top: 19px;
+		width: 0;
+		left: 1px;
+		top: 19px;
 	}
+
 	54% {
-	width: 0;
-	left: 1px;
-	top: 19px;
+		width: 0;
+		left: 1px;
+		top: 19px;
 	}
+
 	70% {
-	width: 50px;
-	left: -8px;
-	top: 37px;
+		width: 50px;
+		left: -8px;
+		top: 37px;
 	}
+
 	84% {
-	width: 17px;
-	left: 21px;
-	top: 48px;
+		width: 17px;
+		left: 21px;
+		top: 48px;
 	}
+
 	100% {
-	width: 25px;
-	left: 14px;
-	top: 45px;
+		width: 25px;
+		left: 14px;
+		top: 45px;
 	}
 }
 
 @keyframes animateSuccessTip {
 	0% {
-	width: 0;
-	left: 1px;
-	top: 19px;
+		width: 0;
+		left: 1px;
+		top: 19px;
 	}
+
 	54% {
-	width: 0;
-	left: 1px;
-	top: 19px;
+		width: 0;
+		left: 1px;
+		top: 19px;
 	}
+
 	70% {
-	width: 50px;
-	left: -8px;
-	top: 37px;
+		width: 50px;
+		left: -8px;
+		top: 37px;
 	}
+
 	84% {
-	width: 17px;
-	left: 21px;
-	top: 48px;
+		width: 17px;
+		left: 21px;
+		top: 48px;
 	}
+
 	100% {
-	width: 25px;
-	left: 14px;
-	top: 45px;
+		width: 25px;
+		left: 14px;
+		top: 45px;
 	}
 }
 
 @-webkit-keyframes animateSuccessLong {
 	0% {
-	width: 0;
-	right: 46px;
-	top: 54px;
+		width: 0;
+		right: 46px;
+		top: 54px;
 	}
+
 	65% {
-	width: 0;
-	right: 46px;
-	top: 54px;
+		width: 0;
+		right: 46px;
+		top: 54px;
 	}
+
 	84% {
-	width: 55px;
-	right: 0px;
-	top: 35px;
+		width: 55px;
+		right: 0px;
+		top: 35px;
 	}
+
 	100% {
-	width: 47px;
-	right: 8px;
-	top: 38px;
+		width: 47px;
+		right: 8px;
+		top: 38px;
 	}
 }
 
 @keyframes animateSuccessLong {
 	0% {
-	width: 0;
-	right: 46px;
-	top: 54px;
+		width: 0;
+		right: 46px;
+		top: 54px;
 	}
+
 	65% {
-	width: 0;
-	right: 46px;
-	top: 54px;
+		width: 0;
+		right: 46px;
+		top: 54px;
 	}
+
 	84% {
-	width: 55px;
-	right: 0px;
-	top: 35px;
+		width: 55px;
+		right: 0px;
+		top: 35px;
 	}
+
 	100% {
-	width: 47px;
-	right: 8px;
-	top: 38px;
+		width: 47px;
+		right: 8px;
+		top: 38px;
 	}
 }
 
 @-webkit-keyframes rotatePlaceholder {
 	0% {
-	transform: rotate(-45deg);
-	-webkit-transform: rotate(-45deg);
+		transform: rotate(-45deg);
+		-webkit-transform: rotate(-45deg);
 	}
+
 	5% {
-	transform: rotate(-45deg);
-	-webkit-transform: rotate(-45deg);
+		transform: rotate(-45deg);
+		-webkit-transform: rotate(-45deg);
 	}
+
 	12% {
-	transform: rotate(-405deg);
-	-webkit-transform: rotate(-405deg);
+		transform: rotate(-405deg);
+		-webkit-transform: rotate(-405deg);
 	}
+
 	100% {
-	transform: rotate(-405deg);
-	-webkit-transform: rotate(-405deg);
+		transform: rotate(-405deg);
+		-webkit-transform: rotate(-405deg);
 	}
 }
 
 @keyframes rotatePlaceholder {
 	0% {
-	transform: rotate(-45deg);
-	-webkit-transform: rotate(-45deg);
+		transform: rotate(-45deg);
+		-webkit-transform: rotate(-45deg);
 	}
+
 	5% {
-	transform: rotate(-45deg);
-	-webkit-transform: rotate(-45deg);
+		transform: rotate(-45deg);
+		-webkit-transform: rotate(-45deg);
 	}
+
 	12% {
-	transform: rotate(-405deg);
-	-webkit-transform: rotate(-405deg);
+		transform: rotate(-405deg);
+		-webkit-transform: rotate(-405deg);
 	}
+
 	100% {
-	transform: rotate(-405deg);
-	-webkit-transform: rotate(-405deg);
+		transform: rotate(-405deg);
+		-webkit-transform: rotate(-405deg);
 	}
 }
 
@@ -2125,27 +2329,29 @@ body.stop-scrolling {
 
 @-webkit-keyframes animateErrorIcon {
 	0% {
-	transform: rotateX(100deg);
-	-webkit-transform: rotateX(100deg);
-	opacity: 0;
+		transform: rotateX(100deg);
+		-webkit-transform: rotateX(100deg);
+		opacity: 0;
 	}
+
 	100% {
-	transform: rotateX(0deg);
-	-webkit-transform: rotateX(0deg);
-	opacity: 1;
+		transform: rotateX(0deg);
+		-webkit-transform: rotateX(0deg);
+		opacity: 1;
 	}
 }
 
 @keyframes animateErrorIcon {
 	0% {
-	transform: rotateX(100deg);
-	-webkit-transform: rotateX(100deg);
-	opacity: 0;
+		transform: rotateX(100deg);
+		-webkit-transform: rotateX(100deg);
+		opacity: 0;
 	}
+
 	100% {
-	transform: rotateX(0deg);
-	-webkit-transform: rotateX(0deg);
-	opacity: 1;
+		transform: rotateX(0deg);
+		-webkit-transform: rotateX(0deg);
+		opacity: 1;
 	}
 }
 
@@ -2156,53 +2362,59 @@ body.stop-scrolling {
 
 @-webkit-keyframes animateXMark {
 	0% {
-	transform: scale(0.4);
-	-webkit-transform: scale(0.4);
-	margin-top: 26px;
-	opacity: 0;
+		transform: scale(0.4);
+		-webkit-transform: scale(0.4);
+		margin-top: 26px;
+		opacity: 0;
 	}
+
 	50% {
-	transform: scale(0.4);
-	-webkit-transform: scale(0.4);
-	margin-top: 26px;
-	opacity: 0;
+		transform: scale(0.4);
+		-webkit-transform: scale(0.4);
+		margin-top: 26px;
+		opacity: 0;
 	}
+
 	80% {
-	transform: scale(1.15);
-	-webkit-transform: scale(1.15);
-	margin-top: -6px;
+		transform: scale(1.15);
+		-webkit-transform: scale(1.15);
+		margin-top: -6px;
 	}
+
 	100% {
-	transform: scale(1);
-	-webkit-transform: scale(1);
-	margin-top: 0;
-	opacity: 1;
+		transform: scale(1);
+		-webkit-transform: scale(1);
+		margin-top: 0;
+		opacity: 1;
 	}
 }
 
 @keyframes animateXMark {
 	0% {
-	transform: scale(0.4);
-	-webkit-transform: scale(0.4);
-	margin-top: 26px;
-	opacity: 0;
+		transform: scale(0.4);
+		-webkit-transform: scale(0.4);
+		margin-top: 26px;
+		opacity: 0;
 	}
+
 	50% {
-	transform: scale(0.4);
-	-webkit-transform: scale(0.4);
-	margin-top: 26px;
-	opacity: 0;
+		transform: scale(0.4);
+		-webkit-transform: scale(0.4);
+		margin-top: 26px;
+		opacity: 0;
 	}
+
 	80% {
-	transform: scale(1.15);
-	-webkit-transform: scale(1.15);
-	margin-top: -6px;
+		transform: scale(1.15);
+		-webkit-transform: scale(1.15);
+		margin-top: -6px;
 	}
+
 	100% {
-	transform: scale(1);
-	-webkit-transform: scale(1);
-	margin-top: 0;
-	opacity: 1;
+		transform: scale(1);
+		-webkit-transform: scale(1);
+		margin-top: 0;
+		opacity: 1;
 	}
 }
 
@@ -2213,19 +2425,21 @@ body.stop-scrolling {
 
 @-webkit-keyframes pulseWarning {
 	0% {
-	border-color: #F8D486;
+		border-color: #F8D486;
 	}
+
 	100% {
-	border-color: #F8BB86;
+		border-color: #F8BB86;
 	}
 }
 
 @keyframes pulseWarning {
 	0% {
-	border-color: #F8D486;
+		border-color: #F8D486;
 	}
+
 	100% {
-	border-color: #F8BB86;
+		border-color: #F8BB86;
 	}
 }
 
@@ -2236,19 +2450,21 @@ body.stop-scrolling {
 
 @-webkit-keyframes pulseWarningIns {
 	0% {
-	background-color: #F8D486;
+		background-color: #F8D486;
 	}
+
 	100% {
-	background-color: #F8BB86;
+		background-color: #F8BB86;
 	}
 }
 
 @keyframes pulseWarningIns {
 	0% {
-	background-color: #F8D486;
+		background-color: #F8D486;
 	}
+
 	100% {
-	background-color: #F8BB86;
+		background-color: #F8BB86;
 	}
 }
 
@@ -2259,29 +2475,31 @@ body.stop-scrolling {
 
 @-webkit-keyframes rotate-loading {
 	0% {
-	-webkit-transform: rotate(0deg);
-			transform: rotate(0deg);
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
 	}
+
 	100% {
-	-webkit-transform: rotate(360deg);
-			transform: rotate(360deg);
+		-webkit-transform: rotate(360deg);
+		transform: rotate(360deg);
 	}
 }
 
 @keyframes rotate-loading {
 	0% {
-	-webkit-transform: rotate(0deg);
-			transform: rotate(0deg);
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
 	}
+
 	100% {
-	-webkit-transform: rotate(360deg);
-			transform: rotate(360deg);
+		-webkit-transform: rotate(360deg);
+		transform: rotate(360deg);
 	}
 }
 
 .notify-alert {
 	-webkit-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.23), 0 3px 10px rgba(0, 0, 0, 0.16);
-			box-shadow: 0 3px 10px rgba(0, 0, 0, 0.23), 0 3px 10px rgba(0, 0, 0, 0.16);
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.23), 0 3px 10px rgba(0, 0, 0, 0.16);
 	border: 0 !important;
 	max-width: 400px;
 	color: #FFF;
@@ -2425,7 +2643,7 @@ body.stop-scrolling {
 
 .datepicker table tr td.old,
 .datepicker table tr td.new {
-color: #999999;
+	color: #999999;
 }
 
 .datepicker table tr td.day:hover,
@@ -2463,7 +2681,7 @@ color: #999999;
 
 .datepicker table tr td.highlighted:active,
 .datepicker table tr td.highlighted.active,
-.open > .dropdown-toggle.datepicker table tr td.highlighted {
+.open>.dropdown-toggle.datepicker table tr td.highlighted {
 	color: #000000;
 	background-color: #afd9ee;
 	border-color: #52addb;
@@ -2471,13 +2689,13 @@ color: #999999;
 
 .datepicker table tr td.highlighted:active:hover,
 .datepicker table tr td.highlighted.active:hover,
-.open > .dropdown-toggle.datepicker table tr td.highlighted:hover,
+.open>.dropdown-toggle.datepicker table tr td.highlighted:hover,
 .datepicker table tr td.highlighted:active:focus,
 .datepicker table tr td.highlighted.active:focus,
-.open > .dropdown-toggle.datepicker table tr td.highlighted:focus,
+.open>.dropdown-toggle.datepicker table tr td.highlighted:focus,
 .datepicker table tr td.highlighted:active.focus,
 .datepicker table tr td.highlighted.active.focus,
-.open > .dropdown-toggle.datepicker table tr td.highlighted.focus {
+.open>.dropdown-toggle.datepicker table tr td.highlighted.focus {
 	color: #000000;
 	background-color: #91cbe8;
 	border-color: #298fc2;
@@ -2485,7 +2703,7 @@ color: #999999;
 
 .datepicker table tr td.highlighted:active,
 .datepicker table tr td.highlighted.active,
-.open > .dropdown-toggle.datepicker table tr td.highlighted {
+.open>.dropdown-toggle.datepicker table tr td.highlighted {
 	background-image: none;
 }
 
@@ -2533,7 +2751,7 @@ fieldset[disabled] .datepicker table tr td.highlighted.focus {
 
 .datepicker table tr td.today:active,
 .datepicker table tr td.today.active,
-.open > .dropdown-toggle.datepicker table tr td.today {
+.open>.dropdown-toggle.datepicker table tr td.today {
 	color: #000000;
 	background-color: #ffc966;
 	border-color: #f59e00;
@@ -2541,13 +2759,13 @@ fieldset[disabled] .datepicker table tr td.highlighted.focus {
 
 .datepicker table tr td.today:active:hover,
 .datepicker table tr td.today.active:hover,
-.open > .dropdown-toggle.datepicker table tr td.today:hover,
+.open>.dropdown-toggle.datepicker table tr td.today:hover,
 .datepicker table tr td.today:active:focus,
 .datepicker table tr td.today.active:focus,
-.open > .dropdown-toggle.datepicker table tr td.today:focus,
+.open>.dropdown-toggle.datepicker table tr td.today:focus,
 .datepicker table tr td.today:active.focus,
 .datepicker table tr td.today.active.focus,
-.open > .dropdown-toggle.datepicker table tr td.today.focus {
+.open>.dropdown-toggle.datepicker table tr td.today.focus {
 	color: #000000;
 	background-color: #ffbc42;
 	border-color: #b37400;
@@ -2555,7 +2773,7 @@ fieldset[disabled] .datepicker table tr td.highlighted.focus {
 
 .datepicker table tr td.today:active,
 .datepicker table tr td.today.active,
-.open > .dropdown-toggle.datepicker table tr td.today {
+.open>.dropdown-toggle.datepicker table tr td.today {
 	background-image: none;
 }
 
@@ -2604,7 +2822,7 @@ fieldset[disabled] .datepicker table tr td.today.focus {
 
 .datepicker table tr td.range:active,
 .datepicker table tr td.range.active,
-.open > .dropdown-toggle.datepicker table tr td.range {
+.open>.dropdown-toggle.datepicker table tr td.range {
 	color: #000000;
 	background-color: #d5d5d5;
 	border-color: #9d9d9d;
@@ -2612,13 +2830,13 @@ fieldset[disabled] .datepicker table tr td.today.focus {
 
 .datepicker table tr td.range:active:hover,
 .datepicker table tr td.range.active:hover,
-.open > .dropdown-toggle.datepicker table tr td.range:hover,
+.open>.dropdown-toggle.datepicker table tr td.range:hover,
 .datepicker table tr td.range:active:focus,
 .datepicker table tr td.range.active:focus,
-.open > .dropdown-toggle.datepicker table tr td.range:focus,
+.open>.dropdown-toggle.datepicker table tr td.range:focus,
 .datepicker table tr td.range:active.focus,
 .datepicker table tr td.range.active.focus,
-.open > .dropdown-toggle.datepicker table tr td.range.focus {
+.open>.dropdown-toggle.datepicker table tr td.range.focus {
 	color: #000000;
 	background-color: #c3c3c3;
 	border-color: #7c7c7c;
@@ -2626,7 +2844,7 @@ fieldset[disabled] .datepicker table tr td.today.focus {
 
 .datepicker table tr td.range:active,
 .datepicker table tr td.range.active,
-.open > .dropdown-toggle.datepicker table tr td.range {
+.open>.dropdown-toggle.datepicker table tr td.range {
 	background-image: none;
 }
 
@@ -2674,7 +2892,7 @@ fieldset[disabled] .datepicker table tr td.range.focus {
 
 .datepicker table tr td.range.highlighted:active,
 .datepicker table tr td.range.highlighted.active,
-.open > .dropdown-toggle.datepicker table tr td.range.highlighted {
+.open>.dropdown-toggle.datepicker table tr td.range.highlighted {
 	color: #000000;
 	background-color: #c1d7e3;
 	border-color: #73a6c0;
@@ -2682,13 +2900,13 @@ fieldset[disabled] .datepicker table tr td.range.focus {
 
 .datepicker table tr td.range.highlighted:active:hover,
 .datepicker table tr td.range.highlighted.active:hover,
-.open > .dropdown-toggle.datepicker table tr td.range.highlighted:hover,
+.open>.dropdown-toggle.datepicker table tr td.range.highlighted:hover,
 .datepicker table tr td.range.highlighted:active:focus,
 .datepicker table tr td.range.highlighted.active:focus,
-.open > .dropdown-toggle.datepicker table tr td.range.highlighted:focus,
+.open>.dropdown-toggle.datepicker table tr td.range.highlighted:focus,
 .datepicker table tr td.range.highlighted:active.focus,
 .datepicker table tr td.range.highlighted.active.focus,
-.open > .dropdown-toggle.datepicker table tr td.range.highlighted.focus {
+.open>.dropdown-toggle.datepicker table tr td.range.highlighted.focus {
 	color: #000000;
 	background-color: #a8c8d8;
 	border-color: #4b88a6;
@@ -2696,7 +2914,7 @@ fieldset[disabled] .datepicker table tr td.range.focus {
 
 .datepicker table tr td.range.highlighted:active,
 .datepicker table tr td.range.highlighted.active,
-.open > .dropdown-toggle.datepicker table tr td.range.highlighted {
+.open>.dropdown-toggle.datepicker table tr td.range.highlighted {
 	background-image: none;
 }
 
@@ -2744,7 +2962,7 @@ fieldset[disabled] .datepicker table tr td.range.highlighted.focus {
 
 .datepicker table tr td.range.today:active,
 .datepicker table tr td.range.today.active,
-.open > .dropdown-toggle.datepicker table tr td.range.today {
+.open>.dropdown-toggle.datepicker table tr td.range.today {
 	color: #000000;
 	background-color: #f4b747;
 	border-color: #bf800c;
@@ -2752,13 +2970,13 @@ fieldset[disabled] .datepicker table tr td.range.highlighted.focus {
 
 .datepicker table tr td.range.today:active:hover,
 .datepicker table tr td.range.today.active:hover,
-.open > .dropdown-toggle.datepicker table tr td.range.today:hover,
+.open>.dropdown-toggle.datepicker table tr td.range.today:hover,
 .datepicker table tr td.range.today:active:focus,
 .datepicker table tr td.range.today.active:focus,
-.open > .dropdown-toggle.datepicker table tr td.range.today:focus,
+.open>.dropdown-toggle.datepicker table tr td.range.today:focus,
 .datepicker table tr td.range.today:active.focus,
 .datepicker table tr td.range.today.active.focus,
-.open > .dropdown-toggle.datepicker table tr td.range.today.focus {
+.open>.dropdown-toggle.datepicker table tr td.range.today.focus {
 	color: #000000;
 	background-color: #f2aa25;
 	border-color: #815608;
@@ -2766,7 +2984,7 @@ fieldset[disabled] .datepicker table tr td.range.highlighted.focus {
 
 .datepicker table tr td.range.today:active,
 .datepicker table tr td.range.today.active,
-.open > .dropdown-toggle.datepicker table tr td.range.today {
+.open>.dropdown-toggle.datepicker table tr td.range.today {
 	background-image: none;
 }
 
@@ -2817,8 +3035,8 @@ fieldset[disabled] .datepicker table tr td.range.today.focus {
 .datepicker table tr td.selected.highlighted:active,
 .datepicker table tr td.selected.active,
 .datepicker table tr td.selected.highlighted.active,
-.open > .dropdown-toggle.datepicker table tr td.selected,
-.open > .dropdown-toggle.datepicker table tr td.selected.highlighted {
+.open>.dropdown-toggle.datepicker table tr td.selected,
+.open>.dropdown-toggle.datepicker table tr td.selected.highlighted {
 	color: #ffffff;
 	background-color: #808080;
 	border-color: #373737;
@@ -2828,20 +3046,20 @@ fieldset[disabled] .datepicker table tr td.range.today.focus {
 .datepicker table tr td.selected.highlighted:active:hover,
 .datepicker table tr td.selected.active:hover,
 .datepicker table tr td.selected.highlighted.active:hover,
-.open > .dropdown-toggle.datepicker table tr td.selected:hover,
-.open > .dropdown-toggle.datepicker table tr td.selected.highlighted:hover,
+.open>.dropdown-toggle.datepicker table tr td.selected:hover,
+.open>.dropdown-toggle.datepicker table tr td.selected.highlighted:hover,
 .datepicker table tr td.selected:active:focus,
 .datepicker table tr td.selected.highlighted:active:focus,
 .datepicker table tr td.selected.active:focus,
 .datepicker table tr td.selected.highlighted.active:focus,
-.open > .dropdown-toggle.datepicker table tr td.selected:focus,
-.open > .dropdown-toggle.datepicker table tr td.selected.highlighted:focus,
+.open>.dropdown-toggle.datepicker table tr td.selected:focus,
+.open>.dropdown-toggle.datepicker table tr td.selected.highlighted:focus,
 .datepicker table tr td.selected:active.focus,
 .datepicker table tr td.selected.highlighted:active.focus,
 .datepicker table tr td.selected.active.focus,
 .datepicker table tr td.selected.highlighted.active.focus,
-.open > .dropdown-toggle.datepicker table tr td.selected.focus,
-.open > .dropdown-toggle.datepicker table tr td.selected.highlighted.focus {
+.open>.dropdown-toggle.datepicker table tr td.selected.focus,
+.open>.dropdown-toggle.datepicker table tr td.selected.highlighted.focus {
 	color: #ffffff;
 	background-color: #6e6e6e;
 	border-color: #161616;
@@ -2851,8 +3069,8 @@ fieldset[disabled] .datepicker table tr td.range.today.focus {
 .datepicker table tr td.selected.highlighted:active,
 .datepicker table tr td.selected.active,
 .datepicker table tr td.selected.highlighted.active,
-.open > .dropdown-toggle.datepicker table tr td.selected,
-.open > .dropdown-toggle.datepicker table tr td.selected.highlighted {
+.open>.dropdown-toggle.datepicker table tr td.selected,
+.open>.dropdown-toggle.datepicker table tr td.selected.highlighted {
 	background-image: none;
 }
 
@@ -2906,8 +3124,8 @@ fieldset[disabled] .datepicker table tr td.selected.highlighted.focus {
 .datepicker table tr td.active.highlighted:active,
 .datepicker table tr td.active.active,
 .datepicker table tr td.active.highlighted.active,
-.open > .dropdown-toggle.datepicker table tr td.active,
-.open > .dropdown-toggle.datepicker table tr td.active.highlighted {
+.open>.dropdown-toggle.datepicker table tr td.active,
+.open>.dropdown-toggle.datepicker table tr td.active.highlighted {
 	color: #ffffff;
 	background-color: #009688;
 	border-color: #029cc7;
@@ -2917,20 +3135,20 @@ fieldset[disabled] .datepicker table tr td.selected.highlighted.focus {
 .datepicker table tr td.active.highlighted:active:hover,
 .datepicker table tr td.active.active:hover,
 .datepicker table tr td.active.highlighted.active:hover,
-.open > .dropdown-toggle.datepicker table tr td.active:hover,
-.open > .dropdown-toggle.datepicker table tr td.active.highlighted:hover,
+.open>.dropdown-toggle.datepicker table tr td.active:hover,
+.open>.dropdown-toggle.datepicker table tr td.active.highlighted:hover,
 .datepicker table tr td.active:active:focus,
 .datepicker table tr td.active.highlighted:active:focus,
 .datepicker table tr td.active.active:focus,
 .datepicker table tr td.active.highlighted.active:focus,
-.open > .dropdown-toggle.datepicker table tr td.active:focus,
-.open > .dropdown-toggle.datepicker table tr td.active.highlighted:focus,
+.open>.dropdown-toggle.datepicker table tr td.active:focus,
+.open>.dropdown-toggle.datepicker table tr td.active.highlighted:focus,
 .datepicker table tr td.active:active.focus,
 .datepicker table tr td.active.highlighted:active.focus,
 .datepicker table tr td.active.active.focus,
 .datepicker table tr td.active.highlighted.active.focus,
-.open > .dropdown-toggle.datepicker table tr td.active.focus,
-.open > .dropdown-toggle.datepicker table tr td.active.highlighted.focus {
+.open>.dropdown-toggle.datepicker table tr td.active.focus,
+.open>.dropdown-toggle.datepicker table tr td.active.highlighted.focus {
 	color: #ffffff;
 	background-color: #029cc7;
 	border-color: #193c5a;
@@ -2940,8 +3158,8 @@ fieldset[disabled] .datepicker table tr td.selected.highlighted.focus {
 .datepicker table tr td.active.highlighted:active,
 .datepicker table tr td.active.active,
 .datepicker table tr td.active.highlighted.active,
-.open > .dropdown-toggle.datepicker table tr td.active,
-.open > .dropdown-toggle.datepicker table tr td.active.highlighted {
+.open>.dropdown-toggle.datepicker table tr td.active,
+.open>.dropdown-toggle.datepicker table tr td.active.highlighted {
 	background-image: none;
 }
 
@@ -3029,10 +3247,10 @@ fieldset[disabled] .datepicker table tr td.active.highlighted.focus {
 .datepicker table tr td span.active:hover.active,
 .datepicker table tr td span.active.disabled.active,
 .datepicker table tr td span.active.disabled:hover.active,
-.open > .dropdown-toggle.datepicker table tr td span.active,
-.open > .dropdown-toggle.datepicker table tr td span.active:hover,
-.open > .dropdown-toggle.datepicker table tr td span.active.disabled,
-.open > .dropdown-toggle.datepicker table tr td span.active.disabled:hover {
+.open>.dropdown-toggle.datepicker table tr td span.active,
+.open>.dropdown-toggle.datepicker table tr td span.active:hover,
+.open>.dropdown-toggle.datepicker table tr td span.active.disabled,
+.open>.dropdown-toggle.datepicker table tr td span.active.disabled:hover {
 	color: #ffffff;
 	background-color: #009688;
 	border-color: #029cc7;
@@ -3046,10 +3264,10 @@ fieldset[disabled] .datepicker table tr td.active.highlighted.focus {
 .datepicker table tr td span.active:hover.active:hover,
 .datepicker table tr td span.active.disabled.active:hover,
 .datepicker table tr td span.active.disabled:hover.active:hover,
-.open > .dropdown-toggle.datepicker table tr td span.active:hover,
-.open > .dropdown-toggle.datepicker table tr td span.active:hover:hover,
-.open > .dropdown-toggle.datepicker table tr td span.active.disabled:hover,
-.open > .dropdown-toggle.datepicker table tr td span.active.disabled:hover:hover,
+.open>.dropdown-toggle.datepicker table tr td span.active:hover,
+.open>.dropdown-toggle.datepicker table tr td span.active:hover:hover,
+.open>.dropdown-toggle.datepicker table tr td span.active.disabled:hover,
+.open>.dropdown-toggle.datepicker table tr td span.active.disabled:hover:hover,
 .datepicker table tr td span.active:active:focus,
 .datepicker table tr td span.active:hover:active:focus,
 .datepicker table tr td span.active.disabled:active:focus,
@@ -3058,10 +3276,10 @@ fieldset[disabled] .datepicker table tr td.active.highlighted.focus {
 .datepicker table tr td span.active:hover.active:focus,
 .datepicker table tr td span.active.disabled.active:focus,
 .datepicker table tr td span.active.disabled:hover.active:focus,
-.open > .dropdown-toggle.datepicker table tr td span.active:focus,
-.open > .dropdown-toggle.datepicker table tr td span.active:hover:focus,
-.open > .dropdown-toggle.datepicker table tr td span.active.disabled:focus,
-.open > .dropdown-toggle.datepicker table tr td span.active.disabled:hover:focus,
+.open>.dropdown-toggle.datepicker table tr td span.active:focus,
+.open>.dropdown-toggle.datepicker table tr td span.active:hover:focus,
+.open>.dropdown-toggle.datepicker table tr td span.active.disabled:focus,
+.open>.dropdown-toggle.datepicker table tr td span.active.disabled:hover:focus,
 .datepicker table tr td span.active:active.focus,
 .datepicker table tr td span.active:hover:active.focus,
 .datepicker table tr td span.active.disabled:active.focus,
@@ -3070,10 +3288,10 @@ fieldset[disabled] .datepicker table tr td.active.highlighted.focus {
 .datepicker table tr td span.active:hover.active.focus,
 .datepicker table tr td span.active.disabled.active.focus,
 .datepicker table tr td span.active.disabled:hover.active.focus,
-.open > .dropdown-toggle.datepicker table tr td span.active.focus,
-.open > .dropdown-toggle.datepicker table tr td span.active:hover.focus,
-.open > .dropdown-toggle.datepicker table tr td span.active.disabled.focus,
-.open > .dropdown-toggle.datepicker table tr td span.active.disabled:hover.focus {
+.open>.dropdown-toggle.datepicker table tr td span.active.focus,
+.open>.dropdown-toggle.datepicker table tr td span.active:hover.focus,
+.open>.dropdown-toggle.datepicker table tr td span.active.disabled.focus,
+.open>.dropdown-toggle.datepicker table tr td span.active.disabled:hover.focus {
 	color: #ffffff;
 	background-color: #029cc7;
 	border-color: #193c5a;
@@ -3087,10 +3305,10 @@ fieldset[disabled] .datepicker table tr td.active.highlighted.focus {
 .datepicker table tr td span.active:hover.active,
 .datepicker table tr td span.active.disabled.active,
 .datepicker table tr td span.active.disabled:hover.active,
-.open > .dropdown-toggle.datepicker table tr td span.active,
-.open > .dropdown-toggle.datepicker table tr td span.active:hover,
-.open > .dropdown-toggle.datepicker table tr td span.active.disabled,
-.open > .dropdown-toggle.datepicker table tr td span.active.disabled:hover {
+.open>.dropdown-toggle.datepicker table tr td span.active,
+.open>.dropdown-toggle.datepicker table tr td span.active:hover,
+.open>.dropdown-toggle.datepicker table tr td span.active.disabled,
+.open>.dropdown-toggle.datepicker table tr td span.active.disabled:hover {
 	background-image: none;
 }
 
@@ -3237,70 +3455,70 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.focus {
 	display: -ms-flexbox;
 	display: flex;
 	-ms-flex-wrap: wrap;
-		flex-wrap: wrap;
+	flex-wrap: wrap;
 	-webkit-box-align: stretch;
-		-ms-flex-align: stretch;
-			align-items: stretch;
+	-ms-flex-align: stretch;
+	align-items: stretch;
 	width: 100%;
 }
 
-.input-group > .form-control,
-.input-group > .custom-select,
-.input-group > .custom-file {
+.input-group>.form-control,
+.input-group>.custom-select,
+.input-group>.custom-file {
 	position: relative;
 	-webkit-box-flex: 1;
-		-ms-flex: 1 1 auto;
-			flex: 1 1 auto;
+	-ms-flex: 1 1 auto;
+	flex: 1 1 auto;
 	width: 1%;
 	margin-bottom: 0;
 }
 
-.input-group > .form-control:focus,
-.input-group > .custom-select:focus,
-.input-group > .custom-file:focus {
+.input-group>.form-control:focus,
+.input-group>.custom-select:focus,
+.input-group>.custom-file:focus {
 	z-index: 3;
 }
 
-.input-group > .form-control + .form-control,
-.input-group > .form-control + .custom-select,
-.input-group > .form-control + .custom-file,
-.input-group > .custom-select + .form-control,
-.input-group > .custom-select + .custom-select,
-.input-group > .custom-select + .custom-file,
-.input-group > .custom-file + .form-control,
-.input-group > .custom-file + .custom-select,
-.input-group > .custom-file + .custom-file {
+.input-group>.form-control+.form-control,
+.input-group>.form-control+.custom-select,
+.input-group>.form-control+.custom-file,
+.input-group>.custom-select+.form-control,
+.input-group>.custom-select+.custom-select,
+.input-group>.custom-select+.custom-file,
+.input-group>.custom-file+.form-control,
+.input-group>.custom-file+.custom-select,
+.input-group>.custom-file+.custom-file {
 	margin-left: -2px;
 }
 
-.input-group > .form-control:not(:last-child),
-.input-group > .custom-select:not(:last-child) {
+.input-group>.form-control:not(:last-child),
+.input-group>.custom-select:not(:last-child) {
 	border-top-right-radius: 0;
 	border-bottom-right-radius: 0;
 }
 
-.input-group > .form-control:not(:first-child),
-.input-group > .custom-select:not(:first-child) {
+.input-group>.form-control:not(:first-child),
+.input-group>.custom-select:not(:first-child) {
 	border-top-left-radius: 0;
 	border-bottom-left-radius: 0;
 }
 
-.input-group > .custom-file {
+.input-group>.custom-file {
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
 	-webkit-box-align: center;
-		-ms-flex-align: center;
-			align-items: center;
+	-ms-flex-align: center;
+	align-items: center;
 }
 
-.input-group > .custom-file:not(:last-child) .custom-file-label,
-.input-group > .custom-file:not(:last-child) .custom-file-label::after {
+.input-group>.custom-file:not(:last-child) .custom-file-label,
+.input-group>.custom-file:not(:last-child) .custom-file-label::after {
 	border-top-right-radius: 0;
 	border-bottom-right-radius: 0;
 }
 
-.input-group > .custom-file:not(:first-child) .custom-file-label {
+.input-group>.custom-file:not(:first-child) .custom-file-label {
 	border-top-left-radius: 0;
 	border-bottom-left-radius: 0;
 }
@@ -3318,14 +3536,14 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.focus {
 	z-index: 2;
 }
 
-.input-group-prepend .btn + .btn,
-.input-group-prepend .btn + .input-group-text,
-.input-group-prepend .input-group-text + .input-group-text,
-.input-group-prepend .input-group-text + .btn,
-.input-group-append .btn + .btn,
-.input-group-append .btn + .input-group-text,
-.input-group-append .input-group-text + .input-group-text,
-.input-group-append .input-group-text + .btn {
+.input-group-prepend .btn+.btn,
+.input-group-prepend .btn+.input-group-text,
+.input-group-prepend .input-group-text+.input-group-text,
+.input-group-prepend .input-group-text+.btn,
+.input-group-append .btn+.btn,
+.input-group-append .btn+.input-group-text,
+.input-group-append .input-group-text+.input-group-text,
+.input-group-append .input-group-text+.btn {
 	margin-left: -2px;
 }
 
@@ -3342,8 +3560,8 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.focus {
 	display: -ms-flexbox;
 	display: flex;
 	-webkit-box-align: center;
-		-ms-flex-align: center;
-			align-items: center;
+	-ms-flex-align: center;
+	align-items: center;
 	padding: 0.375rem 0.75rem;
 	margin-bottom: 0;
 	font-size: 0.875rem;
@@ -3362,22 +3580,22 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.focus {
 	margin-top: 0;
 }
 
-.input-group > .input-group-prepend > .btn,
-.input-group > .input-group-prepend > .input-group-text,
-.input-group > .input-group-append:not(:last-child) > .btn,
-.input-group > .input-group-append:not(:last-child) > .input-group-text,
-.input-group > .input-group-append:last-child > .btn:not(:last-child):not(.dropdown-toggle),
-.input-group > .input-group-append:last-child > .input-group-text:not(:last-child) {
+.input-group>.input-group-prepend>.btn,
+.input-group>.input-group-prepend>.input-group-text,
+.input-group>.input-group-append:not(:last-child)>.btn,
+.input-group>.input-group-append:not(:last-child)>.input-group-text,
+.input-group>.input-group-append:last-child>.btn:not(:last-child):not(.dropdown-toggle),
+.input-group>.input-group-append:last-child>.input-group-text:not(:last-child) {
 	border-top-right-radius: 0;
 	border-bottom-right-radius: 0;
 }
 
-.input-group > .input-group-append > .btn,
-.input-group > .input-group-append > .input-group-text,
-.input-group > .input-group-prepend:not(:first-child) > .btn,
-.input-group > .input-group-prepend:not(:first-child) > .input-group-text,
-.input-group > .input-group-prepend:first-child > .btn:not(:first-child),
-.input-group > .input-group-prepend:first-child > .input-group-text:not(:first-child) {
+.input-group>.input-group-append>.btn,
+.input-group>.input-group-append>.input-group-text,
+.input-group>.input-group-prepend:not(:first-child)>.btn,
+.input-group>.input-group-prepend:not(:first-child)>.input-group-text,
+.input-group>.input-group-prepend:first-child>.btn:not(:first-child),
+.input-group>.input-group-prepend:first-child>.input-group-text:not(:first-child) {
 	border-top-left-radius: 0;
 	border-bottom-left-radius: 0;
 }
@@ -3387,8 +3605,8 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.focus {
 	display: -ms-flexbox;
 	display: flex;
 	-webkit-box-align: center;
-		-ms-flex-align: center;
-			align-items: center;
+	-ms-flex-align: center;
+	align-items: center;
 	min-height: calc(90% - (0.5rem * 2));
 }
 
@@ -3399,8 +3617,8 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.focus {
 	display: flex;
 	-webkit-box-orient: vertical;
 	-webkit-box-direction: normal;
-		-ms-flex-direction: column;
-			flex-direction: column;
+	-ms-flex-direction: column;
+	flex-direction: column;
 	width: 100%;
 	pointer-events: auto;
 	background-color: #FFF;

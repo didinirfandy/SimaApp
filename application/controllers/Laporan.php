@@ -16,15 +16,46 @@ class Laporan extends CI_Controller
         } 
     }
 
+    // Laporan aset
+    public function lp_pemeliharaan()
+    {
+        $this->load->view('Aset/lp_pemeliharaan');
+    }
+
+    public function lp_usul_pengadaan()
+    {
+        $data['dt_usul'] = $this->Laporan_model->dt_usulan_pengadaan();
+        $this->load->view('Aset/lp_usul_pengadaan', $data);
+    }
+
+    public function get_usul_pengadaan()
+    {
+        $data = $this->Laporan_model->get_dt_usulan_pengadaan();
+        echo json_encode($data);
+    }
+
+
     // Laporan Wakasek
     public function lp_pengadaan_wk()
     {
         $this->load->view('Wakasek/lp_pengadaan');
     }
 
+    public function get_dt_pengadaan()
+    {
+        $data = $this->Laporan_model->get_data_pengadaan();
+        echo json_encode($data);
+    }
+
     public function lp_peminjaman_wk()
     {
         $this->load->view('Wakasek/lp_peminjaman');
+    }
+
+    public function get_dt_peminjaman()
+    {
+        $data = $this->Laporan_model->get_data_peminjaman();
+        echo json_encode($data);
     }
 
     public function lp_pemeliharaan_wk()

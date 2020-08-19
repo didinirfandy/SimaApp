@@ -219,70 +219,7 @@
             });
         }
 
-        // function tampil_pelihara() {
-        //     $.ajax({
-        //         type: "GET",
-        //         url: "<?= base_url('Penghapusan_aset/get_data_pemeliharaan_aset') ?>",
-        //         async: false,
-        //         dataType: "JSON",
-        //         success: function(c) {
-        //             var pgdn = "";
-        //             for (h = 0; h < c.length; h++) {
-        //                 var bilangan = c[h].nli_sisa;
-                            
-        //                 var	reverse  = bilangan.toString().split('').reverse().join(''),
-        //                     ribuan 	 = reverse.match(/\d{1,3}/g);
-        //                     nli_sisa = ribuan.join('.').split('').reverse().join('');
-                        
-        //                 var bil = c[h].harga;
-                        
-        //                 var	reverse = bil.toString().split('').reverse().join(''),
-        //                     ribuan 	= reverse.match(/\d{1,3}/g);
-        //                     harga	= ribuan.join('.').split('').reverse().join('');
-
-        //                 if (c[h].umr_ekonomis != "0" && c[h].nli_sisa != "0") {
-        //                     var buku_n          = (c[h].harga - c[h].nli_sisa) / c[h].umr_ekonomis;
-        //                     var buku_bulat_bln  = Math.ceil(buku_n/12); 
-        //                     var	reverse         = buku_bulat_bln.toString().split('').reverse().join(''),
-        //                         ribuan_bln      = reverse.match(/\d{1,3}/g);
-        //                         nilai_buku_bln  = ribuan_bln.join('.').split('').reverse().join('');
-        //                     var buku_bulat_thn  = Math.ceil(buku_n); 
-        //                     var	reverse         = buku_bulat_thn.toString().split('').reverse().join(''),
-        //                         ribuan_thn      = reverse.match(/\d{1,3}/g);
-        //                         nilai_buku_thn  = ribuan_thn.join('.').split('').reverse().join('');
-        //                     // console.log(buku_n);
-        //                 } else {
-        //                     nilai_buku_bln = '0';
-        //                     nilai_buku_thn = '0';
-        //                 }
-
-        //                 if (c[h].kondisi_brg == 2) {
-        //                     kondisi_brg = "Rusak Ringan";
-        //                 } else if(c[h].kondisi_brg == 3){
-        //                     kondisi_brg = "Rusak Berat";
-        //                 } else {
-        //                     kondisi_brg = "baik";
-        //                 }
-
-        //                 pgdn +=
-        //                     '<tr>' + 
-        //                         '<td>' + (h + 1) + '</td>' +
-        //                         '<td>' + c[h].kd_brg + '</td>' +
-        //                         '<td style="text-align: center;">' + c[h].no_reg + '</td>' +
-        //                         '<td>' + c[h].nm_brg + '</td>' +
-        //                         '<td>' + c[h].merk_type + '</td>' +
-        //                         '<td>' + kondisi_brg + '</td>' +
-        //                         '<td style="text-align: right;">' + c[h].umr_ekonomis + '</td>' +
-        //                         '<td style="text-align: right;">' + nli_sisa + '</td>' +
-        //                         '<td style="text-align: right;">' + nilai_buku_bln + '</td>' +
-        //                         '<td style="text-align: right;">' + nilai_buku_thn + '</td>' +
-        //                     '</tr>';
-        //             }
-        //             $('#dt_pelihara').html(pgdn);
-                    
-        //         }
-        //     });
-        // }
+        
     </script>
 </body>
 

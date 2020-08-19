@@ -1,7 +1,8 @@
 <?php
-	$data['tittle'] = "KIB B";
-	$this->load->view('template/head', $data);
+$data['tittle'] = "KIB B";
+$this->load->view('template/head', $data);
 ?>
+
 <body>
     <div id="wrapper">
         <?php $this->load->view('template/navbar'); ?>
@@ -9,19 +10,19 @@
         <?php $this->load->view('template/menu'); ?>
         <!-- /. NAV SIDE  -->
 
-		<div id="page-wrapper">
-            <div class="header"> 
+        <div id="page-wrapper">
+            <div class="header">
                 <h2 class="page-header">KARTU INVENTARIS BARANG PERALATAN DAN MESIN ( KIB B )</h2>
                 <?= $this->session->flashdata('pesan'); ?>
                 <ol class="breadcrumb">
                     <li><a href="#"><?php $str = $this->session->userdata('nama_pegawai');
-                    echo wordwrap($str, 15, "<br>\n"); ?></a></li>
-                    <li><a href="<?=base_url()?>Aset/home">Home</a></li>
+                                    echo wordwrap($str, 15, "<br>\n"); ?></a></li>
+                    <li><a href="<?= base_url() ?>Aset/home">Home</a></li>
                     <li>Daftar Aset</li>
                     <li class="active">KIB B</li>
-                </ol> 
+                </ol>
             </div>
-            
+
             <div id="page-inner">
                 <!-- /. ROW  -->
                 <div class="row">
@@ -50,27 +51,31 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php 
-                                                if (is_array($kib_b)) {
-                                                    $i=1;
-                                                    foreach ($kib_b as $b ) {
-                                                        $harga = number_format("$b[harga]",2,",",".");
-                                                        $nilsisa = number_format("$b[nli_sisa]",2,",",".");
+                                            <?php
+                                            if (is_array($kib_b)) {
+                                                $i = 1;
+                                                foreach ($kib_b as $b) {
+                                                    $harga = number_format("$b[harga]", 2, ",", ".");
+                                                    $nilsisa = number_format("$b[nli_sisa]", 2, ",", ".");
 
-                                                        if ($b['kondisi'] == 1) { 
-                                                            $kondisi = "Baik"; 
-                                                        } elseif ($b['kondisi'] == 2) { 
-                                                            $kondisi = "Rusak Ringan"; 
-                                                        } elseif ($b['kondisi'] == 3) { 
-                                                            $kondisi = "Rusak Berat"; 
-                                                        } else { 
-                                                            $kondisi = "-"; 
-                                                        }
+                                                    if ($b['kondisi'] == 1) {
+                                                        $kondisi = "Baik";
+                                                    } elseif ($b['kondisi'] == 2) {
+                                                        $kondisi = "Rusak Ringan";
+                                                    } elseif ($b['kondisi'] == 3) {
+                                                        $kondisi = "Rusak Berat";
+                                                    } else {
+                                                        $kondisi = "-";
+                                                    }
 
-                                                        if ($b['merk_type'] == "") { $merk_type = "-"; }
-                                                        if ($b['bahan'] == "") { $bahan = "-"; }
+                                                    if ($b['merk_type'] == "") {
+                                                        $merk_type = "-";
+                                                    }
+                                                    if ($b['bahan'] == "") {
+                                                        $bahan = "-";
+                                                    }
 
-                                                        echo "<tr data-id='$b[id_brg]'>
+                                                    echo "<tr data-id='$b[id_brg]'>
                                                                 <td>$i</td>
                                                                 <td>$b[nm_brg]</td>
                                                                 <td>$b[kd_brg]</td>
@@ -87,21 +92,21 @@
                                                                 <td style='text-align: right;'>$b[umr_ekonomis]</td>
                                                                 <td style='text-align: right;'>$nilsisa</td>
                                                                 </tr>";
-                                                        $i++;
-                                                    }
+                                                    $i++;
                                                 }
+                                            }
                                             ?>
                                         </tbody>
                                     </table>
                                 </div>
                                 <h4 style="font-weight: bold;">Keterangan :</h4>
                                 (<span style="color:red;">*</span>) : <span style="font-weight: bold;">Inputkan Angka: 1 (Baik), 2 (Rusak Ringan), 3 (Rusak Berat)</span>
-                            </div>						
-                        </div>   
-                    </div>		
-				</div> 	
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!-- /. ROW  -->
-				<?php $this->load->view('template/copyright') ?>
+                <?php $this->load->view('template/copyright') ?>
             </div>
             <!-- /. PAGE INNER  -->
         </div>
@@ -114,32 +119,35 @@
             $('#dt_kib_b').dataTable();
         })
 
-        $(function(){
+        $(function() {
             $.ajaxSetup({
-                type:"post",
-                cache:false,
+                type: "post",
+                cache: false,
                 dataType: "json"
             })
 
-            $(document).on("click","td",function(){
+            $(document).on("click", "td", function() {
                 $(this).find("span[class ~='caption']").hide();
                 $(this).find("input[class ~='editor']").fadeIn().focus();
             });
 
-            $(document).on("keydown",".editor",function(e) {
-                if(e.keyCode==13) {
+            $(document).on("keydown", ".editor", function(e) {
+                if (e.keyCode == 13) {
                     var target = $(e.target);
                     var value = target.val();
                     var id = target.attr("data-id");
-                    var data = {id:id,value:value};
-                    
-                    if(target.is(".field-kondisi")) {
-                        data.modul="kondisi";
-                    } 
+                    var data = {
+                        id: id,
+                        value: value
+                    };
+
+                    if (target.is(".field-kondisi")) {
+                        data.modul = "kondisi";
+                    }
 
                     $.ajax({
-                        data:data,
-                        url:"<?= base_url('Kib/uptd_kib_b'); ?>",
+                        data: data,
+                        url: "<?= base_url('Kib/uptd_kib_b'); ?>",
                         success: function(a) {
                             target.hide();
                             target.siblings("span[class~='caption']").html(value).fadeIn();

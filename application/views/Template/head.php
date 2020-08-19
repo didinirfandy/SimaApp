@@ -24,7 +24,7 @@
     <link href="<?= base_url(); ?>assets_app/css/checkbox3.min.css" rel="stylesheet" />
 
     <!-- TABLE STYLES-->
-    <link href="<?= base_url(); ?>assets_app/js/dataTables/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="<?= base_url(); ?>assets_app/js/dataTables/dataTables.bootstrap.min.css" rel="stylesheet" />
     <style type="text/css">
 
         td {
@@ -36,4 +36,5 @@
         }
 
     </style>
+    <!-- <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>assets_app/js/dataTables/buttons.dataTables.min.css"> -->
 </head>

@@ -58,22 +58,30 @@ class Pemeliharaan_aset extends CI_Controller
         echo json_encode($data);
     }
 
-    public function set_pelihara()
+    public function aksi_pelihara_wk()
     {
-        $id_pemeliharaan = $this->input->post('id_pemeliharaan');
-        $id_brg = $this->input->post('id_brg');
-        $stts_approval = $this->input->post('stts_approval');
-        $nilai_buku_bln = $this->input->post('nilai_buku_bln');
-        $sisa_umr_ekonomis = $this->input->post('sisa_umr_ekonomis');
-        $data = $this->Pemeliharaan_aset_model->set_pemeliharaan($id_pemeliharaan, $id_brg, $stts_approval, $nilai_buku_bln, $sisa_umr_ekonomis);
+        $id_pemeliharaan    = $this->input->post('id_pemeliharaan');
+        $id_brg             = $this->input->post('id_brg');
+        $stts_approval      = $this->input->post('stts_approval');
+        $nilai_buku_bln     = $this->input->post('nilai_buku_bln');
+        $sisa_umr_ekonomis  = $this->input->post('sisa_umr_ekonomis');
+        $data               = $this->Pemeliharaan_aset_model->aksi_pemeliharaan_wk($id_pemeliharaan, $id_brg, $stts_approval, $nilai_buku_bln, $sisa_umr_ekonomis);
         echo json_encode($data);
     }
 
-    public function set_pelihara_batal()
+    public function aksi_pelihara_kep()
+    {
+        $id_pemeliharaan    = $this->input->post('id_pemeliharaan');
+        $stts_approval_kep  = $this->input->post('stts_approval_kep');
+        $data = $this->Pemeliharaan_aset_model->aksi_pemeliharaan_kep($id_pemeliharaan, $stts_approval_kep);
+        echo json_encode($data);
+    }
+
+    public function aksi_pelihara_batal_wk()
     {
         $id_pemeliharaan = $this->input->post('id_pemeliharaan');
         $id_brg = $this->input->post('id_brg');
-        $data = $this->Pemeliharaan_aset_model->set_pemeliharaan_batal($id_pemeliharaan, $id_brg);
+        $data = $this->Pemeliharaan_aset_model->aksi_pemeliharaan_batal_wk($id_pemeliharaan, $id_brg);
         echo json_encode($data);
     }
 
@@ -97,11 +105,23 @@ class Pemeliharaan_aset extends CI_Controller
         echo json_encode($data);
     }
 
+    public function get_pelihara_aset_external_kep()
+    {
+        $data = $this->Pemeliharaan_aset_model->get_pemeliharaan_aset_external_kep();
+        echo json_encode($data);
+    }
+
     public function pelihara_selesai_ex()
     {
         $id_pemeliharaan = $this->input->post('id_pemeliharaan');
         $id_brg = $this->input->post('id_brg');
         $data = $this->Pemeliharaan_aset_model->pemeliharaan_selesai_ex($id_pemeliharaan, $id_brg);
+        echo json_encode($data);
+    }
+
+    public function get_pelihara_aset()
+    {
+        $data = $this->Pemeliharaan_aset_model->get_pemeliharaan_aset();
         echo json_encode($data);
     }
 }

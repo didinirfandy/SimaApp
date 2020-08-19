@@ -1,7 +1,8 @@
 <?php
-	$data['tittle'] = "Pengadaan Aset";
-	$this->load->view('template/head', $data);
+$data['tittle'] = "Pengadaan Aset";
+$this->load->view('template/head', $data);
 ?>
+
 <body>
     <div id="wrapper">
         <?php $this->load->view('template/navbar'); ?>
@@ -9,20 +10,20 @@
         <?php $this->load->view('template/menu'); ?>
         <!-- /. NAV SIDE  -->
 
-		<div id="page-wrapper">
-            <div class="header"> 
+        <div id="page-wrapper">
+            <div class="header">
                 <h1 class="page-header">
                     Pengadaan Aset
                 </h1>
                 <?= $this->session->flashdata('pesan'); ?>
                 <ol class="breadcrumb">
                     <li><a href="#"><?php $str = $this->session->userdata('nama_pegawai');
-                    echo wordwrap($str, 15, "<br>\n"); ?></a></li>
-                    <li><a href="<?=base_url()?>Aset/home">Home</a></li>
+                                    echo wordwrap($str, 15, "<br>\n"); ?></a></li>
+                    <li><a href="<?= base_url() ?>Aset/home">Home</a></li>
                     <li class="active">Pengadaan Aset</li>
-                </ol> 
+                </ol>
             </div>
-            
+
             <div id="page-inner">
                 <!-- /. ROW  -->
                 <div class="row">
@@ -49,8 +50,8 @@
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>						
-                        </div>   
+                            </div>
+                        </div>
                     </div>
 
                     <div class="col-md-12">
@@ -77,12 +78,12 @@
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>						
-                        </div>   
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- /. ROW  -->
-				<?php $this->load->view('template/copyright') ?>
+                <?php $this->load->view('template/copyright') ?>
             </div>
             <!-- /. PAGE INNER  -->
             <!-- Modal -->
@@ -93,7 +94,7 @@
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             <h4 class="modal-title" id="myModalLabel">Detail aset yang diusulkan</h4>
                         </div>
-                        <div class="modal-body" >
+                        <div class="modal-body">
                             <table class="table table-striped table-bordered table-hover table-sm" id="detail">
                                 <thead>
                                     <tr>
@@ -137,12 +138,12 @@
                 url: "<?= base_url('Pengadaan_aset/get_usulan_group') ?>",
                 async: false,
                 dataType: "JSON",
-                success: function (a) {
-                    var html = "";                        
+                success: function(a) {
+                    var html = "";
                     for (i = 0; i < a.length; i++) {
                         setuju = "2";
                         tolak = "3";
-                        
+
                         if (a[i].stts_approval_kep == 1) {
                             aksi1 = "";
                             aksi2 = "display: none;";
@@ -151,7 +152,7 @@
                             aksi1 = "display: none;";
                             aksi2 = "";
                             aksi3 = "display: none;";
-                        } else if(a[i].stts_approval_kep == 3) {
+                        } else if (a[i].stts_approval_kep == 3) {
                             tmbh = "disabled";
                             hps = "success";
                             btl = "";
@@ -163,18 +164,19 @@
                             aksi2 = "display: none;";
                             aksi3 = "display: none;";
                         }
+
                         html +=
-                            '<tr>' + 
-                                '<td>' + (i + 1) + '</td>' +
-                                '<td>' + a[i].ket + '</td>' +
-                                '<td><button class="btn btn-sm btn-info" onclick="tampil_detail_barang(\'' + a[i].kd_usulan + '\')" data-toggle="modal" data-target="#dtl"><i class="fa fa-info-circle"></i> Detail</button></td>' +
-                                '<td>' + a[i].entry_date + '</td>' +
-                                '<td style="text-align: center;">' + 
-                                    '<button style="'+ aksi1 +'" class="btn btn-sm btn-info" onclick="aksi_usulan_kep(\'' + a[i].kd_usulan + '\', \'' + setuju + '\' )"><i class="fa fa-check"></i> Setuju</button> &nbsp;' +
-                                    '<button style="'+ aksi1 +'" class="btn btn-sm btn-danger" onclick="aksi_usulan_kep(\'' + a[i].kd_usulan + '\', \'' + tolak + '\')"><i class="fa fa-times"></i> Tolak</button>' +
-                                    '<button style="'+ aksi2 +'" type="button" class="btn btn-sm btn-success" disabled><i class="fa fa-check"></i> Disetujui</button>' +
-                                    '<button style="'+ aksi3 +'" type="button" class="btn btn-sm btn-danger" disabled><i class="fa fa-times"></i> Ditolak</button>' +
-                                '</td>' +
+                            '<tr>' +
+                            '<td>' + (i + 1) + '</td>' +
+                            '<td>' + a[i].ket + '</td>' +
+                            '<td><button class="btn btn-sm btn-info" onclick="tampil_detail_barang(\'' + a[i].kd_usulan + '\')" data-toggle="modal" data-target="#dtl"><i class="fa fa-info-circle"></i> Detail</button></td>' +
+                            '<td>' + a[i].entry_date + '</td>' +
+                            '<td style="text-align: center;">' +
+                            '<button style="' + aksi1 + '" class="btn btn-sm btn-info" onclick="aksi_usulan_kep(\'' + a[i].kd_usulan + '\', \'' + setuju + '\' )"><i class="fa fa-check"></i> Setuju</button> &nbsp;' +
+                            '<button style="' + aksi1 + '" class="btn btn-sm btn-danger" onclick="aksi_usulan_kep(\'' + a[i].kd_usulan + '\', \'' + tolak + '\')"><i class="fa fa-times"></i> Tolak</button>' +
+                            '<button style="' + aksi2 + '" type="button" class="btn btn-sm btn-success" disabled><i class="fa fa-check"></i> Disetujui</button>' +
+                            '<button style="' + aksi3 + '" type="button" class="btn btn-sm btn-danger" disabled><i class="fa fa-times"></i> Ditolak</button>' +
+                            '</td>' +
                             '</tr>';
                     }
                     $('#usulan_brg').html(html);
@@ -185,12 +187,23 @@
         function aksi_usulan_kep(kd_usulan, stts_approval) {
             $.ajax({
                 type: "POST",
-                data: { kd_usulan:kd_usulan, stts_approval:stts_approval },
+                data: {
+                    kd_usulan: kd_usulan,
+                    stts_approval: stts_approval
+                },
                 url: "<?= base_url('Pengadaan_aset/aksi_usulan_kep') ?>",
                 async: false,
                 dataType: "JSON",
                 success: function(a) {
-                    location.reload();
+                    swal({
+                        title: "BERHASIL!!!",
+                        type: "success",
+                        timer: 2500,
+                        showConfirmButton: false
+                    });
+                    setTimeout(function() {
+                        location.reload()
+                    }, 2500);
                 }
             });
         }
@@ -206,32 +219,44 @@
                     var dtl = "";
                     for (j = 0; j < b.length; j++) {
                         var bilangan = b[j].harga_brg
-                            
-                        var	reverse     = bilangan.toString().split('').reverse().join(''),
-                            harga_brg 	= reverse.match(/\d{1,3}/g);
-                            harga_brg	= harga_brg.join('.').split('').reverse().join('');
 
-                        if (b[j].jns_brg == 1) { jenis = "KIB A"; } 
-                        else if (b[j].jns_brg == 2) { jenis = "KIB B"; } 
-                        else if (b[j].jns_brg == 3) { jenis = "KIB C"; } 
-                        else if (b[j].jns_brg == 4) { jenis = "KIB D"; } 
-                        else if (b[j].jns_brg == 5) { jenis = "KIB E"; } 
-                        else { jenis = "-"; }
+                        var reverse = bilangan.toString().split('').reverse().join(''),
+                            harga_brg = reverse.match(/\d{1,3}/g);
+                        harga_brg = harga_brg.join('.').split('').reverse().join('');
 
-                        if (b[j].satuan_brg == 1) { satuan = "Buah"; } 
-                        else if (b[j].satuan_brg == 2) { satuan = "Unit"; }
-                        else if (b[j].satuan_brg == 3) { satuan = "Set"; } 
-                        else { satuan = "-"; }
+                        if (b[j].jns_brg == 1) {
+                            jenis = "KIB A";
+                        } else if (b[j].jns_brg == 2) {
+                            jenis = "KIB B";
+                        } else if (b[j].jns_brg == 3) {
+                            jenis = "KIB C";
+                        } else if (b[j].jns_brg == 4) {
+                            jenis = "KIB D";
+                        } else if (b[j].jns_brg == 5) {
+                            jenis = "KIB E";
+                        } else {
+                            jenis = "-";
+                        }
+
+                        if (b[j].satuan_brg == 1) {
+                            satuan = "Buah";
+                        } else if (b[j].satuan_brg == 2) {
+                            satuan = "Unit";
+                        } else if (b[j].satuan_brg == 3) {
+                            satuan = "Set";
+                        } else {
+                            satuan = "-";
+                        }
 
                         dtl +=
-                        '<tr>' + 
+                            '<tr>' +
                             '<td>' + (j + 1) + '</td>' +
                             '<td>' + b[j].nm_brg + '</td>' +
                             '<td>' + jenis + '</td>' +
                             '<td>' + satuan + '</td>' +
                             '<td style="text-align: right;">' + b[j].jmlh_brg + '</td>' +
                             '<td style="text-align: right;">' + harga_brg + '</td>' +
-                        '</tr>';
+                            '</tr>';
                     }
                     $('#dtl_brg').html(dtl);
                 }
@@ -248,20 +273,20 @@
                     var pgdn = "";
                     for (h = 0; h < c.length; h++) {
                         var bilangan = c[h].nli_sisa;
-                            
-                        var	reverse = bilangan.toString().split('').reverse().join(''),
-                            ribuan 	= reverse.match(/\d{1,3}/g);
-                            ribuan	= ribuan.join('.').split('').reverse().join('');
+
+                        var reverse = bilangan.toString().split('').reverse().join(''),
+                            ribuan = reverse.match(/\d{1,3}/g);
+                        ribuan = ribuan.join('.').split('').reverse().join('');
 
                         pgdn +=
-                        '<tr>' + 
+                            '<tr>' +
                             '<td>' + (h + 1) + '</td>' +
                             '<td>' + c[h].kd_brg + '</td>' +
                             '<td style="text-align: center;">' + c[h].no_reg + '</td>' +
                             '<td>' + c[h].nm_brg + '</td>' +
                             '<td style="text-align: right;">' + c[h].umr_ekonomis + '</td>' +
                             '<td style="text-align: right;">' + ribuan + '</td>' +
-                        '</tr>';
+                            '</tr>';
                     }
                     $('#pgdn').html(pgdn);
                 }

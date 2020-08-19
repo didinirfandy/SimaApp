@@ -11,9 +11,7 @@
 
 		<div id="page-wrapper">
             <div class="header"> 
-                <h1 class="page-header">
-                    Laporan Pemeliharaan
-                </h1>
+                <h2 class="page-header">Laporan Pemeliharaan</h2>
                 <?= $this->session->flashdata('pesan'); ?>
                 <ol class="breadcrumb">
                     <li><a href="#"><?php $str = $this->session->userdata('nama_pegawai');
@@ -27,7 +25,7 @@
             <div id="page-inner">
                 <!-- /. ROW  -->
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 Line Chart
@@ -36,24 +34,8 @@
                                 
                             </div>						
                         </div>   
-                    </div>		
-                        
-                    <div class="col-md-6">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                Bar Chart Example
-                            </div>
-                            <div class="panel-body">
-
-                            </div>
-                        </div>  
                     </div>
-                </div> 
-                <div class="row">
-                    <div class="col-md-12">
-                    
-                    </div>		
-				</div> 	
+                </div> 	
                 <!-- /. ROW  -->
 				<?php $this->load->view('template/copyright') ?>
             </div>

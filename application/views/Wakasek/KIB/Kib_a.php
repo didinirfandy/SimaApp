@@ -1,7 +1,8 @@
 <?php
-	$data['tittle'] = "KIB A";
-	$this->load->view('template/head', $data);
+$data['tittle'] = "KIB A";
+$this->load->view('template/head', $data);
 ?>
+
 <body>
     <div id="wrapper">
         <?php $this->load->view('template/navbar'); ?>
@@ -9,18 +10,18 @@
         <?php $this->load->view('template/menu'); ?>
         <!-- /. NAV SIDE  -->
 
-		<div id="page-wrapper">
-            <div class="header"> 
+        <div id="page-wrapper">
+            <div class="header">
                 <h2 class="page-header">KARTU INVENTARIS BARANG TANAH ( KIB A )</h2>
                 <ol class="breadcrumb">
                     <li><a href="#"><?php $str = $this->session->userdata('nama_pegawai');
-                    echo wordwrap($str, 15, "<br>\n"); ?></a></li>
-                    <li><a href="<?=base_url()?>Aset/home">Home</a></li>
+                                    echo wordwrap($str, 15, "<br>\n"); ?></a></li>
+                    <li><a href="<?= base_url() ?>Aset/home">Home</a></li>
                     <li>Daftar Aset</li>
                     <li class="active">KIB A</li>
-                </ol> 
+                </ol>
             </div>
-            
+
             <div id="page-inner">
                 <!-- /. ROW  -->
                 <div class="row">
@@ -58,12 +59,12 @@
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>						
-                        </div>   
+                            </div>
+                        </div>
                     </div>
-				</div> 	
+                </div>
                 <!-- /. ROW  -->
-				<?php $this->load->view('template/copyright') ?>
+                <?php $this->load->view('template/copyright') ?>
             </div>
             <!-- /. PAGE INNER  -->
         </div>
@@ -81,36 +82,50 @@
         function disply_kib_a() {
             $.ajax({
                 type: "AJAX",
-                url: "<?= base_url('Kib/get_kib_a') ?>",
+                url: "<?= base_url('Kib/get_kib_a_wk') ?>",
                 async: false,
                 dataType: "JSON",
                 success: function(c) {
                     var kib_a = "";
-                    
+
                     for (h = 0; h < c.length; h++) {
                         var bilangan = c[h].harga;
-                            
-                        var	reverse = bilangan.toString().split('').reverse().join(''),
-                            ribuan 	= reverse.match(/\d{1,3}/g);
-                            ribuan	= ribuan.join('.').split('').reverse().join('');
 
-                        if (c[h].st_stfkt_tgl == "0000-00-00") { st_stfkt_tgl = "-"; }
+                        var reverse = bilangan.toString().split('').reverse().join(''),
+                            ribuan = reverse.match(/\d{1,3}/g);
+                        ribuan = ribuan.join('.').split('').reverse().join('');
+
+                        if (c[h].luas == 0) {
+                            luas = "-";
+                        } else {
+                            luas = c[h].luas;
+                        }
+                        if (c[h].st_stfkt_tgl == "0000-00-00") {
+                            st_stfkt_tgl = "-";
+                        } else {
+                            st_stfkt_tgl = c[h].st_stfkt_tgl
+                        }
+                        if (c[h].thn_pengadaan == "0000-00-00") {
+                            thn_pengadaan = "-";
+                        } else {
+                            thn_pengadaan = c[h].thn_pengadaan
+                        }
 
                         kib_a +=
-                        '<tr>' + 
+                            '<tr>' +
                             '<td>' + (h + 1) + '</td>' +
                             '<td>' + c[h].nm_brg + '</td>' +
                             '<td>' + c[h].kd_brg + '</td>' +
                             '<td style="text-align: right;">' + c[h].no_reg + '</td>' +
-                            '<td style="text-align: right;">' + c[h].luas + '</td>' +
-                            '<td>' + c[h].thn_pengadaan + '</td>' +
+                            '<td style="text-align: right;">' + luas + '</td>' +
+                            '<td>' + thn_pengadaan + '</td>' +
                             '<td>' + c[h].st_hak + '</td>' +
                             '<td>' + st_stfkt_tgl + '</td>' +
                             '<td>' + c[h].st_stfkt_no + '</td>' +
                             '<td>' + c[h].perolehan + '</td>' +
                             '<td style="text-align: right;">' + ribuan + '</td>' +
-                            
-                        '</tr>';
+
+                            '</tr>';
                     }
                     $('#kib_a').html(kib_a);
                 }

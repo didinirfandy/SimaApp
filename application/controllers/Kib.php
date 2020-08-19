@@ -44,7 +44,7 @@ class Kib extends CI_Controller
         $id = $this->input->post("id");
 		$value = $this->input->post("value");
 		$modul = $this->input->post("modul");
-		$this->Kib_model->update_kib_b($id,$value,$modul);
+		$this->Kib_model->uptd_kib_b($id,$value,$modul);
 		echo "{}";
     }
 
@@ -88,7 +88,7 @@ class Kib extends CI_Controller
     // ----------------------- //
     public function kib_a_wk()
     {
-        $this->load->view('Aset/Kib/kib_a');
+        $this->load->view('Wakasek/Kib/kib_a');
     }
 
     public function get_kib_a_wk()
@@ -103,7 +103,7 @@ class Kib extends CI_Controller
     public function kib_b_wk()
     {
         $data['kib_b'] = $this->Kib_model->get_dt_kib_b();
-        $this->load->view('Aset/Kib/kib_b', $data);
+        $this->load->view('Wakasek/Kib/kib_b', $data);
     }
 
     public function uptd_kib_b_wk()
@@ -122,7 +122,7 @@ class Kib extends CI_Controller
     public function kib_c_wk()
     {
         $data['kib_c'] = $this->Kib_model->get_dt_kib_c();
-        $this->load->view('Aset/Kib/kib_c', $data);
+        $this->load->view('Wakasek/Kib/kib_c', $data);
     }
 
     public function uptd_kib_c_wk()
@@ -139,7 +139,7 @@ class Kib extends CI_Controller
     // ----------------------- //
     public function kib_e_wk()
     {
-        $this->load->view('Aset/Kib/kib_e');
+        $this->load->view('Wakasek/Kib/kib_e');
     }
 
     public function get_kib_e_wk()
@@ -155,7 +155,7 @@ class Kib extends CI_Controller
     // ----------------------- //
     public function kib_a_kep()
     {
-        $this->load->view('Aset/Kib/kib_a');
+        $this->load->view('Kepsek/Kib/kib_a');
     }
 
     public function get_kib_a_kep()
@@ -170,7 +170,7 @@ class Kib extends CI_Controller
     public function kib_b_kep()
     {
         $data['kib_b'] = $this->Kib_model->get_dt_kib_b();
-        $this->load->view('Aset/Kib/kib_b', $data);
+        $this->load->view('Kepsek/Kib/kib_b', $data);
     }
 
     public function uptd_kib_b_kep()
@@ -189,7 +189,7 @@ class Kib extends CI_Controller
     public function kib_c_kep()
     {
         $data['kib_c'] = $this->Kib_model->get_dt_kib_c();
-        $this->load->view('Aset/Kib/kib_c', $data);
+        $this->load->view('Kepsek/Kib/kib_c', $data);
     }
 
     public function uptd_kib_c_kep()
@@ -206,7 +206,7 @@ class Kib extends CI_Controller
     // ----------------------- //
     public function kib_e_kep()
     {
-        $this->load->view('Aset/Kib/kib_e');
+        $this->load->view('Kepsek/Kib/kib_e');
     }
 
     public function get_kib_e_kep()

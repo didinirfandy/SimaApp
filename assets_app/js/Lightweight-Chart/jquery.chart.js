@@ -25,8 +25,8 @@
 var thychart = {
   pie: function(node){
     var makeSVG = function(tag, attrs, val, title, i, fill) {
-      var $el = $(document.createElementNS('http://www.w3.org/2000/svg', tag));
-      var $g = $(document.createElementNS('http://www.w3.org/2000/svg', "g"));
+      var $el = $(document.createElementNS('', tag));
+      var $g = $(document.createElementNS('', "g"));
 
       var $rep = $('<li><i></i><p></p></li>');
           $rep.find("p").html(title+": " + val);

@@ -135,7 +135,7 @@
                                 </div>
                             </div>
                             <div class="panel-body">
-                                <canvas id="pie-chart" class="chart"></canvas>
+                                <canvas id="pie-chart" class="chart" style="width: 655px;height: 277px;"></canvas>
                             </div>
                         </div>            
                     </div>
@@ -159,6 +159,13 @@
     </div>
     <!-- /. WRAPPER  -->
     <?php $this->load->view('template/script') ?>
+    <!-- Custom Js -->
+        <script>var get_status = '<?= base_url('Aset/get_status') ?>';</script>
+    <script src="<?= base_url(); ?>assets_app/js/custom-scripts.js"></script>
+    <!-- Chart Js -->
+    <script type="text/javascript" src="<?= base_url(); ?>assets_app/js/Chart.min.js"></script>
+    <script>var get_data_aset = '<?= base_url('Aset/get_data_aset') ?>';</script>
+    <script type="text/javascript" src="<?= base_url(); ?>assets_app/js/chartjs.js"></script>
 
 </body>
 
