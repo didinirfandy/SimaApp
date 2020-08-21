@@ -204,7 +204,16 @@ p {
 	border-bottom: 1px solid transparent;
 	text-align: left;
 	background-color: rgb(237, 237, 237);
-	padding: 32px 22px 32px 0;
+	padding: 32px 0 32px 0;
+	color: #323232;
+}
+
+.page-header1 {
+	margin: 0;
+	border-bottom: 1px solid transparent;
+	text-align: left;
+	background-color: rgb(237, 237, 237);
+	padding: 32px 0 0 0;
 	color: #323232;
 }
 
@@ -277,6 +286,10 @@ p {
 
 .header {
 	margin: 0 30px;
+}
+
+.header1 {
+	margin: 0 0;
 }
 
 h1.page-header small {
@@ -603,6 +616,16 @@ div#sideNav:hover {
 	text-transform: uppercase;
 	line-height: 30px;
 	background: #14cc13;
+}
+
+.navbar-time {
+	color: #000000;
+	text-align: left;
+	height: 50px;
+	padding: 10px 0 10px 315px;
+	font-size: 13px;
+	font-weight: 700;
+	line-height: 30px;
 }
 
 .navbar-brand b {
@@ -3626,4 +3649,137 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.focus {
 	border: 1px solid rgba(0, 0, 0, 0.2);
 	border-radius: 0.3rem;
 	outline: 0;
+}
+
+
+.user .profile {
+	margin: -30px 0 15px 0;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	
+}
+
+.user .profile .info {
+	padding: 60px 60px;
+	text-align: center;
+	background-color: #fff;
+	white-space: nowrap;
+	background-color: #404040;
+	color: #fff;
+}
+
+.user .profile .info img {
+	border-radius: 50%;
+	max-width: 80px;
+	margin-bottom: 20px;
+	margin-top: 10px;
+}
+
+.user .profile .cover-image {
+	-webkit-box-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+	background-image: url(http://placeimg.com/1200/300/nature);
+	background-size: cover;
+	background-position: center;
+	min-height: 100px;
+	overflow: hidden;
+}
+
+
+.user .user-tabs {
+	margin-top: 20px;
+}
+
+.user .user-tabs .nav-link {
+	border-left: 3px solid transparent;
+	padding: 12px 15px;
+	border-bottom: 0;
+	font-size: 15px;
+	border-radius: 0;
+}
+
+.user .user-tabs .nav-link.active {
+	border-left-color: #009688;
+	border-bottom: 0;
+}
+
+.user .user-tabs .nav-link:hover,
+.user .user-tabs .nav-link:active {
+	background-color: #eee !important;
+	border-bottom: 0;
+}
+
+.user .tab-content {
+	margin: 20px -10px -10px;
+}
+
+.user .timeline-post {
+	background-color: #fff;
+	padding: 20px;
+	margin-bottom: 20px;
+	-webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+.user .timeline-post .post-media {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: start;
+	-ms-flex-align: start;
+	align-items: flex-start;
+	margin-bottom: 15px;
+}
+
+.user .timeline-post .post-media img {
+	margin-right: 10px;
+}
+
+.user .timeline-post .post-media h5 {
+	margin-top: 0;
+	margin-bottom: 3px;
+	font-size: 15px;
+}
+
+.user .timeline-post .post-content {
+	margin-bottom: 20px;
+}
+
+.user .timeline-post .post-utility {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	list-style: none;
+	padding-left: 0;
+	margin-bottom: 0;
+}
+
+.user .timeline-post .post-utility .likes,
+.user .timeline-post .post-utility .shares {
+	margin-right: 10px;
+}
+
+.user .timeline-post .post-utility .likes a,
+.user .timeline-post .post-utility .shares a {
+	color: #555;
+}
+
+.user .timeline-post .post-utility .comments {
+	color: #555;
+	-webkit-box-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+	text-align: right;
+}
+
+.user .user-settings .line-head {
+	font-size: 18px;
+	margin-bottom: 30px;
+	color: #2a2a2a;
+}
+
+.user .user-settings label {
+	color: #666;
 }

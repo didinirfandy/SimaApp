@@ -40,7 +40,7 @@ $this->load->view('template/head', $data);
                                             <tr>
                                                 <th>No</th>
                                                 <th>Keterangan</th>
-                                                <th >Barang Usulan</th>
+                                                <th>Barang Usulan</th>
                                                 <th>Tanggal Ditambahkan</th>
                                                 <th>Status</th>
                                             </tr>
@@ -144,6 +144,9 @@ $this->load->view('template/head', $data);
                 success: function(a) {
                     var html = "";
                     for (i = 0; i < a.length; i++) {
+                        var date = new Date(a[i].entry_date);
+                        var entry_date =  ("00" + date.getDate()).slice(-2) + "/" + ("00" + (date.getMonth() + 1)).slice(-2) + "/" + date.getFullYear() + " " +
+                            ("00" + date.getHours()).slice(-2) + ":" + ("00" + date.getMinutes()).slice(-2) + ":" + ("00" + date.getSeconds()).slice(-2);
 
                         if (a[i].stts_approval_kep == 1) {
                             status = "<button class='btn btn-sm btn-warning' disabled><i class='fa fa-hourglass-half'></i> Pendding</button>";
@@ -156,13 +159,13 @@ $this->load->view('template/head', $data);
                         }
 
                         html +=
-                            "<tr>" +
-                            "<td>" + (i + 1) + "</td>" +
-                            "<td>" + a[i].ket + "</td>" +
-                            "<td style='text-align: center;'><button class='btn btn-sm btn-info' onclick='tampil_detail_barang(" + a[i].kd_usulan + ")' data-toggle='modal' data-target='#dtl'><i class='fa fa-info-circle'></i> Detail</button></td>" +
-                            "<td>" + a[i].entry_date + "</td>" +
-                            "<td style='text-align: center;'>" + status + "</td>" +
-                            "</tr>";
+                            '<tr>' +
+                            '<td>' + (i + 1) + '</td>' +
+                            '<td>' + a[i].ket + '</td>' +
+                            '<td style="text-align: center;"><button class="btn btn-sm btn-info" onclick="tampil_detail_barang(' + a[i].kd_usulan + ')" data-toggle="modal" data-target="#dtl"><i class="fa fa-info-circle"></i> Detail</button></td>' +
+                            '<td style="text-align: center;">' + entry_date + '</td>' +
+                            '<td style="text-align: center;">' + status + '</td>' +
+                            '</tr>';
                     }
                     $('#usulan_brg').html(html);
                 }

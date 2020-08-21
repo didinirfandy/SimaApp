@@ -67,8 +67,9 @@ $this->load->view('template/head', $data);
                                         <label for="ket">Keterangan</label>
                                         <textarea type="text" rows="2" class="form-control" name="ket" id="ket" placeholder="" required></textarea>
                                     </div>
-                                    <button type="submit" name="submit" id="submit" class="btn btn-primary">Simpan</button>
-                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#data_aset">Cek Data</button>
+                                    <br>
+                                    <button type="submit" name="submit" id="submit" class="btn btn-sm btn-primary">Simpan</button>&nbsp;
+                                    <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#data_aset">Cek Data</button>
                                     <input type="hidden" name="kd_peminjaman" value="<?= $kd_peminjaman; ?>">
                                 </form>
                                 <?= form_close() ?>
@@ -358,7 +359,7 @@ $this->load->view('template/head', $data);
                             '<td>' + b[i].no_reg + '</td>' +
                             '<td>' + b[i].nm_brg + '</td>' +
                             '<td>' + kondisi + '</td>' +
-                            '<td><button type="button" onclick="get(\'' + b[i].id_brg + '\', \'' + b[i].kd_brg + '\', \'' + b[i].nm_brg + '\')" class="btn btn-info"><i class="fa fa-plus"></i></button></td>' +
+                            '<td style="text-align: center;"><button type="button" onclick="get(\'' + b[i].id_brg + '\', \'' + b[i].kd_brg + '\', \'' + b[i].nm_brg + '\')" class="btn btn-sm btn-info"><i class="fa fa-plus"></i></button></td>' +
                             '</tr>';
                     }
                     $('#tmpl_popup').html(row);

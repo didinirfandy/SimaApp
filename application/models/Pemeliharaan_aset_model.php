@@ -109,7 +109,23 @@ class Pemeliharaan_aset_model extends CI_Model
         )->result_array();
     }
 
-    function aksi_pemeliharaan_wk($id_pemeliharaan, $id_brg, $stts_approval, $nilai_buku_bln, $sisa_umr_ekonomis)
+    function get_kd_matriks()
+    {
+        $data = $this->db->query(
+            "SELECT 
+                MAX(kd_matriks) AS kd_matriks 
+            FROM 
+                tbl_matriks_nilai 
+            WHERE date(entry_date) NOT IN (date_format(curdate(), '%Y-%m-%d'))"
+        )->result_array();
+
+        foreach ($data as $j) {
+            $kode = 1 + $j['kd_matriks'];
+        }
+        return $kode;
+    }
+
+    function aksi_pemeliharaan_wk($id_pemeliharaan, $id_brg, $kd_matriks, $stts_approval, $nilai_buku_bln, $sisa_umr_ekonomis)
     {
         date_default_timezone_set('Asia/Jakarta');
         $date   = date("Y-m-d H:i:s");
@@ -180,6 +196,7 @@ class Pemeliharaan_aset_model extends CI_Model
         $data = array(
             'id_brg' => $id_barang,
             'kd_brg' => $kd_brg,
+            'kd_matriks' => $kd_matriks,
             'nm_brg' => $nm_brg,
             'no_reg' => $no_reg,
             'kondisi_brg' => $kondisi_brg,
@@ -318,8 +335,7 @@ class Pemeliharaan_aset_model extends CI_Model
 
     function print_pemeliharaan_aset_ex($tgl_awal, $tgl_akhir, $kategori)
     {
-        if ($tgl_awal == "" AND $tgl_akhir == "") 
-        {    
+        if ($tgl_awal == "" and $tgl_akhir == "") {
             if ($kategori == "1") {
                 $stts_approval = "stts_approval IN ('2','3')";
             } else if ($kategori == 2) {
@@ -351,7 +367,7 @@ class Pemeliharaan_aset_model extends CI_Model
             } else {
                 $stts_approval = "AND stts_approval IN ('2','3')";
             }
-            
+
             $data = $this->db->query(
                 "SELECT 
                     a.kd_brg, a.no_reg, a.nm_brg, a.kondisi_brg, a.harga, a.umr_ekonomis, a.merk_type, a.nli_sisa, a.ket,

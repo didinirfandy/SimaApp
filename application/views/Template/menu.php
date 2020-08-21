@@ -22,6 +22,8 @@
                     echo "Waksek Sarana";
                 } elseif ($role == 3) {
                     echo "Kepala Sekolah";
+                } else {
+                    echo "";
                 }
                 ?>
             </p>
@@ -104,7 +106,7 @@
                 <li>
                     <a class="<?php if ($this->uri->segment(2) == "penghapusan_aset") {
                                     echo "active-menu";
-                                } ?>" href="<?= base_url('Penghapusan_aset/penghapusan_aset') ?>"><i class="fa fa-trash-o"></i> Penghapusan Aset</a>
+                                } ?>" href="<?= base_url('Penghapusan_aset/penghapusan_aset') ?>"><i class="fa fa-trash-o"></i> Rekomendasi Penghapusan</a>
                 </li>
                 <li class="<?php if ($this->uri->segment(1) == "Lp_kib") {
                                 echo "active";
@@ -171,7 +173,7 @@
                                 echo "active";
                             } ?>">
                     <a href="#" class="<?php if ($this->uri->segment(1) == "Kib") {
-                                            echo "active-menu";
+                                            echo "active";
                                         } ?>"><i class="fa fa-barcode"></i> Daftar Aset<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
@@ -215,7 +217,7 @@
                                 echo "active";
                             } ?>">
                     <a href="#lp" class="<?php if ($this->uri->segment(1) == "Laporan") {
-                                                echo "active-menu";
+                                                echo "active";
                                             } ?>"><i class="fa fa-file-text-o"></i> Laporan<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li id="lp">
@@ -253,7 +255,7 @@
                                 echo "active";
                             } ?>">
                     <a href="#" class="<?php if ($this->uri->segment(1) == "Kib") {
-                                            echo "active-menu";
+                                            echo "active";
                                         } ?>"><i class="fa fa-barcode"></i> Daftar Aset<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
@@ -297,7 +299,7 @@
                                 echo "active";
                             } ?>">
                     <a href="#lp" class="<?php if ($this->uri->segment(1) == "Laporan") {
-                                                echo "active-menu";
+                                                echo "active";
                                             } ?>"><i class="fa fa-file-text-o"></i> Laporan<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li id="lp">

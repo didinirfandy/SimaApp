@@ -29,7 +29,7 @@ $this->load->view('template/head', $data);
                 <!-- /. ROW  -->
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="panel panel-default"><br>
+                        <div class="panel panel-default"><br><br>
                             <?php $attr = array('id' => 'regfrom');
                             echo form_open('Master_data/int_pengadaan', $attr); ?>
                             <?= $this->session->userdata('status_insert'); ?>
@@ -100,6 +100,7 @@ $this->load->view('template/head', $data);
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-md-4">
                                 <div class="panel panel-primary">
                                     <div class="panel-heading">
@@ -137,8 +138,8 @@ $this->load->view('template/head', $data);
                                 </div>
                             </div>
                             <div style="padding: 20px;">
-                                <button type="submit" name="submit" id="submit" class="btn btn-success">Simpan</button>
-                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#cek_usulan">Cek Usulan</button><br><br>
+                                <button type="submit" name="submit" id="submit" class="btn btn-sm btn-success">Simpan</button>&nbsp;
+                                <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#cek_usulan">Cek Usulan</button><br>
                             </div>
                             <?= form_close() ?>
                         </div>
@@ -526,8 +527,22 @@ $this->load->view('template/head', $data);
             $("#jns_brg").val(jns_brg);
             $("#jmlh_brg").val(jmlh_brg);
             $("#umr_ekonomis").val(masa_manfaat);
+
+            // var bilangan = harga_brg;
+            // var reverse = bilangan.toString().split('').reverse().join(''),
+            //     rupiah = reverse.match(/\d{1,3}/g);
+            // harga = rupiah.join('.').split('').reverse().join('');
             $("#harga").val(harga_brg);
             $("#satuan_brg").val(satuan_brg);
+
+            var dep = 1 / masa_manfaat;
+            var nl = harga_brg * Math.pow(1 - dep, masa_manfaat);
+            var nilai = Math.round(nl);
+            // var reverse = nilai.toString().split('').reverse().join(''),
+            //     rupiah = reverse.match(/\d{1,3}/g);
+            // nil_sisa = rupiah.join('.').split('').reverse().join('');
+            $("#nli_sisa").val(nilai);
+            // console.log(nil_sisa);
 
             $("#cek_usulan").modal("hide");
         }

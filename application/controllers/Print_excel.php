@@ -19,7 +19,7 @@ class Print_excel extends CI_Controller
             $tgl_akhir = $this->input->post('tgl_akhir');
             $kategori  = $this->input->post('kategori');
             $thn_beli  = $this->input->post('thn_beli');
-
+            
             $dt_kib_a  = $this->Kib_model->get_data_kib_a_ctk($tgl_awal, $tgl_akhir, $kategori, $thn_beli);
 
             if ($dt_kib_a != "0") {
@@ -3119,600 +3119,635 @@ class Print_excel extends CI_Controller
         }
     }
 
-    public function export_pengadaan_wk()
+    public function export_pengadaan()
     {
-        if (isset($_POST['cetak'])) {
-
-            // Load plugin PHPExcel nya
-            include APPPATH . 'third_party/PHPExcel.php';
-
-            // Panggil class PHPExcel nya
-            $excel = new PHPExcel();
-
-            date_default_timezone_set('Asia/Jakarta');
-            $date   =   date("mY");
-
-            // Settingan awal fil excel
-            $excel->getProperties()->setCreator('Wakasek SIMA SMAN 3 Cimahi (' . $this->session->userdata('username') . ')')
-                ->setLastModifiedBy('Wakasek SIMA SMAN 3 Cimahi (' . $this->session->userdata('username') . ')')
-                ->setTitle("Data Laporan Pengadaan " . $date)
-                ->setSubject("Laporan Pengadaan " . $date)
-                ->setDescription("Data Laporan Pengadaan " . $date)
-                ->setKeywords("Data Laporan Pengadaan " . $date);
-
-            // Buat sebuah variabel untuk menampung pengaturan style dari TITLE tabel
-            $style_tit = array(
-                'font' => array('bold' => true), // Set font nya jadi bold
-                'alignment' => array(
-                    'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, // Set text jadi ditengah secara horizontal (center)
-                    'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER // Set text jadi di tengah secara vertical (middle)
-                )
-            );
-
-            // Buat sebuah variabel untuk menampung pengaturan style dari ket tabel
-            $style_ket = array(
-                'font' => array('bold' => true), // Set font nya jadi bold
-                'alignment' => array(
-                    'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER // Set text jadi di tengah secara vertical (middle)
-                )
-            );
-
-            // Buat sebuah variabel untuk menampung pengaturan style dari header tabel
-            $style_col = array(
-                'font' => array('bold' => true), // Set font nya jadi bold
-                'alignment' => array(
-                    'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, // Set text jadi ditengah secara horizontal (center)
-                    'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER, // Set text jadi di tengah secara vertical (middle)
-                    'wrap' => true
-                ),
-                'borders' => array(
-                    'top' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border top dengan garis tipis
-                    'right' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),  // Set border right dengan garis tipis
-                    'bottom' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border bottom dengan garis tipis
-                    'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN) // Set border left dengan garis tipis
-                )
-            );
-
-            // Buat sebuah variabel untuk menampung pengaturan style dari isi tabel
-            $style_row = array(
-                'alignment' => array(
-                    'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER, // Set text jadi di tengah secara vertical (middle)
-                    'wrap' => true
-                ),
-                'borders' => array(
-                    'top' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border top dengan garis tipis
-                    'right' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),  // Set border right dengan garis tipis
-                    'bottom' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border bottom dengan garis tipis
-                    'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN) // Set border left dengan garis tipis
-                )
-            );
-
-            // Buat sebuah variabel untuk menampung pengaturan style dari isi tabel
-            $style_row_center = array(
-                'alignment' => array(
-                    'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, // Set text jadi ditengah secara horizontal (center)
-                    'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER, // Set text jadi di tengah secara vertical (middle)
-                    'wrap' => true
-                ),
-                'borders' => array(
-                    'top' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border top dengan garis tipis
-                    'right' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),  // Set border right dengan garis tipis
-                    'bottom' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border bottom dengan garis tipis
-                    'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN) // Set border left dengan garis tipis
-                )
-            );
-
-            // Buat sebuah variabel untuk menampung pengaturan style dari isi tabel
-            $style_row_nm = array(
-                'font' => array(
-                    'bold' => true, // Set font nya jadi bold
-                    'underline' => PHPExcel_Style_Font::UNDERLINE_SINGLE,
-                    'strike'    => false,
-                ),
-                'alignment' => array(
-                    'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, // Set text jadi ditengah secara horizontal (center)
-                    'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER, // Set text jadi di tengah secara vertical (middle)
-                    'wrap' => true
-                )
-            );
-
-            // Buat sebuah variabel untuk menampung pengaturan style dari isi tabel
-            $style_row_ttd = array(
-                'alignment' => array(
-                    'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, // Set text jadi ditengah secara horizontal (center)
-                    'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER, // Set text jadi di tengah secara vertical (middle)
-                    'wrap' => true
-                )
-            );
-
-            // Buat header tabel nya pada baris ke 1
-            $excel->setActiveSheetIndex(0)->mergeCells('A1:Q1');
-            $excel->setActiveSheetIndex(0)->setCellValue('A1', "BUKU INVENTARIS");
-            $excel->setActiveSheetIndex(0)->mergeCells('A2:Q2');
-            $excel->setActiveSheetIndex(0)->setCellValue('A2', "INTRA COUNTABLE");
-            $excel->setActiveSheetIndex(0)->mergeCells('B3:C3');
-            $excel->setActiveSheetIndex(0)->setCellValue('B3', "SKPD");
-            $excel->setActiveSheetIndex(0)->setCellValue('D3', ": 1.01.01.115. SMUN 3 CIMAHI");
-            $excel->setActiveSheetIndex(0)->mergeCells('B4:C4');
-            $excel->setActiveSheetIndex(0)->setCellValue('B4', "KABUPATEN/KOTA");
-            $excel->setActiveSheetIndex(0)->setCellValue('D4', ": KOTA CIMAHI");
-            $excel->setActiveSheetIndex(0)->mergeCells('B5:C5');
-            $excel->setActiveSheetIndex(0)->setCellValue('B5', "PROVINSI");
-            $excel->setActiveSheetIndex(0)->setCellValue('D5', ": JAWA BARAT");
-            $excel->setActiveSheetIndex(0)->mergeCells('B6:C6');
-            $excel->setActiveSheetIndex(0)->setCellValue('B6', "NO. KODE LOKASI");
-            $excel->setActiveSheetIndex(0)->setCellValue('D6', ": ");
-
-            // Style untuk keader
-            $excel->getActiveSheet()->getStyle('A1')->applyFromArray($style_tit)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('A2')->applyFromArray($style_tit)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('B3')->applyFromArray($style_ket)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('D3')->applyFromArray($style_ket)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('B4')->applyFromArray($style_ket)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('D4')->applyFromArray($style_ket)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('B5')->applyFromArray($style_ket)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('D5')->applyFromArray($style_ket)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('B6')->applyFromArray($style_ket)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('D6')->applyFromArray($style_ket)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-
-            // Buat Table head
-            $excel->setActiveSheetIndex(0)->setCellValue('A8', "No");
-            $excel->setActiveSheetIndex(0)->setCellValue('B8', "No Kode Barang");
-            $excel->setActiveSheetIndex(0)->setCellValue('C8', "No Register");
-            $excel->setActiveSheetIndex(0)->setCellValue('D8', "Nama Barang");
-            $excel->setActiveSheetIndex(0)->setCellValue('E8', "Merk/Type");
-            $excel->setActiveSheetIndex(0)->setCellValue('F8', "No Sertifikat");
-            $excel->setActiveSheetIndex(0)->setCellValue('G8', "Bahan");
-            $excel->setActiveSheetIndex(0)->setCellValue('H8', "Asal/Cara Perolehan");
-            $excel->setActiveSheetIndex(0)->setCellValue('I8', "Tahun Priode");
-            $excel->setActiveSheetIndex(0)->setCellValue('J8', "Ukuran Barang");
-            $excel->setActiveSheetIndex(0)->setCellValue('K8', "Satuan");
-            $excel->setActiveSheetIndex(0)->setCellValue('L8', "Keadaan Barang (B, RR, RB)");
-            $excel->setActiveSheetIndex(0)->setCellValue('M8', "Jumlah Barang");
-            $excel->setActiveSheetIndex(0)->setCellValue('N8', "Harga");
-            $excel->setActiveSheetIndex(0)->setCellValue('O8', "Umur Ekonomis");
-            $excel->setActiveSheetIndex(0)->setCellValue('P8', "Nilai Sisa");
-            $excel->setActiveSheetIndex(0)->setCellValue('Q8', "Keterangan");
-
-            // Apply style table head yang telah kita buat tadi ke masing-masing kolom table head
-            $excel->getActiveSheet()->getStyle('A8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('B8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('C8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('D8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('E8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('F8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('G8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('H8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('I8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('J8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('K8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('L8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('M8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('N8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('O8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('P8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('Q8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-
-            // Menampilkan data
-            $numrow = 9; // Set baris pertama untuk isi tabel adalah baris ke 9
-            $p = 1;
-            $totrow = 0;
+        if (isset($_POST['cetak'])) 
+        {
             $tgl_awal  = $this->input->post('tgl_awal');
             $tgl_akhir = $this->input->post('tgl_akhir');
-            $dt_pengadaan = $this->Laporan_model->get_data_pengadaan_ctk($tgl_awal, $tgl_akhir);
-            foreach ($dt_pengadaan as $i) { // Lakukan looping pada variabel
-                if ($i['satuan_brg'] == 1) {
-                    $satuan = "Buah";
-                } else if ($i['satuan_brg'] == 2) {
-                    $satuan = "Unit";
-                } else if ($i['satuan_brg'] == 3) {
-                    $satuan = "Set";
-                } else {
-                    $satuan = "-";
+            $kategori  = $this->input->post('kategori');
+            $thn_beli  = $this->input->post('thn_beli');
+            $dt_pengadaan = $this->Laporan_model->get_data_pengadaan_ctk($tgl_awal, $tgl_akhir, $kategori, $thn_beli);
+
+            if ($dt_pengadaan != 0) {
+                
+                // Load plugin PHPExcel nya
+                include APPPATH . 'third_party/PHPExcel.php';
+    
+                // Panggil class PHPExcel nya
+                $excel = new PHPExcel();
+    
+                date_default_timezone_set('Asia/Jakarta');
+                $date   =   date("mY");
+    
+                // Settingan awal fil excel
+                $excel->getProperties()->setCreator('Wakasek SIMA SMAN 3 Cimahi (' . $this->session->userdata('username') . ')')
+                    ->setLastModifiedBy('Wakasek SIMA SMAN 3 Cimahi (' . $this->session->userdata('username') . ')')
+                    ->setTitle("Data Laporan Pengadaan " . $date)
+                    ->setSubject("Laporan Pengadaan " . $date)
+                    ->setDescription("Data Laporan Pengadaan " . $date)
+                    ->setKeywords("Data Laporan Pengadaan " . $date);
+    
+                // Buat sebuah variabel untuk menampung pengaturan style dari TITLE tabel
+                $style_tit = array(
+                    'font' => array('bold' => true), // Set font nya jadi bold
+                    'alignment' => array(
+                        'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, // Set text jadi ditengah secara horizontal (center)
+                        'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER // Set text jadi di tengah secara vertical (middle)
+                    )
+                );
+    
+                // Buat sebuah variabel untuk menampung pengaturan style dari ket tabel
+                $style_ket = array(
+                    'font' => array('bold' => true), // Set font nya jadi bold
+                    'alignment' => array(
+                        'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER // Set text jadi di tengah secara vertical (middle)
+                    )
+                );
+    
+                // Buat sebuah variabel untuk menampung pengaturan style dari header tabel
+                $style_col = array(
+                    'font' => array('bold' => true), // Set font nya jadi bold
+                    'alignment' => array(
+                        'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, // Set text jadi ditengah secara horizontal (center)
+                        'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER, // Set text jadi di tengah secara vertical (middle)
+                        'wrap' => true
+                    ),
+                    'borders' => array(
+                        'top' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border top dengan garis tipis
+                        'right' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),  // Set border right dengan garis tipis
+                        'bottom' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border bottom dengan garis tipis
+                        'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN) // Set border left dengan garis tipis
+                    )
+                );
+    
+                // Buat sebuah variabel untuk menampung pengaturan style dari isi tabel
+                $style_row = array(
+                    'alignment' => array(
+                        'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER, // Set text jadi di tengah secara vertical (middle)
+                        'wrap' => true
+                    ),
+                    'borders' => array(
+                        'top' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border top dengan garis tipis
+                        'right' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),  // Set border right dengan garis tipis
+                        'bottom' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border bottom dengan garis tipis
+                        'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN) // Set border left dengan garis tipis
+                    )
+                );
+    
+                // Buat sebuah variabel untuk menampung pengaturan style dari isi tabel
+                $style_row_center = array(
+                    'alignment' => array(
+                        'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, // Set text jadi ditengah secara horizontal (center)
+                        'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER, // Set text jadi di tengah secara vertical (middle)
+                        'wrap' => true
+                    ),
+                    'borders' => array(
+                        'top' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border top dengan garis tipis
+                        'right' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),  // Set border right dengan garis tipis
+                        'bottom' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border bottom dengan garis tipis
+                        'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN) // Set border left dengan garis tipis
+                    )
+                );
+    
+                // Buat sebuah variabel untuk menampung pengaturan style dari isi tabel
+                $style_row_nm = array(
+                    'font' => array(
+                        'bold' => true, // Set font nya jadi bold
+                        'underline' => PHPExcel_Style_Font::UNDERLINE_SINGLE,
+                        'strike'    => false,
+                    ),
+                    'alignment' => array(
+                        'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, // Set text jadi ditengah secara horizontal (center)
+                        'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER, // Set text jadi di tengah secara vertical (middle)
+                        'wrap' => true
+                    )
+                );
+    
+                // Buat sebuah variabel untuk menampung pengaturan style dari isi tabel
+                $style_row_ttd = array(
+                    'alignment' => array(
+                        'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, // Set text jadi ditengah secara horizontal (center)
+                        'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER, // Set text jadi di tengah secara vertical (middle)
+                        'wrap' => true
+                    )
+                );
+    
+                // Buat header tabel nya pada baris ke 1
+                $excel->setActiveSheetIndex(0)->mergeCells('A1:Q1');
+                $excel->setActiveSheetIndex(0)->setCellValue('A1', "BUKU INVENTARIS");
+                $excel->setActiveSheetIndex(0)->mergeCells('A2:Q2');
+                $excel->setActiveSheetIndex(0)->setCellValue('A2', "INTRA COUNTABLE");
+                $excel->setActiveSheetIndex(0)->mergeCells('B3:C3');
+                $excel->setActiveSheetIndex(0)->setCellValue('B3', "SKPD");
+                $excel->setActiveSheetIndex(0)->setCellValue('D3', ": 1.01.01.115. SMUN 3 CIMAHI");
+                $excel->setActiveSheetIndex(0)->mergeCells('B4:C4');
+                $excel->setActiveSheetIndex(0)->setCellValue('B4', "KABUPATEN/KOTA");
+                $excel->setActiveSheetIndex(0)->setCellValue('D4', ": KOTA CIMAHI");
+                $excel->setActiveSheetIndex(0)->mergeCells('B5:C5');
+                $excel->setActiveSheetIndex(0)->setCellValue('B5', "PROVINSI");
+                $excel->setActiveSheetIndex(0)->setCellValue('D5', ": JAWA BARAT");
+                $excel->setActiveSheetIndex(0)->mergeCells('B6:C6');
+                $excel->setActiveSheetIndex(0)->setCellValue('B6', "NO. KODE LOKASI");
+                $excel->setActiveSheetIndex(0)->setCellValue('D6', ": ");
+    
+                // Style untuk keader
+                $excel->getActiveSheet()->getStyle('A1')->applyFromArray($style_tit)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('A2')->applyFromArray($style_tit)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('B3')->applyFromArray($style_ket)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('D3')->applyFromArray($style_ket)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('B4')->applyFromArray($style_ket)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('D4')->applyFromArray($style_ket)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('B5')->applyFromArray($style_ket)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('D5')->applyFromArray($style_ket)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('B6')->applyFromArray($style_ket)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('D6')->applyFromArray($style_ket)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+    
+                // Buat Table head
+                $excel->setActiveSheetIndex(0)->setCellValue('A8', "No");
+                $excel->setActiveSheetIndex(0)->setCellValue('B8', "No Kode Barang");
+                $excel->setActiveSheetIndex(0)->setCellValue('C8', "No Register");
+                $excel->setActiveSheetIndex(0)->setCellValue('D8', "Nama Barang");
+                $excel->setActiveSheetIndex(0)->setCellValue('E8', "Merk/Type");
+                $excel->setActiveSheetIndex(0)->setCellValue('F8', "No Sertifikat");
+                $excel->setActiveSheetIndex(0)->setCellValue('G8', "Bahan");
+                $excel->setActiveSheetIndex(0)->setCellValue('H8', "Asal/Cara Perolehan");
+                $excel->setActiveSheetIndex(0)->setCellValue('I8', "Tahun Priode");
+                $excel->setActiveSheetIndex(0)->setCellValue('J8', "Ukuran Barang");
+                $excel->setActiveSheetIndex(0)->setCellValue('K8', "Satuan");
+                $excel->setActiveSheetIndex(0)->setCellValue('L8', "Keadaan Barang (B, RR, RB)");
+                $excel->setActiveSheetIndex(0)->setCellValue('M8', "Jumlah Barang");
+                $excel->setActiveSheetIndex(0)->setCellValue('N8', "Harga");
+                $excel->setActiveSheetIndex(0)->setCellValue('O8', "Umur Ekonomis");
+                $excel->setActiveSheetIndex(0)->setCellValue('P8', "Nilai Sisa");
+                $excel->setActiveSheetIndex(0)->setCellValue('Q8', "Keterangan");
+    
+                // Apply style table head yang telah kita buat tadi ke masing-masing kolom table head
+                $excel->getActiveSheet()->getStyle('A8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('B8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('C8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('D8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('E8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('F8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('G8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('H8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('I8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('J8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('K8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('L8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('M8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('N8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('O8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('P8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('Q8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+    
+                // Menampilkan data
+                $numrow = 9; // Set baris pertama untuk isi tabel adalah baris ke 9
+                $p = 1;
+                $totrow = 0;
+                
+                foreach ($dt_pengadaan as $i) { // Lakukan looping pada variabel
+                    if ($i['satuan_brg'] == 1) {
+                        $satuan = "Buah";
+                    } else if ($i['satuan_brg'] == 2) {
+                        $satuan = "Unit";
+                    } else if ($i['satuan_brg'] == 3) {
+                        $satuan = "Set";
+                    } else {
+                        $satuan = "-";
+                    }
+    
+                    if ($i['kondisi'] == 1) {
+                        $kondisi = "Baik";
+                    } else if ($i['kondisi'] == 2) {
+                        $kondisi = "Rusak Ringan";
+                    } else if ($i['kondisi'] == 3) {
+                        $kondisi = "Rusak Berat";
+                    } else {
+                        $kondisi = "-";
+                    }
+    
+                    $excel->setActiveSheetIndex(0)->setCellValue('A' . $numrow, $p);
+                    $excel->setActiveSheetIndex(0)->setCellValueExplicit('B' . $numrow, $i['kd_brg'], PHPExcel_Cell_DataType::TYPE_STRING);
+                    $excel->setActiveSheetIndex(0)->setCellValueExplicit('C' . $numrow, $i['no_reg'], PHPExcel_Cell_DataType::TYPE_STRING);
+                    $excel->setActiveSheetIndex(0)->setCellValue('D' . $numrow, $i['nm_brg']);
+                    $excel->setActiveSheetIndex(0)->setCellValue('E' . $numrow, $i['merk_type']);
+                    $excel->setActiveSheetIndex(0)->setCellValue('F' . $numrow, $i['st_stfkt_no']);
+                    $excel->setActiveSheetIndex(0)->setCellValue('G' . $numrow, $i['bahan']);
+                    $excel->setActiveSheetIndex(0)->setCellValue('H' . $numrow, $i['perolehan']);
+                    $excel->setActiveSheetIndex(0)->setCellValue('I' . $numrow, $i['thn_beli']);
+                    $excel->setActiveSheetIndex(0)->setCellValue('J' . $numrow, $i['ukuran_cc']);
+                    $excel->setActiveSheetIndex(0)->setCellValue('K' . $numrow, $satuan);
+                    $excel->setActiveSheetIndex(0)->setCellValue('L' . $numrow, $kondisi);
+                    $excel->setActiveSheetIndex(0)->setCellValue('M' . $numrow, $i['jmlh_brg']);
+                    $excel->setActiveSheetIndex(0)->setCellValue('N' . $numrow, number_format("$i[harga]", 2, ",", "."));
+                    $excel->setActiveSheetIndex(0)->setCellValue('O' . $numrow, $i['umr_ekonomis']);
+                    $excel->setActiveSheetIndex(0)->setCellValue('P' . $numrow, number_format("$i[nli_sisa]", 2, ",", "."));
+                    $excel->setActiveSheetIndex(0)->setCellValue('Q' . $numrow, $i['ket']);
+    
+                    // Apply style row yang telah kita buat tadi ke masing-masing baris (isi tabel)
+                    $excel->getActiveSheet()->getStyle('A' . $numrow)->applyFromArray($style_row_center)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                    $excel->getActiveSheet()->getStyle('B' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                    $excel->getActiveSheet()->getStyle('C' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                    $excel->getActiveSheet()->getStyle('D' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                    $excel->getActiveSheet()->getStyle('E' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                    $excel->getActiveSheet()->getStyle('F' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                    $excel->getActiveSheet()->getStyle('G' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                    $excel->getActiveSheet()->getStyle('H' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                    $excel->getActiveSheet()->getStyle('I' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                    $excel->getActiveSheet()->getStyle('J' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                    $excel->getActiveSheet()->getStyle('K' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                    $excel->getActiveSheet()->getStyle('L' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                    $excel->getActiveSheet()->getStyle('M' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                    $excel->getActiveSheet()->getStyle('N' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                    $excel->getActiveSheet()->getStyle('O' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                    $excel->getActiveSheet()->getStyle('P' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                    $excel->getActiveSheet()->getStyle('Q' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+    
+                    $totrow = $numrow++; // Tambah 1 setiap kali looping
+                    $p++;
                 }
-
-                if ($i['kondisi'] == 1) {
-                    $kondisi = "Baik";
-                } else if ($i['kondisi'] == 2) {
-                    $kondisi = "Rusak Ringan";
-                } else if ($i['kondisi'] == 3) {
-                    $kondisi = "Rusak Berat";
+    
+                $row1 = $totrow + 2;
+                $row2 = $totrow + 3;
+                $row3 = $totrow + 8;
+                $row4 = $totrow + 9;
+                $row5 = $totrow + 10;
+    
+                // Buat Kolom Tanda tanggan
+                $excel->setActiveSheetIndex(0)->mergeCells('B' . $row1 . ':C' . $row1);
+                $excel->setActiveSheetIndex(0)->setCellValue('B' . $row1, "Mengetahui");
+                $excel->setActiveSheetIndex(0)->mergeCells('B' . $row2 . ':C' . $row2);
+                $excel->setActiveSheetIndex(0)->setCellValue('B' . $row2, "Kepala SMA Negeri 3 Cimahi");
+                $excel->setActiveSheetIndex(0)->mergeCells('B' . $row3 . ':C' . $row3);
+                $excel->setActiveSheetIndex(0)->setCellValue('B' . $row3, "Dra, Hj. Mimin Hermiati, MM");
+                $excel->setActiveSheetIndex(0)->mergeCells('B' . $row4 . ':C' . $row4);
+                $excel->setActiveSheetIndex(0)->setCellValue('B' . $row4, "Pembina Utama Muda");
+                $excel->setActiveSheetIndex(0)->mergeCells('B' . $row5 . ':C' . $row5);
+                $excel->setActiveSheetIndex(0)->setCellValue('B' . $row5, "NIP. 195611181980032004");
+    
+                $excel->setActiveSheetIndex(0)->mergeCells('H' . $row2 . ':J' . $row2);
+                $excel->setActiveSheetIndex(0)->setCellValue('H' . $row2, "Wakasek Sarana");
+                $excel->setActiveSheetIndex(0)->mergeCells('H' . $row3 . ':J' . $row3);
+                $excel->setActiveSheetIndex(0)->setCellValue('H' . $row3, "Sri Purwanti, SE. MM");
+                $excel->setActiveSheetIndex(0)->mergeCells('H' . $row4 . ':J' . $row4);
+                $excel->setActiveSheetIndex(0)->setCellValue('H' . $row4, "NIP. 196412161987032005");
+    
+                $excel->setActiveSheetIndex(0)->mergeCells('O' . $row2 . ':P' . $row2);
+                $excel->setActiveSheetIndex(0)->setCellValue('O' . $row2, "Pengurus Barang");
+                $excel->setActiveSheetIndex(0)->mergeCells('O' . $row3 . ':P' . $row3);
+                $excel->setActiveSheetIndex(0)->setCellValue('O' . $row3, "Dadang Yana Suryana");
+                $excel->setActiveSheetIndex(0)->mergeCells('O' . $row4 . ':P' . $row4);
+                $excel->setActiveSheetIndex(0)->setCellValue('O' . $row4, "NIP. 197004102010011004");
+    
+                // Apply style tanda tangan yang telah kita buat tadi ke masing-masing kolom tanda tangan
+                $excel->getActiveSheet()->getStyle('B' . $row1)->applyFromArray($style_tit)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('B' . $row2)->applyFromArray($style_tit)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('B' . $row3)->applyFromArray($style_row_nm)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('B' . $row4)->applyFromArray($style_tit)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('B' . $row5)->applyFromArray($style_tit)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+    
+                $excel->getActiveSheet()->getStyle('H' . $row2)->applyFromArray($style_tit)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('H' . $row3)->applyFromArray($style_row_nm)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('H' . $row4)->applyFromArray($style_tit)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+    
+                $excel->getActiveSheet()->getStyle('O' . $row2)->applyFromArray($style_tit)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('O' . $row3)->applyFromArray($style_row_nm)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('O' . $row4)->applyFromArray($style_tit)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+    
+                // Set width kolom
+                $excel->getActiveSheet()->getColumnDimension('A')->setWidth(5);
+                $excel->getActiveSheet()->getColumnDimension('B')->setWidth(15);
+                $excel->getActiveSheet()->getColumnDimension('C')->setWidth(15);
+                $excel->getActiveSheet()->getColumnDimension('D')->setWidth(50);
+                $excel->getActiveSheet()->getColumnDimension('E')->setWidth(15);
+                $excel->getActiveSheet()->getColumnDimension('F')->setWidth(50);
+                $excel->getActiveSheet()->getColumnDimension('G')->setWidth(15);
+                $excel->getActiveSheet()->getColumnDimension('H')->setWidth(20);
+                $excel->getActiveSheet()->getColumnDimension('I')->setWidth(15);
+                $excel->getActiveSheet()->getColumnDimension('J')->setWidth(15);
+                $excel->getActiveSheet()->getColumnDimension('K')->setWidth(15);
+                $excel->getActiveSheet()->getColumnDimension('L')->setWidth(25);
+                $excel->getActiveSheet()->getColumnDimension('M')->setWidth(15);
+                $excel->getActiveSheet()->getColumnDimension('N')->setWidth(15);
+                $excel->getActiveSheet()->getColumnDimension('O')->setWidth(15);
+                $excel->getActiveSheet()->getColumnDimension('P')->setWidth(15);
+                $excel->getActiveSheet()->getColumnDimension('Q')->setWidth(50);
+    
+                // Set height semua kolom menjadi auto (mengikuti height isi dari kolommnya, jadi otomatis)
+                $excel->getActiveSheet()->getDefaultRowDimension()->setRowHeight(-1);
+    
+                // Set orientasi kertas jadi LANDSCAPE
+                $excel->getActiveSheet()->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
+    
+                date_default_timezone_set('Asia/Jakarta');
+                $date   =   date("mY");
+    
+                // Set judul file excel nya
+                $excel->getActiveSheet(0)->setTitle("Data Laporan Pengadaan");
+                $excel->setActiveSheetIndex(0);
+    
+                // Proses file excel
+                header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+                header('Content-Disposition: attachment; filename="Data Laporan Pengadaan ' . $date . '.xlsx"'); // Set nama file excel nya
+                header('Cache-Control: max-age=0');
+    
+                header('Content-Transfer-Encoding: binary');
+                header('Accept-Ranges: bytes');
+                header('Cache-control: no-cache, pre-check=0, post-check=0');
+                header('Cache-control: private');
+                header('Pragma: private');
+                header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // any date in the past
+    
+                $write = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
+                $write->save('php://output');
+            } else {
+                $role = $this->session->userdata('role');
+                if ($role == 2) {
+                    $this->session->set_flashdata('statusgagal', 'Membuat Laporan!!!');
+                    redirect('Laporan/lp_pengadaan_wk');
+                } elseif($role == 3) {
+                    $this->session->set_flashdata('statusgagal', 'Membuat Laporan!!!');
+                    redirect('Laporan/lp_pengadaan_kep');
                 } else {
-                    $kondisi = "-";
+                    redirect('Welcome/index');
                 }
-
-                $excel->setActiveSheetIndex(0)->setCellValue('A' . $numrow, $p);
-                $excel->setActiveSheetIndex(0)->setCellValueExplicit('B' . $numrow, $i['kd_brg'], PHPExcel_Cell_DataType::TYPE_STRING);
-                $excel->setActiveSheetIndex(0)->setCellValueExplicit('C' . $numrow, $i['no_reg'], PHPExcel_Cell_DataType::TYPE_STRING);
-                $excel->setActiveSheetIndex(0)->setCellValue('D' . $numrow, $i['nm_brg']);
-                $excel->setActiveSheetIndex(0)->setCellValue('E' . $numrow, $i['merk_type']);
-                $excel->setActiveSheetIndex(0)->setCellValue('F' . $numrow, $i['st_stfkt_no']);
-                $excel->setActiveSheetIndex(0)->setCellValue('G' . $numrow, $i['bahan']);
-                $excel->setActiveSheetIndex(0)->setCellValue('H' . $numrow, $i['perolehan']);
-                $excel->setActiveSheetIndex(0)->setCellValue('I' . $numrow, $i['thn_beli']);
-                $excel->setActiveSheetIndex(0)->setCellValue('J' . $numrow, $i['ukuran_cc']);
-                $excel->setActiveSheetIndex(0)->setCellValue('K' . $numrow, $satuan);
-                $excel->setActiveSheetIndex(0)->setCellValue('L' . $numrow, $kondisi);
-                $excel->setActiveSheetIndex(0)->setCellValue('M' . $numrow, $i['jmlh_brg']);
-                $excel->setActiveSheetIndex(0)->setCellValue('N' . $numrow, number_format("$i[harga]", 2, ",", "."));
-                $excel->setActiveSheetIndex(0)->setCellValue('O' . $numrow, $i['umr_ekonomis']);
-                $excel->setActiveSheetIndex(0)->setCellValue('P' . $numrow, number_format("$i[nli_sisa]", 2, ",", "."));
-                $excel->setActiveSheetIndex(0)->setCellValue('Q' . $numrow, $i['ket']);
-
-                // Apply style row yang telah kita buat tadi ke masing-masing baris (isi tabel)
-                $excel->getActiveSheet()->getStyle('A' . $numrow)->applyFromArray($style_row_center)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-                $excel->getActiveSheet()->getStyle('B' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-                $excel->getActiveSheet()->getStyle('C' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-                $excel->getActiveSheet()->getStyle('D' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-                $excel->getActiveSheet()->getStyle('E' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-                $excel->getActiveSheet()->getStyle('F' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-                $excel->getActiveSheet()->getStyle('G' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-                $excel->getActiveSheet()->getStyle('H' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-                $excel->getActiveSheet()->getStyle('I' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-                $excel->getActiveSheet()->getStyle('J' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-                $excel->getActiveSheet()->getStyle('K' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-                $excel->getActiveSheet()->getStyle('L' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-                $excel->getActiveSheet()->getStyle('M' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-                $excel->getActiveSheet()->getStyle('N' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-                $excel->getActiveSheet()->getStyle('O' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-                $excel->getActiveSheet()->getStyle('P' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-                $excel->getActiveSheet()->getStyle('Q' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-
-                $totrow = $numrow++; // Tambah 1 setiap kali looping
-                $p++;
             }
-
-            $row1 = $totrow + 2;
-            $row2 = $totrow + 3;
-            $row3 = $totrow + 8;
-            $row4 = $totrow + 9;
-            $row5 = $totrow + 10;
-
-            // Buat Kolom Tanda tanggan
-            $excel->setActiveSheetIndex(0)->mergeCells('B' . $row1 . ':C' . $row1);
-            $excel->setActiveSheetIndex(0)->setCellValue('B' . $row1, "Mengetahui");
-            $excel->setActiveSheetIndex(0)->mergeCells('B' . $row2 . ':C' . $row2);
-            $excel->setActiveSheetIndex(0)->setCellValue('B' . $row2, "Kepala SMA Negeri 3 Cimahi");
-            $excel->setActiveSheetIndex(0)->mergeCells('B' . $row3 . ':C' . $row3);
-            $excel->setActiveSheetIndex(0)->setCellValue('B' . $row3, "Dra, Hj. Mimin Hermiati, MM");
-            $excel->setActiveSheetIndex(0)->mergeCells('B' . $row4 . ':C' . $row4);
-            $excel->setActiveSheetIndex(0)->setCellValue('B' . $row4, "Pembina Utama Muda");
-            $excel->setActiveSheetIndex(0)->mergeCells('B' . $row5 . ':C' . $row5);
-            $excel->setActiveSheetIndex(0)->setCellValue('B' . $row5, "NIP. 195611181980032004");
-
-            $excel->setActiveSheetIndex(0)->mergeCells('H' . $row2 . ':J' . $row2);
-            $excel->setActiveSheetIndex(0)->setCellValue('H' . $row2, "Wakasek Sarana");
-            $excel->setActiveSheetIndex(0)->mergeCells('H' . $row3 . ':J' . $row3);
-            $excel->setActiveSheetIndex(0)->setCellValue('H' . $row3, "Sri Purwanti, SE. MM");
-            $excel->setActiveSheetIndex(0)->mergeCells('H' . $row4 . ':J' . $row4);
-            $excel->setActiveSheetIndex(0)->setCellValue('H' . $row4, "NIP. 196412161987032005");
-
-            $excel->setActiveSheetIndex(0)->mergeCells('O' . $row2 . ':P' . $row2);
-            $excel->setActiveSheetIndex(0)->setCellValue('O' . $row2, "Pengurus Barang");
-            $excel->setActiveSheetIndex(0)->mergeCells('O' . $row3 . ':P' . $row3);
-            $excel->setActiveSheetIndex(0)->setCellValue('O' . $row3, "Dadang Yana Suryana");
-            $excel->setActiveSheetIndex(0)->mergeCells('O' . $row4 . ':P' . $row4);
-            $excel->setActiveSheetIndex(0)->setCellValue('O' . $row4, "NIP. 197004102010011004");
-
-            // Apply style tanda tangan yang telah kita buat tadi ke masing-masing kolom tanda tangan
-            $excel->getActiveSheet()->getStyle('B' . $row1)->applyFromArray($style_tit)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('B' . $row2)->applyFromArray($style_tit)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('B' . $row3)->applyFromArray($style_row_nm)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('B' . $row4)->applyFromArray($style_tit)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('B' . $row5)->applyFromArray($style_tit)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-
-            $excel->getActiveSheet()->getStyle('H' . $row2)->applyFromArray($style_tit)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('H' . $row3)->applyFromArray($style_row_nm)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('H' . $row4)->applyFromArray($style_tit)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-
-            $excel->getActiveSheet()->getStyle('O' . $row2)->applyFromArray($style_tit)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('O' . $row3)->applyFromArray($style_row_nm)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('O' . $row4)->applyFromArray($style_tit)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-
-            // Set width kolom
-            $excel->getActiveSheet()->getColumnDimension('A')->setWidth(5);
-            $excel->getActiveSheet()->getColumnDimension('B')->setWidth(15);
-            $excel->getActiveSheet()->getColumnDimension('C')->setWidth(15);
-            $excel->getActiveSheet()->getColumnDimension('D')->setWidth(50);
-            $excel->getActiveSheet()->getColumnDimension('E')->setWidth(15);
-            $excel->getActiveSheet()->getColumnDimension('F')->setWidth(50);
-            $excel->getActiveSheet()->getColumnDimension('G')->setWidth(15);
-            $excel->getActiveSheet()->getColumnDimension('H')->setWidth(20);
-            $excel->getActiveSheet()->getColumnDimension('I')->setWidth(15);
-            $excel->getActiveSheet()->getColumnDimension('J')->setWidth(15);
-            $excel->getActiveSheet()->getColumnDimension('K')->setWidth(15);
-            $excel->getActiveSheet()->getColumnDimension('L')->setWidth(25);
-            $excel->getActiveSheet()->getColumnDimension('M')->setWidth(15);
-            $excel->getActiveSheet()->getColumnDimension('N')->setWidth(15);
-            $excel->getActiveSheet()->getColumnDimension('O')->setWidth(15);
-            $excel->getActiveSheet()->getColumnDimension('P')->setWidth(15);
-            $excel->getActiveSheet()->getColumnDimension('Q')->setWidth(50);
-
-            // Set height semua kolom menjadi auto (mengikuti height isi dari kolommnya, jadi otomatis)
-            $excel->getActiveSheet()->getDefaultRowDimension()->setRowHeight(-1);
-
-            // Set orientasi kertas jadi LANDSCAPE
-            $excel->getActiveSheet()->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
-
-            date_default_timezone_set('Asia/Jakarta');
-            $date   =   date("mY");
-
-            // Set judul file excel nya
-            $excel->getActiveSheet(0)->setTitle("Data Laporan Pengadaan");
-            $excel->setActiveSheetIndex(0);
-
-            // Proses file excel
-            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-            header('Content-Disposition: attachment; filename="Data Laporan Pengadaan ' . $date . '.xlsx"'); // Set nama file excel nya
-            header('Cache-Control: max-age=0');
-
-            header('Content-Transfer-Encoding: binary');
-            header('Accept-Ranges: bytes');
-            header('Cache-control: no-cache, pre-check=0, post-check=0');
-            header('Cache-control: private');
-            header('Pragma: private');
-            header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // any date in the past
-
-            $write = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
-            $write->save('php://output');
         }
     }
 
-    public function export_peminjaman_wk()
+    public function export_peminjaman()
     {
         if (isset($_POST['cetak'])) {
 
-            // Load plugin PHPExcel nya
-            include APPPATH . 'third_party/PHPExcel.php';
-
-            // Panggil class PHPExcel nya
-            $excel = new PHPExcel();
-
-            date_default_timezone_set('Asia/Jakarta');
-            $date   =   date("mY");
-
-            // Settingan awal file excel
-            $excel->getProperties()->setCreator('Wakasek SIMA SMAN 3 Cimahi (' . $this->session->userdata('username') . ')')
-                ->setLastModifiedBy('Wakasek SIMA SMAN 3 Cimahi (' . $this->session->userdata('username') . ')')
-                ->setTitle("Data Laporan Peminjaman " . $date)
-                ->setSubject("Laporan Peminjaman " . $date)
-                ->setDescription("Data Laporan Peminjaman " . $date)
-                ->setKeywords("Data Laporan Peminjaman " . $date);
-
-            // Buat sebuah variabel untuk menampung pengaturan style dari TITLE tabel
-            $style_tit = array(
-                'font' => array('bold' => true), // Set font nya jadi bold
-                'alignment' => array(
-                    'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, // Set text jadi ditengah secara horizontal (center)
-                    'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER // Set text jadi di tengah secara vertical (middle)
-                )
-            );
-
-            // Buat sebuah variabel untuk menampung pengaturan style dari ket tabel
-            $style_ket = array(
-                'font' => array('bold' => true), // Set font nya jadi bold
-                'alignment' => array(
-                    'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER // Set text jadi di tengah secara vertical (middle)
-                )
-            );
-
-            // Buat sebuah variabel untuk menampung pengaturan style dari header tabel
-            $style_col = array(
-                'font' => array('bold' => true), // Set font nya jadi bold
-                'alignment' => array(
-                    'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, // Set text jadi ditengah secara horizontal (center)
-                    'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER, // Set text jadi di tengah secara vertical (middle)
-                    'wrap' => true
-                ),
-                'borders' => array(
-                    'top' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border top dengan garis tipis
-                    'right' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),  // Set border right dengan garis tipis
-                    'bottom' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border bottom dengan garis tipis
-                    'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN) // Set border left dengan garis tipis
-                )
-            );
-
-            // Buat sebuah variabel untuk menampung pengaturan style dari isi tabel
-            $style_row = array(
-                'alignment' => array(
-                    'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER, // Set text jadi di tengah secara vertical (middle)
-                    'wrap' => true
-                ),
-                'borders' => array(
-                    'top' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border top dengan garis tipis
-                    'right' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),  // Set border right dengan garis tipis
-                    'bottom' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border bottom dengan garis tipis
-                    'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN) // Set border left dengan garis tipis
-                )
-            );
-
-            // Buat sebuah variabel untuk menampung pengaturan style dari isi tabel
-            $style_row_center = array(
-                'alignment' => array(
-                    'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, // Set text jadi ditengah secara horizontal (center)
-                    'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER, // Set text jadi di tengah secara vertical (middle)
-                    'wrap' => true
-                ),
-                'borders' => array(
-                    'top' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border top dengan garis tipis
-                    'right' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),  // Set border right dengan garis tipis
-                    'bottom' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border bottom dengan garis tipis
-                    'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN) // Set border left dengan garis tipis
-                )
-            );
-
-            // Buat sebuah variabel untuk menampung pengaturan style dari isi tabel
-            $style_row_nm = array(
-                'font' => array(
-                    'bold' => true, // Set font nya jadi bold
-                    'underline' => PHPExcel_Style_Font::UNDERLINE_SINGLE,
-                    'strike'    => false,
-                ),
-                'alignment' => array(
-                    'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, // Set text jadi ditengah secara horizontal (center)
-                    'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER, // Set text jadi di tengah secara vertical (middle)
-                    'wrap' => true
-                )
-            );
-
-            // Buat sebuah variabel untuk menampung pengaturan style dari isi tabel
-            $style_row_ttd = array(
-                'alignment' => array(
-                    'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, // Set text jadi ditengah secara horizontal (center)
-                    'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER, // Set text jadi di tengah secara vertical (middle)
-                    'wrap' => true
-                )
-            );
-
-            // Buat header tabel nya pada baris ke 1
-            $excel->setActiveSheetIndex(0)->mergeCells('E1:F1');
-            $excel->setActiveSheetIndex(0)->setCellValue('E1', "LAPORAN PEMINJAMAN");
-            $excel->setActiveSheetIndex(0)->setCellValue('B3', "SKPD");
-            $excel->setActiveSheetIndex(0)->setCellValue('C3', ": 1.01.01.115. SMUN 3 CIMAHI");
-            $excel->setActiveSheetIndex(0)->setCellValue('B4', "KABUPATEN/KOTA");
-            $excel->setActiveSheetIndex(0)->setCellValue('C4', ": KOTA CIMAHI");
-            $excel->setActiveSheetIndex(0)->setCellValue('B5', "PROVINSI");
-            $excel->setActiveSheetIndex(0)->setCellValue('C5', ": Jawa Barat");
-
-            // Style untuk header
-            $excel->getActiveSheet()->getStyle('E1')->applyFromArray($style_tit)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('B3')->applyFromArray($style_ket)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('C3')->applyFromArray($style_ket)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('B4')->applyFromArray($style_ket)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('C4')->applyFromArray($style_ket)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('B5')->applyFromArray($style_ket)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('C5')->applyFromArray($style_ket)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-
-            // Buat table head
-            $excel->setActiveSheetIndex(0)->setCellValue('A8', "No");
-            $excel->setActiveSheetIndex(0)->setCellValue('B8', "Nama Peminjaman");
-            $excel->setActiveSheetIndex(0)->setCellValue('C8', "No Hp");
-            $excel->setActiveSheetIndex(0)->setCellValue('D8', "Tanggal Peminjaman");
-            $excel->setActiveSheetIndex(0)->setCellValue('E8', "Tanggal Pengembalian");
-            $excel->setActiveSheetIndex(0)->setCellValue('F8', "Realisasi Pengembalian");
-            $excel->setActiveSheetIndex(0)->setCellValue('G8', "Kode Barang");
-            $excel->setActiveSheetIndex(0)->setCellValue('H8', "Nama Barang");
-            $excel->setActiveSheetIndex(0)->setCellValue('I8', "Keterangan");
-
-            // Apply style table head yang telah kita buat tadi ke masing-masing kolom table head
-            $excel->getActiveSheet()->getStyle('A8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('B8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('C8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('D8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_DATE_DDMMYYYY);
-            $excel->getActiveSheet()->getStyle('E8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_DATE_DDMMYYYY);
-            $excel->getActiveSheet()->getStyle('F8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_DATE_DDMMYYYY);
-            $excel->getActiveSheet()->getStyle('G8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('H8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('I8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-
-            // Menampilkan data
-            $numrow = 9; // Set baris pertama untuk isi tabel adalah baris ke 9
-            $p = 1;
-            $totrow = 0;
             $tgl_awal  = $this->input->post('tgl_awal');
             $tgl_akhir = $this->input->post('tgl_akhir');
-            $dt_peminjaman = $this->Laporan_model->get_data_peminjaman_ctk($tgl_awal, $tgl_akhir);
-            foreach ($dt_peminjaman as $i) { // Lakukan looping pada variabel
+            $kategori  = $this->input->post('kategori');
+            $dt_peminjaman = $this->Laporan_model->get_data_peminjaman_ctk($tgl_awal, $tgl_akhir, $kategori);
 
-                $excel->setActiveSheetIndex(0)->setCellValue('A' . $numrow, $p);
-                $excel->setActiveSheetIndex(0)->setCellValue('B' . $numrow, $i['nm_peminjaman']);
-                $excel->setActiveSheetIndex(0)->setCellValueExplicit('C' . $numrow, $i['nohp_peminjaman'], PHPExcel_Cell_DataType::TYPE_STRING);
-                $excel->setActiveSheetIndex(0)->setCellValue('D' . $numrow, $i['tgl_peminjaman']);
-                $excel->setActiveSheetIndex(0)->setCellValue('E' . $numrow, $i['tgl_pengembalian']);
-                $excel->setActiveSheetIndex(0)->setCellValue('F' . $numrow, $i['realisasi_pengembalian']);
-                $excel->setActiveSheetIndex(0)->setCellValue('G' . $numrow, $i['kd_brg']);
-                $excel->setActiveSheetIndex(0)->setCellValue('H' . $numrow, $i['nm_brg']);
-                $excel->setActiveSheetIndex(0)->setCellValue('I' . $numrow, $i['ket']);
-
-                // Apply style row yang telah kita buat tadi ke masing-masing baris (isi tabel)
-                $excel->getActiveSheet()->getStyle('A' . $numrow)->applyFromArray($style_row_center)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-                $excel->getActiveSheet()->getStyle('B' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-                $excel->getActiveSheet()->getStyle('C' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-                $excel->getActiveSheet()->getStyle('D' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-                $excel->getActiveSheet()->getStyle('E' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-                $excel->getActiveSheet()->getStyle('F' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-                $excel->getActiveSheet()->getStyle('G' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-                $excel->getActiveSheet()->getStyle('H' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-                $excel->getActiveSheet()->getStyle('I' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-
-                $totrow = $numrow++; // Tambah 1 setiap kali looping
-                $p++;
+            if ($dt_peminjaman != 0) {
+                
+                // Load plugin PHPExcel nya
+                include APPPATH . 'third_party/PHPExcel.php';
+    
+                // Panggil class PHPExcel nya
+                $excel = new PHPExcel();
+    
+                date_default_timezone_set('Asia/Jakarta');
+                $date   =   date("mY");
+    
+                // Settingan awal file excel
+                $excel->getProperties()->setCreator('Wakasek SIMA SMAN 3 Cimahi (' . $this->session->userdata('username') . ')')
+                    ->setLastModifiedBy('Wakasek SIMA SMAN 3 Cimahi (' . $this->session->userdata('username') . ')')
+                    ->setTitle("Data Laporan Peminjaman " . $date)
+                    ->setSubject("Laporan Peminjaman " . $date)
+                    ->setDescription("Data Laporan Peminjaman " . $date)
+                    ->setKeywords("Data Laporan Peminjaman " . $date);
+    
+                // Buat sebuah variabel untuk menampung pengaturan style dari TITLE tabel
+                $style_tit = array(
+                    'font' => array('bold' => true), // Set font nya jadi bold
+                    'alignment' => array(
+                        'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, // Set text jadi ditengah secara horizontal (center)
+                        'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER // Set text jadi di tengah secara vertical (middle)
+                    )
+                );
+    
+                // Buat sebuah variabel untuk menampung pengaturan style dari ket tabel
+                $style_ket = array(
+                    'font' => array('bold' => true), // Set font nya jadi bold
+                    'alignment' => array(
+                        'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER // Set text jadi di tengah secara vertical (middle)
+                    )
+                );
+    
+                // Buat sebuah variabel untuk menampung pengaturan style dari header tabel
+                $style_col = array(
+                    'font' => array('bold' => true), // Set font nya jadi bold
+                    'alignment' => array(
+                        'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, // Set text jadi ditengah secara horizontal (center)
+                        'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER, // Set text jadi di tengah secara vertical (middle)
+                        'wrap' => true
+                    ),
+                    'borders' => array(
+                        'top' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border top dengan garis tipis
+                        'right' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),  // Set border right dengan garis tipis
+                        'bottom' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border bottom dengan garis tipis
+                        'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN) // Set border left dengan garis tipis
+                    )
+                );
+    
+                // Buat sebuah variabel untuk menampung pengaturan style dari isi tabel
+                $style_row = array(
+                    'alignment' => array(
+                        'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER, // Set text jadi di tengah secara vertical (middle)
+                        'wrap' => true
+                    ),
+                    'borders' => array(
+                        'top' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border top dengan garis tipis
+                        'right' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),  // Set border right dengan garis tipis
+                        'bottom' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border bottom dengan garis tipis
+                        'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN) // Set border left dengan garis tipis
+                    )
+                );
+    
+                // Buat sebuah variabel untuk menampung pengaturan style dari isi tabel
+                $style_row_center = array(
+                    'alignment' => array(
+                        'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, // Set text jadi ditengah secara horizontal (center)
+                        'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER, // Set text jadi di tengah secara vertical (middle)
+                        'wrap' => true
+                    ),
+                    'borders' => array(
+                        'top' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border top dengan garis tipis
+                        'right' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),  // Set border right dengan garis tipis
+                        'bottom' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border bottom dengan garis tipis
+                        'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN) // Set border left dengan garis tipis
+                    )
+                );
+    
+                // Buat sebuah variabel untuk menampung pengaturan style dari isi tabel
+                $style_row_nm = array(
+                    'font' => array(
+                        'bold' => true, // Set font nya jadi bold
+                        'underline' => PHPExcel_Style_Font::UNDERLINE_SINGLE,
+                        'strike'    => false,
+                    ),
+                    'alignment' => array(
+                        'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, // Set text jadi ditengah secara horizontal (center)
+                        'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER, // Set text jadi di tengah secara vertical (middle)
+                        'wrap' => true
+                    )
+                );
+    
+                // Buat sebuah variabel untuk menampung pengaturan style dari isi tabel
+                $style_row_ttd = array(
+                    'alignment' => array(
+                        'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, // Set text jadi ditengah secara horizontal (center)
+                        'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER, // Set text jadi di tengah secara vertical (middle)
+                        'wrap' => true
+                    )
+                );
+    
+                // Buat header tabel nya pada baris ke 1
+                $excel->setActiveSheetIndex(0)->mergeCells('E1:F1');
+                $excel->setActiveSheetIndex(0)->setCellValue('E1', "LAPORAN PEMINJAMAN");
+                $excel->setActiveSheetIndex(0)->setCellValue('B3', "SKPD");
+                $excel->setActiveSheetIndex(0)->setCellValue('C3', ": 1.01.01.115. SMUN 3 CIMAHI");
+                $excel->setActiveSheetIndex(0)->setCellValue('B4', "KABUPATEN/KOTA");
+                $excel->setActiveSheetIndex(0)->setCellValue('C4', ": KOTA CIMAHI");
+                $excel->setActiveSheetIndex(0)->setCellValue('B5', "PROVINSI");
+                $excel->setActiveSheetIndex(0)->setCellValue('C5', ": Jawa Barat");
+    
+                // Style untuk header
+                $excel->getActiveSheet()->getStyle('E1')->applyFromArray($style_tit)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('B3')->applyFromArray($style_ket)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('C3')->applyFromArray($style_ket)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('B4')->applyFromArray($style_ket)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('C4')->applyFromArray($style_ket)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('B5')->applyFromArray($style_ket)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('C5')->applyFromArray($style_ket)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+    
+                // Buat table head
+                $excel->setActiveSheetIndex(0)->setCellValue('A8', "No");
+                $excel->setActiveSheetIndex(0)->setCellValue('B8', "Nama Peminjaman");
+                $excel->setActiveSheetIndex(0)->setCellValue('C8', "No Hp");
+                $excel->setActiveSheetIndex(0)->setCellValue('D8', "Tanggal Peminjaman");
+                $excel->setActiveSheetIndex(0)->setCellValue('E8', "Tanggal Pengembalian");
+                $excel->setActiveSheetIndex(0)->setCellValue('F8', "Realisasi Pengembalian");
+                $excel->setActiveSheetIndex(0)->setCellValue('G8', "Kode Barang");
+                $excel->setActiveSheetIndex(0)->setCellValue('H8', "Nama Barang");
+                $excel->setActiveSheetIndex(0)->setCellValue('I8', "Keterangan");
+    
+                // Apply style table head yang telah kita buat tadi ke masing-masing kolom table head
+                $excel->getActiveSheet()->getStyle('A8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('B8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('C8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('D8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_DATE_DDMMYYYY);
+                $excel->getActiveSheet()->getStyle('E8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_DATE_DDMMYYYY);
+                $excel->getActiveSheet()->getStyle('F8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_DATE_DDMMYYYY);
+                $excel->getActiveSheet()->getStyle('G8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('H8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('I8')->applyFromArray($style_col)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+    
+                // Menampilkan data
+                $numrow = 9; // Set baris pertama untuk isi tabel adalah baris ke 9
+                $p = 1;
+                $totrow = 0;
+                
+                foreach ($dt_peminjaman as $i) { // Lakukan looping pada variabel
+    
+                    $excel->setActiveSheetIndex(0)->setCellValue('A' . $numrow, $p);
+                    $excel->setActiveSheetIndex(0)->setCellValue('B' . $numrow, $i['nm_peminjaman']);
+                    $excel->setActiveSheetIndex(0)->setCellValueExplicit('C' . $numrow, $i['nohp_peminjaman'], PHPExcel_Cell_DataType::TYPE_STRING);
+                    $excel->setActiveSheetIndex(0)->setCellValue('D' . $numrow, $i['tgl_peminjaman']);
+                    $excel->setActiveSheetIndex(0)->setCellValue('E' . $numrow, $i['tgl_pengembalian']);
+                    $excel->setActiveSheetIndex(0)->setCellValue('F' . $numrow, $i['realisasi_pengembalian']);
+                    $excel->setActiveSheetIndex(0)->setCellValue('G' . $numrow, $i['kd_brg']);
+                    $excel->setActiveSheetIndex(0)->setCellValue('H' . $numrow, $i['nm_brg']);
+                    $excel->setActiveSheetIndex(0)->setCellValue('I' . $numrow, $i['ket']);
+    
+                    // Apply style row yang telah kita buat tadi ke masing-masing baris (isi tabel)
+                    $excel->getActiveSheet()->getStyle('A' . $numrow)->applyFromArray($style_row_center)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                    $excel->getActiveSheet()->getStyle('B' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                    $excel->getActiveSheet()->getStyle('C' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                    $excel->getActiveSheet()->getStyle('D' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                    $excel->getActiveSheet()->getStyle('E' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                    $excel->getActiveSheet()->getStyle('F' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                    $excel->getActiveSheet()->getStyle('G' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                    $excel->getActiveSheet()->getStyle('H' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                    $excel->getActiveSheet()->getStyle('I' . $numrow)->applyFromArray($style_row)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+    
+                    $totrow = $numrow++; // Tambah 1 setiap kali looping
+                    $p++;
+                }
+    
+                $row1 = $totrow + 2;
+                $row2 = $totrow + 3;
+                $row3 = $totrow + 8;
+                $row4 = $totrow + 9;
+                $row5 = $totrow + 10;
+    
+                // Buat Kolom Tanda tanggan
+                $excel->setActiveSheetIndex(0)->setCellValue('B' . $row1, "Mengetahui");
+                $excel->setActiveSheetIndex(0)->setCellValue('B' . $row2, "Kepala SMA Negeri 3 Cimahi");
+                $excel->setActiveSheetIndex(0)->setCellValue('B' . $row3, "Dra, Hj. Mimin Hermiati, MM");
+                $excel->setActiveSheetIndex(0)->setCellValue('B' . $row4, "Pembina Utama Muda");
+                $excel->setActiveSheetIndex(0)->setCellValue('B' . $row5, "NIP. 195611181980032004");
+    
+                $excel->setActiveSheetIndex(0)->setCellValue('E' . $row2, "Wakasek Sarana");
+                $excel->setActiveSheetIndex(0)->setCellValue('E' . $row3, "Sri Purwanti, SE. MM");
+                $excel->setActiveSheetIndex(0)->setCellValue('E' . $row4, "NIP. 196412161987032005");
+    
+                $excel->setActiveSheetIndex(0)->setCellValue('H' . $row2, "Pengurus Barang");
+                $excel->setActiveSheetIndex(0)->setCellValue('H' . $row3, "Dadang Yana Suryana");
+                $excel->setActiveSheetIndex(0)->setCellValue('H' . $row4, "NIP. 197004102010011004");
+    
+                // Apply style tanda tangan yang telah kita buat tadi ke masing-masing kolom tanda tangan
+                $excel->getActiveSheet()->getStyle('B' . $row1)->applyFromArray($style_tit)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('B' . $row2)->applyFromArray($style_tit)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('B' . $row3)->applyFromArray($style_row_nm)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('B' . $row4)->applyFromArray($style_tit)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('B' . $row5)->applyFromArray($style_tit)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+    
+                $excel->getActiveSheet()->getStyle('E' . $row2)->applyFromArray($style_tit)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('E' . $row3)->applyFromArray($style_row_nm)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('E' . $row4)->applyFromArray($style_tit)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+    
+                $excel->getActiveSheet()->getStyle('H' . $row2)->applyFromArray($style_tit)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('H' . $row3)->applyFromArray($style_row_nm)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                $excel->getActiveSheet()->getStyle('H' . $row4)->applyFromArray($style_tit)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+    
+                // Set width kolom
+                $excel->getActiveSheet()->getColumnDimension('A')->setWidth(5);
+                $excel->getActiveSheet()->getColumnDimension('B')->setWidth(40);
+                $excel->getActiveSheet()->getColumnDimension('C')->setWidth(15);
+                $excel->getActiveSheet()->getColumnDimension('D')->setWidth(20);
+                $excel->getActiveSheet()->getColumnDimension('E')->setWidth(22);
+                $excel->getActiveSheet()->getColumnDimension('F')->setWidth(23);
+                $excel->getActiveSheet()->getColumnDimension('G')->setWidth(15);
+                $excel->getActiveSheet()->getColumnDimension('H')->setWidth(30);
+                $excel->getActiveSheet()->getColumnDimension('I')->setWidth(40);
+    
+                // Set height semua kolom menjadi auto (mengikuti height isi dari kolommnya, jadi otomatis)
+                $excel->getActiveSheet()->getDefaultRowDimension()->setRowHeight(-1);
+    
+                // Set orientasi kertas jadi LANDSCAPE
+                $excel->getActiveSheet()->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
+    
+                date_default_timezone_set('Asia/Jakarta');
+                $date   =   date("mY");
+    
+                // Set judul file excel nya
+                $excel->getActiveSheet(0)->setTitle("Data Laporan Peminjaman");
+                $excel->setActiveSheetIndex(0);
+    
+                // Proses file excel
+                header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+                header('Content-Disposition: attachment; filename="Data Laporan Peminjaman ' . $date . '.xlsx"'); // Set nama file excel nya
+                header('Cache-Control: max-age=0');
+    
+                header('Content-Transfer-Encoding: binary');
+                header('Accept-Ranges: bytes');
+                header('Cache-control: no-cache, pre-check=0, post-check=0');
+                header('Cache-control: private');
+                header('Pragma: private');
+                header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // any date in the past
+    
+                $write = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
+                $write->save('php://output');
+            } else {
+                $role = $this->session->userdata('role');
+                if ($role == 2) {
+                    $this->session->set_flashdata('statusgagal', 'Membuat Laporan!!!');
+                    redirect('Laporan/lp_peminjaman_wk');
+                } elseif($role == 3) {
+                    $this->session->set_flashdata('statusgagal', 'Membuat Laporan!!!');
+                    redirect('Laporan/lp_peminjaman_kep');
+                } else {
+                    redirect('Welcome/index');
+                }
             }
-
-            $row1 = $totrow + 2;
-            $row2 = $totrow + 3;
-            $row3 = $totrow + 8;
-            $row4 = $totrow + 9;
-            $row5 = $totrow + 10;
-
-            // Buat Kolom Tanda tanggan
-            $excel->setActiveSheetIndex(0)->setCellValue('B' . $row1, "Mengetahui");
-            $excel->setActiveSheetIndex(0)->setCellValue('B' . $row2, "Kepala SMA Negeri 3 Cimahi");
-            $excel->setActiveSheetIndex(0)->setCellValue('B' . $row3, "Dra, Hj. Mimin Hermiati, MM");
-            $excel->setActiveSheetIndex(0)->setCellValue('B' . $row4, "Pembina Utama Muda");
-            $excel->setActiveSheetIndex(0)->setCellValue('B' . $row5, "NIP. 195611181980032004");
-
-            $excel->setActiveSheetIndex(0)->setCellValue('E' . $row2, "Wakasek Sarana");
-            $excel->setActiveSheetIndex(0)->setCellValue('E' . $row3, "Sri Purwanti, SE. MM");
-            $excel->setActiveSheetIndex(0)->setCellValue('E' . $row4, "NIP. 196412161987032005");
-
-            $excel->setActiveSheetIndex(0)->setCellValue('H' . $row2, "Pengurus Barang");
-            $excel->setActiveSheetIndex(0)->setCellValue('H' . $row3, "Dadang Yana Suryana");
-            $excel->setActiveSheetIndex(0)->setCellValue('H' . $row4, "NIP. 197004102010011004");
-
-            // Apply style tanda tangan yang telah kita buat tadi ke masing-masing kolom tanda tangan
-            $excel->getActiveSheet()->getStyle('B' . $row1)->applyFromArray($style_tit)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('B' . $row2)->applyFromArray($style_tit)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('B' . $row3)->applyFromArray($style_row_nm)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('B' . $row4)->applyFromArray($style_tit)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('B' . $row5)->applyFromArray($style_tit)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-
-            $excel->getActiveSheet()->getStyle('E' . $row2)->applyFromArray($style_tit)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('E' . $row3)->applyFromArray($style_row_nm)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('E' . $row4)->applyFromArray($style_tit)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-
-            $excel->getActiveSheet()->getStyle('H' . $row2)->applyFromArray($style_tit)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('H' . $row3)->applyFromArray($style_row_nm)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-            $excel->getActiveSheet()->getStyle('H' . $row4)->applyFromArray($style_tit)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-
-            // Set width kolom
-            $excel->getActiveSheet()->getColumnDimension('A')->setWidth(5);
-            $excel->getActiveSheet()->getColumnDimension('B')->setWidth(40);
-            $excel->getActiveSheet()->getColumnDimension('C')->setWidth(15);
-            $excel->getActiveSheet()->getColumnDimension('D')->setWidth(20);
-            $excel->getActiveSheet()->getColumnDimension('E')->setWidth(22);
-            $excel->getActiveSheet()->getColumnDimension('F')->setWidth(23);
-            $excel->getActiveSheet()->getColumnDimension('G')->setWidth(15);
-            $excel->getActiveSheet()->getColumnDimension('H')->setWidth(30);
-            $excel->getActiveSheet()->getColumnDimension('I')->setWidth(40);
-
-            // Set height semua kolom menjadi auto (mengikuti height isi dari kolommnya, jadi otomatis)
-            $excel->getActiveSheet()->getDefaultRowDimension()->setRowHeight(-1);
-
-            // Set orientasi kertas jadi LANDSCAPE
-            $excel->getActiveSheet()->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
-
-            date_default_timezone_set('Asia/Jakarta');
-            $date   =   date("mY");
-
-            // Set judul file excel nya
-            $excel->getActiveSheet(0)->setTitle("Data Laporan Peminjaman");
-            $excel->setActiveSheetIndex(0);
-
-            // Proses file excel
-            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-            header('Content-Disposition: attachment; filename="Data Laporan Peminjaman ' . $date . '.xlsx"'); // Set nama file excel nya
-            header('Cache-Control: max-age=0');
-
-            header('Content-Transfer-Encoding: binary');
-            header('Accept-Ranges: bytes');
-            header('Cache-control: no-cache, pre-check=0, post-check=0');
-            header('Cache-control: private');
-            header('Pragma: private');
-            header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // any date in the past
-
-            $write = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
-            $write->save('php://output');
         }
     }
 }

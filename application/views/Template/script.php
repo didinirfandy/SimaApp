@@ -31,6 +31,8 @@
         <script type="text/javascript" src="<?= base_url(); ?>assets_app/plugins/bootstrap-notify.min.js"></script>
         <script type="text/javascript" src="<?= base_url(); ?>assets_app/plugins/sweetalert.min.js"></script>
 
+        <script type="text/javascript" src="<?= base_url(); ?>assets_app/js/time.js"></script>
+
         <script type="text/javascript">
                 $(document).ready(function() {
                         $(".selectbox").select2();

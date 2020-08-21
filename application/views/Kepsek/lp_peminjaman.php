@@ -34,10 +34,11 @@ $this->load->view('template/head', $data);
                                 <h4 style="font-weight:bold;">Laporan Peminjaman Barang</h4>
                                 <hr align="right" color="black">
                             </div>
+                            <div class="status-gagal" data-statusgagal="<?= $this->session->flashdata('statusgagal'); ?>"></div>
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="form-group col-md-4 mx-sm-3 mb-3">
-                                        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#caritgl"><i class="fa fa-filter" aria-hidden="true"></i> Filter</button>
+                                        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#caritgl"><i class="fa fa-print"></i> Buat Laporan</button>
                                     </div>
                                 </div><br>
                                 <div class="table-responsive">
@@ -75,14 +76,28 @@ $this->load->view('template/head', $data);
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <h5 class="modal-title" id="caritgl">Filter Laporan</h5>
                         </div>
-                        <?= form_open('Print_excel/export_peminjaman_wk'); ?>
+                        <?= form_open('Print_excel/export_peminjaman'); ?>
                         <div class="modal-body">
-                            <div class="form-group">
-                                <label for="tgl_awal">Pilih Tanggal</label>
-                                <div class="input-group input-daterange">
-                                    <input type="date" class="form-control" name="tgl_awal" id="tgl_awal" required>
-                                    <div class="input-group-addon">to</div>
-                                    <input type="date" class="form-control" name="tgl_akhir" id="tgl_akhir" required>
+                            <div class="panel-body">
+                                <div class="form-group row">
+                                    <label for="tgl_awal">Pilih Tanggal</label>
+                                    <div class="input-group input-daterange">
+                                        <input type="date" class="form-control" name="tgl_awal" id="tgl_awal">
+                                        <div class="input-group-addon">to</div>
+                                        <input type="date" class="form-control" name="tgl_akhir" id="tgl_akhir">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="kategori">Nama Barang</label><br>
+                                    <select class="selectbox col-md-12" style="width: 267px;" name="kategori" id="kategori">
+                                        <option value="">-- Pilih --</option>
+                                        <option value="all">Semua</option>
+                                        <?php
+                                        foreach ($pin as $d) { ?>
+                                            <option value="<?= $d['kd_brg'] ?>"><?= $d['nm_brg'] ?></option>
+                                        <?php }
+                                        ?>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -132,6 +147,18 @@ $this->load->view('template/head', $data);
                     }
                     $('#tmpl_data').html(html);
                 }
+            });
+        }
+
+        const statusgagal = $('.status-gagal').data('statusgagal');
+        // console.log(statusgagal);
+        if (statusgagal) {
+            swal({
+                title: "Data kosong",
+                text: "Pilih dan isi kembali filter yang tepat untuk mendapatkan data laporan",
+                type: "error",
+                timer: 7000,
+                showConfirmButton: false
             });
         }
     </script>

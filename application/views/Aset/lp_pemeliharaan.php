@@ -74,7 +74,7 @@ $this->load->view('template/head', $data);
             <!-- /. PAGE INNER  -->
             <!-- Modal -->
             <div class="modal fade" id="caritgl" tabindex="-1" role="dialog" aria-labelledby="caritgl" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -83,7 +83,7 @@ $this->load->view('template/head', $data);
                         <?= form_open('Print_excel/export_pelihara'); ?>
                         <div class="modal-body">
                             <div class="form-row">
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-12">
                                     <label for="tgl_awal">Pilih Tanggal</label>
                                     <div class="input-group input-daterange">
                                         <input type="date" class="form-control" name="tgl_awal" id="tgl_awal">
@@ -91,13 +91,16 @@ $this->load->view('template/head', $data);
                                         <input type="date" class="form-control" name="tgl_akhir" id="tgl_akhir">
                                     </div>
                                 </div>
-                                <div class="form-group col-md-6">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
                                     <label for="kategori">Pilih Kategori</label><br>
-                                    <select class="form-control" name="kategori" id="kategori" required>
-                                        <option value="">-- Pilih --</option>
-                                        <option value="1">Semua</option>
-                                        <option value="2">Internal</option>
-                                        <option value="3">External</option>
+                                    <select class="selectbox col-md-12" style="width: 267px;" name="kategori" id="kategori" required>
+                                        <optgroup label="Pilih Nama Barang">
+                                            <option value="">Semua</option>
+                                            <option value="2">Internal</option>
+                                            <option value="3">External</option>
+                                        </optgroup>
                                     </select>
                                 </div>
                             </div>

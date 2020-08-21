@@ -97,14 +97,16 @@ $this->load->view('template/head', $data);
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="kategori">Nama Barang</label><br>
-                                    <select class="form-control" name="kategori" id="kategori">
-                                        <option value="">-- Pilih --</option>
-                                        <?php
-                                        foreach ($dt_e as $d) { ?>
-                                            <option value="<?= $d['kd_brg'] ?>"><?= $d['nm_brg'] ?></option>
-                                        <?php }
-                                        ?>
+                                    <label for="kategori">Nama Barang</label>
+                                    <select class="selectbox col-md-12" style="width: 267px;" name="kategori" id="kategori">
+                                        <optgroup label="Pilih Nama Barang">
+                                            <option value="">Semua</option>
+                                            <?php
+                                            foreach ($dt_e as $d) { ?>
+                                                <option value="<?= $d['kd_brg'] ?>"><?= $d['nm_brg'] ?></option>
+                                            <?php }
+                                            ?>
+                                        </optgroup>
                                     </select>
                                 </div>
                                 <div class="form-group row">

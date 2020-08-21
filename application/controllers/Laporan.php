@@ -38,7 +38,8 @@ class Laporan extends CI_Controller
     // Laporan Wakasek
     public function lp_pengadaan_wk()
     {
-        $this->load->view('Wakasek/lp_pengadaan');
+        $data['peng'] = $this->Laporan_model->dt_pengadaan();
+        $this->load->view('Wakasek/lp_pengadaan', $data);
     }
 
     public function get_dt_pengadaan()
@@ -49,7 +50,8 @@ class Laporan extends CI_Controller
 
     public function lp_peminjaman_wk()
     {
-        $this->load->view('Wakasek/lp_peminjaman');
+        $data['pin'] = $this->Laporan_model->dt_peminjaman();
+        $this->load->view('Wakasek/lp_peminjaman', $data);
     }
 
     public function get_dt_peminjaman()
@@ -58,34 +60,36 @@ class Laporan extends CI_Controller
         echo json_encode($data);
     }
 
-    public function lp_pemeliharaan_wk()
-    {
-        $this->load->view('Wakasek/lp_pemeliharaan');
-    }
+    // public function lp_pemeliharaan_wk()
+    // {
+    //     $this->load->view('Wakasek/lp_pemeliharaan');
+    // }
 
-    public function lp_penghapusan_wk()
-    {
-        $this->load->view('Wakasek/lp_penghapusan');
-    }
+    // public function lp_penghapusan_wk()
+    // {
+    //     $this->load->view('Wakasek/lp_penghapusan');
+    // }
 
     // LAPORAN kepsek
     public function lp_pengadaan_kep()
     {
-        $this->load->view('Kepsek/lp_pengadaan');
+        $data['peng'] = $this->Laporan_model->dt_pengadaan();
+        $this->load->view('Kepsek/lp_pengadaan', $data);
     }
 
     public function lp_peminjaman_kep()
     {
-        $this->load->view('Kepsek/lp_peminjaman');
+        $data['pin'] = $this->Laporan_model->dt_peminjaman();
+        $this->load->view('Kepsek/lp_peminjaman', $data);
     }
 
-    public function lp_pemeliharaan_kep()
-    {
-        $this->load->view('Kepsek/lp_pemeliharaan');
-    }
+    // public function lp_pemeliharaan_kep()
+    // {
+    //     $this->load->view('Kepsek/lp_pemeliharaan');
+    // }
 
-    public function lp_penghapusan_kep()
-    {
-        $this->load->view('Kepsek/lp_penghapusan');
-    }
+    // public function lp_penghapusan_kep()
+    // {
+    //     $this->load->view('Kepsek/lp_penghapusan');
+    // }
 }

@@ -1,13 +1,13 @@
-<?php 
+<?php
 
-class Login_model extends CI_Model {
-    
-    function login($username,$password)
+class Login_model extends CI_Model
+{
+
+    function login($username, $password)
     {
-        $get = $this->db->get_where('app_user',array('username'=>$username,'password'=>$password));
+        $get = $this->db->get_where('app_user', array('username' => $username, 'password' => $password));
 
-        foreach ($get->result_array() as $q)
-        {
+        foreach ($get->result_array() as $q) {
             $this->session->set_userdata('user_id', $q['user_id']);
             $this->session->set_userdata('username', $q['username']);
             $this->session->set_userdata('nama_pegawai', $q['nama_pegawai']);
@@ -19,39 +19,30 @@ class Login_model extends CI_Model {
             $valid = $q['valid'];
         }
 
-        if($valid==1) 
-        {
+        if ($valid == 1) {
             $row = $get->row_array();
-            if ($get->num_rows() > 0)
-            {
+            if ($get->num_rows() > 0) {
                 date_default_timezone_set('Asia/Jakarta');
 
-                $date = date("Y/m/d H:i:s");  
+                $date = date("Y/m/d H:i:s");
                 $data = array('tgl' => $date, 'status' => 1);
 
                 $this->db->where('username', $username);
                 $this->db->update('app_user', $data);
 
-                if($this->db->affected_rows() > 0)
-                {
+                if ($this->db->affected_rows() > 0) {
                     $item        = '';
                     $assign_to   = 'dashboard';
                     $assign_type = '';
                     activity_log("login", "masuk", $item, $assign_to, $assign_type);
                     return $row['role'];
-                }
-                else
-                {
+                } else {
                     return false;
                 }
-            }
-            else
-            {
+            } else {
                 return false;
             }
-        }
-        else
-        {
+        } else {
             return false;
         }
     }
@@ -63,16 +54,13 @@ class Login_model extends CI_Model {
         $this->db->where('username', $username);
         $this->db->update('app_user');
 
-        if($this->db->affected_rows() > 0)
-        {
+        if ($this->db->affected_rows() > 0) {
             $item        = '';
             $assign_to   = '';
             $assign_type = '';
             activity_log("logout", "keluar", $item, $assign_to, $assign_type);
             return true;
-        }
-        else
-        {
+        } else {
             return false;
         }
     }
@@ -138,6 +126,38 @@ class Login_model extends CI_Model {
         )->result_array();
     }
 
-}
+    function get_prfil($user_id)
+    {
+        return $this->db->query("SELECT * FROM app_user WHERE user_id = '$user_id' GROUP BY user_id")->result_array();
+    }
 
-?>
+    function update_image($user_id, $nama_pegawai, $nik, $ktp, $username, $image)
+    {
+        $data = array(
+            'nama_pegawai' => $nama_pegawai,
+            'nik' => $nik,
+            'ktp' => $ktp,
+            'username' => $username,
+            'image' => $image
+        );
+        $this->db->where('user_id', $user_id);
+        $this->db->update('app_user', $data);
+
+        return 1;
+    }
+
+    function cek_old_password($user_id, $pass)
+    {
+        $result = $this->db->query("SELECT * FROM app_user WHERE user_id = '$user_id' AND password = '$pass' ");
+        if ($result->num_rows() > 0) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    function ganti_password($user_id, $new_password)
+    {
+        return $this->db->query("UPDATE app_user SET password = '$new_password' WHERE user_id = '$user_id' ");
+    }
+}
