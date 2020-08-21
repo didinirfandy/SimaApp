@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 17, 2020 at 04:53 PM
+-- Generation Time: Aug 21, 2020 at 06:42 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.2.15
 
@@ -48,9 +48,9 @@ CREATE TABLE `app_user` (
 --
 
 INSERT INTO `app_user` (`user_id`, `username`, `password`, `nama_pegawai`, `nik`, `ktp`, `role`, `genre`, `tgl`, `status`, `valid`, `image`) VALUES
-(1, 'Aset', 'e10adc3949ba59abbe56e057f20f883e', 'Bagian Aset', 'P12323', '1235789123123124123', '1', '1', '2020-08-17 14:04:09', 0, 1, 'default_laki.png'),
-(2, 'Wakasek', 'e10adc3949ba59abbe56e057f20f883e', 'Wakasek Sarana', '123th23', '321638201080009', '2', '2', '2020-08-17 20:58:42', 0, 1, 'default_cewe.png'),
-(3, 'Kepsek', 'e10adc3949ba59abbe56e057f20f883e', 'Kepala Sekolah', '123th23', '321638201080009', '3', '2', '2020-08-17 21:13:14', 1, 1, 'default_cewe.png');
+(1, 'Aset', '202cb962ac59075b964b07152d234b70', 'Dadang Yana Suryana', 'P12323', '1235789123123124123', '1', '1', '2020-08-21 23:28:55', 0, 1, '1.png'),
+(2, 'Wakasek', 'e10adc3949ba59abbe56e057f20f883e', 'Sri Purwanti', '123th23', '321638201080009', '2', '2', '2020-08-21 23:42:02', 1, 1, 'default_cewe.png'),
+(3, 'Kepsek', 'e10adc3949ba59abbe56e057f20f883e', 'Mimin Hermiati', '123th23', '321638201080009', '3', '2', '2020-08-21 18:12:21', 0, 1, 'default_cewe.png');
 
 -- --------------------------------------------------------
 
@@ -9139,7 +9139,78 @@ INSERT INTO `tbl_log` (`log_id`, `log_time`, `log_user`, `log_menu`, `log_aksi`,
 (449, '2020-08-17 20:58:33', 'Aset', 'logout', 'keluar', '', '', ''),
 (450, '2020-08-17 20:58:42', 'Wakasek', 'login', 'masuk', '', 'dashboard', ''),
 (451, '2020-08-17 21:13:08', 'Wakasek', 'logout', 'keluar', '', '', ''),
-(452, '2020-08-17 21:13:14', 'Kepsek', 'login', 'masuk', '', 'dashboard', '');
+(452, '2020-08-17 21:13:14', 'Kepsek', 'login', 'masuk', '', 'dashboard', ''),
+(453, '2020-08-17 21:58:33', 'Kepsek', 'logout', 'keluar', '', '', ''),
+(454, '2020-08-17 21:58:39', 'Aset', 'login', 'masuk', '', 'dashboard', ''),
+(455, '2020-08-17 22:28:35', 'Aset', 'logout', 'keluar', '', '', ''),
+(456, '2020-08-17 22:28:43', 'Wakasek', 'login', 'masuk', '', 'dashboard', ''),
+(457, '2020-08-17 22:45:46', 'Wakasek', 'logout', 'keluar', '', '', ''),
+(458, '2020-08-17 22:46:00', 'Aset', 'login', 'masuk', '', 'dashboard', ''),
+(459, '2020-08-18 13:35:17', 'Aset', 'login', 'masuk', '', 'dashboard', ''),
+(460, '2020-08-18 15:20:13', 'Aset', 'logout', 'keluar', '', '', ''),
+(461, '2020-08-18 15:20:18', 'Aset', 'login', 'masuk', '', 'dashboard', ''),
+(462, '2020-08-18 22:54:25', 'Aset', 'login', 'masuk', '', 'dashboard', ''),
+(463, '2020-08-19 11:26:36', 'Aset', 'login', 'masuk', '', 'dashboard', ''),
+(464, '2020-08-19 20:01:00', 'Aset', 'Rekomendasi Penghapusan', 'Hapus', 'Menghapus data yang dipilih untuk melakukan perhitungan rangking', '', 'Aset'),
+(465, '2020-08-19 20:02:05', 'Aset', 'Rekomendasi Penghapusan', 'Menginput', 'Memasukan data ke tabel sementara', '', 'Aset'),
+(466, '2020-08-19 20:03:00', 'Aset', 'Rekomendasi Penghapusan', 'Hapus', 'Menghapus data yang dipilih untuk melakukan perhitungan rangking', '', 'Aset'),
+(467, '2020-08-19 20:05:26', 'Aset', 'Rekomendasi Penghapusan', 'Menginput', 'Memasukan data ke tabel sementara', '', 'Aset'),
+(468, '2020-08-19 20:14:43', 'Aset', 'Rekomendasi Penghapusan', 'Hapus', 'Menghapus data yang dipilih untuk melakukan perhitungan rangking', '', 'Aset'),
+(469, '2020-08-19 20:14:55', 'Aset', 'Rekomendasi Penghapusan', 'Menginput', 'Memasukan data ke tabel sementara', '', 'Aset'),
+(470, '2020-08-19 20:14:58', 'Aset', 'Rekomendasi Penghapusan', 'Menginput', 'Memasukan data ke tabel sementara', '', 'Aset'),
+(471, '2020-08-19 20:15:01', 'Aset', 'Rekomendasi Penghapusan', 'Menginput', 'Memasukan data ke tabel sementara', '', 'Aset'),
+(472, '2020-08-19 20:15:04', 'Aset', 'Rekomendasi Penghapusan', 'Menginput', 'Memasukan data ke tabel sementara', '', 'Aset'),
+(473, '2020-08-19 20:15:08', 'Aset', 'Rekomendasi Penghapusan', 'Menginput', 'Memasukan data ke tabel sementara', '', 'Aset'),
+(474, '2020-08-19 20:16:20', 'Aset', 'Rekomendasi Penghapusan', 'Mengubah', 'Mengubah Status yang telah di lakukan perengkingan', '', 'Aset'),
+(475, '2020-08-19 20:27:59', 'Aset', 'Rekomendasi Penghapusan', 'Menginput', 'Memasukan data ke tabel sementara', '', 'Aset'),
+(476, '2020-08-19 20:28:27', 'Aset', 'Rekomendasi Penghapusan', 'Menginput', 'Memasukan data ke tabel sementara', '', 'Aset'),
+(477, '2020-08-19 20:29:20', 'Aset', 'Rekomendasi Penghapusan', 'Menginput', 'Memasukan data ke tabel sementara', '', 'Aset'),
+(478, '2020-08-19 20:29:24', 'Aset', 'Rekomendasi Penghapusan', 'Menginput', 'Memasukan data ke tabel sementara', '', 'Aset'),
+(479, '2020-08-19 20:29:27', 'Aset', 'Rekomendasi Penghapusan', 'Menginput', 'Memasukan data ke tabel sementara', '', 'Aset'),
+(480, '2020-08-19 20:29:41', 'Aset', 'Rekomendasi Penghapusan', 'Mengubah', 'Mengubah Status yang telah di lakukan perengkingan', '', 'Aset'),
+(481, '2020-08-19 20:41:08', 'Aset', 'logout', 'keluar', '', '', ''),
+(482, '2020-08-19 20:41:14', 'Wakasek', 'login', 'masuk', '', 'dashboard', ''),
+(483, '2020-08-19 20:41:24', 'Wakasek', 'logout', 'keluar', '', '', ''),
+(484, '2020-08-19 20:41:28', 'Aset', 'login', 'masuk', '', 'dashboard', ''),
+(485, '2020-08-19 22:24:04', 'Aset', 'Rekomendasi Penghapusan', 'Menginput', 'Memasukan data ke tabel sementara', '', 'Aset'),
+(486, '2020-08-19 22:25:41', 'Aset', 'Rekomendasi Penghapusan', 'Menginput', 'Memasukan data ke tabel sementara', '', 'Aset'),
+(487, '2020-08-19 22:25:47', 'Aset', 'Rekomendasi Penghapusan', 'Menginput', 'Memasukan data ke tabel sementara', '', 'Aset'),
+(488, '2020-08-19 22:25:50', 'Aset', 'Rekomendasi Penghapusan', 'Menginput', 'Memasukan data ke tabel sementara', '', 'Aset'),
+(489, '2020-08-19 22:25:53', 'Aset', 'Rekomendasi Penghapusan', 'Menginput', 'Memasukan data ke tabel sementara', '', 'Aset'),
+(490, '2020-08-19 22:26:06', 'Aset', 'Rekomendasi Penghapusan', 'Mengubah', 'Mengubah Status yang telah di lakukan perengkingan', '', 'Aset'),
+(491, '2020-08-19 22:52:07', 'Aset', 'Rekomendasi Penghapusan', 'Menginput', 'Memasukan data ke tabel sementara', '', 'Aset'),
+(492, '2020-08-19 22:52:10', 'Aset', 'Rekomendasi Penghapusan', 'Menginput', 'Memasukan data ke tabel sementara', '', 'Aset'),
+(493, '2020-08-19 22:52:16', 'Aset', 'Rekomendasi Penghapusan', 'Menginput', 'Memasukan data ke tabel sementara', '', 'Aset'),
+(494, '2020-08-19 22:52:18', 'Aset', 'Rekomendasi Penghapusan', 'Menginput', 'Memasukan data ke tabel sementara', '', 'Aset'),
+(495, '2020-08-19 22:52:21', 'Aset', 'Rekomendasi Penghapusan', 'Menginput', 'Memasukan data ke tabel sementara', '', 'Aset'),
+(496, '2020-08-19 22:55:42', 'Aset', 'Rekomendasi Penghapusan', 'Mengubah', 'Mengubah Status yang telah di lakukan perengkingan', '', 'Aset'),
+(497, '2020-08-20 19:40:16', 'Wakasek', 'login', 'masuk', '', 'dashboard', ''),
+(498, '2020-08-20 21:28:58', 'Aset', 'login', 'masuk', '', 'dashboard', ''),
+(499, '2020-08-20 22:22:30', 'Aset', 'logout', 'keluar', '', '', ''),
+(500, '2020-08-20 22:40:55', 'Wakasek', 'logout', 'keluar', '', '', ''),
+(501, '2020-08-20 22:41:04', 'Kepsek', 'login', 'masuk', '', 'dashboard', ''),
+(502, '2020-08-20 22:42:31', 'Kepsek', 'logout', 'keluar', '', '', ''),
+(503, '2020-08-20 22:42:39', 'Aset', 'login', 'masuk', '', 'dashboard', ''),
+(504, '2020-08-21 14:58:16', 'Aset', 'login', 'masuk', '', 'dashboard', ''),
+(505, '2020-08-21 15:02:21', 'Aset', 'logout', 'keluar', '', '', ''),
+(506, '2020-08-21 15:02:26', 'Aset', 'login', 'masuk', '', 'dashboard', ''),
+(507, '2020-08-21 17:03:47', 'Aset', 'logout', 'keluar', '', '', ''),
+(508, '2020-08-21 17:03:53', 'Aset', 'login', 'masuk', '', 'dashboard', ''),
+(509, '2020-08-21 17:52:56', 'Aset', 'logout', 'keluar', '', '', ''),
+(510, '2020-08-21 17:53:03', 'Aset', 'login', 'masuk', '', 'dashboard', ''),
+(511, '2020-08-21 18:05:09', 'Aset', 'logout', 'keluar', '', '', ''),
+(512, '2020-08-21 18:05:14', 'Aset', 'login', 'masuk', '', 'dashboard', ''),
+(513, '2020-08-21 18:05:44', 'Aset', 'logout', 'keluar', '', '', ''),
+(514, '2020-08-21 18:05:52', 'Aset', 'login', 'masuk', '', 'dashboard', ''),
+(515, '2020-08-21 18:06:07', 'Aset', 'logout', 'keluar', '', '', ''),
+(516, '2020-08-21 18:06:11', 'Wakasek', 'login', 'masuk', '', 'dashboard', ''),
+(517, '2020-08-21 18:12:09', 'Wakasek', 'logout', 'keluar', '', '', ''),
+(518, '2020-08-21 18:12:21', 'Kepsek', 'login', 'masuk', '', 'dashboard', ''),
+(519, '2020-08-21 18:50:59', 'Kepsek', 'logout', 'keluar', '', '', ''),
+(520, '2020-08-21 18:51:03', 'Aset', 'login', 'masuk', '', 'dashboard', ''),
+(521, '2020-08-21 23:28:55', 'Aset', 'login', 'masuk', '', 'dashboard', ''),
+(522, '2020-08-21 23:41:42', 'Aset', 'logout', 'keluar', '', '', ''),
+(523, '2020-08-21 23:42:02', 'Wakasek', 'login', 'masuk', '', 'dashboard', '');
 
 -- --------------------------------------------------------
 
@@ -9171,6 +9242,7 @@ CREATE TABLE `tbl_matriks_nilai` (
   `kondisi_brg` int(11) NOT NULL,
   `nilai_buku` int(11) NOT NULL,
   `sisa_umr_ekonomis` int(11) NOT NULL,
+  `status` enum('1','2','3') NOT NULL COMMENT '1=Belum;2=Hitung;3=Sudah',
   `entry_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -9178,17 +9250,36 @@ CREATE TABLE `tbl_matriks_nilai` (
 -- Dumping data for table `tbl_matriks_nilai`
 --
 
-INSERT INTO `tbl_matriks_nilai` (`id_matriks`, `id_brg`, `kd_matriks`, `kd_brg`, `no_reg`, `nm_brg`, `kondisi_brg`, `nilai_buku`, `sisa_umr_ekonomis`, `entry_date`) VALUES
-(6, 6, 1, '06.02.01.28.', '001', 'Kursi Tamu', 2, 8, 4, '2020-08-03 23:21:33'),
-(7, 7, 1, '06.01.04.06.', '001', 'Band Kas', 2, 7, 2, '2020-08-03 23:27:28'),
-(8, 8, 1, '06.01.04.06.', '002', 'Band Kas', 4, 6, 2, '2020-08-03 23:30:30'),
-(9, 9, 1, '06.01.03.01.', '001', 'Mesin Stensil Manual Folio', 4, 5, 4, '2020-08-03 23:30:53'),
-(10, 10, 1, '04.03.08.18.', '001', 'Stopwach', 4, 4, 4, '2020-08-03 23:38:35'),
-(11, 21, 1, '04.03.08.18.', '002', 'Stopwatch', 2, 3, 4, '2020-08-03 23:39:08'),
-(12, 22, 0, '06.01.01.02.', '001', 'Mesin Ketik Manual Standar (14-16)', 2, 8, 4, '2020-08-11 16:13:01'),
-(13, 25, 0, '06.01.05.10.', '001', 'White Board', 2, 8, 4, '2020-08-11 16:13:06'),
-(14, 23, 0, '06.01.01.02.', '002', 'Mesin Ketik Manual Standar (14-16)', 2, 8, 4, '2020-08-11 17:37:58'),
-(15, 24, 0, '06.01.01.02.', '003', 'Mesin Ketik Manual Standar (14-16)', 4, 8, 4, '2020-08-11 17:38:06');
+INSERT INTO `tbl_matriks_nilai` (`id_matriks`, `id_brg`, `kd_matriks`, `kd_brg`, `no_reg`, `nm_brg`, `kondisi_brg`, `nilai_buku`, `sisa_umr_ekonomis`, `status`, `entry_date`) VALUES
+(1, 6, 1, '06.02.01.28.', '001', 'Kursi Tamu', 2, 8, 4, '3', '2020-08-03 23:21:33'),
+(2, 7, 1, '06.01.04.06.', '001', 'Band Kas', 2, 7, 2, '3', '2020-08-03 23:27:28'),
+(3, 8, 1, '06.01.04.06.', '002', 'Band Kas', 4, 6, 2, '3', '2020-08-03 23:30:30'),
+(4, 9, 1, '06.01.03.01.', '001', 'Mesin Stensil Manual Folio', 4, 5, 4, '3', '2020-08-03 23:30:53'),
+(5, 10, 1, '04.03.08.18.', '001', 'Stopwach', 4, 4, 2, '3', '2020-08-03 23:38:35'),
+(6, 21, 1, '04.03.08.18.', '002', 'Stopwatch', 2, 3, 4, '3', '2020-08-03 23:39:08'),
+(7, 22, 2, '06.01.01.02.', '001', 'Mesin Ketik Manual Standar (14-16)', 2, 8, 4, '3', '2020-08-11 16:13:01'),
+(8, 25, 2, '06.01.05.10.', '001', 'White Board', 2, 5, 2, '3', '2020-08-11 16:13:06'),
+(9, 23, 2, '06.01.01.02.', '002', 'Mesin Ketik Manual Standar (14-16)', 2, 8, 2, '3', '2020-08-11 17:37:58'),
+(10, 24, 3, '06.01.01.02.', '003', 'Mesin Ketik Manual Standar (14-16)', 4, 7, 4, '3', '2020-08-19 17:38:06');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_matriks_nilai_while`
+--
+
+CREATE TABLE `tbl_matriks_nilai_while` (
+  `id` int(11) NOT NULL,
+  `id_matriks` int(11) NOT NULL,
+  `id_brg` int(11) NOT NULL,
+  `kd_matriks` int(11) NOT NULL,
+  `kd_brg` varchar(20) NOT NULL,
+  `no_reg` varchar(11) NOT NULL,
+  `nm_brg` varchar(250) NOT NULL,
+  `kondisi_brg` int(11) NOT NULL,
+  `nilai_buku` int(11) NOT NULL,
+  `sisa_umr_ekonomis` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -9416,6 +9507,7 @@ CREATE TABLE `tbl_penghapusan_aset` (
 CREATE TABLE `tbl_rengking` (
   `id_rengking` int(11) NOT NULL,
   `kd_rengking` int(11) NOT NULL,
+  `rangking` int(11) NOT NULL,
   `id_brg` int(11) NOT NULL,
   `kd_brg` varchar(20) NOT NULL,
   `no_reg` varchar(11) NOT NULL,
@@ -9429,17 +9521,17 @@ CREATE TABLE `tbl_rengking` (
 -- Dumping data for table `tbl_rengking`
 --
 
-INSERT INTO `tbl_rengking` (`id_rengking`, `kd_rengking`, `id_brg`, `kd_brg`, `no_reg`, `nm_brg`, `nilai_akhir`, `ket`, `entry_date`) VALUES
-(1, 0, 6, '06.02.01.28.', '001', 'Kursi Tamu', '0.5', '', '2020-08-11 17:39:47'),
-(2, 0, 7, '06.01.04.06.', '001', 'Band Kas', '0.24', '', '2020-08-11 17:39:47'),
-(3, 0, 8, '06.01.04.06.', '002', 'Band Kas', '0.68', '', '2020-08-11 17:39:47'),
-(4, 0, 9, '06.01.03.01.', '001', 'Mesin Stensil Manual Folio', '0.82', '', '2020-08-11 17:39:47'),
-(5, 0, 10, '04.03.08.18.', '001', 'Stopwach', '0.76', '', '2020-08-11 17:39:47'),
-(6, 0, 21, '04.03.08.18.', '002', 'Stopwatch', '0.2', '', '2020-08-11 17:39:47'),
-(7, 0, 22, '06.01.01.02.', '001', 'Mesin Ketik Manual Standar (14-16)', '0.5', '', '2020-08-11 17:39:47'),
-(8, 0, 25, '06.01.05.10.', '001', 'White Board', '0.5', '', '2020-08-11 17:39:47'),
-(9, 0, 23, '06.01.01.02.', '002', 'Mesin Ketik Manual Standar (14-16)', '0.5', '', '2020-08-11 17:39:47'),
-(10, 0, 24, '06.01.01.02.', '003', 'Mesin Ketik Manual Standar (14-16)', '1', '', '2020-08-11 17:39:47');
+INSERT INTO `tbl_rengking` (`id_rengking`, `kd_rengking`, `rangking`, `id_brg`, `kd_brg`, `no_reg`, `nm_brg`, `nilai_akhir`, `ket`, `entry_date`) VALUES
+(1, 1, 1, 6, '06.02.01.28.', '001', 'Kursi Tamu', '2', 'Pertama', '2020-08-18 18:59:14'),
+(2, 1, 2, 7, '06.01.04.06.', '001', 'Band Kas', '1.36', 'Pertama', '2020-08-18 18:59:14'),
+(3, 1, 3, 8, '06.01.04.06.', '002', 'Band Kas', '1', 'Pertama', '2020-08-18 18:59:14'),
+(4, 1, 4, 21, '04.03.08.18.', '002', 'Stopwatch', '0.48', 'Pertama', '2020-08-18 18:59:14'),
+(5, 1, 5, 24, '06.01.01.02.', '003', 'Mesin Ketik Manual Standar (14-16)', '0.4', 'Pertama', '2020-08-18 18:59:14'),
+(21, 2, 1, 9, '06.01.03.01.', '001', 'Mesin Stensil Manual Folio', '1.55', 'Kedua', '2020-08-19 22:55:41'),
+(22, 2, 2, 10, '04.03.08.18.', '001', 'Stopwach', '1', 'Kedua', '2020-08-19 22:55:41'),
+(23, 2, 3, 22, '06.01.01.02.', '001', 'Mesin Ketik Manual Standar (14-16)', '1', 'Kedua', '2020-08-19 22:55:41'),
+(24, 2, 4, 25, '06.01.05.10.', '001', 'White Board', '0.6', 'Kedua', '2020-08-19 22:55:41'),
+(25, 2, 5, 23, '06.01.01.02.', '002', 'Mesin Ketik Manual Standar (14-16)', '0.15', 'Kedua', '2020-08-19 22:55:41');
 
 -- --------------------------------------------------------
 
@@ -9493,15 +9585,15 @@ CREATE TABLE `tbl_usulan_aset` (
 --
 
 INSERT INTO `tbl_usulan_aset` (`id_usulan`, `kd_usulan`, `kd_brg`, `nm_brg`, `jns_brg`, `jmlh_brg`, `satuan_brg`, `harga_brg`, `masa_manfaat`, `ket`, `stts_approval_wk`, `tgl_approval_wk`, `stts_approval_kep`, `tgl_approval_kep`, `stts_pengadaan`, `tgl_pengadaan`, `entry_date`) VALUES
-(43, '2', '06.01.05.10.', 'White Board ', '2', 12, '1', '708000', '', 'usulan awal', '2', '0000-00-00 00:00:00', '2', '2020-08-01 18:08:57', '3', '0000-00-00 00:00:00', '2020-07-12 22:21:38'),
-(44, '2', '06.01.05.37.', 'White Board Elektronic  ', '1', 1, '2', '202000', '', 'usulan awal', '2', '0000-00-00 00:00:00', '2', '2020-08-01 18:08:57', '3', '0000-00-00 00:00:00', '2020-07-12 22:22:39'),
-(45, '3', '06.02.01.11.', 'Meja Tulis', '2', 144, '1', '92400', '', 'usulan kedua', '2', '2020-08-01 17:58:30', '2', '2020-08-11 10:17:07', '3', '0000-00-00 00:00:00', '2020-07-12 22:23:26'),
-(46, '3', '06.02.01.06.', 'Kursi Kayu / Rotan / Bambu ', '2', 144, '1', '92400', '', 'usulan kedua', '2', '2020-08-01 17:58:30', '2', '2020-08-11 10:17:07', '3', '0000-00-00 00:00:00', '2020-07-12 22:24:50'),
-(50, '5', '02.06.01.05.10.', 'White Board', '2', 2, '1', '250000', '', 'usulan 1', '2', '2020-08-11 10:12:49', '2', '2020-08-11 10:17:13', '3', '0000-00-00 00:00:00', '2020-08-11 09:34:57'),
-(51, '5', '02.06.01.05.37.', 'White Board Elektronic', '2', 1, '1', '1200000', '', 'usulan 1', '2', '2020-08-11 10:12:49', '2', '2020-08-11 10:17:13', '3', '0000-00-00 00:00:00', '2020-08-11 09:35:58'),
-(58, '6', '02.06.01.05.10.', 'White Board', '2', 3, '1', '750000', '', 'usulan baru', '2', '2020-08-11 17:31:42', '2', '2020-08-11 17:32:08', '3', '0000-00-00 00:00:00', '2020-08-11 17:30:36'),
-(59, '6', '02.06.01.05.37.', 'White Board Elektronic', '2', 2, '1', '1750000', '', 'usulan baru', '2', '2020-08-11 17:31:42', '2', '2020-08-11 17:32:08', '3', '0000-00-00 00:00:00', '2020-08-11 17:30:56'),
-(60, '7', '02.06.02.01.10.', 'Meja Rapat', '2', 5, '1', '2348900', '5', 'testing', '2', '2020-08-13 17:12:48', '2', '2020-08-13 17:15:46', '3', '0000-00-00 00:00:00', '2020-08-13 17:10:57');
+(43, '2', '06.01.05.10.', 'White Board ', '2', 12, '1', '708000', '', 'usulan awal', '2', '0000-00-00 00:00:00', '2', '2020-08-01 18:08:57', '2', '0000-00-00 00:00:00', '2020-07-12 22:21:38'),
+(44, '2', '06.01.05.37.', 'White Board Elektronic  ', '1', 1, '2', '202000', '', 'usulan awal', '2', '0000-00-00 00:00:00', '2', '2020-08-01 18:08:57', '2', '0000-00-00 00:00:00', '2020-07-12 22:22:39'),
+(45, '3', '06.02.01.11.', 'Meja Tulis', '2', 144, '1', '92400', '', 'usulan kedua', '2', '2020-08-01 17:58:30', '2', '2020-08-11 10:17:07', '2', '0000-00-00 00:00:00', '2020-07-12 22:23:26'),
+(46, '3', '06.02.01.06.', 'Kursi Kayu / Rotan / Bambu ', '2', 144, '1', '92400', '', 'usulan kedua', '2', '2020-08-01 17:58:30', '2', '2020-08-11 10:17:07', '2', '0000-00-00 00:00:00', '2020-07-12 22:24:50'),
+(50, '5', '02.06.01.05.10.', 'White Board', '2', 2, '1', '250000', '', 'usulan 1', '2', '2020-08-11 10:12:49', '2', '2020-08-11 10:17:13', '2', '0000-00-00 00:00:00', '2020-08-11 09:34:57'),
+(51, '5', '02.06.01.05.37.', 'White Board Elektronic', '2', 1, '1', '1200000', '', 'usulan 1', '2', '2020-08-11 10:12:49', '2', '2020-08-11 10:17:13', '2', '0000-00-00 00:00:00', '2020-08-11 09:35:58'),
+(58, '6', '02.06.01.05.10.', 'White Board', '2', 3, '1', '750000', '', 'usulan baru', '2', '2020-08-11 17:31:42', '2', '2020-08-11 17:32:08', '2', '0000-00-00 00:00:00', '2020-08-11 17:30:36'),
+(59, '6', '02.06.01.05.37.', 'White Board Elektronic', '2', 2, '1', '1750000', '', 'usulan baru', '2', '2020-08-11 17:31:42', '2', '2020-08-11 17:32:08', '2', '0000-00-00 00:00:00', '2020-08-11 17:30:56'),
+(60, '7', '02.06.02.01.10.', 'Meja Rapat', '2', 5, '1', '2348900', '5', 'testing', '2', '2020-08-13 17:12:48', '2', '2020-08-13 17:15:46', '2', '0000-00-00 00:00:00', '2020-08-13 17:10:57');
 
 --
 -- Indexes for dumped tables
@@ -9548,6 +9640,12 @@ ALTER TABLE `tbl_masa_manfaat`
 --
 ALTER TABLE `tbl_matriks_nilai`
   ADD PRIMARY KEY (`id_matriks`);
+
+--
+-- Indexes for table `tbl_matriks_nilai_while`
+--
+ALTER TABLE `tbl_matriks_nilai_while`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tbl_nilai_buku`
@@ -9629,7 +9727,7 @@ ALTER TABLE `tbl_kondisi_barang`
 -- AUTO_INCREMENT for table `tbl_log`
 --
 ALTER TABLE `tbl_log`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=453;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=524;
 
 --
 -- AUTO_INCREMENT for table `tbl_masa_manfaat`
@@ -9641,7 +9739,13 @@ ALTER TABLE `tbl_masa_manfaat`
 -- AUTO_INCREMENT for table `tbl_matriks_nilai`
 --
 ALTER TABLE `tbl_matriks_nilai`
-  MODIFY `id_matriks` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_matriks` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `tbl_matriks_nilai_while`
+--
+ALTER TABLE `tbl_matriks_nilai_while`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `tbl_nilai_buku`
@@ -9677,7 +9781,7 @@ ALTER TABLE `tbl_penghapusan_aset`
 -- AUTO_INCREMENT for table `tbl_rengking`
 --
 ALTER TABLE `tbl_rengking`
-  MODIFY `id_rengking` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_rengking` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `tbl_sisa_umr_ekonomis`
