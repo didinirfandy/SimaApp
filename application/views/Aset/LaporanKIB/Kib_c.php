@@ -16,7 +16,7 @@ $this->load->view('template/head', $data);
                 <?= $this->session->flashdata('pesan'); ?>
                 <ol class="breadcrumb">
                     <li><a href="#"><?php $str = $this->session->userdata('nama_pegawai');
-                                    echo wordwrap($str, 15, "<br>\n"); ?></a></li>
+                                    echo wordwrap($str, 30, "<br>\n"); ?></a></li>
                     <li><a href="<?= base_url() ?>Aset/home">Home</a></li>
                     <li>Laporan</li>
                     <li class="active">KIB C</li>
