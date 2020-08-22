@@ -32,9 +32,9 @@ class Login_model extends CI_Model
 
                 if ($this->db->affected_rows() > 0) {
                     $item        = '';
-                    $assign_to   = 'dashboard';
+                    $assign_to   = '';
                     $assign_type = '';
-                    activity_log("login", "masuk", $item, $assign_to, $assign_type);
+                    activity_log("login", "Masuk", $item, $assign_to, $assign_type);
                     return $row['role'];
                 } else {
                     return false;
@@ -58,7 +58,7 @@ class Login_model extends CI_Model
             $item        = '';
             $assign_to   = '';
             $assign_type = '';
-            activity_log("logout", "keluar", $item, $assign_to, $assign_type);
+            activity_log("logout", "Keluar", $item, $assign_to, $assign_type);
             return true;
         } else {
             return false;
@@ -143,7 +143,17 @@ class Login_model extends CI_Model
         $this->db->where('user_id', $user_id);
         $this->db->update('app_user', $data);
 
-        return 1;
+        if ($this->db->affected_rows() > 0) {
+            $menu        = 'Setting';
+            $aksi        = 'Mengubah';
+            $item        = 'Mengubah data diri atau image';
+            $assign_to   = '';
+            $assign_type = '';
+            activity_log($menu, $aksi, $item, $assign_to, $assign_type);
+            return 1;
+        } else {
+            return false;
+        }
     }
 
     function cek_old_password($user_id, $pass)
@@ -158,6 +168,26 @@ class Login_model extends CI_Model
 
     function ganti_password($user_id, $new_password)
     {
-        return $this->db->query("UPDATE app_user SET password = '$new_password' WHERE user_id = '$user_id' ");
+        $data = $this->db->query("UPDATE app_user SET password = '$new_password' WHERE user_id = '$user_id' ");
+        if ($data) {
+            if ($this->db->affected_rows() > 0) {
+                $menu        = 'Setting';
+                $aksi        = 'Mengubah';
+                $item        = 'Mengubah password';
+                $assign_to   = '';
+                $assign_type = '';
+                activity_log($menu, $aksi, $item, $assign_to, $assign_type);
+                return $data;
+            } else {
+                return false;
+            }
+        } else {
+            return 0;
+        }
+    }
+
+    function dt_log()
+    {
+        return $this->db->query("SELECT * FROM tbl_log ORDER BY log_time DESC")->result_array();
     }
 }

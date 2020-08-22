@@ -235,7 +235,7 @@ $this->load->view('template/head', $data);
                             '<td>' + a[i].jmlh_brg + '</td>' +
                             '<td>' + satuan + '</td>' +
                             '<td>' + a[i].harga_brg + '</td>' +
-                            '<td><button type="submit" title="Hapus" onclick="delete_usulan(\'' + a[i].id_usulan + '\')" class="btn btn-danger"><i class="fa fa-trash-o"></i></button></td>' +
+                            '<td style="text-align: center;"><button type="submit" title="Hapus" onclick="delete_usulan(\'' + a[i].id_usulan + '\')" class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i></button></td>' +
                             '</tr>';
                     }
                     $('#tmpl_data').html(rows);
@@ -320,7 +320,7 @@ $this->load->view('template/head', $data);
                             '<td>' + a[i].uraian + '</td>' +
                             '<td>' + a[i].masa_manfaat + '</td>' +
                             '<td>' + jenis + '</td>' +
-                            '<td><button type="submit" title="Tambah" onclick="get(\'' + a[i].golongan + '\', \'' + titik + '\', \'' + bidang + '\', \'' + titik1 + '\', \'' + kelompok + '\', \'' + titik2 + '\', \'' + sub_kelompok + '\', \'' + titik3 + '\', \'' + sub_sub_kelompok + '\', \'' + titik4 + '\', \'' + a[i].uraian + '\', \'' + a[i].masa_manfaat + '\', \'' + a[i].kib + '\')" class="btn btn-info"><i class="fa fa-plus"></i></button></td>' +
+                            '<td style="text-align: center;"><button type="submit" title="Tambah" onclick="get(\'' + a[i].golongan + '\', \'' + titik + '\', \'' + bidang + '\', \'' + titik1 + '\', \'' + kelompok + '\', \'' + titik2 + '\', \'' + sub_kelompok + '\', \'' + titik3 + '\', \'' + sub_sub_kelompok + '\', \'' + titik4 + '\', \'' + a[i].uraian + '\', \'' + a[i].masa_manfaat + '\', \'' + a[i].kib + '\')" class="btn btn-sm btn-info"><i class="fa fa-plus"></i></button></td>' +
                             '</tr>';
 
                     }

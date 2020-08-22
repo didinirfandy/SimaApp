@@ -75,9 +75,9 @@
                 <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
             </a>
             <ul class="dropdown-menu dropdown-user">
-                <!-- <li>
-                    <a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                </li> -->
+                <li>
+                    <a href="<?= base_url('Aset/log') ?>"><i class="fa fa-binoculars fa-fw"></i> Log</a>
+                </li>
                 <li>
                     <?php
                     $role = $this->session->userdata('role');
@@ -92,7 +92,7 @@
                     <?php }
                     ?>
                 </li>
-                <!-- <li class="divider"></li> -->
+                <li class="divider"></li>
                 <li>
                     <a href="<?= base_url('Login/logout') ?>"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                 </li>

@@ -28,7 +28,7 @@ function jam() {
 	//bulan
 	bulan = getTheMonth(monthnumber);
 
-	document.getElementById('the-time').innerHTML = '  ||  ' + hour + ':' + minute + ':' + second;
+	document.getElementById('the-time').innerHTML = ' | ' + hour + ':' + minute + ':' + second;
 	document.getElementById('the-day').innerHTML = hari + ', ' + monthday + ' ' + bulan + ' ' + year;
 }
 

@@ -107,4 +107,15 @@ class Aset extends CI_Controller
 		redirect('Aset/setting');
     }
 
+    public function log()
+    {
+        $this->load->view('Aset/log');
+    }
+
+    public function get_log()
+    {
+        $data = $this->Login_model->dt_log();
+        echo json_encode($data);
+    }
+
 }

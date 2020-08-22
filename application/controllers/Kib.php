@@ -44,7 +44,7 @@ class Kib extends CI_Controller
         $id = $this->input->post("id");
 		$value = $this->input->post("value");
 		$modul = $this->input->post("modul");
-		$this->Kib_model->uptd_kib_b($id,$value,$modul);
+		$this->Kib_model->update_kib_b($id,$value,$modul);
 		echo "{}";
     }
 
@@ -215,6 +215,3 @@ class Kib extends CI_Controller
         echo json_encode($data);
     }
 }
-
-
-?>

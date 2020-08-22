@@ -116,7 +116,7 @@ $this->load->view('template/head', $data);
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-sm-offset-2 col-sm-10">
-                                                <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Save</button>
+                                                <button class="btn btn-sm btn-primary" type="submit"><i class="fa fa-save"></i> Save</button>
                                             </div>
                                         </div>
                                     </form>

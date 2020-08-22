@@ -546,18 +546,6 @@ $this->load->view('template/head', $data);
 
             $("#cek_usulan").modal("hide");
         }
-
-        // function delete_pengadaan(id_brg) {
-        //     $.ajax({
-        //         type: "POST",
-        //         data: "id_brg=" + id_brg,
-        //         url: "<?= base_url('Master_data/del_pengadaan'); ?>",
-        //         dataType: "JSON",
-        //         success: function(d) {
-        //             tampil_pengadaan();
-        //         }
-        //     })
-        // }
     </script>
 
 </body>
