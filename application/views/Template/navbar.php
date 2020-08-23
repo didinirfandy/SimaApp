@@ -75,9 +75,15 @@
                 <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
             </a>
             <ul class="dropdown-menu dropdown-user">
-                <li>
-                    <a href="<?= base_url('Aset/log') ?>"><i class="fa fa-binoculars fa-fw"></i> Log</a>
-                </li>
+                <?php
+                $role = $this->session->userdata('role');
+                if ($role == 1) { ?>
+                    <li>
+                        <a href="<?= base_url('Aset/log') ?>"><i class="fa fa-binoculars fa-fw"></i> Log</a>
+                    </li>
+                <?php } else {
+                    echo "";
+                } ?>
                 <li>
                     <?php
                     $role = $this->session->userdata('role');

@@ -100,7 +100,7 @@ class Pemeliharaan_aset_model extends CI_Model
         return $this->db->query(
             "SELECT 
                 a.id_pemeliharaan, a.id_brg, a.kd_brg, a.nm_brg, a.no_reg, a.kondisi_brg,
-                a.harga, a.umr_ekonomis, a.merk_type, a.nli_sisa, a.stts_approval, b.thn_beli, a.ket,
+                a.harga, a.umr_ekonomis, a.merk_type, a.nli_sisa, a.stts_approval, a.stts_approval_kep, b.thn_beli, a.ket,
                 (a.umr_ekonomis - (DATE_FORMAT(NOW(), '%Y') - b.thn_beli)) AS sisa_umr_ekonomis,
                 ((b.harga - b.nli_sisa) / b.umr_ekonomis) AS nil_bku
             FROM tbl_pemeliharaan_aset a
@@ -136,119 +136,221 @@ class Pemeliharaan_aset_model extends CI_Model
                     stts_approval = '$stts_approval', tgl_approval = '$date', stts_approval_kep = '2', tgl_approval_kep = '$date'
                 WHERE id_pemeliharaan = '$id_pemeliharaan' "
             );
-        } else {
-            $hasil1 = $this->db->query(
-                "UPDATE 
-                    tbl_pemeliharaan_aset SET 
-                    stts_approval = '$stts_approval', tgl_approval = '$date'
-                WHERE id_pemeliharaan = '$id_pemeliharaan' "
+
+            $hasil2 = $this->db->query("UPDATE tbl_pengadaan_aset SET stts_pemeliharaan = '2' WHERE id_brg = '$id_brg' ");
+
+            $get = $this->db->get_where('tbl_pemeliharaan_aset', array('id_pemeliharaan' => $id_pemeliharaan))->result_array();
+
+            $id_barang   = $get[0]['id_brg'];
+            $kd_brg      = $get[0]['kd_brg'];
+            $nm_brg      = $get[0]['nm_brg'];
+            $no_reg      = $get[0]['no_reg'];
+
+            if ($get[0]['kondisi_brg'] == 2) {
+                $kondisi_brg = 2;
+            } elseif ($get[0]['kondisi_brg'] == 3) {
+                $kondisi_brg = 4;
+            }
+
+            if ($sisa_umr_ekonomis == 0) {
+                $sisa_umr_eko = 5;
+            } elseif ($sisa_umr_ekonomis < 2) {
+                $sisa_umr_eko = 4;
+            } elseif ($sisa_umr_ekonomis >= 2) {
+                $sisa_umr_eko = 2;
+            } else {
+                $sisa_umr_eko = 0;
+            }
+
+            if ($nilai_buku_bln >= '44000' or $nilai_buku_bln <= '2022999') {
+                $nilai_buku = 8;
+            } elseif ($nilai_buku_bln >= '2023000' or $nilai_buku_bln <= '4001999') {
+                $nilai_buku = 7;
+            } elseif ($nilai_buku_bln >= '4002000' or $nilai_buku_bln <= '5980999') {
+                $nilai_buku = 6;
+            } elseif ($nilai_buku_bln >= '5981000' or $nilai_buku_bln <= '7959999') {
+                $nilai_buku = 5;
+            } elseif ($nilai_buku_bln >= '7960000' or $nilai_buku_bln <= '9938999') {
+                $nilai_buku = 4;
+            } elseif ($nilai_buku_bln >= '9939000' or $nilai_buku_bln <= '11917999') {
+                $nilai_buku = 3;
+            } elseif ($nilai_buku_bln >= '11918000' or $nilai_buku_bln <= '13896999') {
+                $nilai_buku = 2;
+            } elseif ($nilai_buku_bln >= '13897000' or $nilai_buku_bln <= '15876000') {
+                $nilai_buku = 1;
+            } else {
+                $nilai_buku = 0;
+            }
+
+            date_default_timezone_set('Asia/Jakarta');
+            $date = date("Y-m-d H:i:s");
+
+            $data = array(
+                'id_brg' => $id_barang,
+                'kd_brg' => $kd_brg,
+                'kd_matriks' => $kd_matriks,
+                'nm_brg' => $nm_brg,
+                'no_reg' => $no_reg,
+                'kondisi_brg' => $kondisi_brg,
+                'nilai_buku' => $nilai_buku,
+                'sisa_umr_ekonomis' => $sisa_umr_eko,
+                'entry_date' => $date
             );
-        }
-        $hasil2 = $this->db->query("UPDATE tbl_pengadaan_aset SET stts_pemeliharaan = '2' WHERE id_brg = '$id_brg' ");
 
-        $get = $this->db->get_where('tbl_pemeliharaan_aset', array('id_pemeliharaan' => $id_pemeliharaan))->result_array();
-        // $nb  = $this->db->get('tbl_nilai_buku')->result_array();
+            $hasil3 = $this->db->insert('tbl_matriks_nilai', $data);
 
-        $id_barang   = $get[0]['id_brg'];
-        $kd_brg      = $get[0]['kd_brg'];
-        $nm_brg      = $get[0]['nm_brg'];
-        $no_reg      = $get[0]['no_reg'];
-
-        if ($get[0]['kondisi_brg'] == 2) {
-            $kondisi_brg = 2;
-        } elseif ($get[0]['kondisi_brg'] == 3) {
-            $kondisi_brg = 4;
-        }
-
-        if ($sisa_umr_ekonomis == 0) {
-            $sisa_umr_eko = 5;
-        } elseif ($sisa_umr_ekonomis < 2) {
-            $sisa_umr_eko = 4;
-        } elseif ($sisa_umr_ekonomis >= 2) {
-            $sisa_umr_eko = 2;
-        } else {
-            $sisa_umr_eko = 0;
-        }
-
-        if ($nilai_buku_bln >= '44000' or $nilai_buku_bln <= '2022999') {
-            $nilai_buku = 8;
-        } elseif ($nilai_buku_bln >= '2023000' or $nilai_buku_bln <= '4001999') {
-            $nilai_buku = 7;
-        } elseif ($nilai_buku_bln >= '4002000' or $nilai_buku_bln <= '5980999') {
-            $nilai_buku = 6;
-        } elseif ($nilai_buku_bln >= '5981000' or $nilai_buku_bln <= '7959999') {
-            $nilai_buku = 5;
-        } elseif ($nilai_buku_bln >= '7960000' or $nilai_buku_bln <= '9938999') {
-            $nilai_buku = 4;
-        } elseif ($nilai_buku_bln >= '9939000' or $nilai_buku_bln <= '11917999') {
-            $nilai_buku = 3;
-        } elseif ($nilai_buku_bln >= '11918000' or $nilai_buku_bln <= '13896999') {
-            $nilai_buku = 2;
-        } elseif ($nilai_buku_bln >= '13897000' or $nilai_buku_bln <= '15876000') {
-            $nilai_buku = 1;
-        } else {
-            $nilai_buku = 0;
-        }
-
-        date_default_timezone_set('Asia/Jakarta');
-        $date = date("Y-m-d H:i:s");
-
-        $data = array(
-            'id_brg' => $id_barang,
-            'kd_brg' => $kd_brg,
-            'kd_matriks' => $kd_matriks,
-            'nm_brg' => $nm_brg,
-            'no_reg' => $no_reg,
-            'kondisi_brg' => $kondisi_brg,
-            'nilai_buku' => $nilai_buku,
-            'sisa_umr_ekonomis' => $sisa_umr_eko,
-            'entry_date' => $date
-        );
-
-        $hasil3 = $this->db->insert('tbl_matriks_nilai', $data);
-
-        if ($hasil1 && $hasil2 && $hasil3) {
-            if ($this->db->affected_rows() > 0) {
-                $menu        = 'Pemeliharaan Aset';
-                $aksi        = 'Approve dan Insert';
-                $item        = 'Menyetujui pemeliharaan dan menginput data ke tabel matriks';
-                $assign_to   = 'Asset dan Kepsek';
-                $assign_type = 'Approve dan Insert';
-                activity_log($menu, $aksi, $item, $assign_to, $assign_type);
-                return 1;
+            if ($hasil1 && $hasil2 && $hasil3) {
+                if ($this->db->affected_rows() > 0) {
+                    $menu        = 'Pemeliharaan Aset';
+                    $aksi        = 'Approve dan Insert';
+                    $item        = 'Menyetujui pemeliharaan dan menginput data ke tabel matriks';
+                    $assign_to   = 'Asset dan Kepsek';
+                    $assign_type = 'Approve dan Insert';
+                    activity_log($menu, $aksi, $item, $assign_to, $assign_type);
+                    return 1;
+                } else {
+                    return 0;
+                }
             } else {
                 return 0;
             }
         } else {
-            return 0;
+            $hasil1 = $this->db->query("UPDATE tbl_pemeliharaan_aset SET stts_approval = '$stts_approval', tgl_approval = '$date' WHERE id_pemeliharaan = '$id_pemeliharaan' ");
+            $hasil2 = $this->db->query("UPDATE tbl_pengadaan_aset SET stts_pemeliharaan = '2' WHERE id_brg = '$id_brg' ");
+
+            if ($hasil1 && $hasil2) {
+                if ($this->db->affected_rows() > 0) {
+                    $menu        = 'Pemeliharaan Aset';
+                    $aksi        = 'Approve dan Insert';
+                    $item        = 'Menyetujui pemeliharaan';
+                    $assign_to   = 'Asset dan Kepsek';
+                    $assign_type = 'Approve dan Insert';
+                    activity_log($menu, $aksi, $item, $assign_to, $assign_type);
+                    return 1;
+                } else {
+                    return 0;
+                }
+            } else {
+                return 0;
+            }
         }
     }
 
-    function aksi_pemeliharaan_kep($id_pemeliharaan, $stts_approval_kep)
+    function aksi_pemeliharaan_kep($id_pemeliharaan, $id_brg, $kd_matriks, $stts_approval_kep, $nilai_buku_bln, $sisa_umr_ekonomis)
     {
-        date_default_timezone_set('Asia/Jakarta');
-        $date   = date("Y-m-d H:i:s");
-        $hasil  = $this->db->query(
-            "UPDATE 
-                tbl_pemeliharaan_aset SET 
-                stts_approval_kep = '$stts_approval_kep', tgl_approval_kep = '$date'
-            WHERE id_pemeliharaan = '$id_pemeliharaan' "
-        );
+        if ($stts_approval_kep == 2) {
 
-        if ($hasil) {
-            if ($this->db->affected_rows() > 0) {
-                $menu        = 'Pemeliharaan Aset';
-                $aksi        = 'Update';
-                $item        = 'Menyetujui pemeliharaan dan mengupdate data ke tabel matriks';
-                $assign_to   = 'Asset dan Kepsek';
-                $assign_type = 'Approve dan Insert';
-                activity_log($menu, $aksi, $item, $assign_to, $assign_type);
-                return 1;
+            date_default_timezone_set('Asia/Jakarta');
+            $date   = date("Y-m-d H:i:s");
+            $hasil1  = $this->db->query(
+                "UPDATE 
+                    tbl_pemeliharaan_aset SET 
+                    stts_approval_kep = '$stts_approval_kep', tgl_approval_kep = '$date'
+                WHERE id_pemeliharaan = '$id_pemeliharaan' "
+            );
+
+            $hasil2 = $this->db->query("UPDATE tbl_pengadaan_aset SET stts_pemeliharaan = '2' WHERE id_brg = '$id_brg' ");
+
+            $get = $this->db->get_where('tbl_pemeliharaan_aset', array('id_pemeliharaan' => $id_pemeliharaan))->result_array();
+
+            $id_barang   = $get[0]['id_brg'];
+            $kd_brg      = $get[0]['kd_brg'];
+            $nm_brg      = $get[0]['nm_brg'];
+            $no_reg      = $get[0]['no_reg'];
+
+            if ($get[0]['kondisi_brg'] == 2) {
+                $kondisi_brg = 2;
+            } elseif ($get[0]['kondisi_brg'] == 3) {
+                $kondisi_brg = 4;
+            }
+
+            if ($sisa_umr_ekonomis == 0) {
+                $sisa_umr_eko = 5;
+            } elseif ($sisa_umr_ekonomis < 2) {
+                $sisa_umr_eko = 4;
+            } elseif ($sisa_umr_ekonomis >= 2) {
+                $sisa_umr_eko = 2;
+            } else {
+                $sisa_umr_eko = 0;
+            }
+
+            if ($nilai_buku_bln >= '44000' or $nilai_buku_bln <= '2022999') {
+                $nilai_buku = 8;
+            } elseif ($nilai_buku_bln >= '2023000' or $nilai_buku_bln <= '4001999') {
+                $nilai_buku = 7;
+            } elseif ($nilai_buku_bln >= '4002000' or $nilai_buku_bln <= '5980999') {
+                $nilai_buku = 6;
+            } elseif ($nilai_buku_bln >= '5981000' or $nilai_buku_bln <= '7959999') {
+                $nilai_buku = 5;
+            } elseif ($nilai_buku_bln >= '7960000' or $nilai_buku_bln <= '9938999') {
+                $nilai_buku = 4;
+            } elseif ($nilai_buku_bln >= '9939000' or $nilai_buku_bln <= '11917999') {
+                $nilai_buku = 3;
+            } elseif ($nilai_buku_bln >= '11918000' or $nilai_buku_bln <= '13896999') {
+                $nilai_buku = 2;
+            } elseif ($nilai_buku_bln >= '13897000' or $nilai_buku_bln <= '15876000') {
+                $nilai_buku = 1;
+            } else {
+                $nilai_buku = 0;
+            }
+
+            date_default_timezone_set('Asia/Jakarta');
+            $date = date("Y-m-d H:i:s");
+
+            $data = array(
+                'id_brg' => $id_barang,
+                'kd_brg' => $kd_brg,
+                'kd_matriks' => $kd_matriks,
+                'nm_brg' => $nm_brg,
+                'no_reg' => $no_reg,
+                'kondisi_brg' => $kondisi_brg,
+                'nilai_buku' => $nilai_buku,
+                'sisa_umr_ekonomis' => $sisa_umr_eko,
+                'entry_date' => $date
+            );
+
+            $hasil3 = $this->db->insert('tbl_matriks_nilai', $data);
+
+            if ($hasil1 && $hasil2 && $hasil3) {
+                if ($this->db->affected_rows() > 0) {
+                    $menu        = 'Pemeliharaan Aset';
+                    $aksi        = 'Update';
+                    $item        = 'Menyetujui pemeliharaan External dan mengupdate data ke tabel matriks';
+                    $assign_to   = 'Asset dan Kepsek';
+                    $assign_type = 'Approve dan Insert';
+                    activity_log($menu, $aksi, $item, $assign_to, $assign_type);
+                    return 1;
+                } else {
+                    return 0;
+                }
             } else {
                 return 0;
             }
         } else {
-            return 0;
+            date_default_timezone_set('Asia/Jakarta');
+            $date   = date("Y-m-d H:i:s");
+            $hasil  = $this->db->query(
+                "UPDATE 
+                    tbl_pemeliharaan_aset SET 
+                    stts_approval_kep = '$stts_approval_kep', tgl_approval_kep = '$date'
+                WHERE id_pemeliharaan = '$id_pemeliharaan' "
+            );
+
+            if ($hasil) {
+                if ($this->db->affected_rows() > 0) {
+                    $menu        = 'Pemeliharaan Aset';
+                    $aksi        = 'Update';
+                    $item        = 'Menolak pemeliharaan External';
+                    $assign_to   = 'Asset dan Kepsek';
+                    $assign_type = 'Approve dan Insert';
+                    activity_log($menu, $aksi, $item, $assign_to, $assign_type);
+                    return 1;
+                } else {
+                    return 0;
+                }
+            } else {
+                return 0;
+            }
         }
     }
 
@@ -256,12 +358,13 @@ class Pemeliharaan_aset_model extends CI_Model
     {
         $hasil1 = $this->db->query("UPDATE tbl_pemeliharaan_aset SET stts_approval = '1' WHERE id_pemeliharaan = '$id_pemeliharaan' ");
         $hasil2 = $this->db->query("UPDATE tbl_pengadaan_aset SET stts_pemeliharaan = '1' WHERE id_brg = '$id_brg' ");
+        $hasil3 = $this->db->query("DELETE FROM tbl_matriks_nilai WHERE id_brg = '$id_brg'");
 
-        if ($hasil1 && $hasil2) {
+        if ($hasil1 && $hasil2 && $hasil3) {
             if ($this->db->affected_rows() > 0) {
                 $menu        = 'Pemeliharaan Aset';
-                $aksi        = 'Membatalkan pemeliharaan';
-                $item        = 'Mengupdate status';
+                $aksi        = 'Update dan Delete';
+                $item        = 'Mengupdate status dan menghapus data matriksnya';
                 $assign_to   = 'Asset';
                 $assign_type = '';
                 activity_log($menu, $aksi, $item, $assign_to, $assign_type);
@@ -308,7 +411,17 @@ class Pemeliharaan_aset_model extends CI_Model
 
     function get_pemeliharaan_aset_external_kep()
     {
-        return $this->db->query("SELECT * FROM tbl_pemeliharaan_aset WHERE stts_approval IN ('3', '5') ")->result_array();
+        return $this->db->query(
+            "SELECT 
+                a.id_pemeliharaan, a.id_brg, a.kd_brg, a.nm_brg, a.no_reg, a.kondisi_brg,
+                a.harga, a.umr_ekonomis, a.merk_type, a.nli_sisa, a.stts_approval, a.stts_approval_kep, b.thn_beli, a.ket,
+                (a.umr_ekonomis - (DATE_FORMAT(NOW(), '%Y') - b.thn_beli)) AS sisa_umr_ekonomis,
+                ((b.harga - b.nli_sisa) / b.umr_ekonomis) AS nil_bku
+            FROM tbl_pemeliharaan_aset a
+            LEFT JOIN tbl_pengadaan_aset b ON b.id_brg = a.id_brg
+            WHERE stts_approval IN ('3', '5')
+            ORDER BY a.entry_date"
+    )->result_array();
     }
 
     function pemeliharaan_selesai_ex($id_pemeliharaan, $id_brg)

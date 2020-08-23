@@ -23,11 +23,6 @@ $(function () {
     };
     data = [
       {
-        value: tot[0].tot_penghapusan,
-        color: "#DB2500",
-        highlight: "#FA0000",
-        label: "Data Penghapusan"
-      }, {
         value: tot[0].tot_aset_b,
         color: "#1ABC9C",
         highlight: "#13D1AC",

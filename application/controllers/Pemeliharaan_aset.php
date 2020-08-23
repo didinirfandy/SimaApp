@@ -73,8 +73,12 @@ class Pemeliharaan_aset extends CI_Controller
     public function aksi_pelihara_kep()
     {
         $id_pemeliharaan    = $this->input->post('id_pemeliharaan');
+        $id_brg             = $this->input->post('id_brg');
+        $kd_matriks         = $this->Pemeliharaan_aset_model->get_kd_matriks();
         $stts_approval_kep  = $this->input->post('stts_approval_kep');
-        $data = $this->Pemeliharaan_aset_model->aksi_pemeliharaan_kep($id_pemeliharaan, $stts_approval_kep);
+        $nilai_buku_bln     = $this->input->post('nilai_buku_bln');
+        $sisa_umr_ekonomis  = $this->input->post('sisa_umr_ekonomis');
+        $data = $this->Pemeliharaan_aset_model->aksi_pemeliharaan_kep($id_pemeliharaan, $id_brg, $kd_matriks, $stts_approval_kep, $nilai_buku_bln, $sisa_umr_ekonomis);
         echo json_encode($data);
     }
 

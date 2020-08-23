@@ -19,7 +19,7 @@
                 if ($role == 1) {
                     echo "Bagian Aset";
                 } elseif ($role == 2) {
-                    echo "Waksek Sarana";
+                    echo "Wakasek Sarana";
                 } elseif ($role == 3) {
                     echo "Kepala Sekolah";
                 } else {

@@ -41,10 +41,10 @@ $this->load->view('template/head', $data);
                                                 <th>No</th>
                                                 <th>User</th>
                                                 <th>Menu</th>
-                                                <th>Aksi</th>
+                                                <th>Tipe Aksi</th>
                                                 <th>Keterangan</th>
-                                                <th>Ditugaskan</th>
-                                                <th>Tipe</th>
+                                                <th>Tujuan</th>
+                                                <th>Aksi</th>
                                                 <th>Tanggal</th>
                                             </tr>
                                         </thead>

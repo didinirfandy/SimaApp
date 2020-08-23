@@ -167,11 +167,11 @@ $this->load->view('template/head', $data);
                 success: function(c) {
                     var pgdn = "";
                     for (h = 0; h < c.length; h++) {
-                        var bilangan = c[h].nli_sisa;
+                        var bilangan = c[h].nil_bku;
 
                         var reverse = bilangan.toString().split('').reverse().join(''),
                             ribuan = reverse.match(/\d{1,3}/g);
-                        ribuan = ribuan.join('.').split('').reverse().join('');
+                        nil_bku = ribuan.join('.').split('').reverse().join('');
 
                         setuju = "2";
                         tolak = "3";
@@ -226,11 +226,10 @@ $this->load->view('template/head', $data);
                             '<td style="text-align: right;">' + c[h].umr_ekonomis + '</td>' +
                             '<td style="text-align: right;">' + ribuan + '</td>' +
                             '<td style="text-align: center;">' +
-                            '<button style="' + aksi1 + '" class="btn btn-sm btn-info" onclick="aksi_pelihara_kep(\'' + c[h].id_pemeliharaan + '\', \'' + setuju + '\' )"><i class="fa fa-check"></i> Setuju</button> &nbsp;' +
-                            '<button style="' + aksi1 + '" class="btn btn-sm btn-danger" onclick="aksi_pelihara_kep(\'' + c[h].id_pemeliharaan + '\', \'' + tolak + '\')"><i class="fa fa-times"></i> Tolak</button>' +
-                            '<button style="' + aksi2 + '" type="button" class="btn btn-sm btn-success" disabled><i class="fa fa-check"></i> Disetujui</button> &nbsp;' +
-                            '<button style="' + aksi3 + '" type="button" class="btn btn-sm btn-danger" disabled><i class="fa fa-times"></i> Ditolak</button>' +
-                            '<button style="' + aksi2 + '" type="button" disabled class="btn btn-sm btn-' + stts + '"><i class="fa fa-' + icon + '"></i> ' + text + '</button>' +
+                            '<button style="' + aksi1 + '" class="btn btn-xs btn-primary" onclick="aksi_pelihara_kep(\'' + c[h].id_pemeliharaan + '\', \'' + c[h].id_brg + '\', \'' + setuju + '\', \'' + nil_bku + '\', \'' + c[h].sisa_umr_ekonomis + '\' )"><i class="fa fa-check"></i> Setuju</button> &nbsp;' +
+                            '<button style="' + aksi1 + '" class="btn btn-xs btn-danger" onclick="aksi_pelihara_kep(\'' + c[h].id_pemeliharaan + '\', \'' + c[h].id_brg + '\', \'' + tolak + '\', \'' + nil_bku + '\', \'' + c[h].sisa_umr_ekonomis + '\')"><i class="fa fa-times"></i> Tolak</button> &nbsp;' +
+                            '<button style="' + aksi3 + '" type="button" class="btn btn-xs btn-danger" disabled><i class="fa fa-times"></i> Ditolak</button> &nbsp;' +
+                            '<button style="' + aksi2 + '" type="button" disabled class="btn btn-xs btn-' + stts + '"><i class="fa fa-' + icon + '"></i> ' + text + '</button> &nbsp;' +
                             '</td>' +
                             '</tr>';
                     }
@@ -239,19 +238,29 @@ $this->load->view('template/head', $data);
             });
         }
 
-        function aksi_pelihara_kep(id_pemeliharaan, stts_approval_kep) {
+        function aksi_pelihara_kep(id_pemeliharaan, id_brg, stts_approval_kep, nilai_buku_bln, sisa_umr_ekonomis) {
             $.ajax({
                 type: "POST",
                 data: {
                     id_pemeliharaan: id_pemeliharaan,
-                    stts_approval_kep: stts_approval_kep
+                    id_brg: id_brg,
+                    stts_approval_kep: stts_approval_kep,
+                    nilai_buku_bln: nilai_buku_bln,
+                    sisa_umr_ekonomis: sisa_umr_ekonomis
                 },
                 url: "<?= base_url('Pemeliharaan_aset/aksi_pelihara_kep') ?>",
                 async: false,
                 dataType: "JSON",
                 success: function(a) {
+                    if (stts_approval_kep == 2) {
+                        stts = "Disetujui";
+                    } else if (stts_approval_kep == 3) {
+                        stts = "Ditolak";
+                    } else {
+                        stts = "-";
+                    }
                     swal({
-                        title: "BERHASIL",
+                        title: "Berhasil " + stts,
                         type: "success",
                         timer: 2500,
                         showConfirmButton: false

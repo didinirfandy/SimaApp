@@ -135,45 +135,45 @@ $this->load->view('template/head', $data);
                                 </div>
                             </div>
                             <div class="panel-body">
-                                <h5 style="color: #000000; font: 700 30px Arial;">Keterangan :</h5>
+                                <h5 style="color: #000000; font: 700 15px Arial;">Keterangan :</h5>
                                 <div class="col-md-12">
                                     <div class="col-md-1">
-                                        <div style="background-color: #DB2500; height: 30px; width: 50px;"></div>
+                                        <div style="background-color: #DB2500; height: 15px; width: 50px;"></div>
                                     </div>
                                     <div class="col-md-3" style="color: #000000; font: 600 12px Arial;">Data Penghapusan</div>
 
                                     <div class="col-md-1">
-                                        <div style="background-color: #1ABC9C; height: 30px; width: 50px;"></div>
+                                        <div style="background-color: #1ABC9C; height: 15px; width: 50px;"></div>
                                     </div>
                                     <div class="col-md-3" style="color: #000000; font: 600 12px Arial;">Aset Layak Pakai</div>
 
                                     <div class="col-md-1">
-                                        <div style="background-color: #DEA923; height: 30px; width: 50px;"></div>
+                                        <div style="background-color: #DEA923; height: 15px; width: 50px;"></div>
                                     </div>
                                     <div class="col-md-3" style="color: #000000; font: 600 12px Arial;">Pemeliharaan Internal Masih Proses</div>
 
                                     <div class="col-md-1">
-                                        <div style="background-color: #1ec74b; height: 30px; width: 50px;"></div>
+                                        <div style="background-color: #1ec74b; height: 15px; width: 50px;"></div>
                                     </div>
                                     <div class="col-md-3" style="color: #000000; font: 600 12px Arial;">Pemeliharaan External Masih Proses</div>
 
                                     <div class="col-md-1">
-                                        <div style="background-color: #44524d; height: 30px; width: 50px;"></div>
+                                        <div style="background-color: #44524d; height: 15px; width: 50px;"></div>
                                     </div>
                                     <div class="col-md-3" style="color: #000000; font: 600 12px Arial;">Pemeliharaan Internal Selesai</div>
 
                                     <div class="col-md-1">
-                                        <div style="background-color: #1f2194; height: 30px; width: 50px;"></div>
+                                        <div style="background-color: #1f2194; height: 15px; width: 50px;"></div>
                                     </div>
                                     <div class="col-md-3" style="color: #000000; font: 600 12px Arial;">Pemeliharaan External Selesai</div>
 
                                     <div class="col-md-1">
-                                        <div style="background-color: #824087; height: 30px; width: 50px;"></div>
+                                        <div style="background-color: #824087; height: 15px; width: 50px;"></div>
                                     </div>
                                     <div class="col-md-3" style="color: #000000; font: 600 12px Arial;">Aset Rusak Ringan</div>
 
                                     <div class="col-md-1">
-                                        <div style="background-color: #456e4a; height: 30px; width: 50px;"></div>
+                                        <div style="background-color: #456e4a; height: 15px; width: 50px;"></div>
                                     </div>
                                     <div class="col-md-3" style="color: #000000; font: 600 12px Arial;">Aset Rusak Berat</div>
                                 </div>

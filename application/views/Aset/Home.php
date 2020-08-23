@@ -136,11 +136,6 @@ $this->load->view('template/head', $data);
                                 <h5 style="color: #000000; font: 700 15px Arial;">Keterangan :</h5>
                                 <div class="col-md-12">
                                     <div class="col-md-1">
-                                        <div style="background-color: #DB2500; height: 15px; width: 50px;"></div>
-                                    </div>
-                                    <div class="col-md-3" style="color: #000000; font: 600 12px Arial;">Data Penghapusan</div>
-
-                                    <div class="col-md-1">
                                         <div style="background-color: #1ABC9C; height: 15px; width: 50px;"></div>
                                     </div>
                                     <div class="col-md-3" style="color: #000000; font: 600 12px Arial;">Aset Layak Pakai</div>

@@ -190,25 +190,89 @@ $this->load->view('template/head', $data);
 
                         if (c[h].stts_approval == 1) {
                             tmbh = "";
-                            hps = "info";
+                            hps = "primary";
                             btl = "";
                             aksi1 = "";
                             aksi2 = "display: none;";
                             aksi3 = "display: none;";
+                            aksi4 = "display: none;";
+                            aksi5 = "display: none;";
                         } else if (c[h].stts_approval == 2) {
-                            tmbh = "disabled";
-                            hps = "success";
-                            btl = "";
-                            aksi1 = "display: none;";
-                            aksi2 = "";
-                            aksi3 = "display: none;";
+                            if (c[h].stts_approval_kep == 1) {
+                                tmbh = "disabled";
+                                hps = "success";
+                                btl = "";
+                                aksi1 = "display: none;";
+                                aksi2 = "";
+                                aksi3 = "display: none;";
+                                aksi4 = "display: none;";
+                                aksi5 = "display: none;";
+                            } else if (c[h].stts_approval_kep == 2) {
+                                tmbh = "disabled";
+                                hps = "success";
+                                btl = "";
+                                aksi1 = "display: none;";
+                                aksi2 = "";
+                                aksi3 = "display: none;";
+                                aksi4 = "display: none;";
+                                aksi5 = "display: none;";
+                            } else if (c[h].stts_approval_kep == 3) {
+                                tmbh = "disabled";
+                                hps = "success";
+                                btl = "";
+                                aksi1 = "display: none;";
+                                aksi2 = "display: none";
+                                aksi3 = "display: none;";
+                                aksi4 = "display: none;";
+                                aksi5 = "";
+                            } else {
+                                btl = "disabled";
+                                tmbh = "";
+                                hps = "primary";
+                                aksi1 = "display: none;";
+                                aksi2 = "display: none;";
+                                aksi3 = "display: none;";
+                                aksi4 = "display: none;";
+                                aksi5 = "display: none;";
+                            }
                         } else if (c[h].stts_approval == 3) {
-                            tmbh = "disabled";
-                            hps = "success";
-                            btl = "";
-                            aksi1 = "display: none;";
-                            aksi2 = "";
-                            aksi3 = "display: none;";
+                            if (c[h].stts_approval_kep == 1) {
+                                tmbh = "disabled";
+                                hps = "success";
+                                btl = "";
+                                aksi1 = "display: none;";
+                                aksi2 = "";
+                                aksi3 = "display: none;";
+                                aksi4 = "display: none;";
+                                aksi5 = "display: none;";
+                            } else if (c[h].stts_approval_kep == 2) {
+                                tmbh = "disabled";
+                                hps = "success";
+                                btl = "";
+                                aksi1 = "display: none;";
+                                aksi2 = "display: none;";
+                                aksi3 = "display: none;";
+                                aksi4 = "";
+                                aksi5 = "display: none;";
+                            } else if (c[h].stts_approval_kep == 3) {
+                                tmbh = "disabled";
+                                hps = "success";
+                                btl = "";
+                                aksi1 = "display: none;";
+                                aksi2 = "display: none";
+                                aksi3 = "display: none;";
+                                aksi4 = "display: none;";
+                                aksi5 = "";
+                            } else {
+                                btl = "disabled";
+                                tmbh = "";
+                                hps = "primary";
+                                aksi1 = "display: none;";
+                                aksi2 = "display: none;";
+                                aksi3 = "display: none;";
+                                aksi4 = "display: none;";
+                                aksi5 = "display: none;";
+                            }
                         } else if (c[h].stts_approval == 4) {
                             tmbh = "disabled";
                             hps = "success";
@@ -216,6 +280,8 @@ $this->load->view('template/head', $data);
                             aksi1 = "display: none;";
                             aksi2 = "display: none;";
                             aksi3 = "";
+                            aksi4 = "display: none;";
+                            aksi5 = "display: none;";
                         } else if (c[h].stts_approval == 5) {
                             tmbh = "disabled";
                             hps = "success";
@@ -223,6 +289,8 @@ $this->load->view('template/head', $data);
                             aksi1 = "display: none;";
                             aksi2 = "display: none;";
                             aksi3 = "";
+                            aksi4 = "display: none;";
+                            aksi5 = "display: none;";
                         } else {
                             btl = "disabled";
                             tmbh = "";
@@ -230,6 +298,8 @@ $this->load->view('template/head', $data);
                             aksi1 = "display: none;";
                             aksi2 = "display: none;";
                             aksi3 = "display: none;";
+                            aksi4 = "display: none;";
+                            aksi5 = "display: none;";
                         }
 
                         if (c[h].kondisi_brg == 1) {
@@ -259,7 +329,9 @@ $this->load->view('template/head', $data);
                             '<td style="text-align: right;">' + nil_bku + '</td>' +
                             '<td>' + c[h].ket + '</td>' +
                             '<td style="text-align: center;">' +
-                            '<button style="' + aksi3 + '" type="button" class="btn btn-sm btn-success" disabled><i class="fa fa-check"></i> Selesai</button>' +
+                            '<button style="' + aksi5 + '" type="button" class="btn btn-sm btn-danger" disabled><i class="fa fa-check"></i> Ditolak</button>' +
+                            '<button style="' + aksi4 + '" type="button" class="btn btn-sm btn-info" disabled><i class="fa fa-check"></i> Disetujui</button>' +
+                            '<button style="' + aksi3 + '" type="button" class="btn btn-sm btn-success" disabled><i class="fa fa-check"></i></button>' +
                             '<button style="' + aksi1 + '" type="submit" ' + tmbh + ' title="Internal" onclick="set_pelihara(\'' + c[h].id_pemeliharaan + '\', \'' + c[h].id_brg + '\', \'' + internal + '\', \'' + nil_bku + '\', \'' + sisa_umr_ekonomis + '\')" class="btn btn-sm btn-' + hps + '"><i class="fa fa-level-down"></i> Internal</button> &nbsp;' +
                             '<button style="' + aksi1 + '" type="submit" ' + tmbh + ' title="Eksternal" onclick="set_pelihara(\'' + c[h].id_pemeliharaan + '\', \'' + c[h].id_brg + '\', \'' + eksternal + '\', \'' + nil_bku + '\', \'' + sisa_umr_ekonomis + '\')" class="btn btn-sm btn-' + hps + '"><i class="fa fa-level-up"></i> Eksternal</button>' +
                             '<button style="' + aksi2 + '"type="submit" ' + btl + ' title="Batal" onclick="set_pelihara_batal(\'' + c[h].id_pemeliharaan + '\', \'' + c[h].id_brg + '\')" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Batal</button>' +
@@ -293,13 +365,14 @@ $this->load->view('template/head', $data);
                     } else {
                         stts = "-";
                     }
+
                     swal({
-                        text: "Berhasil Menyetujui Pemeliharaan " + stts + " !!!",
+                        text: "Berhasil Menyetujui Pemeliharaan " + stts,
                         icon: "success",
                         timer: 2500,
                         showConfirmButton: false
                     })
-                    // location.reload();
+                    
                     setTimeout(function() {
                         location.reload()
                     }, 2500);
@@ -319,7 +392,7 @@ $this->load->view('template/head', $data);
                 dataType: "JSON",
                 success: function(a) {
                     swal({
-                        text: "Berhasil ditolak!",
+                        text: "Berhasil dibatalkan!",
                         icon: "success",
                         timer: 5000,
                         showConfirmButton: false

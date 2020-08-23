@@ -116,13 +116,12 @@ class Login_model extends CI_Model
                 (SELECT COUNT(stts_approval) FROM tbl_pemeliharaan_aset WHERE stts_approval = '2') AS tot_pemeliharaan_in,
                 (SELECT COUNT(stts_approval) FROM tbl_pemeliharaan_aset WHERE stts_approval = '3') AS tot_pemeliharaan_ex,
                 (SELECT COUNT(stts_approval) FROM tbl_pemeliharaan_aset WHERE stts_approval = '4') AS tot_pemeliharaan_selesai_in,
-                (SELECT COUNT(stts_approval) FROM tbl_pemeliharaan_aset WHERE stts_approval = '5') AS tot_pemeliharaan_selesai_ex,
-                (SELECT COUNT(stts_penghapusan) FROM tbl_pengadaan_aset WHERE stts_penghapusan = '3' ) AS tot_penghapusan
+                (SELECT COUNT(stts_approval) FROM tbl_pemeliharaan_aset WHERE stts_approval = '5') AS tot_pemeliharaan_selesai_ex
             FROM 
                 tbl_pengadaan_aset
             GROUP BY 
                 tot_aset_b, tot_aset_rr, tot_aset_rb, tot_pemeliharaan_in, tot_pemeliharaan_ex, 
-                tot_pemeliharaan_selesai_in, tot_pemeliharaan_selesai_ex, tot_penghapusan"
+                tot_pemeliharaan_selesai_in, tot_pemeliharaan_selesai_ex"
         )->result_array();
     }
 
@@ -139,6 +138,30 @@ class Login_model extends CI_Model
             'ktp' => $ktp,
             'username' => $username,
             'image' => $image
+        );
+        $this->db->where('user_id', $user_id);
+        $this->db->update('app_user', $data);
+
+        if ($this->db->affected_rows() > 0) {
+            $menu        = 'Setting';
+            $aksi        = 'Mengubah';
+            $item        = 'Mengubah data diri atau image';
+            $assign_to   = '';
+            $assign_type = '';
+            activity_log($menu, $aksi, $item, $assign_to, $assign_type);
+            return 1;
+        } else {
+            return false;
+        }
+    }
+
+    function update_no_image($user_id, $nama_pegawai, $nik, $ktp, $username)
+    {
+        $data = array(
+            'nama_pegawai' => $nama_pegawai,
+            'nik' => $nik,
+            'ktp' => $ktp,
+            'username' => $username
         );
         $this->db->where('user_id', $user_id);
         $this->db->update('app_user', $data);
