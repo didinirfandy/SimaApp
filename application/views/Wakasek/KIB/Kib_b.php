@@ -11,11 +11,11 @@
 
 		<div id="page-wrapper">
             <div class="header"> 
-                <h2 class="page-header">KARTU INVENTARIS BARANG PERALATAN DAN MESIN ( KIB B )</h2>
+                <h3 class="page-header">KARTU INVENTARIS BARANG PERALATAN DAN MESIN ( KIB B )</h3>
                 <?= $this->session->flashdata('pesan'); ?>
                 <ol class="breadcrumb">
                     <li><a href="#"><?php $str = $this->session->userdata('nama_pegawai');
-                    echo wordwrap($str, 15, "<br>\n"); ?></a></li>
+                    echo wordwrap($str, 30, "<br>\n"); ?></a></li>
                     <li><a href="<?=base_url()?>Aset/home">Home</a></li>
                     <li>Daftar Aset</li>
                     <li class="active">KIB B</li>
@@ -43,7 +43,7 @@
                                                 <th>Bahan</th>
                                                 <th>Tahun Pembelian</th>
                                                 <th>Asal-Usul</th>
-                                                <th>Kondisi <span style="color:red;">*</span></th>
+                                                <th>Kondisi</th>
                                                 <th>Harga</th>
                                                 <th>Umur Ekonomis</th>
                                                 <th>Nilai Sisa</th>
@@ -79,10 +79,7 @@
                                                                 <td>$b[bahan]</td>
                                                                 <td>$b[thn_beli]</td>
                                                                 <td>$b[perolehan]</td>
-                                                                <td>
-                                                                    <span class='span-kondisi caption' data-id='$b[id_brg]'>$kondisi</span>
-                                                                    <input type='text' class='field-kondisi form-control editor' style='display: none;' value='$b[kondisi]' data-id='$b[id_brg]' />
-                                                                </td>
+                                                                <td>$kondisi</td>
                                                                 <td style='text-align: right;'>$harga</td>
                                                                 <td style='text-align: right;'>$b[umr_ekonomis]</td>
                                                                 <td style='text-align: right;'>$nilsisa</td>

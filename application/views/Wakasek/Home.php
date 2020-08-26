@@ -17,7 +17,7 @@ $this->load->view('template/head', $data);
                 <ol class="breadcrumb">
                     <li>
                         <a href="#"><?php $str = $this->session->userdata('nama_pegawai');
-                                    echo wordwrap($str, 30, "<br>\n"); ?></a>
+                                    echo wordwrap($str, 50, "<br>\n"); ?></a>
                     </li>
                     <li class="active">Dashboard</li>
                 </ol>

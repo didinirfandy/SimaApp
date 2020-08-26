@@ -12,13 +12,13 @@ $this->load->view('template/head', $data);
 
         <div id="page-wrapper">
             <div class="header">
-                <h1 class="page-header">
+                <h2 class="page-header">
                     Pemeliharaan Aset
-                </h1>
+                </h2>
                 <?= $this->session->flashdata('pesan'); ?>
                 <ol class="breadcrumb">
                     <li><a href="#"><?php $str = $this->session->userdata('nama_pegawai');
-                                    echo wordwrap($str, 30, "<br>\n"); ?></a></li>
+                                    echo wordwrap($str, 40, "<br>\n"); ?></a></li>
                     <li><a href="<?= base_url() ?>Aset/home">Home</a></li>
                     <li class="active">Pemeliharaan Aset</li>
                 </ol>
@@ -125,6 +125,10 @@ $this->load->view('template/head', $data);
                             text = "Selesai";
                             stts = "success";
                             icon = "check";
+                        } else if (c[h].stts_approval == 6) {
+                            text = "Penghapusan";
+                            stts = "danger";
+                            icon = "trash";
                         } else {
                             text = "Proses";
                             stts = "info";
@@ -149,7 +153,7 @@ $this->load->view('template/head', $data);
                             '<td>' + kondisi_brg + '</td>' +
                             '<td style="text-align: right;">' + c[h].umr_ekonomis + '</td>' +
                             '<td style="text-align: right;">' + ribuan + '</td>' +
-                            '<td style="text-align: center;"><button type="button" disabled title="Selesai" class="btn btn-sm btn-' + stts + '"><i class="fa fa-' + icon + '"></i> ' + text + '</button></td>' +
+                            '<td style="text-align: center;"><button type="button" disabled title="Selesai" class="btn btn-xs btn-' + stts + '"><i class="fa fa-' + icon + '"></i> ' + text + '</button></td>' +
                             '</tr>';
                     }
                     $('#dt_internal').html(pgdn);
@@ -167,12 +171,46 @@ $this->load->view('template/head', $data);
                 success: function(c) {
                     var pgdn = "";
                     for (h = 0; h < c.length; h++) {
-                        var bilangan = c[h].nil_bku;
+                        if (c[h].nli_sisa != "") {
+                            var bilangan = c[h].nli_sisa;
 
-                        var reverse = bilangan.toString().split('').reverse().join(''),
-                            ribuan = reverse.match(/\d{1,3}/g);
-                        nil_bku = ribuan.join('.').split('').reverse().join('');
+                            var reverse = bilangan.toString().split('').reverse().join(''),
+                                ribuan = reverse.match(/\d{1,3}/g);
+                            nli_sisa = ribuan.join('.').split('').reverse().join('');
+                        } else {
+                            nli_sisa = "";
+                        }
 
+                        if (c[h].harga != "") {
+                            var bil = c[h].harga;
+
+                            var reverse = bil.toString().split('').reverse().join(''),
+                                ribuan = reverse.match(/\d{1,3}/g);
+                            harga = ribuan.join('.').split('').reverse().join('');
+                        } else {
+                            harga = "";
+                        }
+
+                        var dateMonth = new Date();
+                        var thn_new = dateMonth.getFullYear();
+                        var thn_beli = c[h].thn_beli;
+                        var selisih = thn_new - thn_beli;
+
+                        var tahun = Math.ceil(c[h].nil_bku / 12);
+                        var bulan = dateMonth.getMonth() + 1;
+
+                        var penyusutan = tahun * bulan;
+                        var reverse = penyusutan.toString().split('').reverse().join(''),
+                            ribuan_bln = reverse.match(/\d{1,3}/g);
+                        penyusutan_fix = ribuan_bln.join('.').split('').reverse().join('');
+
+                        var hsl_fix = c[h].harga - (c[h].nil_bku * selisih);
+
+                        var reverse = hsl_fix.toString().split('').reverse().join(''),
+                            ribuan_bku = reverse.match(/\d{1,3}/g);
+                        nil_bku = ribuan_bku.join('.').split('').reverse().join('');
+
+                        var sisa_umr_ekonomis = c[h].sisa_umr_ekonomis;
                         setuju = "2";
                         tolak = "3";
 
@@ -201,6 +239,10 @@ $this->load->view('template/head', $data);
                             text = "Selesai";
                             stts = "success";
                             icon = "check";
+                        } else if (c[h].stts_approval == 7) {
+                            text = "Penghapusan";
+                            stts = "danger";
+                            icon = "trash";
                         } else {
                             text = "Proses";
                             stts = "info";
@@ -224,10 +266,10 @@ $this->load->view('template/head', $data);
                             '<td>' + c[h].merk_type + '</td>' +
                             '<td>' + kondisi_brg + '</td>' +
                             '<td style="text-align: right;">' + c[h].umr_ekonomis + '</td>' +
-                            '<td style="text-align: right;">' + ribuan + '</td>' +
+                            '<td style="text-align: right;">' + nil_bku + '</td>' +
                             '<td style="text-align: center;">' +
-                            '<button style="' + aksi1 + '" class="btn btn-xs btn-primary" onclick="aksi_pelihara_kep(\'' + c[h].id_pemeliharaan + '\', \'' + c[h].id_brg + '\', \'' + setuju + '\', \'' + nil_bku + '\', \'' + c[h].sisa_umr_ekonomis + '\' )"><i class="fa fa-check"></i> Setuju</button> &nbsp;' +
-                            '<button style="' + aksi1 + '" class="btn btn-xs btn-danger" onclick="aksi_pelihara_kep(\'' + c[h].id_pemeliharaan + '\', \'' + c[h].id_brg + '\', \'' + tolak + '\', \'' + nil_bku + '\', \'' + c[h].sisa_umr_ekonomis + '\')"><i class="fa fa-times"></i> Tolak</button> &nbsp;' +
+                            '<button style="' + aksi1 + '" class="btn btn-xs btn-primary" onclick="aksi_pelihara_kep(\'' + c[h].id_pemeliharaan + '\', \'' + c[h].id_brg + '\', \'' + setuju + '\', \'' + hsl_fix + '\', \'' +  sisa_umr_ekonomis + '\' )"><i class="fa fa-check"></i> Setuju</button> &nbsp;' +
+                            '<button style="' + aksi1 + '" class="btn btn-xs btn-danger" onclick="aksi_pelihara_kep(\'' + c[h].id_pemeliharaan + '\', \'' + c[h].id_brg + '\', \'' + tolak + '\', \'' + hsl_fix + '\', \'' + sisa_umr_ekonomis + '\')"><i class="fa fa-times"></i> Tolak</button> &nbsp;' +
                             '<button style="' + aksi3 + '" type="button" class="btn btn-xs btn-danger" disabled><i class="fa fa-times"></i> Ditolak</button> &nbsp;' +
                             '<button style="' + aksi2 + '" type="button" disabled class="btn btn-xs btn-' + stts + '"><i class="fa fa-' + icon + '"></i> ' + text + '</button> &nbsp;' +
                             '</td>' +

@@ -12,13 +12,13 @@ $this->load->view('template/head', $data);
 
         <div id="page-wrapper">
             <div class="header">
-                <h1 class="page-header">
+                <h2 class="page-header">
                     Pengadaan Aset
-                </h1>
+                </h2>
                 <?= $this->session->flashdata('pesan'); ?>
                 <ol class="breadcrumb">
                     <li><a href="#"><?php $str = $this->session->userdata('nama_pegawai');
-                                    echo wordwrap($str, 30, "<br>\n"); ?></a></li>
+                                    echo wordwrap($str, 40, "<br>\n"); ?></a></li>
                     <li><a href="<?= base_url() ?>Aset/home">Home</a></li>
                     <li class="active">Pengadaan Aset</li>
                 </ol>
@@ -169,7 +169,7 @@ $this->load->view('template/head', $data);
                             '<tr>' +
                             '<td>' + (i + 1) + '</td>' +
                             '<td>' + a[i].ket + '</td>' +
-                            '<td><button class="btn btn-sm btn-info" onclick="tampil_detail_barang(\'' + a[i].kd_usulan + '\')" data-toggle="modal" data-target="#dtl"><i class="fa fa-info-circle"></i> Detail</button></td>' +
+                            '<td style="text-align: center;"><button class="btn btn-sm btn-info" onclick="tampil_detail_barang(\'' + a[i].kd_usulan + '\')" data-toggle="modal" data-target="#dtl"><i class="fa fa-info-circle"></i> Detail</button></td>' +
                             '<td>' + a[i].entry_date + '</td>' +
                             '<td style="text-align: center;">' +
                             '<button style="' + aksi1 + '" class="btn btn-sm btn-info" onclick="aksi_usulan_kep(\'' + a[i].kd_usulan + '\', \'' + setuju + '\' )"><i class="fa fa-check"></i> Setuju</button> &nbsp;' +
@@ -272,11 +272,15 @@ $this->load->view('template/head', $data);
                 success: function(c) {
                     var pgdn = "";
                     for (h = 0; h < c.length; h++) {
-                        var bilangan = c[h].nli_sisa;
+                        if (c[h].nli_sisa != "") {
+                            var bilangan = c[h].nli_sisa;
 
-                        var reverse = bilangan.toString().split('').reverse().join(''),
-                            ribuan = reverse.match(/\d{1,3}/g);
-                        ribuan = ribuan.join('.').split('').reverse().join('');
+                            var reverse = bilangan.toString().split('').reverse().join(''),
+                                ribuan = reverse.match(/\d{1,3}/g);
+                            ribuan = ribuan.join('.').split('').reverse().join('');
+                        } else {
+                            ribuan = "";
+                        }
 
                         pgdn +=
                             '<tr>' +

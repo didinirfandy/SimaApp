@@ -12,13 +12,13 @@ $this->load->view('template/head', $data);
 
         <div id="page-wrapper">
             <div class="header">
-                <h1 class="page-header">
+                <h2 class="page-header">
                     Laporan Pengadaan
-                </h1>
+                </h2>
                 <?= $this->session->flashdata('pesan'); ?>
                 <ol class="breadcrumb">
                     <li><a href="#"><?php $str = $this->session->userdata('nama_pegawai');
-                                    echo wordwrap($str, 30, "<br>\n"); ?></a></li>
+                                    echo wordwrap($str, 40, "<br>\n"); ?></a></li>
                     <li><a href="<?= base_url() ?>Aset/home">Home</a></li>
                     <li>Laporan</li>
                     <li class="active">Pengadaan</li>
@@ -38,7 +38,7 @@ $this->load->view('template/head', $data);
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="form-group col-md-4 mx-sm-3 mb-3">
-                                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#caritgl"><i class="fa fa-print"></i> Buat Laporan</button>
+                                        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#caritgl"><i class="fa fa-print"></i> Buat Laporan</button>
                                     </div>
                                 </div><br>
                                 <div class="table-responsive">
@@ -142,17 +142,26 @@ $this->load->view('template/head', $data);
                 success: function(a) {
                     var html = "";
                     for (i = 0; i < a.length; i++) {
-                        var bilangan = a[i].nli_sisa;
+                        if (a[i].nli_sisa != "") {
+                            var bilangan = a[i].nli_sisa;
 
-                        var reverse = bilangan.toString().split('').reverse().join(''),
-                            ribuan = reverse.match(/\d{1,3}/g);
-                        nli_sisa = ribuan.join('.').split('').reverse().join('');
+                            var reverse = bilangan.toString().split('').reverse().join(''),
+                                ribuan = reverse.match(/\d{1,3}/g);
+                            nli_sisa = ribuan.join('.').split('').reverse().join('');
+                        } else {
+                            nli_sisa = "";
+                        }
 
-                        var bil = a[i].harga;
+                        if (a[i].harga != "") {
+                            var bil = a[i].harga;
 
-                        var reverse = bil.toString().split('').reverse().join(''),
-                            ribuan = reverse.match(/\d{1,3}/g);
-                        harga = ribuan.join('.').split('').reverse().join('');
+                            var reverse = bil.toString().split('').reverse().join(''),
+                                ribuan = reverse.match(/\d{1,3}/g);
+                            harga = ribuan.join('.').split('').reverse().join('');
+                        } else {
+                            harga = "";
+                        }
+
 
                         if (a[i].satuan_brg == 1) {
                             satuan = "Buah";

@@ -12,9 +12,9 @@ $this->load->view('template/head', $data);
 
         <div id="page-wrapper">
             <div class="header">
-                <h1 class="page-header">
+                <h2 class="page-header">
                     Pengadaan Aset
-                </h1>
+                </h2>
                 <?= $this->session->flashdata('pesan'); ?>
                 <ol class="breadcrumb">
                     <li><a href="#"><?php $str = $this->session->userdata('nama_pegawai');
@@ -144,9 +144,13 @@ $this->load->view('template/head', $data);
                 success: function(a) {
                     var html = "";
                     for (i = 0; i < a.length; i++) {
-                        var date = new Date(a[i].entry_date);
-                        var entry_date =  ("00" + date.getDate()).slice(-2) + "/" + ("00" + (date.getMonth() + 1)).slice(-2) + "/" + date.getFullYear() + " " +
-                            ("00" + date.getHours()).slice(-2) + ":" + ("00" + date.getMinutes()).slice(-2) + ":" + ("00" + date.getSeconds()).slice(-2);
+                        if (a[i].entry_date != "") {
+                            var date = new Date(a[i].entry_date);
+                            var entry_date = ("00" + date.getDate()).slice(-2) + "/" + ("00" + (date.getMonth() + 1)).slice(-2) + "/" + date.getFullYear() + " " +
+                                ("00" + date.getHours()).slice(-2) + ":" + ("00" + date.getMinutes()).slice(-2) + ":" + ("00" + date.getSeconds()).slice(-2);
+                        } else {
+                            entry_date = "";
+                        }
 
                         if (a[i].stts_approval_kep == 1) {
                             status = "<button class='btn btn-sm btn-warning' disabled><i class='fa fa-hourglass-half'></i> Pendding</button>";
@@ -182,11 +186,15 @@ $this->load->view('template/head', $data);
                 success: function(b) {
                     var dtl = "";
                     for (j = 0; j < b.length; j++) {
-                        var bilangan = b[j].harga_brg
+                        if (b[j].harga_brg != "") {
+                            var bilangan = b[j].harga_brg;
 
-                        var reverse = bilangan.toString().split('').reverse().join(''),
-                            harga_brg = reverse.match(/\d{1,3}/g);
-                        harga_brg = harga_brg.join('.').split('').reverse().join('');
+                            var reverse = bilangan.toString().split('').reverse().join(''),
+                                harga_brg = reverse.match(/\d{1,3}/g);
+                            harga_brg = harga_brg.join('.').split('').reverse().join('');
+                        } else {
+                            harga_brg = "";
+                        }
 
                         if (b[j].jns_brg == 1) {
                             jenis = "KIB A";
@@ -236,11 +244,15 @@ $this->load->view('template/head', $data);
                 success: function(c) {
                     var pgdn = "";
                     for (h = 0; h < c.length; h++) {
-                        var bilangan = c[h].nli_sisa;
+                        if (c[h].nli_sisa != "") {
+                            var bilangan = c[h].nli_sisa;
 
-                        var reverse = bilangan.toString().split('').reverse().join(''),
-                            ribuan = reverse.match(/\d{1,3}/g);
-                        ribuan = ribuan.join('.').split('').reverse().join('');
+                            var reverse = bilangan.toString().split('').reverse().join(''),
+                                ribuan = reverse.match(/\d{1,3}/g);
+                            ribuan = ribuan.join('.').split('').reverse().join('');
+                        } else {
+                            ribuan = "";
+                        }
 
                         pgdn +=
                             '<tr>' +

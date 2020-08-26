@@ -53,7 +53,7 @@ class Wakasek extends CI_Controller
         $config['allowed_types']  = 'png|jpg|jpeg';
         $config['overwrite']      = true;
         $config['max_size']       = 16048;
-        $config['file_name']      = $user_id;
+        $config['file_name']      = $username;
 
         $this->load->library('upload', $config);
 

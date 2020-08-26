@@ -12,7 +12,7 @@ $this->load->view('template/head', $data);
 
         <div id="page-wrapper">
             <div class="header">
-                <h1 class="page-header">Dashboard</h1>
+                <h2 class="page-header">Dashboard</h2>
                 <?= $this->session->flashdata('pesan'); ?>
                 <ol class="breadcrumb">
                     <li><a href="#"><?php $str = $this->session->userdata('nama_pegawai');

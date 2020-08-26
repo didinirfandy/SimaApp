@@ -12,9 +12,9 @@ $this->load->view('template/head', $data);
 
         <div id="page-wrapper">
             <div class="header">
-                <h1 class="page-header">
+                <h2 class="page-header">
                     Rekomendasi Penghapusan
-                </h1>
+                </h2>
                 <?= $this->session->flashdata('pesan'); ?>
                 <ol class="breadcrumb">
                     <li><a href="#"><?php $str = $this->session->userdata('nama_pegawai');
@@ -119,6 +119,7 @@ $this->load->view('template/head', $data);
                                             $msg = "nilai selisih sisa umur ekonomis kosong";
                                             error_reporting(0);
                                         } else {
+                                            $msg = "";
                                             $m_nor_nilai_kondisi_brg        = ($mn['kondisi_brg'] - $xn['kon_brgn']) / $selisih_kon_brg;
                                             $m_nor_nilai_nilai_buku         = ($mn['nilai_buku'] - $xn['nil_bukun']) / $selisih_nil_bk;
                                             $m_nor_nilai_sisa_umr_ekonomis  = ($mn['sisa_umr_ekonomis'] - $xn['sisa_umr_ekonomisn']) / $selisih_sisa_umr_ekonomis;
@@ -128,8 +129,8 @@ $this->load->view('template/head', $data);
                                         $m_krit_bbt_nilai_buku          = $m_nor_nilai_nilai_buku * $bobot[2];
                                         $m_krit_bbt_sisa_umr_ekonomis   = $m_nor_nilai_sisa_umr_ekonomis * $bobot[3];
 
-                                        $nilai_akhir[$mn['id_brg']] += $m_krit_bbt_kondisi_brg + $m_krit_bbt_nilai_buku + $m_krit_bbt_sisa_umr_ekonomis;
-                                        $hsl = $nilai_akhir[$mn['id_brg']] += $m_krit_bbt_kondisi_brg + $m_krit_bbt_nilai_buku + $m_krit_bbt_sisa_umr_ekonomis;
+                                        $nilai_akhir[$mn['id_brg']] = $m_krit_bbt_kondisi_brg + $m_krit_bbt_nilai_buku + $m_krit_bbt_sisa_umr_ekonomis;
+                                        $hsl = $nilai_akhir[$mn['id_brg']] = $m_krit_bbt_kondisi_brg + $m_krit_bbt_nilai_buku + $m_krit_bbt_sisa_umr_ekonomis;
 
                                     ?>
                                     <?php } ?>
@@ -150,8 +151,8 @@ $this->load->view('template/head', $data);
                                         <input type="hidden" name="nilai_akhir[]" value="<?= $nilai_akhir[$k] ?>">
                                     <?php }
                                 }
-
-                                if ($hsl == 0) { ?>
+                                
+                                if ($selisih_kon_brg == 0 or $selisih_nil_bk == 0 or $selisih_sisa_umr_ekonomis == 0) { ?>
                                     <h4 style="font-weight: bold;">Keterangan :</h4>
                                     (<span style="color:red;">*</span>) : <span style="font-weight: bold;"><?= $msg ?></span>
                                     <hr align="right" color="black">
@@ -173,7 +174,7 @@ $this->load->view('template/head', $data);
                                         <div class="footer">
                                             <button class="btn btn-sm btn-info" disabled name="submit" type="submit"><i class="fa fa-fw fa-floppy-o"></i> Proses</button>
                                         </div>
-                                    <?php } 
+                                <?php }
                                 }
                                 ?>
                                 <?= form_close() ?>
@@ -185,7 +186,7 @@ $this->load->view('template/head', $data);
                     <div class="col-md-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 style="font-weight:bold;">Rangking </h3>
+                                <h3 style="font-weight:bold;">Rangking Penghapusan</h3>
                                 <hr align="right" color="black">
                             </div>
                             <div class="panel-body">
@@ -313,7 +314,7 @@ $this->load->view('template/head', $data);
                     var html = "";
                     for (i = 0; i < a.length; i++) {
                         var date = new Date(a[i].entry_date);
-                        var entry_date =  ("00" + date.getDate()).slice(-2) + "/" + ("00" + (date.getMonth() + 1)).slice(-2) + "/" + date.getFullYear() + " " +
+                        var entry_date = ("00" + date.getDate()).slice(-2) + "/" + ("00" + (date.getMonth() + 1)).slice(-2) + "/" + date.getFullYear() + " " +
                             ("00" + date.getHours()).slice(-2) + ":" + ("00" + date.getMinutes()).slice(-2) + ":" + ("00" + date.getSeconds()).slice(-2);
 
                         html +=

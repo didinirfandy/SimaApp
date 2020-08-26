@@ -152,24 +152,32 @@ $this->load->view('template/head', $data);
                 success: function(c) {
                     var pgdn = "";
                     for (h = 0; h < c.length; h++) {
-                        var bilangan = c[h].nli_sisa;
+                        if (c[h].nli_sisa != "") {
+                            var bilangan = c[h].nli_sisa;
 
-                        var reverse = bilangan.toString().split('').reverse().join(''),
-                            ribuan = reverse.match(/\d{1,3}/g);
-                        nli_sisa = ribuan.join('.').split('').reverse().join('');
+                            var reverse = bilangan.toString().split('').reverse().join(''),
+                                ribuan = reverse.match(/\d{1,3}/g);
+                            nli_sisa = ribuan.join('.').split('').reverse().join('');
+                        } else {
+                            nli_sisa = "";
+                        }
 
-                        var bil = c[h].harga;
+                        if (c[h].harga != "") {
+                            var bil = c[h].harga;
 
-                        var reverse = bil.toString().split('').reverse().join(''),
-                            ribuan = reverse.match(/\d{1,3}/g);
-                        harga = ribuan.join('.').split('').reverse().join('');
+                            var reverse = bil.toString().split('').reverse().join(''),
+                                ribuan = reverse.match(/\d{1,3}/g);
+                            harga = ribuan.join('.').split('').reverse().join('');
+                        } else {
+                            harga = "";
+                        }
 
                         var dateMonth = new Date();
                         var thn_new = dateMonth.getFullYear();
                         var thn_beli = c[h].thn_beli;
                         var selisih = thn_new - thn_beli;
 
-                        var tahun = Math.ceil(c[h].nil_bku / 12);
+                        var tahun = Math.ceil(c[h].penyusutan / 12);
                         var bulan = dateMonth.getMonth() + 1;
 
                         var penyusutan = tahun * bulan;
@@ -177,7 +185,7 @@ $this->load->view('template/head', $data);
                             ribuan_bln = reverse.match(/\d{1,3}/g);
                         penyusutan_fix = ribuan_bln.join('.').split('').reverse().join('');
 
-                        var hsl_fix = c[h].harga - (c[h].nil_bku * selisih);
+                        var hsl_fix = c[h].harga - (c[h].penyusutan * selisih);
 
                         var reverse = hsl_fix.toString().split('').reverse().join(''),
                             ribuan_bku = reverse.match(/\d{1,3}/g);
@@ -329,12 +337,12 @@ $this->load->view('template/head', $data);
                             '<td style="text-align: right;">' + nil_bku + '</td>' +
                             '<td>' + c[h].ket + '</td>' +
                             '<td style="text-align: center;">' +
-                            '<button style="' + aksi5 + '" type="button" class="btn btn-sm btn-danger" disabled><i class="fa fa-check"></i> Ditolak</button>' +
-                            '<button style="' + aksi4 + '" type="button" class="btn btn-sm btn-info" disabled><i class="fa fa-check"></i> Disetujui</button>' +
-                            '<button style="' + aksi3 + '" type="button" class="btn btn-sm btn-success" disabled><i class="fa fa-check"></i></button>' +
-                            '<button style="' + aksi1 + '" type="submit" ' + tmbh + ' title="Internal" onclick="set_pelihara(\'' + c[h].id_pemeliharaan + '\', \'' + c[h].id_brg + '\', \'' + internal + '\', \'' + nil_bku + '\', \'' + sisa_umr_ekonomis + '\')" class="btn btn-sm btn-' + hps + '"><i class="fa fa-level-down"></i> Internal</button> &nbsp;' +
-                            '<button style="' + aksi1 + '" type="submit" ' + tmbh + ' title="Eksternal" onclick="set_pelihara(\'' + c[h].id_pemeliharaan + '\', \'' + c[h].id_brg + '\', \'' + eksternal + '\', \'' + nil_bku + '\', \'' + sisa_umr_ekonomis + '\')" class="btn btn-sm btn-' + hps + '"><i class="fa fa-level-up"></i> Eksternal</button>' +
-                            '<button style="' + aksi2 + '"type="submit" ' + btl + ' title="Batal" onclick="set_pelihara_batal(\'' + c[h].id_pemeliharaan + '\', \'' + c[h].id_brg + '\')" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Batal</button>' +
+                            '<button style="' + aksi5 + '" type="button" class="btn btn-xs btn-danger" disabled><i class="fa fa-check"></i> Ditolak</button>' +
+                            '<button style="' + aksi4 + '" type="button" class="btn btn-xs btn-info" disabled><i class="fa fa-check"></i> Disetujui</button>' +
+                            '<button style="' + aksi3 + '" type="button" class="btn btn-xs btn-success" disabled><i class="fa fa-check"></i></button>' +
+                            '<button style="' + aksi1 + '" type="submit" ' + tmbh + ' title="Internal" onclick="set_pelihara(\'' + c[h].id_pemeliharaan + '\', \'' + c[h].id_brg + '\', \'' + internal + '\', \'' + hsl_fix + '\', \'' + sisa_umr_ekonomis + '\')" class="btn btn-xs btn-' + hps + '"><i class="fa fa-level-down"></i> Internal</button> &nbsp;' +
+                            '<button style="' + aksi1 + '" type="submit" ' + tmbh + ' title="Eksternal" onclick="set_pelihara(\'' + c[h].id_pemeliharaan + '\', \'' + c[h].id_brg + '\', \'' + eksternal + '\', \'' + hsl_fix + '\', \'' + sisa_umr_ekonomis + '\')" class="btn btn-xs btn-' + hps + '"><i class="fa fa-level-up"></i> Eksternal</button>' +
+                            '<button style="' + aksi2 + '"type="submit" ' + btl + ' title="Batal" onclick="set_pelihara_batal(\'' + c[h].id_pemeliharaan + '\', \'' + c[h].id_brg + '\')" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Batal</button>' +
                             '</td>' +
                             '</tr>';
                     }
@@ -372,7 +380,7 @@ $this->load->view('template/head', $data);
                         timer: 2500,
                         showConfirmButton: false
                     })
-                    
+
                     setTimeout(function() {
                         location.reload()
                     }, 2500);
@@ -424,6 +432,10 @@ $this->load->view('template/head', $data);
                             text = "Selesai";
                             stts = "success";
                             icon = "check";
+                        } else if (c[h].stts_approval == 6) {
+                            text = "Penghapusan";
+                            stts = "danger";
+                            icon = "trash";
                         } else {
                             text = "Proses";
                             stts = "info";
@@ -448,7 +460,7 @@ $this->load->view('template/head', $data);
                             '<td>' + kondisi_brg + '</td>' +
                             '<td style="text-align: right;">' + c[h].umr_ekonomis + '</td>' +
                             '<td style="text-align: right;">' + ribuan + '</td>' +
-                            '<td style="text-align: center;"><button type="button" disabled title="Selesai" class="btn btn-sm btn-' + stts + '"><i class="fa fa-' + icon + '"></i> ' + text + '</button></td>' +
+                            '<td style="text-align: center;"><button type="button" disabled title="Selesai" class="btn btn-xs btn-' + stts + '"><i class="fa fa-' + icon + '"></i> ' + text + '</button></td>' +
                             '</tr>';
                     }
                     $('#dt_internal').html(pgdn);
@@ -476,6 +488,10 @@ $this->load->view('template/head', $data);
                             text = "Selesai";
                             stts = "success";
                             icon = "check";
+                        } else if (c[h].stts_approval == 7) {
+                            text = "Penghapusan";
+                            stts = "danger";
+                            icon = "trash";
                         } else {
                             text = "Proses";
                             stts = "info";
@@ -500,7 +516,7 @@ $this->load->view('template/head', $data);
                             '<td>' + kondisi_brg + '</td>' +
                             '<td style="text-align: right;">' + c[h].umr_ekonomis + '</td>' +
                             '<td style="text-align: right;">' + ribuan + '</td>' +
-                            '<td style="text-align: right;"><button type="button" disabled title="Selesai" class="btn btn-sm btn-' + stts + '"><i class="fa fa-' + icon + '"></i> ' + text + '</button></td>' +
+                            '<td style="text-align: right;"><button type="button" disabled title="Selesai" class="btn btn-xs btn-' + stts + '"><i class="fa fa-' + icon + '"></i> ' + text + '</button></td>' +
                             '</tr>';
                     }
                     $('#dt_external').html(pgdn);

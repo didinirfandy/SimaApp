@@ -57,11 +57,13 @@ class Penghapusan_aset_model extends CI_Model
     function update_stts_matriks($id_brg)
     {
         foreach ($id_brg as $i) {
-            $data = array('status' => '3');
-            $hsl = $this->db->update("tbl_matriks_nilai", $data, array('id_brg' => $i));
+            $data1 = array('status' => '3');
+            $data2 = array('stts_pemeliharaan' => '4', 'stts_penghapusan' => '2');
+            $hsl1 = $this->db->update("tbl_matriks_nilai", $data1, array('id_brg' => $i));
+            $hsl2 = $this->db->update("tbl_pengadaan_aset", $data2, array('id_brg' => $i));
         }
         
-        if ($hsl) {
+        if ($hsl1 && $hsl2) {
             if ($this->db->affected_rows() > 0) {
                 $menu        = 'Rekomendasi Penghapusan';
                 $aksi        = 'Mengubah';
@@ -76,7 +78,6 @@ class Penghapusan_aset_model extends CI_Model
         } else {
             return 0;
         }
-        // return 1;
     }
 
     function input_data_matriks($id_matriks)
@@ -163,7 +164,7 @@ class Penghapusan_aset_model extends CI_Model
     function delete_data_matriks($id_matriks)
     {
         $hsl1 = $this->db->delete('tbl_matriks_nilai_while', array('id_matriks' => $id_matriks)); 
-        $hsl2 = $this->db->query("UPDATE tbl_matriks_nilai SET status='1' WHERE id_matriks = '$id_matriks' ");
+        $hsl2 = $this->db->query("UPDATE `tbl_matriks_nilai` SET `status` ='1' WHERE id_matriks = '$id_matriks' ");
 
         if ($hsl1 && $hsl2) {
             if ($this->db->affected_rows() > 0) {

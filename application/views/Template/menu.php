@@ -11,13 +11,13 @@
         <div>
             <span class="app-sidebar__user-name">
                 <?php $str = $this->session->userdata('nama_pegawai');
-                echo wordwrap($str, 15, "<br>\n"); ?>
+                echo wordwrap($str, 20, "<br>\n"); ?>
             </span>
             <p class="app-sidebar__user-designation" style="padding-top: 0px; font-size: 13px;">
                 <?php
                 $role = $this->session->userdata('role');
                 if ($role == 1) {
-                    echo "Bagian Aset";
+                    echo "Tenaga Administrasi Aset";
                 } elseif ($role == 2) {
                     echo "Wakasek Sarana";
                 } elseif ($role == 3) {

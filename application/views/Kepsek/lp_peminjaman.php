@@ -12,13 +12,13 @@ $this->load->view('template/head', $data);
 
         <div id="page-wrapper">
             <div class="header">
-                <h1 class="page-header">
+                <h2 class="page-header">
                     Laporan Peminjaman
-                </h1>
+                </h2>
                 <?= $this->session->flashdata('pesan'); ?>
                 <ol class="breadcrumb">
                     <li><a href="#"><?php $str = $this->session->userdata('nama_pegawai');
-                                    echo wordwrap($str, 30, "<br>\n"); ?></a></li>
+                                    echo wordwrap($str, 40, "<br>\n"); ?></a></li>
                     <li><a href="<?= base_url() ?>Aset/home">Home</a></li>
                     <li>Laporan</li>
                     <li class="active">Peminjaman</li>

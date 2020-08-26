@@ -26,9 +26,9 @@ $this->load->view('template/head', $data);
                                     <?php
                                     $role = $this->session->userdata('role');
                                     if ($role == 1) {
-                                        echo "Bagian Aset";
+                                        echo "Tenaga Administrasi Aset";
                                     } elseif ($role == 2) {
-                                        echo "Waksek Sarana";
+                                        echo "Wakasek Sarana";
                                     } elseif ($role == 3) {
                                         echo "Kepala Sekolah";
                                     }

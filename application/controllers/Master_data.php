@@ -132,6 +132,7 @@ class Master_data extends CI_Controller
         $dipinjam       =   $this->input->post('dipinjam');
         $penyusutan     =   $this->input->post('penyusutan');
         $nli_sisa       =   $this->input->post('nli_sisa');
+        $jns_brg        =   $this->input->post('jns_brg');
         $ket            =   $this->input->post('ket');
 
         if (isset($dipinjam) and isset($penyusutan)) {
@@ -170,6 +171,7 @@ class Master_data extends CI_Controller
                 'dipinjam' => $dp,
                 'penyusutan' => $dp,
                 'nli_sisa' => $nli_sisa,
+                'jns_brg' => $jns_brg,
                 'ket' => $ket,
                 'entry_date' => $date
 

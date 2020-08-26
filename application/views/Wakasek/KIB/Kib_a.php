@@ -12,10 +12,10 @@ $this->load->view('template/head', $data);
 
         <div id="page-wrapper">
             <div class="header">
-                <h2 class="page-header">KARTU INVENTARIS BARANG TANAH ( KIB A )</h2>
+                <h3 class="page-header">KARTU INVENTARIS BARANG TANAH ( KIB A )</h3>
                 <ol class="breadcrumb">
                     <li><a href="#"><?php $str = $this->session->userdata('nama_pegawai');
-                                    echo wordwrap($str, 15, "<br>\n"); ?></a></li>
+                                    echo wordwrap($str, 30, "<br>\n"); ?></a></li>
                     <li><a href="<?= base_url() ?>Aset/home">Home</a></li>
                     <li>Daftar Aset</li>
                     <li class="active">KIB A</li>

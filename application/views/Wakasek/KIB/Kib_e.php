@@ -1,7 +1,8 @@
 <?php
-	$data['tittle'] = "KIB E";
-	$this->load->view('template/head', $data);
+$data['tittle'] = "KIB E";
+$this->load->view('template/head', $data);
 ?>
+
 <body>
     <div id="wrapper">
         <?php $this->load->view('template/navbar'); ?>
@@ -9,19 +10,19 @@
         <?php $this->load->view('template/menu'); ?>
         <!-- /. NAV SIDE  -->
 
-		<div id="page-wrapper">
-            <div class="header"> 
-                <h2 class="page-header">KARTU INVENTARIS BARANG ASET TETAP LAINNYA ( KIB E )</h2>
+        <div id="page-wrapper">
+            <div class="header">
+                <h3 class="page-header">KARTU INVENTARIS BARANG ASET TETAP LAINNYA ( KIB E )</h3>
                 <?= $this->session->flashdata('pesan'); ?>
                 <ol class="breadcrumb">
                     <li><a href="#"><?php $str = $this->session->userdata('nama_pegawai');
-                    echo wordwrap($str, 15, "<br>\n"); ?></a></li>
-                    <li><a href="<?=base_url()?>Aset/home">Home</a></li>
+                                    echo wordwrap($str, 30, "<br>\n"); ?></a></li>
+                    <li><a href="<?= base_url() ?>Aset/home">Home</a></li>
                     <li>Daftar Aset</li>
                     <li class="active">KIB E</li>
-                </ol> 
+                </ol>
             </div>
-            
+
             <div id="page-inner">
                 <!-- /. ROW  -->
                 <div class="row">
@@ -62,12 +63,12 @@
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>						
-                        </div>   
+                            </div>
+                        </div>
                     </div>
-				</div> 	
+                </div>
                 <!-- /. ROW  -->
-				<?php $this->load->view('template/copyright') ?>
+                <?php $this->load->view('template/copyright') ?>
             </div>
             <!-- /. PAGE INNER  -->
         </div>
@@ -90,39 +91,36 @@
                 dataType: "JSON",
                 success: function(c) {
                     var kib_e = "";
-                    
-                    for (h = 0; h < c.length; h++) {
-                        var bilangan = c[h].harga;
-                            
-                        var	reverse = bilangan.toString().split('').reverse().join(''),
-                            harga 	= reverse.match(/\d{1,3}/g);
-                            harga	= harga.join('.').split('').reverse().join('');
 
-                        if (c[h].bp_s == "") { bp_s = "-"; }
-                        if (c[h].bbkk_ad == "") { bbkk_ad = "-"; }
-                        if (c[h].bbkk_b == "") { bbkk_b = "-"; }
-                        if (c[h].htt_j == "") { htt_j = "-"; }
-                        if (c[h].htt_u == "") { htt_u = "-"; }
-                        if (c[h].jmlh_brg == "0") { jmlh_brg = "-"; }
+                    for (h = 0; h < c.length; h++) {
+                        if (c[h].harga != "") {
+                            var bilangan = c[h].harga;
+
+                            var reverse = bilangan.toString().split('').reverse().join(''),
+                                harga = reverse.match(/\d{1,3}/g);
+                            harga = harga.join('.').split('').reverse().join('');
+                        } else {
+                            harga = "";
+                        }
 
                         kib_e +=
-                        '<tr>' + 
+                            '<tr>' +
                             '<td>' + (h + 1) + '</td>' +
                             '<td>' + c[h].nm_brg + '</td>' +
                             '<td>' + c[h].kd_brg + '</td>' +
                             '<td style="text-align: right;">' + c[h].no_reg + '</td>' +
                             '<td>' + c[h].bp_jp + '</td>' +
-                            '<td>' + bp_s + '</td>' +
-                            '<td>' + bbkk_ad + '</td>' +
+                            '<td>' + c[h].bp_s + '</td>' +
+                            '<td>' + c[h].bbkk_ad + '</td>' +
                             '<td>' + c[h].bbkk_p + '</td>' +
-                            '<td>' + bbkk_b + '</td>' +
-                            '<td>' + htt_j + '</td>' +
-                            '<td>' + htt_u + '</td>' +
-                            '<td>' + jmlh_brg + '</td>' +
+                            '<td>' + c[h].bbkk_b + '</td>' +
+                            '<td>' + c[h].htt_j + '</td>' +
+                            '<td>' + c[h].htt_u + '</td>' +
+                            '<td>' + c[h].jmlh_brg + '</td>' +
                             '<td>' + c[h].thn_beli + '</td>' +
                             '<td>' + c[h].perolehan + '</td>' +
                             '<td style="text-align: right;">' + harga + '</td>' +
-                        '</tr>';
+                            '</tr>';
                     }
                     $('#kib_e').html(kib_e);
                 }

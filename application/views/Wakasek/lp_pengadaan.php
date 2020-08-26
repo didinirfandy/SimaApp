@@ -127,7 +127,7 @@ $this->load->view('template/head', $data);
     <script type="text/javascript">
         $(document).ready(function() {
             tmpl_data();
-            
+
             $("#lp_pengadaan").dataTable();
         });
 
@@ -140,17 +140,25 @@ $this->load->view('template/head', $data);
                 success: function(a) {
                     var html = "";
                     for (i = 0; i < a.length; i++) {
-                        var bilangan = a[i].nli_sisa;
+                        if (a[i].nli_sisa != "") {
+                            var bilangan = a[i].nli_sisa;
 
-                        var reverse = bilangan.toString().split('').reverse().join(''),
-                            ribuan = reverse.match(/\d{1,3}/g);
-                        nli_sisa = ribuan.join('.').split('').reverse().join('');
+                            var reverse = bilangan.toString().split('').reverse().join(''),
+                                ribuan = reverse.match(/\d{1,3}/g);
+                            nli_sisa = ribuan.join('.').split('').reverse().join('');
+                        } else {
+                            nli_sisa = "";
+                        }
 
-                        var bil = a[i].harga;
+                        if (a[i].harga != "") {
+                            var bil = a[i].harga;
 
-                        var reverse = bil.toString().split('').reverse().join(''),
-                            ribuan = reverse.match(/\d{1,3}/g);
-                        harga = ribuan.join('.').split('').reverse().join('');
+                            var reverse = bil.toString().split('').reverse().join(''),
+                                ribuan = reverse.match(/\d{1,3}/g);
+                            harga = ribuan.join('.').split('').reverse().join('');
+                        } else {
+                            harga = "";
+                        }
 
                         if (a[i].satuan_brg == 1) {
                             satuan = "Buah";

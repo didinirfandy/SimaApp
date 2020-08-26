@@ -12,7 +12,7 @@ $this->load->view('template/head', $data);
 
         <div id="page-wrapper">
             <div class="header">
-                <h2 class="page-header">KARTU INVENTARIS BARANG ASET TETAP LAINNYA ( KIB E )</h2>
+                <h3 class="page-header">KARTU INVENTARIS BARANG ASET TETAP LAINNYA ( KIB E )</h3>
                 <?= $this->session->flashdata('pesan'); ?>
                 <ol class="breadcrumb">
                     <li><a href="#"><?php $str = $this->session->userdata('nama_pegawai');
@@ -91,31 +91,15 @@ $this->load->view('template/head', $data);
                 dataType: "json",
                 success: function(c) {
                     var kib_e = "";
-
                     for (h = 0; h < c.length; h++) {
-                        var bilangan = c[h].harga;
+                        if (c[h].harga != "") {
+                            var bilangan = c[h].harga;
 
-                        var reverse = bilangan.toString().split('').reverse().join(''),
-                            harga = reverse.match(/\d{1,3}/g);
-                        harga = harga.join('.').split('').reverse().join('');
-
-                        if (c[h].bp_s == "") {
-                            bp_s = "-";
-                        }
-                        if (c[h].bbkk_ad == "") {
-                            bbkk_ad = "-";
-                        }
-                        if (c[h].bbkk_b == "") {
-                            bbkk_b = "-";
-                        }
-                        if (c[h].htt_j == "") {
-                            htt_j = "-";
-                        }
-                        if (c[h].htt_u == "") {
-                            htt_u = "-";
-                        }
-                        if (c[h].jmlh_brg == "0") {
-                            jmlh_brg = "-";
+                            var reverse = bilangan.toString().split('').reverse().join(''),
+                                harga = reverse.match(/\d{1,3}/g);
+                            harga = harga.join('.').split('').reverse().join('');
+                        } else {
+                            harga = "";
                         }
 
                         kib_e +=
@@ -125,13 +109,13 @@ $this->load->view('template/head', $data);
                             '<td>' + c[h].kd_brg + '</td>' +
                             '<td style="text-align: right;">' + c[h].no_reg + '</td>' +
                             '<td>' + c[h].bp_jp + '</td>' +
-                            '<td>' + bp_s + '</td>' +
-                            '<td>' + bbkk_ad + '</td>' +
+                            '<td>' + c[h].bp_s + '</td>' +
+                            '<td>' + c[h].bbkk_ad + '</td>' +
                             '<td>' + c[h].bbkk_p + '</td>' +
-                            '<td>' + bbkk_b + '</td>' +
-                            '<td>' + htt_j + '</td>' +
-                            '<td>' + htt_u + '</td>' +
-                            '<td>' + jmlh_brg + '</td>' +
+                            '<td>' + c[h].bbkk_b + '</td>' +
+                            '<td>' + c[h].htt_j + '</td>' +
+                            '<td>' + c[h].htt_u + '</td>' +
+                            '<td>' + c[h].jmlh_brg + '</td>' +
                             '<td>' + c[h].thn_beli + '</td>' +
                             '<td>' + c[h].perolehan + '</td>' +
                             '<td style="text-align: right;">' + harga + '</td>' +

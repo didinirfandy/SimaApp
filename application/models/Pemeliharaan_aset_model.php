@@ -7,13 +7,16 @@ class Pemeliharaan_aset_model extends CI_Model
         return $this->db->query(
             "SELECT 
                 a.id_brg, a.kd_brg, a.nm_brg, a.no_reg, a.merk_type, a.harga, a.kondisi, a.umr_ekonomis, a.nli_sisa, a.stts_pemeliharaan, a.thn_beli,
-                (a.umr_ekonomis - (DATE_FORMAT(NOW(), '%Y') - a.thn_beli)) AS sisa_umr_ekonomis, 
-                ((a.harga - a.nli_sisa) / a.umr_ekonomis) AS nil_bku, 
-                b.stts_approval
+                (a.umr_ekonomis - (DATE_FORMAT(NOW(), '%Y') - a.thn_beli)) AS sisa_umr_ekonomis, a.jns_brg,
+                ((a.harga - a.nli_sisa) / a.umr_ekonomis) AS penyusutan, b.stts_approval
             FROM 
                 tbl_pengadaan_aset a 
                 LEFT JOIN tbl_pemeliharaan_aset b ON b.id_brg = a.id_brg
-            ORDER BY a.id_brg"
+            WHERE 
+                a.jns_brg != 1
+                AND a.thn_beli != ''
+                AND a.umr_ekonomis != ''
+            ORDER BY a.kondisi DESC"
         )->result_array();
     }
 
@@ -32,7 +35,7 @@ class Pemeliharaan_aset_model extends CI_Model
         $nli_sisa       = $get[0]['nli_sisa'];
 
         date_default_timezone_set('Asia/Jakarta');
-        $date   = date("Y-m-d H:i:s");
+        $date = date("Y-m-d H:i:s");
 
         $data = array(
             'id_brg'        => $id_brg,
@@ -102,10 +105,13 @@ class Pemeliharaan_aset_model extends CI_Model
                 a.id_pemeliharaan, a.id_brg, a.kd_brg, a.nm_brg, a.no_reg, a.kondisi_brg,
                 a.harga, a.umr_ekonomis, a.merk_type, a.nli_sisa, a.stts_approval, a.stts_approval_kep, b.thn_beli, a.ket,
                 (a.umr_ekonomis - (DATE_FORMAT(NOW(), '%Y') - b.thn_beli)) AS sisa_umr_ekonomis,
-                ((b.harga - b.nli_sisa) / b.umr_ekonomis) AS nil_bku
+                ((b.harga - b.nli_sisa) / b.umr_ekonomis) AS penyusutan
             FROM tbl_pemeliharaan_aset a
-            LEFT JOIN tbl_pengadaan_aset b ON b.id_brg = a.id_brg
-            ORDER BY a.entry_date"
+                LEFT JOIN tbl_pengadaan_aset b ON b.id_brg = a.id_brg
+            WHERE 
+                b.jns_brg != 1
+                AND b.thn_beli != ''
+            ORDER BY a.stts_approval ASC, a.stts_approval_kep ASC"
         )->result_array();
     }
 
@@ -162,21 +168,21 @@ class Pemeliharaan_aset_model extends CI_Model
                 $sisa_umr_eko = 0;
             }
 
-            if ($nilai_buku_bln >= '44000' or $nilai_buku_bln <= '2022999') {
+            if ($nilai_buku_bln >= '44000' and $nilai_buku_bln <= '2022999') {
                 $nilai_buku = 8;
-            } elseif ($nilai_buku_bln >= '2023000' or $nilai_buku_bln <= '4001999') {
+            } elseif ($nilai_buku_bln >= '2023000' and $nilai_buku_bln <= '4001999') {
                 $nilai_buku = 7;
-            } elseif ($nilai_buku_bln >= '4002000' or $nilai_buku_bln <= '5980999') {
+            } elseif ($nilai_buku_bln >= '4002000' and $nilai_buku_bln <= '5980999') {
                 $nilai_buku = 6;
-            } elseif ($nilai_buku_bln >= '5981000' or $nilai_buku_bln <= '7959999') {
+            } elseif ($nilai_buku_bln >= '5981000' and $nilai_buku_bln <= '7959999') {
                 $nilai_buku = 5;
-            } elseif ($nilai_buku_bln >= '7960000' or $nilai_buku_bln <= '9938999') {
+            } elseif ($nilai_buku_bln >= '7960000' and $nilai_buku_bln <= '9938999') {
                 $nilai_buku = 4;
-            } elseif ($nilai_buku_bln >= '9939000' or $nilai_buku_bln <= '11917999') {
+            } elseif ($nilai_buku_bln >= '9939000' and $nilai_buku_bln <= '11917999') {
                 $nilai_buku = 3;
-            } elseif ($nilai_buku_bln >= '11918000' or $nilai_buku_bln <= '13896999') {
+            } elseif ($nilai_buku_bln >= '11918000' and $nilai_buku_bln <= '13896999') {
                 $nilai_buku = 2;
-            } elseif ($nilai_buku_bln >= '13897000' or $nilai_buku_bln <= '15876000') {
+            } elseif ($nilai_buku_bln >= '13897000' and $nilai_buku_bln <= '15876000') {
                 $nilai_buku = 1;
             } else {
                 $nilai_buku = 0;
@@ -258,6 +264,7 @@ class Pemeliharaan_aset_model extends CI_Model
             $nm_brg      = $get[0]['nm_brg'];
             $no_reg      = $get[0]['no_reg'];
 
+
             if ($get[0]['kondisi_brg'] == 2) {
                 $kondisi_brg = 2;
             } elseif ($get[0]['kondisi_brg'] == 3) {
@@ -274,21 +281,21 @@ class Pemeliharaan_aset_model extends CI_Model
                 $sisa_umr_eko = 0;
             }
 
-            if ($nilai_buku_bln >= '44000' or $nilai_buku_bln <= '2022999') {
+            if ($nilai_buku_bln >= '44000' and $nilai_buku_bln <= '2022999') {
                 $nilai_buku = 8;
-            } elseif ($nilai_buku_bln >= '2023000' or $nilai_buku_bln <= '4001999') {
+            } elseif ($nilai_buku_bln >= '2023000' and $nilai_buku_bln <= '4001999') {
                 $nilai_buku = 7;
-            } elseif ($nilai_buku_bln >= '4002000' or $nilai_buku_bln <= '5980999') {
+            } elseif ($nilai_buku_bln >= '4002000' and $nilai_buku_bln <= '5980999') {
                 $nilai_buku = 6;
-            } elseif ($nilai_buku_bln >= '5981000' or $nilai_buku_bln <= '7959999') {
+            } elseif ($nilai_buku_bln >= '5981000' and $nilai_buku_bln <= '7959999') {
                 $nilai_buku = 5;
-            } elseif ($nilai_buku_bln >= '7960000' or $nilai_buku_bln <= '9938999') {
+            } elseif ($nilai_buku_bln >= '7960000' and $nilai_buku_bln <= '9938999') {
                 $nilai_buku = 4;
-            } elseif ($nilai_buku_bln >= '9939000' or $nilai_buku_bln <= '11917999') {
+            } elseif ($nilai_buku_bln >= '9939000' and $nilai_buku_bln <= '11917999') {
                 $nilai_buku = 3;
-            } elseif ($nilai_buku_bln >= '11918000' or $nilai_buku_bln <= '13896999') {
+            } elseif ($nilai_buku_bln >= '11918000' and $nilai_buku_bln <= '13896999') {
                 $nilai_buku = 2;
-            } elseif ($nilai_buku_bln >= '13897000' or $nilai_buku_bln <= '15876000') {
+            } elseif ($nilai_buku_bln >= '13897000' and $nilai_buku_bln <= '15876000') {
                 $nilai_buku = 1;
             } else {
                 $nilai_buku = 0;
@@ -356,7 +363,7 @@ class Pemeliharaan_aset_model extends CI_Model
 
     function aksi_pemeliharaan_batal_wk($id_pemeliharaan, $id_brg)
     {
-        $hasil1 = $this->db->query("UPDATE tbl_pemeliharaan_aset SET stts_approval = '1' WHERE id_pemeliharaan = '$id_pemeliharaan' ");
+        $hasil1 = $this->db->query("UPDATE tbl_pemeliharaan_aset SET stts_approval = '1', stts_approval_kep = '1' WHERE id_pemeliharaan = '$id_pemeliharaan' ");
         $hasil2 = $this->db->query("UPDATE tbl_pengadaan_aset SET stts_pemeliharaan = '1' WHERE id_brg = '$id_brg' ");
         $hasil3 = $this->db->query("DELETE FROM tbl_matriks_nilai WHERE id_brg = '$id_brg'");
 
@@ -379,7 +386,7 @@ class Pemeliharaan_aset_model extends CI_Model
 
     function get_pemeliharaan_aset_internal()
     {
-        return $this->db->query("SELECT * FROM tbl_pemeliharaan_aset WHERE stts_approval_kep = '2' AND stts_approval IN ('2', '4')")->result_array();
+        return $this->db->query("SELECT * FROM tbl_pemeliharaan_aset WHERE stts_approval_kep = '2' AND stts_approval IN ('2', '4', '6') ORDER BY id_pemeliharaan DESC")->result_array();
     }
 
     function pemeliharaan_selesai_in($id_pemeliharaan, $id_brg)
@@ -406,7 +413,7 @@ class Pemeliharaan_aset_model extends CI_Model
 
     function get_pemeliharaan_aset_external()
     {
-        return $this->db->query("SELECT * FROM tbl_pemeliharaan_aset WHERE stts_approval_kep = '2' AND stts_approval IN ('3', '5') ")->result_array();
+        return $this->db->query("SELECT * FROM tbl_pemeliharaan_aset WHERE stts_approval_kep = '2' AND stts_approval IN ('3', '5', '7') ORDER BY id_pemeliharaan DESC")->result_array();
     }
 
     function get_pemeliharaan_aset_external_kep()
@@ -419,9 +426,9 @@ class Pemeliharaan_aset_model extends CI_Model
                 ((b.harga - b.nli_sisa) / b.umr_ekonomis) AS nil_bku
             FROM tbl_pemeliharaan_aset a
             LEFT JOIN tbl_pengadaan_aset b ON b.id_brg = a.id_brg
-            WHERE stts_approval IN ('3', '5')
+            WHERE stts_approval IN ('3', '5', '7')
             ORDER BY a.entry_date"
-    )->result_array();
+        )->result_array();
     }
 
     function pemeliharaan_selesai_ex($id_pemeliharaan, $id_brg)

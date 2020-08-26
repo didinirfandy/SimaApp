@@ -17,7 +17,7 @@
                 <?= $this->session->flashdata('pesan'); ?>
                 <ol class="breadcrumb">
                     <li><a href="#"><?php $str = $this->session->userdata('nama_pegawai');
-                    echo wordwrap($str, 30, "<br>\n"); ?></a></li>
+                    echo wordwrap($str, 40, "<br>\n"); ?></a></li>
                     <li><a href="<?=base_url()?>Aset/home"></a>Home</li>
                     <li class="active">Laporan Penghapusan</li>
                 </ol> 

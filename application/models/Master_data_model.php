@@ -16,16 +16,16 @@ class Master_data_model extends CI_Model
         return $kode;
     }
 
-    function entry_usulan_pengadaan($db, $data, $nm_brg)
+    function entry_usulan_pengadaan($tbl, $data, $nm_brg)
     {
-        $insert = $this->db->insert($db, $data);
+        $insert = $this->db->insert($tbl, $data);
         if ($insert) {
             if ($this->db->affected_rows() > 0) {
-                $menu        = 'data usulan pengadaan';
-                $aksi        = 'menambah';
+                $menu        = 'Data usulan pengadaan';
+                $aksi        = 'Menambah';
                 $item        = $nm_brg;
-                $assign_to   = 'wakasek dan kepsek';
-                $assign_type = 'approval';
+                $assign_to   = 'Wakasek dan Kepsek';
+                $assign_type = 'Approval';
                 activity_log($menu, $aksi, $item, $assign_to, $assign_type);
                 return 1;
             } else {
@@ -109,9 +109,9 @@ class Master_data_model extends CI_Model
     {
         return $this->db->query(
             "SELECT 
-                id_brg, kd_brg, nm_brg, no_reg, merk_type, ukuran_cc, perolehan, 
-                bahan, thn_beli, umr_ekonomis, nli_sisa, kondisi, satuan_brg
-            FROM tbl_pengadaan_aset ORDER BY id_brg DESC"
+                id_brg, kd_brg, nm_brg, no_reg, merk_type, ukuran_cc, perolehan, bahan,
+                thn_beli, umr_ekonomis, nli_sisa, kondisi, satuan_brg, dipinjam, penyusutan
+            FROM tbl_pengadaan_aset ORDER BY entry_date DESC"
         )->result_array();
     }
 

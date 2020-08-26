@@ -12,7 +12,7 @@ $this->load->view('template/head', $data);
 
         <div id="page-wrapper">
             <div class="header">
-                <h2 class="page-header">KARTU INVENTARIS BARANG GEDUNG DAN BANGUNAN ( KIB C )</h2>
+                <h3 class="page-header">KARTU INVENTARIS BARANG GEDUNG DAN BANGUNAN ( KIB C )</h3>
                 <?= $this->session->flashdata('pesan'); ?>
                 <ol class="breadcrumb">
                     <li><a href="#"><?php $str = $this->session->userdata('nama_pegawai');
@@ -93,7 +93,7 @@ $this->load->view('template/head', $data);
                                                     if ($c['dg_no'] == "0") {
                                                         $dg_no = "-";
                                                     }
-                                                    if ($c['stts_tanah'] == "") {
+                                                    if ($c['stts_tanah'] == "" OR $c['stts_tanah'] == "-") {
                                                         $stts_tanah = "-";
                                                     }
 

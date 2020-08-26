@@ -21,14 +21,14 @@ $this->load->view('template/head', $data);
                                     <img class="user-img" src="<?= base_url(); ?>assets_app/img/profil/<?= $p['image'] ?>">
                                 <?php } ?>
                                 <h4><?php $str = $this->session->userdata('nama_pegawai');
-                                    echo wordwrap($str, 30, "<br>\n"); ?></h4>
+                                    echo wordwrap($str, 50, "<br>\n"); ?></h4>
                                 <p>
                                     <?php
                                     $role = $this->session->userdata('role');
                                     if ($role == 1) {
-                                        echo "Bagian Aset";
+                                        echo "Tenaga Administrasi Aset";
                                     } elseif ($role == 2) {
-                                        echo "Waksek Sarana";
+                                        echo "Wakasek Sarana";
                                     } elseif ($role == 3) {
                                         echo "Kepala Sekolah";
                                     }

@@ -82,14 +82,6 @@ $this->load->view('template/head', $data);
                                             <label for="perolehan">Perolehan</label>
                                             <input type="text" class="form-control" name="perolehan" id="perolehan">
                                         </div>
-                                        <!-- <div class="form-group">
-                                            <label for="kondisi">Kondisi Aset</label>
-                                            <select class="selectbox col-sm-12" name="kondisi" id="kondisi">
-                                                <option value="">-- Pilih --</option>
-                                                <option value="1">BAIK</option>
-                                                <option value="2">TIDAK BAIK</option>
-                                            </select>
-                                        </div> -->
                                         <input type="hidden" name="kondisi" value="1">
                                         <div class="form-group">
                                             <div class="form-check">
@@ -168,6 +160,8 @@ $this->load->view('template/head', $data);
                                                 <th>Perolehan</th>
                                                 <th>Bahan</th>
                                                 <th>Tahun Beli</th>
+                                                <th>Dapat Dipinjam <span style="color:red;">*</span></th>
+                                                <th>Mengalami Penyusutan <span style="color:red;">*</span></th>
                                                 <th>Umur Ekonomis</th>
                                                 <th>Nilai Sisa</th>
                                                 <th>Action</th>
@@ -182,6 +176,18 @@ $this->load->view('template/head', $data);
                                                         $nilsisa = number_format("$a[nli_sisa]", 2, ",", ".");
                                                     } else {
                                                         $nilsisa = "0";
+                                                    }
+
+                                                    if ($a['dipinjam'] == 1) {
+                                                        $dipinjam = "Ya";
+                                                    } else {
+                                                        $dipinjam = "Tidak";
+                                                    }
+
+                                                    if ($a['penyusutan'] == 1) {
+                                                        $penyusutan = "Ya";
+                                                    } else {
+                                                        $penyusutan = "Tidak";
                                                     }
 
                                                     if ($a['satuan_brg'] == 1) {
@@ -220,6 +226,14 @@ $this->load->view('template/head', $data);
                                                                 <span class='span-thbeli caption' data-id='$a[id_brg]'>$a[thn_beli]</span>
                                                                 <input type='text' class='field-thbeli form-control editor' style='display: none;' value='$a[thn_beli]' data-id='$a[id_brg]' />
                                                             </td>
+                                                            <td>
+                                                                <span class='span-pinjam caption' data-id='$a[id_brg]'>$dipinjam</span>
+                                                                <input type='text' class='field-pinjam form-control editor' style='display: none;' value='$a[dipinjam]' data-id='$a[id_brg]' />
+                                                            </td>
+                                                            <td>
+                                                                <span class='span-penyusutan caption' data-id='$a[id_brg]'>$penyusutan</span>
+                                                                <input type='text' class='field-penyusutan form-control editor' style='display: none;' value='$a[penyusutan]' data-id='$a[id_brg]' />
+                                                            </td>
                                                             <td style='text-align: right;'>
                                                                 <span class='span-umrek caption' data-id='$a[id_brg]'>$a[umr_ekonomis]</span>
                                                                 <input type='text' class='field-umrek form-control editor' style='display: none;' value='$a[umr_ekonomis]' data-id='$a[id_brg]' />
@@ -237,6 +251,12 @@ $this->load->view('template/head', $data);
                                         </tbody>
                                     </table>
                                 </div>
+                                <h4 style="font-weight: bold;">Keterangan :</h4>
+                                (<span style="color:red;">*</span>) :
+                                <span style="font-weight: bold;">
+                                    Inputkan Angka : 1 (Ya) <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    0 (Tidak)
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -336,24 +356,26 @@ $this->load->view('template/head', $data);
                         document.getElementById('penyusutan').value = "";
                         document.getElementById('nli_sisa').value = "";
                         document.getElementById('ket').value = "";
+                        document.getElementById('jns_brg').value = "";
 
                         if (berhasil == "1") {
                             swal({
                                 title: "Simpan Berhasil",
                                 type: "success",
-                                timer: 5000,
+                                timer: 3000,
                                 showConfirmButton: false
                             });
                         } else {
                             swal({
                                 title: "Simpan Gagal",
                                 type: "error",
-                                timer: 5000,
+                                timer: 3000,
                                 showConfirmButton: false
                             });
                         }
-
-                        location.reload();
+                        setTimeout(function() {
+                            location.reload();
+                        }, 3000);
                     }
                 });
                 return false;
@@ -394,7 +416,11 @@ $this->load->view('template/head', $data);
                     } else if (target.is(".field-bahan")) {
                         data.modul = "bahan";
                     } else if (target.is(".field-thbeli")) {
-                        data.modul = "thbeli";
+                        data.modul = "thn_beli";
+                    } else if (target.is(".field-pinjam")) {
+                        data.modul = "dipinjam";
+                    } else if (target.is(".field-penyusutan")) {
+                        data.modul = "penyusutan";
                     } else if (target.is(".field-umrek")) {
                         data.modul = "umr_ekonomis";
                     } else if (target.is(".field-nilss")) {
@@ -409,11 +435,8 @@ $this->load->view('template/head', $data);
                             target.siblings("span[class~='caption']").html(value).fadeIn();
                             location.reload();
                         }
-
                     });
-
                 }
-
             });
 
             $(document).on("click", ".hapus-member", function() {

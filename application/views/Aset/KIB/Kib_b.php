@@ -12,7 +12,7 @@ $this->load->view('template/head', $data);
 
         <div id="page-wrapper">
             <div class="header">
-                <h2 class="page-header">KARTU INVENTARIS BARANG PERALATAN DAN MESIN ( KIB B )</h2>
+                <h3 class="page-header">KARTU INVENTARIS BARANG PERALATAN DAN MESIN ( KIB B )</h3>
                 <?= $this->session->flashdata('pesan'); ?>
                 <ol class="breadcrumb">
                     <li><a href="#"><?php $str = $this->session->userdata('nama_pegawai');
