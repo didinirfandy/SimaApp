@@ -14,7 +14,7 @@
         </div>
         <!-- Menampilkan Waktu -->
         <div class="navbar-time">
-            <span style="color:black" id="dates"><span id="the-day"></span><span id="the-time"></span> </span>
+            <span style="color:black"><span id="the-day"></span><span id="the-time"></span></span>
         </div>
     </div>
 

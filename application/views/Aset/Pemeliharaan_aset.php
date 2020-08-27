@@ -100,11 +100,6 @@ $this->load->view('template/head', $data);
                                 <hr align="right" color="black">
                             </div>
                             <div class="panel-body">
-                                <!-- <div class="row">
-                                    <div class="form-group col-md-4 mx-sm-3 mb-3">
-                                        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#caritgl"><i class="fa fa-filter" aria-hidden="true"></i> Filter</button>
-                                    </div>
-                                </div><br> -->
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered table-hover" id="external">
                                         <thead>
@@ -155,34 +150,6 @@ $this->load->view('template/head', $data);
                     </div>
                 </div>
             </div>
-
-            <!-- Modal -->
-            <!-- <div class="modal fade" id="caritgl" tabindex="-1" role="dialog" aria-labelledby="caritgl" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h5 class="modal-title" id="caritgl">Filter Laporan</h5>
-                        </div>
-                        <?= form_open('Print_excel/export_external'); ?>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label for="tgl_awal">Pilih Tanggal</label>
-                                <div class="input-group input-daterange">
-                                    <input type="date" class="form-control" name="tgl_awal" id="tgl_awal" required>
-                                    <div class="input-group-addon">to</div>
-                                    <input type="date" class="form-control" name="tgl_akhir" id="tgl_akhir" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-sm btn-primary" name="cetak_ex">Cetak</button>
-                        </div>
-                        <?= form_close() ?>
-                    </div>
-                </div>
-            </div> -->
         </div>
         <!-- /. PAGE WRAPPER  -->
     </div>

@@ -271,14 +271,10 @@ class Pemeliharaan_aset_model extends CI_Model
                 $kondisi_brg = 4;
             }
 
-            if ($sisa_umr_ekonomis == 0) {
+            if ($sisa_umr_ekonomis <= 2) {
                 $sisa_umr_eko = 5;
-            } elseif ($sisa_umr_ekonomis < 2) {
-                $sisa_umr_eko = 4;
-            } elseif ($sisa_umr_ekonomis >= 2) {
+            } elseif ($sisa_umr_ekonomis > 2) {
                 $sisa_umr_eko = 2;
-            } else {
-                $sisa_umr_eko = 0;
             }
 
             if ($nilai_buku_bln >= '44000' and $nilai_buku_bln <= '2022999') {
