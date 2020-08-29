@@ -15,10 +15,8 @@ class Laporan_model extends  CI_Model
 
     function get_data_pengadaan_ctk($tgl_awal, $tgl_akhir, $kategori, $thn_beli)
     {
-        if ($tgl_awal == "" AND $tgl_akhir == "") 
-        {
-            if ($kategori != "all") 
-            {
+        if ($tgl_awal == "" and $tgl_akhir == "") {
+            if ($kategori != "all") {
                 $ktr = " WHERE kd_brg = '$kategori'";
                 if ($thn_beli != "") {
                     $thn = " AND thn_beli = '$thn_beli'";
@@ -45,8 +43,7 @@ class Laporan_model extends  CI_Model
                 ORDER BY entry_date DESC"
             )->result_array();
         } else {
-            if ($kategori != "all") 
-            {
+            if ($kategori != "all") {
                 $ktr = " AND kd_brg = '$kategori'";
             } else {
                 $ktr = "";
@@ -57,7 +54,7 @@ class Laporan_model extends  CI_Model
             } else {
                 $thn = "";
             }
-            
+
             $data = $this->db->query(
                 "SELECT 
                     kd_brg, no_reg, nm_brg, merk_type, st_stfkt_no, bahan, perolehan, thn_beli, ukuran_cc, 
@@ -100,10 +97,8 @@ class Laporan_model extends  CI_Model
 
     function get_data_peminjaman_ctk($tgl_awal, $tgl_akhir, $kategori)
     {
-        if ($tgl_awal == "" AND $tgl_akhir == "") 
-        {
-            if ($kategori != "all") 
-            {
+        if ($tgl_awal == "" and $tgl_akhir == "") {
+            if ($kategori != "all") {
                 $ktr = " WHERE kd_brg = '$kategori'";
             } else {
                 $ktr = " ";
@@ -119,8 +114,7 @@ class Laporan_model extends  CI_Model
                 ORDER BY entry_date DESC"
             )->result_array();
         } else {
-            if ($kategori != "all") 
-            {
+            if ($kategori != "all") {
                 $ktr = " AND kd_brg = '$kategori'";
             } else {
                 $ktr = " ";
@@ -159,8 +153,9 @@ class Laporan_model extends  CI_Model
                 kd_brg, nm_brg, jmlh_brg, satuan_brg, harga_brg, masa_manfaat, ket 
             FROM tbl_usulan_aset 
             WHERE 
-                stts_approval_kep = '2' 
-                AND stts_pengadaan = '2' 
+                stts_approval_kep = '2'
+                AND stts_approval_wk = '2' 
+                AND stts_pengadaan = '3' 
             ORDER BY entry_date DESC"
         )->result_array();
     }
@@ -186,14 +181,15 @@ class Laporan_model extends  CI_Model
             $ktr = " ";
         }
 
-        if ($tgl_awal == "" AND $tgl_akhir == "") {
+        if ($tgl_awal == "" and $tgl_akhir == "") {
             $data = $this->db->query(
                 "SELECT 
                     kd_brg, nm_brg, jmlh_brg, satuan_brg, harga_brg, masa_manfaat, ket 
                 FROM tbl_usulan_aset 
                 WHERE 
                     stts_approval_kep = '2' 
-                    AND stts_pengadaan = '2' 
+                    AND stts_approval_wk = '2' 
+                    AND stts_pengadaan = '3' 
                     $ktr
                 ORDER BY entry_date DESC"
             )->result_array();
@@ -204,7 +200,8 @@ class Laporan_model extends  CI_Model
                 FROM tbl_usulan_aset 
                 WHERE 
                     stts_approval_kep = '2' 
-                    AND stts_pengadaan = '2' 
+                    AND stts_approval_wk = '2' 
+                    AND stts_pengadaan = '3' 
                     AND date(entry_date) BETWEEN date('$tgl_awal') AND date('$tgl_akhir')
                     $ktr
                 ORDER BY entry_date DESC"

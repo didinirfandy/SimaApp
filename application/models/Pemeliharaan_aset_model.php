@@ -452,7 +452,7 @@ class Pemeliharaan_aset_model extends CI_Model
     function print_pemeliharaan_aset_ex($tgl_awal, $tgl_akhir, $kategori)
     {
         if ($tgl_awal == "" and $tgl_akhir == "") {
-            if ($kategori == "1") {
+            if ($kategori == 1) {
                 $stts_approval = "stts_approval IN ('2','3')";
             } else if ($kategori == 2) {
                 $stts_approval = "stts_approval = '2'";
@@ -465,16 +465,19 @@ class Pemeliharaan_aset_model extends CI_Model
             $data = $this->db->query(
                 "SELECT 
                     a.kd_brg, a.no_reg, a.nm_brg, a.kondisi_brg, a.harga, a.umr_ekonomis, a.merk_type, a.nli_sisa, a.ket,
-                    b.st_stfkt_no, b.bahan, b.perolehan, b.thn_beli, b.satuan_brg, b.jmlh_brg
+                    b.st_stfkt_no, b.bahan, b.perolehan, b.thn_beli, b.satuan_brg,
+                    (
+                        SELECT COUNT(jmlh_brg) FROM tbl_pengadaan_aset WHERE kd_brg = a.kd_brg AND stts_pemeliharaan = '2'
+                    ) AS jmlh_brg
                 FROM 
                     tbl_pemeliharaan_aset a
                     LEFT JOIN tbl_pengadaan_aset b ON b.id_brg = a.id_brg
                 WHERE 
                     $stts_approval
-                ORDER BY a.entry_date DESC "
+                GROUP BY a.kd_brg"
             )->result_array();
         } else {
-            if ($kategori == "1") {
+            if ($kategori == 1) {
                 $stts_approval = "AND stts_approval IN ('2','3')";
             } else if ($kategori == 2) {
                 $stts_approval = "AND stts_approval = '2'";
@@ -487,14 +490,17 @@ class Pemeliharaan_aset_model extends CI_Model
             $data = $this->db->query(
                 "SELECT 
                     a.kd_brg, a.no_reg, a.nm_brg, a.kondisi_brg, a.harga, a.umr_ekonomis, a.merk_type, a.nli_sisa, a.ket,
-                    b.st_stfkt_no, b.bahan, b.perolehan, b.thn_beli, b.satuan_brg, b.jmlh_brg
+                    b.st_stfkt_no, b.bahan, b.perolehan, b.thn_beli, b.satuan_brg,
+                    (
+                        SELECT COUNT(jmlh_brg) FROM tbl_pengadaan_aset WHERE kd_brg = a.kd_brg AND stts_pemeliharaan = '2'
+                    ) AS jmlh_brg
                 FROM 
                     tbl_pemeliharaan_aset a
                     LEFT JOIN tbl_pengadaan_aset b ON b.id_brg = a.id_brg
                 WHERE 
                     date(a.entry_date) BETWEEN date('$tgl_awal') AND date('$tgl_akhir')
                     $stts_approval
-                ORDER BY a.entry_date DESC "
+                GROUP BY a.kd_brg"
             )->result_array();
         }
 
@@ -510,14 +516,17 @@ class Pemeliharaan_aset_model extends CI_Model
         return $this->db->query(
             "SELECT 
                 a.kd_brg, a.no_reg, a.nm_brg, a.kondisi_brg, a.harga, a.umr_ekonomis, a.merk_type, a.nli_sisa, a.ket,
-                b.st_stfkt_no, b.bahan, b.perolehan, b.thn_beli, b.satuan_brg, b.jmlh_brg
+                b.st_stfkt_no, b.bahan, b.perolehan, b.thn_beli, b.satuan_brg, 
+                (
+                    SELECT COUNT(jmlh_brg) FROM tbl_pengadaan_aset WHERE kd_brg = a.kd_brg AND stts_pemeliharaan = '2'
+                ) AS jmlh_brg
             FROM 
                 tbl_pemeliharaan_aset a
                 LEFT JOIN tbl_pengadaan_aset b ON b.id_brg = a.id_brg
             WHERE 
                 stts_approval IN ('2','3')
                 AND stts_approval_kep = '2'
-            ORDER BY a.entry_date DESC "
+            GROUP BY a.kd_brg"
         )->result_array();
     }
 }

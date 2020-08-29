@@ -127,7 +127,7 @@ $this->load->view('template/head', $data);
                 <!--/.row-->
 
                 <div class="row">
-                    <div class="col-md-9 col-sm-12 col-xs-12">
+                    <div class="col-md-7 col-sm-12 col-xs-12">
                         <div class="panel panel-default chartJs">
                             <div class="panel-heading">
                                 <div class="card-title">
@@ -135,62 +135,19 @@ $this->load->view('template/head', $data);
                                 </div>
                             </div>
                             <div class="panel-body">
-                                <h5 style="color: #000000; font: 700 15px Arial;">Keterangan :</h5>
-                                <div class="col-md-12">
-                                    <div class="col-md-1">
-                                        <div style="background-color: #DB2500; height: 15px; width: 50px;"></div>
-                                    </div>
-                                    <div class="col-md-2" style="color: #000000; font: 600 12px Arial;">Data Penghapusan</div>
-
-                                    <div class="col-md-1">
-                                        <div style="background-color: #1ABC9C; height: 15px; width: 50px;"></div>
-                                    </div>
-                                    <div class="col-md-2" style="color: #000000; font: 600 12px Arial;">Aset Layak Pakai</div>
-
-                                    <div class="col-md-1">
-                                        <div style="background-color: #DEA923; height: 15px; width: 50px;"></div>
-                                    </div>
-                                    <div class="col-md-2" style="color: #000000; font: 600 12px Arial;">Pemeliharaan Internal Masih Proses</div>
-
-                                    <div class="col-md-1">
-                                        <div style="background-color: #1ec74b; height: 15px; width: 50px;"></div>
-                                    </div>
-                                    <div class="col-md-2" style="color: #000000; font: 600 12px Arial;">Pemeliharaan External Masih Proses</div>
-
-                                    <div class="col-md-1">
-                                        <div style="background-color: #44524d; height: 15px; width: 50px;"></div>
-                                    </div>
-                                    <div class="col-md-2" style="color: #000000; font: 600 12px Arial;">Pemeliharaan Internal Selesai</div>
-
-                                    <div class="col-md-1">
-                                        <div style="background-color: #1f2194; height: 15px; width: 50px;"></div>
-                                    </div>
-                                    <div class="col-md-2" style="color: #000000; font: 600 12px Arial;">Pemeliharaan External Selesai</div>
-
-                                    <div class="col-md-1">
-                                        <div style="background-color: #824087; height: 15px; width: 50px;"></div>
-                                    </div>
-                                    <div class="col-md-2" style="color: #000000; font: 600 12px Arial;">Aset Rusak Ringan</div>
-
-                                    <div class="col-md-1">
-                                        <div style="background-color: #456e4a; height: 15px; width: 50px;"></div>
-                                    </div>
-                                    <div class="col-md-2" style="color: #000000; font: 600 12px Arial;">Aset Rusak Berat</div>
-                                </div>
-                                <div class="col-md-12">
-                                    <br><br>
-                                </div>
-                                <canvas id="pie-chart" class="chart" style="width: 655px;height: 277px;"></canvas>
+                                <div id="asetPerkategori" style="height: 300px; width: 100%;"></div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3 col-sm-12 col-xs-12">
-                        <div class="panel panel-default">
+                    <div class="col-md-5 col-sm-12 col-xs-12">
+                        <div class="panel panel-default chartJs">
                             <div class="panel-heading">
-                                Status Usulan Pengadaan
+                                <div class="card-title">
+                                    <div class="title">Status Usulan Pengadaan</div>
+                                </div>
                             </div>
                             <div class="panel-body">
-                                <div id="morris-donut-chart"></div>
+                                <div id="usulanPengadaan" style="height: 300px; width: 100%;"></div>
                             </div>
                         </div>
                     </div>
@@ -204,15 +161,13 @@ $this->load->view('template/head', $data);
     </div>
     <!-- /. WRAPPER  -->
     <?php $this->load->view('template/script') ?>
-    <!-- Custom Js -->
-    <script>
-        var get_status = '<?= base_url('Aset/get_status') ?>';
-    </script>
-    <script src="<?= base_url(); ?>assets_app/js/custom-scripts.js"></script>
+
+    <!-- <script src="<?= base_url(); ?>assets_app/js/custom-scripts.js"></script> -->
     <!-- Chart Js -->
     <script type="text/javascript" src="<?= base_url(); ?>assets_app/js/Chart.min.js"></script>
     <script>
         var get_data_aset = '<?= base_url('Aset/get_data_aset') ?>';
+        var get_status = '<?= base_url('Aset/get_status') ?>';
     </script>
     <script type="text/javascript" src="<?= base_url(); ?>assets_app/js/chartjs.js"></script>
 </body>

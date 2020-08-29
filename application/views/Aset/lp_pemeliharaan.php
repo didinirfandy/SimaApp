@@ -97,7 +97,7 @@ $this->load->view('template/head', $data);
                                     <label for="kategori">Pilih Kategori</label><br>
                                     <select class="selectbox col-md-12" style="width: 267px;" name="kategori" id="kategori" required>
                                         <optgroup label="Pilih Nama Barang">
-                                            <option value="">Semua</option>
+                                            <option value="1">Semua</option>
                                             <option value="2">Internal</option>
                                             <option value="3">External</option>
                                         </optgroup>
@@ -156,6 +156,14 @@ $this->load->view('template/head', $data);
                             kondisi_brg = "baik";
                         }
 
+                        if (c[h].satuan_brg == 1) {
+                            satuan_brg = "Buah";
+                        } else if (c[h].satuan_brg == 2) {
+                            satuan_brg = "Unit";
+                        } else {
+                            satuan_brg = "Set";
+                        }
+
                         pgdn +=
                             '<tr>' +
                             '<td>' + (h + 1) + '</td>' +
@@ -168,7 +176,7 @@ $this->load->view('template/head', $data);
                             '<td>' + c[h].bahan + '</td>' +
                             '<td>' + c[h].perolehan + '</td>' +
                             '<td>' + c[h].thn_beli + '</td>' +
-                            '<td>' + c[h].satuan_brg + '</td>' +
+                            '<td>' + satuan_brg + '</td>' +
                             '<td>' + c[h].jmlh_brg + '</td>' +
                             '<td style="text-align: right;">' + c[h].umr_ekonomis + '</td>' +
                             '<td style="text-align: right;">' + ribuan + '</td>' +

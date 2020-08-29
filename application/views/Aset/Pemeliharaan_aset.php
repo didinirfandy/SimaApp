@@ -321,8 +321,6 @@ $this->load->view('template/head', $data);
                             '<button style="' + aksi1 + '" type="submit" ' + tmbh + ' title="Pemeliharaan" onclick="tmbh_pelihara(\'' + c[h].id_brg + '\')" class="btn btn-xs btn-info"><i class="fa fa-cog"></i> Pemeliharaan</button> &nbsp;' +
                             '<button style="' + aksi4 + '" type="submit" ' + hps + ' title="Batalkan" onclick="hps_pelihara(\'' + c[h].id_brg + '\')" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Batalkan</button></td>' +
                             '</tr>';
-                        // id_brg = c[h].id_brg;
-                        // $('#insert_keterangan').html(id_brg);
                     }
                     $('#tmpl_data').html(pgdn);
 

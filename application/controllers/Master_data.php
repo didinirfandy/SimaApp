@@ -171,7 +171,7 @@ class Master_data extends CI_Controller
                 'dipinjam' => $dp,
                 'penyusutan' => $dp,
                 'nli_sisa' => $nli_sisa,
-                'jns_brg' => $jns_brg,
+                'jns_brg' => "1",
                 'ket' => $ket,
                 'entry_date' => $date
 

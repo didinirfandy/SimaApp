@@ -84,10 +84,15 @@ class Login_model extends CI_Model
     {
         return $this->db->query(
             "SELECT 
-                MAX(id_usulan) AS max_id,
-                (SELECT COUNT(stts_approval_kep) FROM tbl_usulan_aset WHERE stts_approval_kep = '1') AS pending,
-                (SELECT COUNT(stts_approval_kep) FROM tbl_usulan_aset WHERE stts_approval_kep = '2') AS diterima,
-                (SELECT COUNT(stts_approval_kep) FROM tbl_usulan_aset WHERE stts_approval_kep = '3') AS ditolak
+                (
+                    (SELECT COUNT(stts_approval_kep) FROM tbl_usulan_aset WHERE stts_approval_kep = '1') / (SELECT COUNT(id_usulan) FROM tbl_usulan_aset) * 100
+                ) AS pending,
+                (
+                    (SELECT COUNT(stts_approval_kep) FROM tbl_usulan_aset WHERE stts_approval_kep = '2') / (SELECT COUNT(id_usulan) FROM tbl_usulan_aset) * 100
+                ) AS diterima,
+                (
+                    (SELECT COUNT(stts_approval_kep) FROM tbl_usulan_aset WHERE stts_approval_kep = '3') / (SELECT COUNT(id_usulan) FROM tbl_usulan_aset) * 100
+                ) AS ditolak
             FROM tbl_usulan_aset"
         )->result_array();
     }
@@ -110,13 +115,27 @@ class Login_model extends CI_Model
     {
         return $this->db->query(
             "SELECT
-                (SELECT COUNT(kondisi) FROM tbl_pengadaan_aset WHERE kondisi = '1' ) AS tot_aset_b,
-                (SELECT COUNT(kondisi) FROM tbl_pengadaan_aset WHERE kondisi = '2' ) AS tot_aset_rr,
-                (SELECT COUNT(kondisi) FROM tbl_pengadaan_aset WHERE kondisi = '3' ) AS tot_aset_rb,
-                (SELECT COUNT(stts_approval) FROM tbl_pemeliharaan_aset WHERE stts_approval = '2') AS tot_pemeliharaan_in,
-                (SELECT COUNT(stts_approval) FROM tbl_pemeliharaan_aset WHERE stts_approval = '3') AS tot_pemeliharaan_ex,
-                (SELECT COUNT(stts_approval) FROM tbl_pemeliharaan_aset WHERE stts_approval = '4') AS tot_pemeliharaan_selesai_in,
-                (SELECT COUNT(stts_approval) FROM tbl_pemeliharaan_aset WHERE stts_approval = '5') AS tot_pemeliharaan_selesai_ex
+                (
+                    ((SELECT COUNT(kondisi) FROM tbl_pengadaan_aset WHERE kondisi = '1' ) / (SELECT COUNT(id_brg) FROM tbl_pengadaan_aset)) * 100
+                ) AS tot_aset_b,
+                (
+                    ((SELECT COUNT(kondisi) FROM tbl_pengadaan_aset WHERE kondisi = '2' ) / (SELECT COUNT(id_brg) FROM tbl_pengadaan_aset)) * 100
+                ) AS tot_aset_rr,
+                (
+                    ((SELECT COUNT(kondisi) FROM tbl_pengadaan_aset WHERE kondisi = '3' ) / (SELECT COUNT(id_brg) FROM tbl_pengadaan_aset)) * 100
+                ) AS tot_aset_rb,
+                (
+                    ((SELECT COUNT(stts_approval) FROM tbl_pemeliharaan_aset WHERE stts_approval = '2') / (SELECT COUNT(id_brg) FROM tbl_pengadaan_aset)) * 100
+                ) AS tot_pemeliharaan_in,
+                (
+                    ((SELECT COUNT(stts_approval) FROM tbl_pemeliharaan_aset WHERE stts_approval = '3') / (SELECT COUNT(id_brg) FROM tbl_pengadaan_aset)) * 100
+                ) AS tot_pemeliharaan_ex,
+                (
+                    ((SELECT COUNT(stts_approval) FROM tbl_pemeliharaan_aset WHERE stts_approval = '4') / (SELECT COUNT(id_brg) FROM tbl_pengadaan_aset)) * 100
+                ) AS tot_pemeliharaan_selesai_in,
+                (
+                    ((SELECT COUNT(stts_approval) FROM tbl_pemeliharaan_aset WHERE stts_approval = '5') / (SELECT COUNT(id_brg) FROM tbl_pengadaan_aset)) * 100
+                ) AS tot_pemeliharaan_selesai_ex
             FROM 
                 tbl_pengadaan_aset
             GROUP BY 

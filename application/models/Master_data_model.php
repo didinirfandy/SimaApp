@@ -266,24 +266,23 @@ class Master_data_model extends CI_Model
 
     function update_pengembalian($id_peminjaman, $id_brg, $realisasi_pengembalian, $kondisi)
     {
-        if ($this->db->affected_rows() > 0) {
-            $menu        = 'data peminjaman';
-            $aksi        = 'Mengubah';
-            $item        = 'Mengubah tanggal realisasi pengembalian menjadi ' . $realisasi_pengembalian . '';
-            $assign_to   = '';
-            $assign_type = '';
-            activity_log($menu, $aksi, $item, $assign_to, $assign_type);
+        $up1 = $this->db->query("UPDATE tbl_peminjaman_aset SET realisasi_pengembalian = '$realisasi_pengembalian', stts_peminjaman = '2' WHERE id_peminjaman = '$id_peminjaman'");
+        $up2 = $this->db->query("UPDATE tbl_pengadaan_aset SET kondisi = '$kondisi' WHERE id_brg = '$id_brg'");
 
-            $up1 = $this->db->query("UPDATE tbl_peminjaman_aset SET realisasi_pengembalian = '$realisasi_pengembalian', stts_peminjaman = '2' WHERE id_peminjaman = '$id_peminjaman'");
-            $up2 = $this->db->query("UPDATE tbl_pengadaan_aset SET kondisi = '$kondisi' WHERE id_brg = '$id_brg'");
-
-            if ($up1 && $up2) {
+        if ($up1 && $up2) {
+            if ($this->db->affected_rows() > 0) {
+                $menu        = 'Data Peminjaman';
+                $aksi        = 'Mengubah';
+                $item        = 'Mengubah tanggal realisasi pengembalian menjadi ' . $realisasi_pengembalian . '';
+                $assign_to   = '';
+                $assign_type = '';
+                activity_log($menu, $aksi, $item, $assign_to, $assign_type);
                 return 1;
             } else {
                 return 0;
             }
         } else {
-            return false;
+            return 0;
         }
     }
 }

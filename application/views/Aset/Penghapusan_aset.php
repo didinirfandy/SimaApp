@@ -106,32 +106,34 @@ $this->load->view('template/head', $data);
                                     <input type="hidden" name="nm_brg[]" value="<?= $mn['nm_brg'] ?>">
                                     <?php
                                     foreach ($minmax as $xn) {
+                                        error_reporting(0);
                                         $selisih_kon_brg            = $xn['kon_brgx'] - $xn['kon_brgn'];
                                         $selisih_nil_bk             = $xn['nil_bukux'] - $xn['nil_bukun'];
                                         $selisih_sisa_umr_ekonomis  = $xn['sisa_umr_ekonomisx'] - $xn['sisa_umr_ekonomisn'];
-                                        if ($selisih_kon_brg == 0) {
-                                            $msg = "nilai selisih barang kosong";
-                                            error_reporting(0);
-                                        } elseif ($selisih_nil_bk == 0) {
-                                            $msg = "nilai selisih nilai buku kosong";
-                                            error_reporting(0);
-                                        } elseif ($selisih_sisa_umr_ekonomis == 0) {
-                                            $msg = "nilai selisih sisa umur ekonomis kosong";
-                                            error_reporting(0);
-                                        } else {
-                                            $msg = "";
-                                            $m_nor_nilai_kondisi_brg        = ($mn['kondisi_brg'] - $xn['kon_brgn']) / $selisih_kon_brg;
-                                            $m_nor_nilai_nilai_buku         = ($mn['nilai_buku'] - $xn['nil_bukun']) / $selisih_nil_bk;
-                                            $m_nor_nilai_sisa_umr_ekonomis  = ($mn['sisa_umr_ekonomis'] - $xn['sisa_umr_ekonomisn']) / $selisih_sisa_umr_ekonomis;
-                                        }
 
-                                        $m_krit_bbt_kondisi_brg         = $m_nor_nilai_kondisi_brg * $bobot[1];
-                                        $m_krit_bbt_nilai_buku          = $m_nor_nilai_nilai_buku * $bobot[2];
-                                        $m_krit_bbt_sisa_umr_ekonomis   = $m_nor_nilai_sisa_umr_ekonomis * $bobot[3];
+                                        if ($selisih_kon_brg == "0" or $selisih_nil_bk == "0" or $selisih_sisa_umr_ekonomis == "0") {
+                                            error_reporting(0);
+                                            $msg = "Nilai Selisih Kosong";
+                                        } else {
+                                            error_reporting(0);
+                                            $msg = "";
+                                            // $m_nor_nilai_kondisi_brg        = ($mn['kondisi_brg'] - $xn['kon_brgn']) / ($xn['kon_brgx'] - $xn['kon_brgn']);
+                                            // $m_nor_nilai_nilai_buku         = ($mn['nilai_buku'] - $xn['nil_bukun']) / ($xn['nil_bukux'] - $xn['nil_bukun']);
+                                            // $m_nor_nilai_sisa_umr_ekonomis  = ($mn['sisa_umr_ekonomis'] - $xn['sisa_umr_ekonomisn']) / ($xn['sisa_umr_ekonomisx'] - $xn['sisa_umr_ekonomisn']);
+
+                                            $m_nor_nilai_kondisi_brg        = ($mn['kondisi_brg'] - $xn['kon_brgn']) / ($xn['kon_brgx'] - $xn['kon_brgn']);
+                                            $m_nor_nilai_nilai_buku         = ($mn['nilai_buku'] - $xn['nil_bukun']) / ($xn['nil_bukux'] - $xn['nil_bukun']);
+                                            $m_nor_nilai_sisa_umr_ekonomis  = ($mn['sisa_umr_ekonomis'] - $xn['sisa_umr_ekonomisn']) / ($xn['sisa_umr_ekonomisx'] - $xn['sisa_umr_ekonomisn']);
+
+                                            $m_krit_bbt_kondisi_brg         = $m_nor_nilai_kondisi_brg * $bobot[1];
+                                            $m_krit_bbt_nilai_buku          = $m_nor_nilai_nilai_buku * $bobot[2];
+                                            $m_krit_bbt_sisa_umr_ekonomis   = $m_nor_nilai_sisa_umr_ekonomis * $bobot[3];
+                                        }
 
                                         $nilai_akhir[$mn['id_brg']] = $m_krit_bbt_kondisi_brg + $m_krit_bbt_nilai_buku + $m_krit_bbt_sisa_umr_ekonomis;
                                         $hsl = $nilai_akhir[$mn['id_brg']] = $m_krit_bbt_kondisi_brg + $m_krit_bbt_nilai_buku + $m_krit_bbt_sisa_umr_ekonomis;
 
+                                        // print_r($hsl);
                                     ?>
                                     <?php } ?>
                                     <?php
@@ -141,6 +143,7 @@ $this->load->view('template/head', $data);
                                 reset($nilai_akhir);
                                 arsort($nilai_akhir);
                                 // print_r($nilai_akhir);
+
                                 $i = 1;
                                 foreach ($nilai_akhir as $k => $v) {
                                     if ($k == 0) { ?>
@@ -151,8 +154,8 @@ $this->load->view('template/head', $data);
                                         <input type="hidden" name="nilai_akhir[]" value="<?= $nilai_akhir[$k] ?>">
                                     <?php }
                                 }
-                                
-                                if ($selisih_kon_brg == 0 or $selisih_nil_bk == 0 or $selisih_sisa_umr_ekonomis == 0) { ?>
+
+                                if ($selisih_kon_brg == "0" or $selisih_nil_bk == "0" or $selisih_sisa_umr_ekonomis == "0") { ?>
                                     <h4 style="font-weight: bold;">Keterangan :</h4>
                                     (<span style="color:red;">*</span>) : <span style="font-weight: bold;"><?= $msg ?></span>
                                     <hr align="right" color="black">

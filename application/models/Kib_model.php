@@ -12,7 +12,7 @@ class Kib_model extends CI_Model
                 kd_brg, nm_brg, no_reg, luas, thn_pengadaan, 
                 st_hak, st_stfkt_tgl, st_stfkt_no, perolehan, harga 
             FROM tbl_pengadaan_aset 
-            WHERE jns_brg = '1' 
+            WHERE jns_brg = '1' AND stts_penghapusan = '1'
             ORDER BY entry_date DESC"
         )->result_array();
     }
@@ -87,7 +87,7 @@ class Kib_model extends CI_Model
                 id_brg, kd_brg, nm_brg, no_reg, merk_type, bahan, thn_beli, 
                 perolehan, kondisi, harga, umr_ekonomis, nli_sisa 
             FROM tbl_pengadaan_aset 
-            WHERE jns_brg = '2' 
+            WHERE jns_brg = '2' AND stts_penghapusan = '1'
             ORDER BY entry_date DESC"
         )->result_array();
     }
@@ -179,7 +179,7 @@ class Kib_model extends CI_Model
                 beton, luas, letak_lokasi, dg_tgl, dg_no, 
                 stts_tanah, harga, no_kd_tanah, perolehan, ket
             FROM tbl_pengadaan_aset 
-            WHERE jns_brg = '3' 
+            WHERE jns_brg = '3' AND stts_penghapusan = '1'
             ORDER BY entry_date DESC"
         )->result_array();
     }
@@ -265,16 +265,16 @@ class Kib_model extends CI_Model
     // ----------------------- //
     //      Data kib_d        //
     // ----------------------- //
-    function get_dt_kib_d()
-    {
-        // return $this->db->query(
-        //     "SELECT 
-        //         kd_brg, nm_brg, no_reg, luas, thn_pengadaan,
-        //         st_hak, st_stfkt_tgl, st_stfkt_no, perolehan, harga 
-        //     FROM tbl_pengadaan_aset 
-        //     WHERE jns_brg = '4' "
-        // )->result_array();
-    }
+    // function get_dt_kib_d()
+    // {
+    //     return $this->db->query(
+    //         "SELECT 
+    //             kd_brg, nm_brg, no_reg, luas, thn_pengadaan,
+    //             st_hak, st_stfkt_tgl, st_stfkt_no, perolehan, harga 
+    //         FROM tbl_pengadaan_aset 
+    //         WHERE jns_brg = '4' "
+    //     )->result_array();
+    // }
 
     // ----------------------- //
     //      Data kib_e        //
@@ -287,7 +287,7 @@ class Kib_model extends CI_Model
                 bbkk_ad, bbkk_p, bbkk_b, htt_j, htt_u, 
                 jmlh_brg, thn_beli, perolehan, harga, ket
             FROM tbl_pengadaan_aset 
-            WHERE jns_brg = '5'
+            WHERE jns_brg = '5' AND stts_penghapusan = '1'
             ORDER BY entry_date DESC"
         )->result_array();
     }

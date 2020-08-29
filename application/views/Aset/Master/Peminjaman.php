@@ -347,7 +347,9 @@ $this->load->view('template/head', $data);
                 success: function(b) {
                     var row = '';
                     for (var i = 0; i < b.length; i++) {
-                        if (b[i].kondisi == "1") {
+                        if (b[i].kondisi == 1) {
+                            kondisi = "Baik" 
+                        } else if (b[i].kondisi == 2) {
                             kondisi = "Rusak ringan";
                         } else {
                             kondisi = "Rusak Berat";

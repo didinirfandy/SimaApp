@@ -16,6 +16,7 @@
 
         <!-- Lightweight Chart -->
         <script src="<?= base_url(); ?>assets_app/js/Lightweight-Chart/jquery.chart.js"></script>
+        <script src="<?= base_url(); ?>assets_app/js/canvasjs.min.js"></script>
 
         <!-- DATA TABLE SCRIPTS -->
         <script src="<?= base_url(); ?>assets_app/js/dataTables/jquery.dataTables.min.js"></script>
