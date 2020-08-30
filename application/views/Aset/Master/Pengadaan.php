@@ -529,9 +529,9 @@ $this->load->view('template/head', $data);
                                 '<td style="text-align: right;">' + a[i].masa_manfaat + '</td>' +
                                 '<td style="text-align: right;">' + harga_brg + '</td>' +
                                 '<td style="text-align: center;">' +
-                                '<button style="' + display1 + '" type="button" class="btn btn-sm btn-danger" disabled><i class="fa fa-exclamation"></i></button>' +
-                                '<button style="' + display2 + '" type="submit" class="btn btn-sm btn-info" title="Tambah" onclick="get(\'' + a[i].id_usulan + '\', \'' + a[i].kd_brg + '\', \'' + a[i].nm_brg + '\', \'' + a[i].jns_brg + '\', \'' + a[i].jmlh_brg + '\', \'' + a[i].masa_manfaat + '\', \'' + a[i].harga_brg + '\', \'' + a[i].satuan_brg + '\')"><i class="fa fa-plus"></i></button>' +
-                                '<button style="' + display3 + '" type="button" class="btn btn-sm btn-success" disabled><i class="fa fa-check"></i></button>' +
+                                '<button style="' + display1 + '" type="button" class="btn btn-xs btn-danger" disabled><i class="fa fa-exclamation"></i></button>' +
+                                '<button style="' + display2 + '" type="submit" class="btn btn-xs btn-info" title="Tambah" onclick="get(\'' + a[i].id_usulan + '\', \'' + a[i].kd_brg + '\', \'' + a[i].nm_brg + '\', \'' + a[i].jns_brg + '\', \'' + a[i].jmlh_brg + '\', \'' + a[i].masa_manfaat + '\', \'' + a[i].harga_brg + '\', \'' + a[i].satuan_brg + '\')"><i class="fa fa-plus"></i></button>' +
+                                '<button style="' + display3 + '" type="button" class="btn btn-xs btn-success" disabled><i class="fa fa-check"></i></button>' +
                                 '</td>' +
                                 '</tr>';
 

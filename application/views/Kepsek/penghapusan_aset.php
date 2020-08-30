@@ -1,7 +1,8 @@
 <?php
-	$data['tittle'] = "Penghapusan Aset";
-	$this->load->view('template/head', $data);
+$data['tittle'] = "Penghapusan Aset";
+$this->load->view('template/head', $data);
 ?>
+
 <body>
     <div id="wrapper">
         <?php $this->load->view('template/navbar'); ?>
@@ -9,20 +10,20 @@
         <?php $this->load->view('template/menu'); ?>
         <!-- /. NAV SIDE  -->
 
-		<div id="page-wrapper">
-            <div class="header"> 
+        <div id="page-wrapper">
+            <div class="header">
                 <h2 class="page-header">
                     Penghapusan Aset
                 </h2>
                 <?= $this->session->flashdata('pesan'); ?>
                 <ol class="breadcrumb">
                     <li><a href="#"><?php $str = $this->session->userdata('nama_pegawai');
-                    echo wordwrap($str, 40, "<br>\n"); ?></a></li>
-                    <li><a href="<?=base_url()?>Aset/home">Home</a></li>
+                                    echo wordwrap($str, 40, "<br>\n"); ?></a></li>
+                    <li><a href="<?= base_url() ?>Aset/home">Home</a></li>
                     <li class="active">Penghapusan Aset</li>
-                </ol> 
+                </ol>
             </div>
-            
+
             <div id="page-inner">
                 <!-- /. ROW  -->
                 <div class="row">
@@ -33,7 +34,7 @@
                                 <hr align="right" color="black">
                             </div>
                             <div class="panel-body">
-                            <table class="table table-striped table-bordered table-hover" id="reng">
+                                <table class="table table-striped table-bordered table-hover" id="reng">
                                     <thead>
                                         <tr>
                                             <th>No</th>
@@ -45,12 +46,12 @@
                                     <tbody id="tmpl_reng">
                                     </tbody>
                                 </table>
-                            </div>						
-                        </div>   
+                            </div>
+                        </div>
                     </div>
-                </div> 
+                </div>
                 <!-- /. ROW  -->
-				<?php $this->load->view('template/copyright') ?>
+                <?php $this->load->view('template/copyright') ?>
             </div>
             <!-- /. PAGE INNER  -->
             <!-- Modal -->
@@ -106,15 +107,20 @@
                 success: function(a) {
                     var html = "";
                     for (i = 0; i < a.length; i++) {
-                        var date = new Date(a[i].entry_date);
-                        var entry_date = ("00" + date.getDate()).slice(-2) + "/" + ("00" + (date.getMonth() + 1)).slice(-2) + "/" + date.getFullYear() + " " +
-                            ("00" + date.getHours()).slice(-2) + ":" + ("00" + date.getMinutes()).slice(-2) + ":" + ("00" + date.getSeconds()).slice(-2);
+                        if (a[i].entry_date != 0) {
+                            s
+                            var date = new Date(a[i].entry_date);
+                            var entry_date = ("00" + date.getDate()).slice(-2) + "/" + ("00" + (date.getMonth() + 1)).slice(-2) + "/" + date.getFullYear() + " " +
+                                ("00" + date.getHours()).slice(-2) + ":" + ("00" + date.getMinutes()).slice(-2) + ":" + ("00" + date.getSeconds()).slice(-2);
+                        } else {
+                            entry_date = "";
+                        }
 
                         html +=
                             '<tr>' +
                             '<td>' + (i + 1) + '</td>' +
                             '<td>' + a[i].ket + '</td>' +
-                            '<td style="text-align: center;"><button class="btn btn-sm btn-info" onclick="tampil_detail_rangking(' + a[i].kd_rengking + ')" data-toggle="modal" data-target="#dtl"><i class="fa fa-info-circle"></i> Detail</button></td>' +
+                            '<td style="text-align: center;"><button class="btn btn-xs btn-info" onclick="tampil_detail_rangking(' + a[i].kd_rengking + ')" data-toggle="modal" data-target="#dtl"><i class="fa fa-info-circle"></i> Detail</button></td>' +
                             '<td style="text-align: center;">' + entry_date + '</td>' +
                             '</tr>';
                     }

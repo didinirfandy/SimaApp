@@ -324,7 +324,7 @@ $this->load->view('template/head', $data);
                             '<tr>' +
                             '<td>' + (i + 1) + '</td>' +
                             '<td>' + a[i].ket + '</td>' +
-                            '<td style="text-align: center;"><button class="btn btn-sm btn-info" onclick="tampil_detail_rangking(' + a[i].kd_rengking + ')" data-toggle="modal" data-target="#dtl"><i class="fa fa-info-circle"></i> Detail</button></td>' +
+                            '<td style="text-align: center;"><button class="btn btn-xs btn-info" onclick="tampil_detail_rangking(' + a[i].kd_rengking + ')" data-toggle="modal" data-target="#dtl"><i class="fa fa-info-circle"></i> Detail</button></td>' +
                             '<td style="text-align: center;">' + entry_date + '</td>' +
                             '</tr>';
                     }

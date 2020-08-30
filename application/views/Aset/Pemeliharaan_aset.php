@@ -439,7 +439,7 @@ $this->load->view('template/head', $data);
                             '<td style="text-align: right;">' + c[h].umr_ekonomis + '</td>' +
                             '<td style="text-align: right;">' + nli_sisa + '</td>' +
                             '<td style="text-align: center;">' +
-                            '<button style="' + aksi1 + '" type="submit" title="Selesai" onclick="pelihara_selesai_ex(\'' + c[h].id_pemeliharaan + '\', \'' + c[h].id_brg + '\')" class="btn btn-sm btn-info"><i class="fa fa-cog"></i> Selesai</button>' +
+                            '<button style="' + aksi1 + '" type="submit" title="Selesai" onclick="pelihara_selesai_ex(\'' + c[h].id_pemeliharaan + '\', \'' + c[h].id_brg + '\')" class="btn btn-xs btn-info"><i class="fa fa-cog"></i> Selesai</button>' +
                             '<button style="' + aksi2 + '" disabled class="btn btn-xs btn-success"><i class="fa fa-check"></i></button>' +
                             '<button style="' + aksi3 + '" disabled class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Penghapusan</button>' +
                             '</td>' +
@@ -503,7 +503,7 @@ $this->load->view('template/head', $data);
                             '<td style="text-align: right;">' + c[h].umr_ekonomis + '</td>' +
                             '<td style="text-align: right;">' + nli_sisa + '</td>' +
                             '<td style="text-align: center;">' +
-                            '<button style="' + aksi1 + '" type="submit" title="Selesai" onclick="pelihara_selesai_ex(\'' + c[h].id_pemeliharaan + '\', \'' + c[h].id_brg + '\')" class="btn btn-sm btn-info"><i class="fa fa-cog"></i> Selesai</button>' +
+                            '<button style="' + aksi1 + '" type="submit" title="Selesai" onclick="pelihara_selesai_ex(\'' + c[h].id_pemeliharaan + '\', \'' + c[h].id_brg + '\')" class="btn btn-xs btn-info"><i class="fa fa-cog"></i> Selesai</button>' +
                             '<button style="' + aksi2 + '" disabled class="btn btn-xs btn-success"><i class="fa fa-check"></i></button>' +
                             '<button style="' + aksi3 + '" disabled class="btn btn-xs btn-danger">Penghapusan</button>' +
                             '</td>' +

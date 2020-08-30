@@ -153,11 +153,11 @@ $this->load->view('template/head', $data);
                         }
 
                         if (a[i].stts_approval_kep == 1) {
-                            status = "<button class='btn btn-sm btn-warning' disabled><i class='fa fa-hourglass-half'></i> Pendding</button>";
+                            status = "<button class='btn btn-xs btn-warning' disabled><i class='fa fa-hourglass-half'></i> Pendding</button>";
                         } else if (a[i].stts_approval_kep == 2) {
-                            status = "<button class='btn btn-sm btn-success' disabled><i class='fa fa-check-circle'></i> Diterima</button>";
+                            status = "<button class='btn btn-xs btn-success' disabled><i class='fa fa-check-circle'></i> Diterima</button>";
                         } else if (a[i].stts_approval_kep == 3) {
-                            status = "<button class='btn btn-sm btn-danger' disabled><i class='fa fa-times-circle'></i> Ditolak</button>";
+                            status = "<button class='btn btn-xs btn-danger' disabled><i class='fa fa-times-circle'></i> Ditolak</button>";
                         } else {
                             status = "";
                         }
@@ -166,7 +166,7 @@ $this->load->view('template/head', $data);
                             '<tr>' +
                             '<td>' + (i + 1) + '</td>' +
                             '<td>' + a[i].ket + '</td>' +
-                            '<td style="text-align: center;"><button class="btn btn-sm btn-info" onclick="tampil_detail_barang(' + a[i].kd_usulan + ')" data-toggle="modal" data-target="#dtl"><i class="fa fa-info-circle"></i> Detail</button></td>' +
+                            '<td style="text-align: center;"><button class="btn btn-xs btn-info" onclick="tampil_detail_barang(' + a[i].kd_usulan + ')" data-toggle="modal" data-target="#dtl"><i class="fa fa-info-circle"></i> Detail</button></td>' +
                             '<td style="text-align: center;">' + entry_date + '</td>' +
                             '<td style="text-align: center;">' + status + '</td>' +
                             '</tr>';

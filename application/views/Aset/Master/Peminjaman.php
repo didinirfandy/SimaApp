@@ -152,11 +152,11 @@ $this->load->view('template/head', $data);
                                                     <td><?= $p['tgl_pengembalian']; ?></td>
                                                     <td><?= $p['realisasi_pengembalian']; ?></td>
                                                     <td><?= $p['ket']; ?></td>
-                                                    <td><button type="button" class="btn btn-sm btn-<?= $warna; ?>" disabled> <?= $stts_peminjaman; ?></button></td>
+                                                    <td><button type="button" class="btn btn-xs btn-<?= $warna; ?>" disabled> <?= $stts_peminjaman; ?></button></td>
                                                     <td>
                                                         <?php
                                                         if ($p['stts_peminjaman'] == 1) { ?>
-                                                            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#data_kmbl<?= $p['id_peminjaman'] ?>"> Kembalikan</button>
+                                                            <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#data_kmbl<?= $p['id_peminjaman'] ?>"> Kembalikan</button>
                                                         <?php } else { ?>
 
                                                         <?php }
@@ -221,30 +221,28 @@ $this->load->view('template/head', $data);
                             </div>
                             <?= form_open('Master_data/pengembalian'); ?>
                             <div class="modal-body">
-                                <form>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <label for="realisasi_pengembalian">Tanggal Pengembalian</label>
-                                            <div class="input-group input-daterange">
-                                                <input type="date" class="form-control" name="realisasi_pengembalian" required>
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="kondisi">Kondisi Aset</label><br>
-                                            <select class="selectbox col-sm-12" name="kondisi">
-                                                <option value="1">Baik</option>
-                                                <option value="2">Rusak Ringan</option>
-                                                <option value="3">Rusak Berat</option>
-                                            </select>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="realisasi_pengembalian">Tanggal Pengembalian</label>
+                                        <div class="input-group input-daterange">
+                                            <input type="date" class="form-control" name="realisasi_pengembalian" required>
                                         </div>
                                     </div>
-                                    <input type="hidden" name="id_peminjaman" value="<?= $p['id_peminjaman'] ?>">
-                                    <input type="hidden" name="id_brg" value="<?= $p['id_brg'] ?>">
-                                    <button type="submit" class="btn btn-sm btn-primary" name="submit"> Simpan</button>
-                                </form>
+                                    <div class="form-group col-md-6">
+                                        <label for="kondisi">Kondisi Aset</label><br>
+                                        <select class="selectbox col-sm-12" name="kondisi">
+                                            <option value="1">Baik</option>
+                                            <option value="2">Rusak Ringan</option>
+                                            <option value="3">Rusak Berat</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="id_peminjaman" value="<?= $p['id_peminjaman'] ?>">
+                                <input type="hidden" name="id_brg" value="<?= $p['id_brg'] ?>">
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-sm btn-primary" name="submit"> Simpan</button>
                             </div>
                             <?= form_close() ?>
                         </div>
@@ -318,7 +316,7 @@ $this->load->view('template/head', $data);
                             '<td>' + a[i].nohp_peminjaman + '</td>' +
                             '<td>' + a[i].kd_brg + '</td>' +
                             '<td>' + a[i].nm_brg + '</td>' +
-                            '<td><button type="button" onclick="delete_peminjaman(\'' + a[i].id_peminjaman + '\')" class="btn btn-danger"><i class="fa fa-trash-o"></i></button></td>' +
+                            '<td><button type="button" onclick="delete_peminjaman(\'' + a[i].id_peminjaman + '\')" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i></button></td>' +
                             '</tr>';
                     }
                     $('#tmpl_data').html(rows);
@@ -348,7 +346,7 @@ $this->load->view('template/head', $data);
                     var row = '';
                     for (var i = 0; i < b.length; i++) {
                         if (b[i].kondisi == 1) {
-                            kondisi = "Baik" 
+                            kondisi = "Baik"
                         } else if (b[i].kondisi == 2) {
                             kondisi = "Rusak ringan";
                         } else {
@@ -361,7 +359,7 @@ $this->load->view('template/head', $data);
                             '<td>' + b[i].no_reg + '</td>' +
                             '<td>' + b[i].nm_brg + '</td>' +
                             '<td>' + kondisi + '</td>' +
-                            '<td style="text-align: center;"><button type="button" onclick="get(\'' + b[i].id_brg + '\', \'' + b[i].kd_brg + '\', \'' + b[i].nm_brg + '\')" class="btn btn-sm btn-info"><i class="fa fa-plus"></i></button></td>' +
+                            '<td style="text-align: center;"><button type="button" onclick="get(\'' + b[i].id_brg + '\', \'' + b[i].kd_brg + '\', \'' + b[i].nm_brg + '\')" class="btn btn-xs btn-info"><i class="fa fa-plus"></i></button></td>' +
                             '</tr>';
                     }
                     $('#tmpl_popup').html(row);

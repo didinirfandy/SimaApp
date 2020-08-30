@@ -166,13 +166,13 @@ $this->load->view('template/head', $data);
                             '<tr>' +
                             '<td>' + (i + 1) + '</td>' +
                             '<td>' + a[i].ket + '</td>' +
-                            '<td style="text-align: center;"><button class="btn btn-sm btn-info" onclick="tampil_detail_barang(\'' + a[i].kd_usulan + '\')" data-toggle="modal" data-target="#dtl"><i class="fa fa-info-circle"></i> Detail</button></td>' +
+                            '<td style="text-align: center;"><button class="btn btn-xs btn-info" onclick="tampil_detail_barang(\'' + a[i].kd_usulan + '\')" data-toggle="modal" data-target="#dtl"><i class="fa fa-info-circle"></i> Detail</button></td>' +
                             '<td>' + a[i].entry_date + '</td>' +
                             '<td style="text-align: center;">' +
-                            '<button style="' + aksi1 + '" class="btn btn-sm btn-info" onclick="aksi_usulan_wk(\'' + a[i].kd_usulan + '\', \'' + setuju + '\' )"><i class="fa fa-check"></i> Validasi</button> &nbsp;' +
-                            // '<button style="'+ aksi1 +'" class="btn btn-sm btn-danger" onclick="aksi_usulan_wk(\'' + a[i].kd_usulan + '\', \'' + tolak + '\')"><i class="fa fa-times"></i> Tolak</button>' +
-                            '<button style="' + aksi2 + '" type="button" class="btn btn-sm btn-success" disabled><i class="fa fa-check"></i> Validasi</button>' +
-                            // '<button style="'+ aksi3 +'" type="button" class="btn btn-sm btn-danger" disabled><i class="fa fa-times"></i> Ditolak</button>' +
+                            '<button style="' + aksi1 + '" class="btn btn-xs btn-info" onclick="aksi_usulan_wk(\'' + a[i].kd_usulan + '\', \'' + setuju + '\' )"><i class="fa fa-check"></i> Validasi</button> &nbsp;' +
+                            // '<button style="'+ aksi1 +'" class="btn btn-xs btn-danger" onclick="aksi_usulan_wk(\'' + a[i].kd_usulan + '\', \'' + tolak + '\')"><i class="fa fa-times"></i> Tolak</button>' +
+                            '<button style="' + aksi2 + '" type="button" class="btn btn-xs btn-success" disabled><i class="fa fa-check"></i> Validasi</button>' +
+                            // '<button style="'+ aksi3 +'" type="button" class="btn btn-xs btn-danger" disabled><i class="fa fa-times"></i> Ditolak</button>' +
                             '</td>' +
                             '</tr>';
                     }
